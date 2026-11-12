@@ -1,0 +1,148 @@
+{
+  "profile": {
+    "name": "배민혁",
+    "role": "반도체 검사 장비 SW 엔지니어",
+    "summary": "TODO: 한두 문장 자기소개 (경력 연차 · 주력 분야 · 지원 방향)",
+    "links": [
+      { "label": "Email", "href": "TODO" },
+      { "label": "GitHub", "href": "TODO" }
+    ],
+    "skills": [
+      { "group": "언어", "items": ["C#", "Python", "JavaScript"] },
+      { "group": "도메인", "items": ["검사 장비 SW", "레시피 관리", "조명 · 비전"] },
+      { "group": "AI 활용", "items": ["Claude Code", "로컬 LLM (Ollama)", "ONNX Runtime Web"] }
+    ]
+  },
+
+  "cases": [
+    {
+      "title": "TODO: 실무 사례 1 제목",
+      "period": "TODO",
+      "problem": "TODO: 어떤 문제였나 (사내 이름 · 수치 · 화면 없이)",
+      "action": "TODO: 무엇을 했나",
+      "result": "TODO: 결과 (공개 가능한 표현으로)",
+      "tags": []
+    },
+    {
+      "title": "TODO: 실무 사례 2 제목",
+      "period": "TODO",
+      "problem": "TODO",
+      "action": "TODO",
+      "result": "TODO",
+      "tags": []
+    }
+  ],
+
+  "apps": [
+    {
+      "id": "01",
+      "name": "설비 로그 분석기",
+      "tag": "AX",
+      "status": "wip",
+      "short": "로그 드롭 → 알람 원인 요약",
+      "problem": "알람 원인을 찾으려고 로그 수만 줄을 눈으로 훑는다",
+      "build": "로그 드롭 → 타임라인 + 알람 군집 + 직전 경고 통계 + LLM 원인 후보 (근거 줄 검증)",
+      "result": "합성 로그로 도는 웹 데모",
+      "features": ["로그 파싱 · 모듈별 타임라인", "알람을 발생 단위로 묶고 같은 첫 알람끼리 군집", "직전 경고 통계 + 원인 후보 · 근거 줄 검증"],
+      "stack": ["JavaScript", "LLM API", "합성 로그"],
+      "flow": [
+        { "t": "로그 드롭", "sub": "txt · csv" },
+        { "t": "파싱", "sub": "시간 · 모듈 · 레벨" },
+        { "t": "군집", "sub": "같은 원인 알람" },
+        { "t": "LLM 요약", "sub": "원인 후보 3개" }
+      ],
+      "data": "합성 설비 로그 (모듈 5종 · 알람 12종 · 1만 줄)",
+      "pitch": "로그 드롭 한 번으로 원인 후보까지",
+      "demo": "apps/01-log-analyzer/",
+      "repo": null
+    },
+    {
+      "id": "02",
+      "name": "주간 보고 자동 생성기",
+      "tag": "AX",
+      "status": "wip",
+      "short": "커밋 + 메모 → 보고 PPT",
+      "problem": "매주 git 커밋을 다시 읽고 양식 PPT 에 손으로 옮겨 적는다",
+      "build": "커밋 주제별 묶기 → 메모 편집 → 요약 3줄 + 사실 검증 → 양식 PPT",
+      "result": "실무에서 쓰는 CLI 를 바탕으로, 합성 커밋으로 도는 공개 웹 데모",
+      "features": ["커밋을 주제별로 자동 묶기", "요약 3줄 + 근거 없는 숫자 · 효과어 차단", "양식 PPT · 흐름도 · 상태 배지"],
+      "stack": ["JavaScript", "PptxGenJS", "LLM API"],
+      "flow": [
+        { "t": "커밋 읽기", "sub": "합성 저장소 · 붙여넣기" },
+        { "t": "주제 묶기", "sub": "태그 · 영역 규칙" },
+        { "t": "요약 · 검증", "sub": "근거 없는 숫자 차단" },
+        { "t": "내보내기", "sub": "중립 양식 PPT" }
+      ],
+      "data": "합성 커밋 로그 (가상 프로젝트 · 4주)",
+      "pitch": "커밋에서 주간 보고 PPT 까지 한 번에",
+      "demo": "apps/02-weekly-report/",
+      "repo": null
+    },
+    {
+      "id": "03",
+      "name": "Klarf / Wafer Map 뷰어",
+      "tag": "도메인 데모",
+      "status": "planned",
+      "short": "Klarf 드롭 → 맵 · Pareto",
+      "problem": "Klarf 결과를 보려면 전용 툴이 있어야 한다",
+      "build": "파일 드롭 → 웨이퍼 맵 + 결함 Pareto + Lot 비교",
+      "result": "브라우저만으로 도는 뷰어",
+      "features": ["Klarf 파일 파서", "웨이퍼 맵 확대 · 필터", "Pareto · Lot 비교"],
+      "stack": ["JavaScript", "Canvas", "합성 Klarf"],
+      "flow": [
+        { "t": "Klarf 드롭", "sub": "여러 파일 가능" },
+        { "t": "파싱", "sub": "웨이퍼 · 다이 · 결함" },
+        { "t": "맵 렌더링", "sub": "확대 · 클래스 필터" },
+        { "t": "집계", "sub": "Pareto · Lot 비교" }
+      ],
+      "data": "공개 Klarf 규격 기반 합성 파일",
+      "pitch": "설치 없이 브라우저에서 Klarf 열기",
+      "demo": null,
+      "repo": null
+    },
+    {
+      "id": "04",
+      "name": "레시피 Diff · 버전 관리",
+      "tag": "도메인 데모",
+      "status": "planned",
+      "short": "레시피 이력 · Diff · 롤백",
+      "problem": "레시피가 언제, 왜 바뀌었는지 추적하기 어렵다",
+      "build": "버전 이력 + 파라미터 Diff + 롤백 + 기준(Golden) 검증",
+      "result": "합성 레시피로 도는 웹 데모",
+      "features": ["버전 이력 · 파라미터 Diff", "롤백 · 변경분만 배포", "기준 등록 · 검사 전 검증"],
+      "stack": ["JavaScript", "localStorage", "합성 레시피"],
+      "flow": [
+        { "t": "저장", "sub": "버전 자동 생성" },
+        { "t": "Diff", "sub": "바뀐 파라미터 강조" },
+        { "t": "롤백 · 배포", "sub": "변경분만 반영" },
+        { "t": "기준 검증", "sub": "Golden 과 비교" }
+      ],
+      "data": "합성 레시피 (항목 40 · 버전 10)",
+      "pitch": "누가 · 언제 · 무엇을 바꿨는지 한눈에",
+      "demo": null,
+      "repo": null
+    },
+    {
+      "id": "05",
+      "name": "브라우저 ADC 데모",
+      "tag": "도메인 데모",
+      "status": "planned",
+      "short": "이미지 드롭 → 결함 분류",
+      "problem": "결함 분류 AI 는 서버 · GPU 없이는 보여주기 어렵다",
+      "build": "이미지 드롭 → 브라우저 안에서 ONNX 추론 → 분류 + 신뢰도",
+      "result": "공개 데이터셋 기반 라이브 데모",
+      "features": ["브라우저 내 ONNX 추론", "분류 결과 + 신뢰도", "혼동 행렬 · 추론 시간"],
+      "stack": ["ONNX Runtime Web", "WM-811K", "MVTec AD"],
+      "flow": [
+        { "t": "이미지 드롭", "sub": "png · jpg" },
+        { "t": "전처리", "sub": "크기 · 정규화" },
+        { "t": "ONNX 추론", "sub": "브라우저 안에서" },
+        { "t": "결과", "sub": "분류 · 신뢰도 · 시간" }
+      ],
+      "data": "공개 데이터셋 (WM-811K, MVTec AD) — 사용 전 라이선스 확인",
+      "pitch": "서버 없이 브라우저에서 결함 분류",
+      "demo": null,
+      "repo": null
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>주간 보고 생성기 · 데모</title>
+  <meta name="description" content="git 커밋과 메모로 주간 보고 PPT 를 만드는 데모 — 합성 데이터">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="bar">
+    <div class="bar-in">
+      <a class="back" href="../../#/app/02">← 포트폴리오</a>
+      <strong class="app-name"><span>02</span> 주간 보고 생성기</strong>
+      <button class="btn ghost sm" type="button" id="open-settings">설정 · API 키</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="intro">
+      <h1>커밋에서 주간 보고 PPT 까지</h1>
+      <p>git 커밋을 주제별로 묶고, 메모(왜 · 상태)를 보태 요약 3줄을 만든 뒤, <b>입력에 없는 숫자 · 상태어 · 효과어</b>를 검사해 양식 PPT 로 내보냅니다.</p>
+      <ol class="steps-nav">
+        <li><span>1</span>커밋 불러오기</li>
+        <li><span>2</span>주제 · 메모 편집</li>
+        <li><span>3</span>검증 · PPT 내보내기</li>
+      </ol>
+    </section>
+
+    <section class="panel source">
+      <div class="src-tabs" role="tablist">
+        <button type="button" role="tab" data-src="sample" class="on">예시 프로젝트 (합성)</button>
+        <button type="button" role="tab" data-src="paste">내 git log 붙여넣기</button>
+      </div>
+      <div id="paste-box" class="paste" hidden>
+        <p>저장소에서 아래 명령을 실행하고 결과를 붙여넣으세요. 내용은 이 브라우저 안에서만 처리되고, Claude 로 생성할 때만 해당 주제의 커밋 제목과 메모가 Anthropic API 로 전송됩니다.</p>
+        <pre><code id="git-cmd">git log --no-merges --date=short --name-only --since="5 weeks ago" --author="$(git config user.name)" --format="@@%h|%ad|%s"</code></pre>
+        <textarea id="paste-text" rows="7" spellcheck="false" placeholder="@@a1b2c3d|2026-11-10|[주제] 커밋 제목&#10;src/폴더/파일.cs"></textarea>
+        <div class="row">
+          <button class="btn" type="button" id="paste-load">불러오기</button>
+          <span class="hint">영역(태그 · 구역) 규칙은 설정에서 저장소 폴더 구조에 맞게 고칠 수 있습니다.</span>
+        </div>
+      </div>
+      <div class="weeks-row">
+        <div id="weeks" class="weeks"></div>
+        <p id="stats" class="stats"></p>
+      </div>
+    </section>
+
+    <div class="work">
+      <aside class="panel topics">
+        <div class="panel-head">
+          <h2>주제</h2>
+          <button class="btn ghost sm" type="button" id="gen-all">전체 Claude 로 생성</button>
+        </div>
+        <ul id="topic-list"></ul>
+      </aside>
+      <section class="panel editor" id="editor"></section>
+    </div>
+
+    <section class="panel export">
+      <div class="export-in">
+        <label class="field inline">작성자 <input id="author" type="text"></label>
+        <p id="export-stats" class="stats"></p>
+        <button class="btn" type="button" id="export">PPT 내보내기</button>
+      </div>
+      <p id="export-msg" class="msg" role="status"></p>
+    </section>
+  </main>
+
+  <footer class="foot">합성 데이터: 가상 프로젝트 SpotCheck (실존하지 않음). 사내용 Python CLI 를 공개용으로 옮긴 데모입니다.</footer>
+
+  <dialog id="settings">
+    <form method="dialog" class="dlg">
+      <h2>설정</h2>
+      <label class="field">Anthropic API 키
+        <input id="api-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-ant-...">
+        <small>이 페이지의 메모리에만 두고 저장하지 않습니다 (새로고침하면 사라짐). 요청은 브라우저에서 api.anthropic.com 으로 바로 갑니다.</small>
+      </label>
+      <label class="field">모델
+        <select id="model"></select>
+      </label>
+      <label class="field">영역 규칙 (JSON)
+        <textarea id="rules" rows="9" spellcheck="false"></textarea>
+        <small>파일 경로가 match 로 시작하면 그 tag · section 으로 묶습니다. 바꾸면 현재 주차를 다시 묶고 편집 내용은 초기화됩니다.</small>
+      </label>
+      <p id="settings-err" class="msg err"></p>
+      <div class="row end">
+        <button class="btn ghost" value="cancel" type="submit">닫기</button>
+        <button class="btn" id="settings-save" value="save" type="submit">저장</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="core.js"></script>
+  <script src="sample.js"></script>
+  <script src="deck.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

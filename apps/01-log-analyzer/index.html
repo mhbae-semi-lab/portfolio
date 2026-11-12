@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>설비 로그 분석기 · 데모</title>
+  <meta name="description" content="설비 로그를 끌어다 놓으면 알람을 원인별로 묶고 직전 경고와 원인 후보를 보여주는 데모 — 합성 로그">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="bar">
+    <div class="bar-in">
+      <a class="back" href="../../#/app/01">← 포트폴리오</a>
+      <strong class="app-name"><span>01</span> 설비 로그 분석기</strong>
+      <button class="btn ghost sm" type="button" id="open-settings">설정 · API 키</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="intro">
+      <h1>로그 드롭 한 번으로 원인 후보까지</h1>
+      <p>수만 줄의 설비 로그에서 알람을 <b>발생 단위로 묶고</b>, 같은 첫 알람끼리 모은 뒤, 알람 직전에 반복된 경고를 통계로 찾아 원인 후보와 <b>근거 줄</b>을 보여줍니다.</p>
+      <ol class="steps-nav">
+        <li><span>1</span>로그 불러오기</li>
+        <li><span>2</span>타임라인 · 알람 군집</li>
+        <li><span>3</span>직전 경고 · 원인 후보 · 근거 줄</li>
+      </ol>
+    </section>
+
+    <section class="panel source" id="drop">
+      <div class="src-row">
+        <div class="src-tabs">
+          <button type="button" id="load-sample" class="on">예시 로그 (합성)</button>
+          <label class="file-btn">내 로그 열기<input type="file" id="file" accept=".log,.txt,.csv,text/plain" hidden></label>
+          <button type="button" class="link" id="download-sample">예시 로그 내려받기</button>
+        </div>
+        <p class="drop-hint">로그 파일을 이 페이지에 끌어다 놓아도 됩니다</p>
+      </div>
+      <details class="format">
+        <summary>읽을 수 있는 형식</summary>
+        <p><code>2026-11-10 09:12:40.000 ALARM [LOADER] L103 Wafer vacuum lost (P=-44.8 kPa)</code></p>
+        <p>날짜 시각(밀리초 선택) · 레벨(INFO / WARN / ERROR / ALARM / FATAL) · [모듈](선택) · 메시지. ERROR 이상을 알람으로 보고, 메시지 속 <code>L103</code> 같은 영문+숫자를 알람 코드로 씁니다. 코드가 없으면 숫자를 지운 메시지로 묶습니다.</p>
+        <p>파일은 이 브라우저 안에서만 읽습니다. Claude 로 분석할 때만 해당 군집의 통계와 근거 줄(최대 80줄)이 Anthropic API 로 전송됩니다.</p>
+      </details>
+      <div id="stats" class="stat-row"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>타임라인 <small>드래그로 확대 · 더블클릭으로 전체 · 알람을 누르면 해당 군집으로</small></h2>
+        <div class="legend"><span class="lg info"></span>정보 밀도<span class="lg warn"></span>경고<span class="lg alarm"></span>알람<span class="lg band"></span>선택한 군집의 발생</div>
+      </div>
+      <div class="tl-wrap"><canvas id="timeline"></canvas><div id="tip" class="tip" hidden></div></div>
+      <div class="row"><span id="range" class="hint"></span><button class="btn ghost sm" type="button" id="reset-view">전체 보기</button></div>
+    </section>
+
+    <div class="work">
+      <aside class="panel clusters">
+        <div class="panel-head"><h2>알람 군집 <small>첫 알람이 같은 발생끼리</small></h2></div>
+        <ul id="cluster-list"></ul>
+      </aside>
+      <section class="panel detail" id="detail"></section>
+    </div>
+
+    <section class="panel viewer">
+      <div class="panel-head">
+        <h2>로그 <small id="viewer-count"></small></h2>
+        <div class="filters">
+          <select id="f-level"><option value="0">모든 레벨</option><option value="2">경고 이상</option><option value="3">알람만</option></select>
+          <select id="f-module"></select>
+          <input id="f-text" type="search" placeholder="메시지 검색">
+        </div>
+      </div>
+      <div id="rows" class="rows" tabindex="0"></div>
+    </section>
+  </main>
+
+  <footer class="foot">합성 로그: 가상 검사기 SpotCheck 의 하루 (실제 장비 · 알람 코드와 무관). 진공 저하 · 램프 열화 · 모터 과열 시나리오가 들어 있습니다.</footer>
+
+  <dialog id="settings">
+    <form method="dialog" class="dlg">
+      <h2>설정</h2>
+      <label class="field">Anthropic API 키
+        <input id="api-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-ant-...">
+        <small>이 페이지의 메모리에만 두고 저장하지 않습니다 (새로고침하면 사라짐). 요청은 브라우저에서 api.anthropic.com 으로 바로 갑니다.</small>
+      </label>
+      <label class="field">모델 <select id="model"></select></label>
+      <label class="field">발생 묶기 간격 (초)
+        <input id="gap" type="number" min="10" max="3600" step="10">
+        <small>알람 사이가 이보다 짧으면 한 발생으로 묶습니다.</small>
+      </label>
+      <p id="settings-err" class="msg err"></p>
+      <div class="row end">
+        <button class="btn ghost" value="cancel" type="submit">닫기</button>
+        <button class="btn" id="settings-save" value="save" type="submit">저장</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="gen.js"></script>
+  <script src="analyze.js"></script>
+  <script src="sample-causes.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
