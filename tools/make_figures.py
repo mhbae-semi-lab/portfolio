@@ -1005,6 +1005,65 @@ def fig_race():
     return int(before.sum()), int(after.sum())
 
 
+# 27. 석사 연구 예비 실험 결과 (공개 SKY130 설계 + 가상 촬영 영상, 연구 저장소 README 의 수치를 그대로 그림)
+#     과검을 영상 1장당 1개 이하로 맞췄을 때 치명 결함(쇼트, 단선 위치) 검출률
+def fig_research_pre():
+    plt = _plt()
+    rows = [("기준 조건", 81.3, 95.3), ("패턴 반사율 저하", 25.8, 99.2), ("다층 (met1 + poly)", 95.4, 95.6)]
+    fig, ax = plt.subplots(figsize=(9, 4.6), dpi=100)
+    y = np.arange(len(rows))[::-1] * 1.3
+    for yi, (lab, cur, new) in zip(y, rows):
+        ax.barh(yi + .26, cur, .46, color="#9aa3ae")
+        ax.barh(yi - .26, new, .46, color=BLUE)
+        ax.text(cur + 1.2, yi + .26, f"{cur:.1f}%", va="center", fontsize=13, color=INK)
+        ax.text(new + 1.2, yi - .26, f"{new:.1f}%", va="center", fontsize=13, color=BLUE, weight="bold")
+    ax.set_yticks(y, [r[0] for r in rows], fontsize=13)
+    ax.set_xlim(0, 112)
+    ax.set_xlabel("치명 결함 검출률 (%), 과검은 영상 1장당 1개 이하", fontsize=13, color=INK)
+    from matplotlib.patches import Patch
+    ax.legend(handles=[Patch(color="#9aa3ae", label="현행 밝기 구역"), Patch(color=BLUE, label="도면 구역 + 구역별 임계값")],
+              frameon=False, fontsize=12.5, ncol=2, loc="lower left", bbox_to_anchor=(0, 1.0))
+    _clean(ax)
+    ax.tick_params(axis="y", length=0, colors=INK)
+    fig.tight_layout()
+    _save_plt(fig, "fig-research-pre.webp")
+    return rows
+
+
+# 26. 기술 노트, 평가 누수: 날마다 조명이 조금씩 다른 프레임을 파일 이름 해시로 나누면 같은 날 프레임이
+#     학습과 평가에 섞여 점수가 부풀고, 날짜 단위로 나누면 처음 보는 날짜의 실제 점수에 가깝다
+def fig_leak():
+    import zlib
+    rng = np.random.default_rng(31)
+    days, per_day, dim = 25, 50, 16
+    w = np.ones(dim) / np.sqrt(dim) * 2.5           # 마크 있음/없음 차이
+    X, y, day, name = [], [], [], []
+    for d in range(days):
+        off = rng.normal(0, .8, dim)                # 그날의 조명, 초점 차이
+        for f in range(per_day):
+            lab = int(rng.integers(0, 2))
+            X.append(off + lab * w + rng.normal(0, .35, dim))
+            y.append(lab)
+            day.append(d)
+            name.append(f"d{d:02d}_{f:03d}.bmp")
+    X, y, day = np.array(X), np.array(y), np.array(day)
+
+    def acc(tr, te):  # 가장 가까운 학습 프레임의 라벨을 따르는 분류기(1-NN)
+        d2 = ((X[te][:, None] - X[tr][None]) ** 2).sum(-1)
+        return float((y[tr][d2.argmin(1)] == y[te]).mean() * 100)
+
+    dev = day < 20                                   # 앞 20일은 개발용, 뒤 5일은 처음 보는 날짜
+    h = np.array([zlib.crc32(n.encode()) % 5 == 0 for n in name])
+    a_hash = acc(np.where(dev & ~h)[0], np.where(dev & h)[0])
+    a_date = acc(np.where(day < 16)[0], np.where(dev & (day >= 16))[0])
+    a_real = acc(np.where(dev)[0], np.where(~dev)[0])
+    _hbars("fig-leak.webp", [("파일 이름 해시로 나눈 평가", a_hash, f"{a_hash:.0f}%", "#9aa3ae"),
+                             ("날짜 단위로 나눈 평가", a_date, f"{a_date:.0f}%", BLUE),
+                             ("처음 보는 날짜의 실제 성능", a_real, f"{a_real:.0f}%", INK)],
+           "같은 분류기의 정확도 (%)", 115, size=(9, 4))
+    return round(a_hash), round(a_date), round(a_real)
+
+
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     est, align_a, align_v = fig_align()
@@ -1035,6 +1094,9 @@ if __name__ == "__main__":
     print("research miss at <=10 px", r_glob, r_reg)
     race = fig_race()
     print("race stops before, after", race)
+    leak = fig_leak()
+    print("leak hash, date, real", leak)
+    fig_research_pre()
     print("align score peak", a_est, "stable backlog", q_all, q_new, "light dev", round(light, 2), "tilt", tilt)
     print("score (old, new) per shot", score)
     print("hough old r", round(float(old[2])), "new r", round(float(new[2])))
@@ -1057,3 +1119,4 @@ if __name__ == "__main__":
     assert m_both >= m_pos + 10, "좌표 매칭 그림: 크기를 함께 본 쪽이 확실히 나아야 함"
     assert r_reg < r_glob - 20, "연구 예시 그림: 영역별 임계값이 확실히 나아야 함"
     assert 40 <= race[0] <= 60 and race[1] == 0, "레이스 그림: 수정 전 약 4번에 1번, 수정 후 0번이어야 함"
+    assert leak[0] >= leak[1] + 10 and abs(leak[1] - leak[2]) <= 8, "누수 그림: 해시 분할은 부풀고 날짜 분할은 실제에 가까워야 함"

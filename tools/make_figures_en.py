@@ -54,6 +54,11 @@ EN = {
     "화면에 못 그린 프레임 (장)": "Frames not yet drawn", "무늬가 뚜렷한 바닥": "Well-textured floor",
     "무늬가 약한 바닥": "Weakly textured floor", "하나의 임계값": "Single threshold", "도면 영역별 임계값": "Region-wise thresholds",
     "복사를 비동기로 분리": "Async copy", "4분 20초": "4 min 20 s",
+    "파일 이름 해시로 나눈 평가": "Split by file-name hash", "날짜 단위로 나눈 평가": "Split by date",
+    "처음 보는 날짜의 실제 성능": "Real accuracy on unseen dates", "같은 분류기의 정확도 (%)": "Accuracy of the same classifier (%)",
+    "기준 조건": "Baseline", "패턴 반사율 저하": "Lower pattern reflectance", "다층 (met1 + poly)": "Multilayer (met1 + poly)",
+    "치명 결함 검출률 (%), 과검은 영상 1장당 1개 이하": "Killer defect detection (%), at most 1 false call per image",
+    "현행 밝기 구역": "Current brightness zones", "도면 구역 + 구역별 임계값": "Drawing zones + per-zone thresholds",
 }
 RULES = [
     (r"^(\d+)초, 약 (\d+)MB/s$", r"\1 s, about \2 MB/s"),

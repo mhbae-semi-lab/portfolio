@@ -296,7 +296,7 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 .sheet-body p a:hover { text-decoration: underline; }
 
 /* 일하는 방식: 검증에 쓴 반복과 시험 */
-.checks { list-style: none; padding: 0; margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.checks { list-style: none; padding: 0; margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
 .checks a { display: block; height: 100%; padding: 16px 18px; background: var(--surface); border-radius: var(--r); text-decoration: none; color: var(--ink-2); font-size: 14.5px; line-height: 1.45; border: 1px solid transparent; transition: border-color .2s ease; }
 .checks a:hover { border-color: var(--line); }
 .checks strong { display: block; margin-bottom: 6px; font-size: 28px; font-weight: 750; letter-spacing: -.035em; line-height: 1.1; color: var(--accent); font-variant-numeric: tabular-nums; }
@@ -309,3 +309,22 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 .lang-switch a[aria-current] { background: var(--ink); color: var(--bg); }
 .nav-in .lang-switch + .btn-sm { margin-left: -14px; }
 @media (max-width: 860px) { .nav .lang-switch { margin-left: auto; } .nav .lang-switch + .btn-sm { margin-left: 0; } }
+
+/* 기술 노트: 첫 화면 목록과 글 페이지(notes/*.html) */
+.notes { list-style: none; padding: 0; margin-top: 28px; border-top: 2px solid var(--ink); }
+.notes a { display: grid; gap: 4px; padding: 16px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+.notes b { font-size: 19px; letter-spacing: -.015em; }
+.notes b::after { content: " →"; color: var(--accent); }
+.notes a:hover b { color: var(--accent); }
+.notes span { color: var(--ink-2); font-size: 16px; }
+.note { width: min(720px, 100% - 32px); margin: 0 auto; padding: 36px 0 80px; display: flex; flex-direction: column; gap: 14px; }
+.note-back { font-size: 15px; font-weight: 600; color: var(--accent); text-decoration: none; }
+.note h1 { font-size: clamp(30px, 4.4vw, 44px); letter-spacing: -.035em; line-height: 1.2; font-weight: 800; margin-top: 10px; }
+.note h2 { font-size: 22px; letter-spacing: -.02em; margin-top: 26px; }
+.note p, .note li { color: var(--ink-2); }
+.note b { color: var(--ink); }
+.note .d-meta a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.note ul { padding-left: 20px; display: grid; gap: 8px; }
+.note pre { margin: 0; padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow-x: auto; font: 13.5px/1.6 ui-monospace, Consolas, monospace; color: var(--ink); }
+.note code { font: inherit; }
+.note .note-foot { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }

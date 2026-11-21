@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%232f62d6%22/%3E%3Ctext x=%2216%22 y=%2222.5%22 font-size=%2217%22 font-family=%22sans-serif%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22white%22%3E%EB%B0%B0%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="assets/site.css?v=20261121f">
+  <link rel="stylesheet" href="assets/site.css?v=20261121g">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Minhyeok Bae", "alternateName": "배민혁", "jobTitle": "Semiconductor Inspection Equipment SW Engineer", "url": "https://mhbae-semi-lab.github.io/portfolio/en.html", "email": "mailto:mhbae03@gmail.com", "image": "https://mhbae-semi-lab.github.io/portfolio/assets/img/profile.jpg", "sameAs": ["https://github.com/mhbae-semi-lab"], "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Inha University, Graduate School of Manufacturing Innovation"}, {"@type": "CollegeOrUniversity", "name": "Tech University of Korea"}], "knowsAbout": ["Wafer Align", "Defect detection", "Inspection recipe automation", "Image processing", "OpenCV", "C++", "C#", "Auto Focus"]}</script>
 </head>
 <body>
@@ -178,6 +178,7 @@
             <a class="tile reveal" href="#p-backup"><img class="light" src="assets/img/en/fig-backup.webp" alt="" loading="lazy" width="900" height="600"><b>Tool data backup and disk management</b><span>25 min → 4 min</span></a>
             <a class="tile reveal" href="#p-ftp"><img class="light" src="assets/img/en/fig-ftp.webp" alt="" loading="lazy" width="900" height="600"><b>Large inspection result transfer</b><span>4 GB in 65 s</span></a>
             <a class="tile reveal" href="#p-matching"><img class="light" src="assets/img/en/fig-matching.webp" alt="" loading="lazy" width="1000" height="520"><b>Defect coordinate matching and review reports</b><span>2023, position error handling</span></a>
+            <a class="tile reveal" href="#p-weekly"><img src="assets/img/demo-02.webp" alt="" loading="lazy" width="800" height="506"><b>Weekly report automation (in-house)</b><span>Used by 10 people, 50 planned</span></a>
           </div>
         </div>
         <div class="group">
@@ -199,6 +200,16 @@
         <li class="reveal"><b>Port</b><span>Move to C++, then match results value by value</span></li>
         <li class="reveal"><b>Switch</b><span>Run in shadow mode to collect field data, then switch</span></li>
       </ol>
+      <h3 class="lessons-head">Repeats and tests behind the numbers</h3>
+      <ul class="checks">
+        <li class="reveal"><a href="#p-recipe-deploy"><strong>200<span> runs</span></strong>Restart loop to confirm the start race is gone</a></li>
+        <li class="reveal"><a href="#p-interlock"><strong>1,000<span> runs</span></strong>Lifter servo repeat drive, position repeatability</a></li>
+        <li class="reveal"><a href="#p-align"><strong>100<span> runs</span></strong>Rotated wafers through Align, 0 fails</a></li>
+        <li class="reveal"><a href="#p-light"><strong>100<span> runs</span></strong>Repeated light measurements, mean deviation 0.52%</a></li>
+        <li class="reveal"><a href="#p-focus"><strong>20<span> runs</span></strong>Particle height repeats, ±2 µm</a></li>
+        <li class="reveal"><a href="#p-recipe-deploy"><strong>54<span> tests</span></strong>Unit tests, all passing</a></li>
+        <li class="reveal"><a href="#p-recipe-tools"><strong>68<span> items</span></strong>49 self-checks, 19 integration tests</a></li>
+      </ul>
       <h3 class="lessons-head">What I got wrong and what I changed</h3>
       <ul class="lessons">
         <li class="reveal"><b>I recheck methods that already passed</b><p>The first Align beat the customer criteria over thousands of production runs, but I found it sometimes gave a wrong angle a high score on low-contrast images. I redesigned it so wrong answers score low, and reported the longer compute time (150 → 700 ms) as well.</p><a href="#p-align">Featureless Wafer Align</a></li>
@@ -206,6 +217,17 @@
         <li class="reveal"><b>When a score looks good, I suspect it first</b><p>An evaluation set split by file-name hash scored better than reality. Frames from the same day had leaked into both training and evaluation, so I switched to a split by date. The CNN’s detection gain was not significant, and I reported it that way.</p><a href="#p-mark">Shot Key mark detection</a></li>
         <li class="reveal"><b>I check the measuring tool first</b><p>The repeat-run program measuring the race reproduction rate had a bug, so the first numbers were inflated. I fixed the measurement program first, then measured again.</p><a href="#p-recipe-deploy">Unified RAC tool</a></li>
       </ul>
+    </section>
+
+    <section id="notes" class="wrap">
+      <h2>Tech notes</h2>
+      <p class="sub">Problems I met at work, explained again from first principles with synthetic data. The notes are in Korean.</p>
+      <ul class="notes">
+        <li class="reveal"><a href="notes/score-normalization.html"><b>Why a match score hits 100</b><span>Normalizing a score map by its own min and max gives even a 90°-rotated wafer 100 points.</span></a></li>
+        <li class="reveal"><a href="notes/frame-backlog.html"><b>When drawing cannot keep up with the camera</b><span>If drawing is just 3 ms slower per frame, queuing every frame piles up 700 frames in 5 minutes.</span></a></li>
+        <li class="reveal"><a href="notes/eval-leakage.html"><b>When an evaluation score looks too good</b><span>Splitting by file-name hash mixes same-day frames and inflates the score: 100% vs 84% in a synthetic test.</span></a></li>
+      </ul>
+      <p class="research-links">Code for every figure: <a href="https://github.com/mhbae-semi-lab/portfolio/blob/main/tools/make_figures.py" target="_blank" rel="noopener">tools/make_figures.py</a>. It rebuilds each figure from synthetic data and checks its result with asserts.</p>
     </section>
 
     <section id="demo" class="wrap">
@@ -224,6 +246,13 @@
         </a>
       </div>
       <p class="soon">In progress: Klarf wafer map viewer, recipe baseline manager, alignment mark detection comparison, mail classifier</p>
+      <h3 class="lessons-head">How I work with AI</h3>
+      <ul class="lessons">
+        <li class="reveal"><b>I set the design and the pass criteria</b><p>I write down first what to build, what counts as correct, and how to check it.</p></li>
+        <li class="reveal"><b>I implement with AI coding tools</b><p>I use AI coding tools such as Claude Code and Cursor to write and tidy code, and keep the working instructions in the repository so the same criteria carry over.</p></li>
+        <li class="reveal"><b>Tests decide what ships</b><p>I keep only what passes unit tests, self-checks, and value-by-value comparison of Python and C++ results.</p></li>
+        <li class="reveal"><b>Rules filter model output</b><p>The demos above check every LLM result against rules, and fall back to the rule-based result when numbers or evidence appear that are not in the input.</p></li>
+      </ul>
     </section>
 
     <section id="career" class="wrap career">
@@ -273,10 +302,10 @@
         <ol class="research-flow">
           <li class="reveal"><b>The limit I saw at work</b><span>Rule-based logic needs a person to retune inspection settings every time the product or process changes.</span></li>
           <li class="reveal"><b>Groundwork: RAC and Shot Key Align</b><span>RAC (Recipe Auto Creation) converts design data (GDS) into inspection images, builds the recipe, then sets illumination, focus, and alignment automatically. Shot Key Align learns the mark-detection tolerances people used to tune from labeled field images, and a CNN covers keys the rules miss. Inspection thresholds still come from presets set by people.</span></li>
-          <li class="reveal"><b>Research topic</b><span>Setting region-wise inspection thresholds automatically from design-drawing features, compared with the rule-based approach using miss and over-detection curves.</span></li>
+          <li class="reveal"><b>Research topic</b><span>Building inspection zones and per-zone inspection settings automatically from the design drawing, verified by how closely they match zones drawn by people and whether detection stays the same.</span></li>
           <li class="reveal"><b>Next</b><span>Define problems in numbers, solve them in ways that can be verified, and build equipment SW that does not need constant manual tuning.</span></li>
         </ol>
-        <figure class="d-fig light reveal"><img src="assets/img/en/fig-research.webp" alt="Left: synthetic drawing split into blank, wiring, and pad regions. Right: over-detection vs. miss-rate curves; the region-wise threshold curve sits below and left of the single-threshold curve" loading="lazy" width="1000" height="460"><figcaption>A preview of the two approaches the research will compare, drawn with synthetic data. When noise differs by region, a single threshold cannot reduce over-detection and misses together. This is not a research result.</figcaption></figure>
+        <figure class="d-fig light reveal"><img src="assets/img/en/fig-research-pre.webp" alt="Killer defect detection bars. Baseline: current 81.3 percent vs drawing zones 95.3. Lower pattern reflectance: 25.8 vs 99.2. Multilayer: 95.4 vs 95.6" loading="lazy" width="900" height="460"><figcaption>Preliminary experiment: public SKY130 design, simulated imaging, vertical 4-die comparison. Detection of short and open defects with false calls held at 1 or fewer per image. The baseline gap is +14.0 pp (95% interval +12.0 to +15.9). The cost: inspected area grows from 22% to 39%, and a 1 px alignment error roughly doubles false calls. The current method gets close on the baseline when its thresholds are lowered, and falls behind when conditions change. No company data was used.</figcaption></figure>
       </div>
       <div class="pipeline reveal">
         <p>What RAC automates, and the step the research adds</p>
@@ -289,15 +318,23 @@
           <li><a href="#p-align">Featureless Align</a></li>
           <li>Origin</li>
           <li>Feature</li>
-          <li class="next">Region-wise inspection thresholds <small>research</small></li>
+          <li class="next">Inspection zones and per-zone settings <small>research</small></li>
         </ol>
         <p class="pipeline-side"><a href="#p-mark">Shot Key Align</a> learns mark-detection tolerances from field labels, CNN backup, regression gate</p>
       </div>
+      <h3 class="lessons-head">Research plan, in order</h3>
+      <ol class="steps">
+        <li class="reveal"><b>Now</b><span>Verify alignment-mark decisions with data: generate candidates, pick by score, compare with people, then apply.</span></li>
+        <li class="reveal"><b>Next</b><span>Generate inspection zones from the drawing, judged by agreement with zones drawn by people and by generation time.</span></li>
+        <li class="reveal"><b>Then</b><span>Extend to inspection settings for automatic recipe creation: success rate, time vs. manual, equal detection.</span></li>
+        <li class="reveal"><b>Last</b><span>Compare before and after deployment and write the thesis. Graduation expected Feb 2028.</span></li>
+      </ol>
+      <p class="research-links">Publication order: alignment-mark decisions to a domestic conference and a KCI journal, then drawing-based generation to an SCI journal, each after company approval.</p>
     </section>
 
     <section id="contact" class="wrap contact">
       <h2>Looking for a team to build with</h2>
-      <p>Available from March 2028. After my master’s, I plan to serve as a technical research personnel (Korea’s alternative military service program).</p>
+      <p>Available from March 2028. I have not done military service yet; after my master’s in February 2028, I plan to serve as technical research personnel (Korea’s alternative military service program).</p>
       <p class="mail">mhbae03@gmail.com</p>
       <div class="cta">
         <a class="btn" href="mailto:mhbae03@gmail.com">Send email</a>
@@ -354,6 +391,15 @@
     <figure class="d-fig light"><img src="assets/img/en/fig-stable.webp" alt="Frames not yet drawn over continuous capture time. Drawing every frame piles up over 700 in 5 minutes; drawing only the latest stays at 1 or fewer" width="900" height="540"><figcaption>If drawing is even slightly slower than capture, drawing every frame in order makes the queue grow without end. Synthetic simulation</figcaption></figure>
     <div class="stat-big"><strong>264<span>h</span></strong><span>0 failures over 11 days (264 hours) of operation, Vision uptime 98.86%</span></div>
     <dl class="kpi"><div><dt>Availability (432 h basis)</dt><dd>99.31%</dd></div><div><dt>Memory (10 shears)</dt><dd>18 → 12GB</dd></div><div><dt>Camera usage time</dt><dd>−55%</dd></div></dl>
+    <h3>Timeline</h3>
+    <ol class="timeline">
+      <li><time>2025.01</time><p>New project to turn a manual machine semi-automatic; I owned vision, sequence, and UI</p></li>
+      <li><time>2025.05</time><p>Finished the manual shear sequence before the deadline. Average shear time 126 s → 94 s, success rate 96.7% → over 98%</p></li>
+      <li><time>H2 2025</time><p>Semi-auto upgrade and reliability work, 32 site visits</p></li>
+      <li><time>2025.11</time><p>On site for 25 days (Nov 14 to Dec 10), reproducing, fixing, and revalidating the halts within 48 hours</p></li>
+      <li><time>2026.02</time><p>The day after a tip breakage, fixed the interlock criteria; no recurrence since (<a href="#p-interlock">details</a>)</p></li>
+      <li><time>2026</time><p>Maintenance and development work continues</p></li>
+    </ol>
     <section class="d-step">
       <h3><span>1</span>A new tool with no reference code</h3>
       <p>This new tool turned a manual machine into a semi-automatic one, so there was no reference code and the delivery date was fixed. After it entered production the program kept halting within 48 hours, so I stayed on site for 25 days, repeating reproduction, log analysis, fixes, and revalidation.</p>
@@ -369,10 +415,10 @@
     </section>
     <section class="d-step">
       <h3><span>4</span>Rebuild the interlocks</h3>
-      <p>After a wafer breakage, I rebuilt the interlocks: lifter homing method, vacuum state monitoring, wafer presence recheck. Malfunctions over the next 23 slots: <b>0</b>.</p>
+      <p>I rebuilt the interlocks: lifter homing method, vacuum state monitoring, wafer presence recheck. Malfunctions over the next 23 slots: <b>0</b>.</p>
     </section>
     <p class="d-tags">C# (WinForms), OpenCV</p>
-    <p class="d-source">Source: H2 2025 performance report, field setup and open-issue notes</p>
+    <p class="d-source">Source: H2 2025 performance report, field setup and open-issue notes, career notes (dates)</p>
   </template>
 
   <template id="p-focus">
@@ -538,6 +584,21 @@
     <p class="d-source">Source: H1 and H2 2023 evaluations</p>
   </template>
 
+  <template id="p-weekly">
+    <p class="d-meta">2026 · in-house tool, design and implementation · the public demo is a rebuild on synthetic data</p>
+    <h2 id="detail-title">Weekly report automation (in-house)</h2>
+    <figure class="d-fig"><img src="assets/img/demo-02.webp" alt="Public weekly report generator demo with topic summaries and validation results" width="800" height="506"><figcaption>The public demo. It rebuilds the in-house tool’s flow on synthetic commits.</figcaption></figure>
+    <dl class="kpi"><div><dt>People using it now</dt><dd>10</dd></div><div><dt>Planned rollout</dt><dd>50</dd></div></dl>
+    <h3>Problem</h3>
+    <ul><li>Every week, writing the report meant rereading the week’s commits and notes and copying them by hand into the company PPT template.</li></ul>
+    <h3>Approach</h3>
+    <ul><li>Rules group the week’s git commits by topic; each topic gets a title and a three-line summary in the template PPT.</li><li>Summaries come only from a local LLM, so no data leaves the machine.</li><li>Every summary is checked: three lines, 80 characters per line, and no numbers or status words such as “done” that are not in the input. On failure it retries once, then falls back to rule-based sentences.</li><li>It also runs as a Claude Code command.</li></ul>
+    <h3>Result</h3>
+    <ul><li>10 people on the team use it, with a rollout to 50 planned.</li><li>You can try the same flow, rebuilt on synthetic data, in the <a href="apps/02-weekly-report/">public demo</a> (in Korean).</li></ul>
+    <p class="d-tags">Python, python-pptx, local LLM (Ollama), Claude Code</p>
+    <p class="d-source">Source: in-house tool usage (Nov 2026)</p>
+  </template>
+
   <template id="p-score">
     <p class="d-meta">2026</p>
     <h2 id="detail-title">Fixing pattern-match score misjudgment</h2>
@@ -619,7 +680,7 @@
     <p class="d-source">Source: H1 2025 performance report and others</p>
   </template>
 
-  <script src="assets/widgets.js?v=20261121f"></script>
-  <script src="assets/site.js?v=20261121f"></script>
+  <script src="assets/widgets.js?v=20261121g"></script>
+  <script src="assets/site.js?v=20261121g"></script>
 </body>
 </html>

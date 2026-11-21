@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>화면 그리기가 촬영을 따라가지 못할 때 | 배민혁 기술 노트</title>
+  <meta name="description" content="그리기가 촬영보다 조금만 느려도 모든 프레임을 줄 세우면 대기열이 끝없이 쌓입니다. 최신 1장만 그리는 방법.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="../assets/site.css?v=20261121g">
+</head>
+<body>
+  <main class="note">
+    <a class="note-back" href="../#notes">← 포트폴리오</a>
+    <h1>화면 그리기가 촬영을 따라가지 못할 때</h1>
+    <p class="d-meta">기술 노트 · 동시성, 장비 UI · 관련 프로젝트 <a href="../#p-stable">신규 Particle 제거 설비 SW</a></p>
+
+    <h2>무엇이 이상했나</h2>
+    <p>신규 설비에서 연속 촬영을 오래 하면 화면이 점점 늦게 따라오고 메모리가 늘다가 결국 프로그램이 멈췄습니다. 촬영 자체는 정상이었고, 문제는 받은 프레임을 화면에 그리는 쪽이었습니다.</p>
+
+    <h2>원인: 조금 느린 것이 끝없이 쌓인다</h2>
+    <p>카메라가 33ms 마다(30fps) 프레임을 보내고, 화면 그리기는 평균 36ms 가 걸린다고 해 봅시다. 차이는 프레임당 3ms 뿐이지만, 받은 프레임을 모두 차례로 그리면 그리지 못한 프레임이 시간에 비례해 계속 늘어납니다. 처리 속도가 도착 속도보다 느리면 대기열은 줄어들 수 없습니다.</p>
+    <figure class="d-fig light"><img src="../assets/img/fig-stable.webp" alt="연속 촬영 시간에 따라 화면에 못 그린 프레임 수. 모든 프레임을 차례로 그리면 5분에 700장 넘게 쌓이고, 최신 1장만 그리면 1장 이하" width="900" height="540"><figcaption>합성 시뮬레이션: 30fps 촬영, 그리기 평균 36ms. 모든 프레임을 차례로 그리면 5분에 700장 넘게 쌓이고, 최신 1장만 그리면 1장 이하. 코드는 tools/make_figures.py 의 fig_stable</figcaption></figure>
+    <p>버퍼를 키우면 멈추는 시점만 늦춰질 뿐입니다. 쌓인 프레임은 메모리를 차지하고, 화면은 점점 과거를 보여 줍니다.</p>
+
+    <h2>고친 것: 최신 1장만, 한 번에 하나만</h2>
+    <p>화면은 모든 프레임을 보여 줄 필요가 없습니다. 사람이 보는 것은 지금 상태입니다. 그래서 새 프레임이 오면 아직 그리지 못한 이전 프레임을 버리고, 그리기는 동시에 하나만 돌게 했습니다.</p>
+<pre><code>// 개념 코드 (C#). 가장 최근 프레임 하나와 "그리는 중" 표시만 둔다
+Frame? latest;
+int drawing;
+
+void OnFrame(Frame f)                      // 카메라 스레드
+{
+    Interlocked.Exchange(ref latest, f)?.Dispose();          // 못 그린 이전 프레임은 버림
+    if (Interlocked.CompareExchange(ref drawing, 1, 0) == 0)  // 그리는 중이 아니면 예약
+        ui.BeginInvoke(Draw);
+}
+
+void Draw()                                 // UI 스레드
+{
+    var f = Interlocked.Exchange(ref latest, null);
+    if (f != null) { Render(f); f.Dispose(); }
+    Volatile.Write(ref drawing, 0);
+    // 그리는 동안 새 프레임이 왔으면 한 번 더
+    if (Volatile.Read(ref latest) != null && Interlocked.CompareExchange(ref drawing, 1, 0) == 0)
+        ui.BeginInvoke(Draw);
+}</code></pre>
+    <ul>
+      <li>버려도 되는 것(화면 표시)과 버리면 안 되는 것(검사 결과, 저장할 영상)은 다른 경로로 나눴습니다. 위 코드는 표시 경로에만 씁니다.</li>
+      <li>그리기 도중에 온 프레임을 놓치지 않도록, 표시를 끄고 난 뒤 한 번 더 확인합니다.</li>
+      <li>설비에서는 이 수정과 함께 64bit 전환, 카메라 재연결을 넣어 20 Slot 연속 Freezing 0건, 메모리 18GB 에서 12GB 가 됐습니다.</li>
+    </ul>
+
+    <h2>정리</h2>
+    <p>처리 속도가 도착 속도보다 느린 대기열은 버퍼 크기와 상관없이 언젠가 넘칩니다. 먼저 "이 데이터를 버려도 되는가"를 정하고, 버려도 되는 경로는 최신 값만 남깁니다. 평균이 아니라 최악의 처리 시간이 도착 간격보다 짧은지도 함께 봅니다.</p>
+    <p class="note-foot">그림과 코드는 원리를 설명하려고 새로 만든 것이고, 설비 코드가 아닙니다.</p>
+  </main>
+</body>
+</html>

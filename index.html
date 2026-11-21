@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%232f62d6%22/%3E%3Ctext x=%2216%22 y=%2222.5%22 font-size=%2217%22 font-family=%22sans-serif%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22white%22%3E%EB%B0%B0%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="assets/site.css?v=20261121f">
+  <link rel="stylesheet" href="assets/site.css?v=20261121g">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "배민혁", "jobTitle": "반도체 검사 장비 SW 엔지니어", "url": "https://mhbae-semi-lab.github.io/portfolio/", "email": "mailto:mhbae03@gmail.com", "image": "https://mhbae-semi-lab.github.io/portfolio/assets/img/profile.jpg", "sameAs": ["https://github.com/mhbae-semi-lab"], "alumniOf": [{"@type": "CollegeOrUniversity", "name": "인하대학교 제조혁신전문대학원"}, {"@type": "CollegeOrUniversity", "name": "한국공학대학교"}], "knowsAbout": ["Wafer Align", "결함 검출", "검사 Recipe 자동화", "영상처리", "OpenCV", "C++", "C#", "Auto Focus"]}</script>
 </head>
 <body>
@@ -178,6 +178,7 @@
             <a class="tile reveal" href="#p-backup"><img class="light" src="assets/img/fig-backup.webp" alt="" loading="lazy" width="900" height="600"><b>설비 데이터 백업과 용량 관리</b><span>25분 → 4분</span></a>
             <a class="tile reveal" href="#p-ftp"><img class="light" src="assets/img/fig-ftp.webp" alt="" loading="lazy" width="900" height="600"><b>검사 결과 대용량 전송</b><span>4GB 65초</span></a>
             <a class="tile reveal" href="#p-matching"><img class="light" src="assets/img/fig-matching.webp" alt="" loading="lazy" width="1000" height="520"><b>결함 좌표 매칭과 Review 리포트</b><span>2023, 위치 오차 보정</span></a>
+            <a class="tile reveal" href="#p-weekly"><img src="assets/img/demo-02.webp" alt="" loading="lazy" width="800" height="506"><b>주간 업무 보고 자동화 (사내)</b><span>팀 10명 사용, 50명 확장 예정</span></a>
           </div>
         </div>
         <div class="group">
@@ -216,6 +217,17 @@
         <li class="reveal"><b>점수가 좋으면 먼저 의심합니다</b><p>파일 이름 해시로 나눈 평가셋에서 점수가 실제보다 좋게 나왔습니다. 같은 날 프레임이 학습과 평가에 섞인 누수라 날짜 단위로 바꿨습니다. CNN 의 검출 향상은 유의하지 않아 그대로 보고했습니다.</p><a href="#p-mark">Shot Key 정렬 마크 검출</a></li>
         <li class="reveal"><b>재는 도구부터 확인합니다</b><p>레이스 재현율을 재던 반복 실행 프로그램에 결함이 있어 처음 잰 값이 부풀어 있었습니다. 측정 프로그램부터 고친 뒤 다시 쟀습니다.</p><a href="#p-recipe-deploy">RAC 통합 도구</a></li>
       </ul>
+    </section>
+
+    <section id="notes" class="wrap">
+      <h2>기술 노트</h2>
+      <p class="sub">현업에서 겪은 문제의 원리를 합성 데이터로 다시 풀어 쓴 글입니다.</p>
+      <ul class="notes">
+        <li class="reveal"><a href="notes/score-normalization.html"><b>매칭 점수가 100점이 되는 이유</b><span>점수 맵을 자기 최소, 최대로 정규화하면 90° 돌아간 자재도 100점이 됩니다.</span></a></li>
+        <li class="reveal"><a href="notes/frame-backlog.html"><b>화면 그리기가 촬영을 따라가지 못할 때</b><span>그리기가 프레임당 3ms 만 느려도, 모든 프레임을 줄 세우면 5분에 700장이 쌓입니다.</span></a></li>
+        <li class="reveal"><a href="notes/eval-leakage.html"><b>평가 점수가 너무 좋을 때</b><span>파일 이름 해시로 나누면 같은 날 프레임이 섞여 점수가 부풉니다. 합성 실험에서 100% 대 84%.</span></a></li>
+      </ul>
+      <p class="research-links">그림을 만든 코드: <a href="https://github.com/mhbae-semi-lab/portfolio/blob/main/tools/make_figures.py" target="_blank" rel="noopener">tools/make_figures.py</a>. 모든 그림을 합성 데이터로 다시 만들고, 그림마다 결과를 assert 로 검사합니다.</p>
     </section>
 
     <section id="demo" class="wrap">
@@ -290,10 +302,10 @@
         <ol class="research-flow">
           <li class="reveal"><b>현업에서 본 한계</b><span>규칙 기반 로직은 제품과 공정 조건이 바뀔 때마다 사람이 검사 조건을 다시 조정해야 합니다.</span></li>
           <li class="reveal"><b>바탕이 된 과제, RAC 와 Shot Key Align</b><span>RAC(Recipe Auto Creation)는 도면(GDS)을 검사 영상으로 바꾸고 Recipe 를 만든 뒤 조명, Focus, Align 을 자동으로 맞춥니다. Shot Key Align 은 사람이 맞추던 마크 검출 허용치를 현장 이미지 라벨로 학습하고, 규칙이 놓친 키는 CNN 이 보완합니다. 검사 임계값은 아직 사람이 정한 Preset 을 씁니다.</span></li>
-          <li class="reveal"><b>연구 주제</b><span>설계 도면의 특징으로 영역별 검사 임계값을 자동으로 정하는 방법. 규칙 기반 방식과 미검·과검 곡선으로 비교합니다.</span></li>
+          <li class="reveal"><b>연구 주제</b><span>설계 도면에서 검사 구역과 구역별 검사 조건을 자동으로 만드는 방법. 사람이 만든 구역과 얼마나 같은지, 검출력이 같은지로 검증합니다.</span></li>
           <li class="reveal"><b>앞으로</b><span>문제를 숫자로 정의하고 검증 가능한 방법으로 풀어, 사람이 일일이 조정하지 않아도 되는 장비 SW 를 만들겠습니다.</span></li>
         </ol>
-        <figure class="d-fig light reveal"><img src="assets/img/fig-research.webp" alt="왼쪽은 빈 영역, 배선, 패드로 나눈 합성 도면, 오른쪽은 과검과 미검률 곡선. 도면 영역별 임계값 곡선이 하나의 임계값 곡선보다 왼쪽 아래에 있음" loading="lazy" width="1000" height="460"><figcaption>연구에서 비교할 두 방식을 합성 데이터로 미리 그려 본 예시입니다. 영역마다 잡음이 다르면 하나의 임계값은 과검과 미검을 함께 줄이기 어렵습니다. 실제 연구 결과가 아닙니다.</figcaption></figure>
+        <figure class="d-fig light reveal"><img src="assets/img/fig-research-pre.webp" alt="치명 결함 검출률 막대. 기준 조건 현행 81.3퍼센트 대 도면 구역 95.3퍼센트, 패턴 반사율 저하 25.8 대 99.2, 다층 95.4 대 95.6" loading="lazy" width="900" height="460"><figcaption>예비 실험: 공개 SKY130 설계와 가상 촬영 영상, 세로 4다이 비교 판정. 과검을 영상 1장당 1개 이하로 맞췄을 때 쇼트, 단선 위치 결함의 검출률입니다. 기준 조건 차이는 +14.0%p (95% 구간 +12.0 ~ +15.9). 대신 검사 면적이 22% 에서 39% 로 늘고, 정렬 오차 1 px 에 과검이 약 2배가 됩니다. 현행 방식도 임계값을 낮추면 기준 조건에서는 비슷해지고, 조건이 바뀔 때 차이가 납니다. 회사 데이터는 쓰지 않았습니다.</figcaption></figure>
       </div>
       <div class="pipeline reveal">
         <p>RAC 가 자동으로 하는 순서와, 연구가 더할 단계</p>
@@ -306,15 +318,23 @@
           <li><a href="#p-align">Featureless Align</a></li>
           <li>Origin</li>
           <li>Feature</li>
-          <li class="next">영역별 검사 임계값 <small>연구</small></li>
+          <li class="next">검사 구역과 구역별 조건 <small>연구</small></li>
         </ol>
         <p class="pipeline-side"><a href="#p-mark">Shot Key Align</a> 마크 검출 허용치를 현장 라벨로 학습, CNN 보완, 회귀 차단</p>
       </div>
+      <h3 class="lessons-head">학위 연구 순서</h3>
+      <ol class="steps">
+        <li class="reveal"><b>지금</b><span>정렬 마크 판정을 데이터로 검증. 후보를 만들고, 점수로 고르고, 사람 결과와 비교해 적용하는 순환을 만듭니다.</span></li>
+        <li class="reveal"><b>다음</b><span>도면에서 검사 구역 자동 생성. 사람이 만든 구역과의 일치 정도와 생성 시간으로 판단합니다.</span></li>
+        <li class="reveal"><b>그다음</b><span>검사 조건까지 이어 Recipe 자동 생성. 생성 성공률, 수동 대비 시간, 검출력 동등을 봅니다.</span></li>
+        <li class="reveal"><b>마지막</b><span>적용 전후를 비교해 학위논문을 씁니다. 2028.02 졸업 예정.</span></li>
+      </ol>
+      <p class="research-links">투고 순서: 정렬 마크 판정으로 국내 학술대회와 KCI, 도면 기반 자동 생성 검증으로 SCI 저널. 회사 공개 승인을 받은 뒤 냅니다.</p>
     </section>
 
     <section id="contact" class="wrap contact">
       <h2>함께 일할 팀을 찾고 있습니다</h2>
-      <p>2028년 3월 입사 가능, 석사 졸업 후 전문연구요원 편입을 희망합니다.</p>
+      <p>2028년 3월 입사 가능합니다. 현역 미필이며, 2028년 2월 석사 졸업 후 전문연구요원으로 편입하기를 희망합니다.</p>
       <p class="mail">mhbae03@gmail.com</p>
       <div class="cta">
         <a class="btn" href="mailto:mhbae03@gmail.com">이메일 보내기</a>
@@ -371,6 +391,15 @@
     <figure class="d-fig light"><img src="assets/img/fig-stable.webp" alt="연속 촬영 시간에 따라 화면에 못 그린 프레임 수. 모든 프레임을 차례로 그리면 5분에 700장 넘게 쌓이고, 최신 1장만 그리면 1장 이하" width="900" height="540"><figcaption>화면 그리기가 촬영보다 조금만 느려도, 모든 프레임을 차례로 그리면 대기열이 끝없이 쌓입니다. 합성 시뮬레이션</figcaption></figure>
     <div class="stat-big"><strong>264<span>h</span></strong><span>11일(264시간) 운영 동안 Failure 0건, Vision UpTime 98.86%</span></div>
     <dl class="kpi"><div><dt>가동률 (432h 기준)</dt><dd>99.31%</dd></div><div><dt>메모리 (10회 Shear)</dt><dd>18 → 12GB</dd></div><div><dt>카메라 사용 시간</dt><dd>−55%</dd></div></dl>
+    <h3>일정</h3>
+    <ol class="timeline">
+      <li><time>2025.01</time><p>수동 장비를 Semi Auto 로 바꾸는 신규 과제 시작. Vision, 시퀀스, UI 담당</p></li>
+      <li><time>2025.05</time><p>납기 안에 Manual Shear 시퀀스 완성. 평균 Shear 시간 126초 → 94초, 성공률 96.7% → 98% 이상</p></li>
+      <li><time>2025 하</time><p>Semi Auto 고도화와 신뢰성 확보, 현장 출장 32회</p></li>
+      <li><time>2025.11</time><p>11.14 ~ 12.10 현장 25일 상주. 48시간 안에 멈추던 문제를 재현, 수정, 재검증</p></li>
+      <li><time>2026.02</time><p>Tip 파손 다음 날 Interlock 판정 기준을 고치고, 이후 재발 0건 (<a href="#p-interlock">자세히</a>)</p></li>
+      <li><time>2026</time><p>유지보수와 개발 건을 이어서 진행</p></li>
+    </ol>
     <section class="d-step">
       <h3><span>1</span>참고 코드 없는 신규 설비</h3>
       <p>수동 장비를 Semi Auto 로 바꾸는 신규 설비라 참고할 코드가 없고 납기는 정해져 있었습니다. 양산 투입 후 48시간 안에 프로그램이 멈추는 일이 반복돼, 현장에 25일 상주하며 재현, 로그 분석, 수정, 재검증을 반복했습니다.</p>
@@ -386,10 +415,10 @@
     </section>
     <section class="d-step">
       <h3><span>4</span>Interlock 재정비</h3>
-      <p>웨이퍼 파손 이후 Lifter 원점 방식, Vacuum 상태 감시, 웨이퍼 존재 재확인 등 Interlock 을 다시 정비했습니다. 이후 23 Slot 오동작 <b>0건</b>.</p>
+      <p>Lifter 원점 방식, Vacuum 상태 감시, 웨이퍼 존재 재확인 등 Interlock 을 다시 정비했습니다. 이후 23 Slot 오동작 <b>0건</b>.</p>
     </section>
     <p class="d-tags">C# (WinForms), OpenCV</p>
-    <p class="d-source">근거: 2025 하반기 업무성과 기술서, 현장 Setup 과 펜딩 정리</p>
+    <p class="d-source">근거: 2025 하반기 업무성과 기술서, 현장 Setup 과 펜딩 정리, 경력 정리 문서 (일정)</p>
   </template>
 
   <template id="p-focus">
@@ -555,6 +584,21 @@
     <p class="d-source">근거: 2023 상반기, 하반기 평가서</p>
   </template>
 
+  <template id="p-weekly">
+    <p class="d-meta">2026 · 사내 도구 설계와 구현 · 공개 데모는 합성 데이터로 다시 만든 것</p>
+    <h2 id="detail-title">주간 업무 보고 자동화 (사내)</h2>
+    <figure class="d-fig"><img src="assets/img/demo-02.webp" alt="주간 보고 생성기 공개 데모 화면, 주제별 요약과 검증 결과" width="800" height="506"><figcaption>공개 데모 화면. 사내 도구와 같은 흐름을 합성 커밋으로 다시 만들었습니다.</figcaption></figure>
+    <dl class="kpi"><div><dt>지금 쓰는 사람</dt><dd>10명</dd></div><div><dt>확장 예정</dt><dd>50명</dd></div></dl>
+    <h3>문제</h3>
+    <ul><li>주간 보고를 쓸 때마다 한 주의 커밋과 메모를 다시 읽고, 사내 양식 PPT 에 손으로 옮겨 적었습니다.</li></ul>
+    <h3>접근</h3>
+    <ul><li>한 주의 git 커밋을 규칙으로 주제별로 묶고, 주제마다 제목과 요약 3줄을 만들어 양식 PPT 로 냅니다.</li><li>요약은 로컬 LLM 으로만 만들어 데이터가 밖으로 나가지 않습니다.</li><li>요약은 매번 검사합니다. 3줄, 줄당 80자, 입력에 없는 숫자나 "완료" 같은 상태어가 나오면 한 번 다시 만들고, 그래도 안 되면 규칙 기반 문장으로 바꿉니다.</li><li>Claude Code 명령으로도 쓸 수 있게 했습니다.</li></ul>
+    <h3>결과</h3>
+    <ul><li>팀 10명이 쓰고 있고, 50명으로 넓힐 예정입니다.</li><li>같은 흐름을 합성 데이터로 다시 만든 <a href="apps/02-weekly-report/">공개 데모</a>에서 직접 써 볼 수 있습니다.</li></ul>
+    <p class="d-tags">Python, python-pptx, 로컬 LLM (Ollama), Claude Code</p>
+    <p class="d-source">근거: 사내 도구 사용 현황 (2026.11)</p>
+  </template>
+
   <template id="p-score">
     <p class="d-meta">2026</p>
     <h2 id="detail-title">패턴 매칭 점수 오판정 개선</h2>
@@ -636,7 +680,7 @@
     <p class="d-source">근거: 2025 상반기 업무성과 기술서 외</p>
   </template>
 
-  <script src="assets/widgets.js?v=20261121f"></script>
-  <script src="assets/site.js?v=20261121f"></script>
+  <script src="assets/widgets.js?v=20261121g"></script>
+  <script src="assets/site.js?v=20261121g"></script>
 </body>
 </html>
