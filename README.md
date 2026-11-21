@@ -21,16 +21,16 @@
 
 ## 구조
 ```
-index.html, assets/      포트폴리오 (해시 라우팅 단일 페이지, 인쇄 스타일 → PDF)
-projects.json            앱 · 사례 · 프로필 (웹과 PDF 가 같은 데이터를 씀)
+index.html, assets/      포트폴리오 한 페이지, 카드를 누르면 #p-이름 으로 세부 패널이 열림
+tools/make_figures.py    합성 데이터로 사례 그림(assets/img/fig-*.webp)을 다시 만듦
 apps/01-log-analyzer/    gen.js 합성 로그 · analyze.js 파싱 · 군집 · 검증 · app.js 화면
 apps/02-weekly-report/   core.js 주제 묶기 · 검증 · deck.js PPT · app.js 화면
 ```
 `analyze.js`, `core.js`, `deck.js` 는 node 에서도 `require` 로 쓸 수 있어 화면 없이 검증할 수 있습니다.
 
 ## 로컬에서 보기
-`fetch` 를 쓰므로 웹 서버가 필요합니다.
+정적 파일이라 index.html 을 바로 열어도 됩니다. 웹 서버로 보려면:
 ```
 python -m http.server 8765
 ```
-→ http://127.0.0.1:8765 (로컬에서는 아직 채우지 않은 칸이 빨간 점선으로 보입니다)
+→ http://127.0.0.1:8765
