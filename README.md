@@ -34,3 +34,6 @@ apps/02-weekly-report/   core.js 주제 묶기 · 검증 · deck.js PPT · app.j
 python -m http.server 8765
 ```
 → http://127.0.0.1:8765
+
+## 올릴 때
+`index.html` 의 `site.css?v=` 와 `site.js?v=` 값을 바꿉니다. 바꾸지 않으면 방문자 브라우저가 예전 스타일을 계속 씁니다.

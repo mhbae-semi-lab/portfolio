@@ -223,3 +223,16 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 .d-step b { color: var(--ink); }
 @media (max-width: 1020px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
 .contact .mail { color: var(--ink); font-size: 18px; font-weight: 650; font-variant-numeric: tabular-nums; }
+
+/* 강점 3가지: 누르면 근거 프로젝트 */
+.proof { list-style: none; padding: 0; margin-top: 26px; max-width: 44em; border-top: 1px solid var(--line); }
+.proof a { display: grid; grid-template-columns: minmax(0, 17em) 1fr auto; gap: 2px 18px; align-items: baseline; padding: 11px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; }
+.proof a::after { content: "→"; color: var(--muted); }
+.proof b { font-weight: 650; }
+.proof span { color: var(--ink-2); font-size: 15.5px; }
+.proof a:hover b, .proof a:hover::after { color: var(--accent); }
+.plain .made { display: block; font-size: 14.5px; color: var(--muted); margin-top: 3px; }
+.plain .made a { color: var(--accent); text-decoration: none; }
+.plain .made a:hover { text-decoration: underline; }
+.d-source { color: var(--muted); font-size: 13.5px; }
+@media (max-width: 860px) { .proof a { grid-template-columns: 1fr auto; } .proof span { grid-column: 1; } }
