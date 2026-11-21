@@ -25,6 +25,7 @@ let lastFocus = null;
 
 function show(id) {
   body.replaceChildren(document.getElementById(id).content.cloneNode(true));
+  window.initWidgets?.(body); // 움직이는 그림 (assets/widgets.js)
   const i = ids.indexOf(id);
   for (const [dir, j] of [["prev", i - 1], ["next", i + 1]]) {
     const a = dlg.querySelector(`[data-dir="${dir}"]`);

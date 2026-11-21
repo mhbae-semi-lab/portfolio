@@ -260,3 +260,11 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 .pipeline li.next small { font-size: 12.5px; margin-left: 4px; }
 .pipeline-side { margin-top: 12px; font-size: 15px; color: var(--ink-2); }
 .pipeline-side a { color: var(--accent); text-decoration: none; font-weight: 600; margin-right: 6px; }
+
+/* 세부 패널의 움직이는 그림 (assets/widgets.js) */
+.widget canvas { display: block; width: 100%; height: auto; }
+.widget-ctl { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 12px 14px 0; color: #3a414b; font-size: 15px; }
+.widget-ctl label { font-weight: 650; }
+.widget-ctl input[type="range"] { flex: 1 1 200px; accent-color: var(--accent); min-height: 28px; }
+.widget-ctl output { min-width: 4.5em; font-weight: 650; font-variant-numeric: tabular-nums; color: #2f62d6; }
+.widget-read { padding: 6px 14px 0; font-size: 14px; color: #5f6773; font-variant-numeric: tabular-nums; }

@@ -14,7 +14,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%232f62d6%22/%3E%3Ctext x=%2216%22 y=%2222.5%22 font-size=%2217%22 font-family=%22sans-serif%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22white%22%3E%EB%B0%B0%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="assets/site.css?v=20261121c">
+  <link rel="stylesheet" href="assets/site.css?v=20261121d">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "배민혁", "jobTitle": "반도체 검사 장비 SW 엔지니어", "url": "https://mhbae-semi-lab.github.io/portfolio/", "email": "mailto:mhbae03@gmail.com", "image": "https://mhbae-semi-lab.github.io/portfolio/assets/img/profile.jpg", "sameAs": ["https://github.com/mhbae-semi-lab"], "alumniOf": [{"@type": "CollegeOrUniversity", "name": "인하대학교 제조혁신전문대학원"}, {"@type": "CollegeOrUniversity", "name": "한국공학대학교"}], "knowsAbout": ["Wafer Align", "결함 검출", "검사 Recipe 자동화", "영상처리", "OpenCV", "C++", "C#", "Auto Focus"]}</script>
 </head>
 <body>
@@ -299,7 +299,7 @@
     </section>
     <section class="d-step">
       <h3><span>2</span>Die 배열의 주기에 격자 맞추기</h3>
-      <figure class="d-fig light"><img src="assets/img/fig-align-score.webp" alt="가정한 회전각에 따른 격자 일치 점수 곡선, 1.8도에서 뾰족한 봉우리" width="900" height="500"><figcaption>회전각을 바꿔 가며 잰 격자 일치 점수. 실제 각도에서만 뾰족하게 솟습니다. 합성 영상</figcaption></figure>
+      <figure class="d-fig light" data-widget="align"><img src="assets/img/fig-align-score.webp" alt="가정한 회전각에 따른 격자 일치 점수 곡선, 1.8도에서 뾰족한 봉우리" width="900" height="500"><figcaption>회전각을 바꿔 가며 잰 격자 일치 점수. 실제 각도에서만 뾰족하게 솟습니다. 합성 영상</figcaption></figure>
       <p>합성 영상으로 실패를 재현해 원인을 카메라 고정 잡음으로 좁혔습니다. Die 배열의 주기에 격자를 맞추고, 여러 지점의 일관성을 점수로 삼아 틀리면 점수가 떨어지게 했습니다.</p>
     </section>
     <section class="d-step">
@@ -345,7 +345,7 @@
   <template id="p-focus">
     <p class="d-meta">2025 · 신규 Particle 제거 설비, 설계와 현장 검증</p>
     <h2 id="detail-title">입자 높이 Auto Focus, 영상에서 접촉 감지로</h2>
-    <figure class="d-fig light"><img src="assets/img/fig-focus-stack.webp" alt="초점 높이 0, 15, 30, 45, 60µm 에서 찍은 합성 입자 영상과 입자, 바닥 선명도 막대. 바닥은 0µm, 입자는 60µm 에서 가장 선명" width="1000" height="440"><figcaption>초점을 올리며 입자(파란 상자)와 주변 네 방향 바닥(점선)의 선명도를 함께 잽니다. 두 봉우리의 높이 차이가 입자 높이입니다. 합성 영상</figcaption></figure>
+    <figure class="d-fig light" data-widget="focus"><img src="assets/img/fig-focus-stack.webp" alt="초점 높이 0, 15, 30, 45, 60µm 에서 찍은 합성 입자 영상과 입자, 바닥 선명도 막대. 바닥은 0µm, 입자는 60µm 에서 가장 선명" width="1000" height="440"><figcaption>초점을 올리며 입자(파란 상자)와 주변 네 방향 바닥(점선)의 선명도를 함께 잽니다. 두 봉우리의 높이 차이가 입자 높이입니다. 합성 영상</figcaption></figure>
     <dl class="kpi"><div><dt>영상 AF 시간</dt><dd>−72%</dd></div><div><dt>높이 반복성 (20회)</dt><dd>±2µm</dd></div><div><dt>Shear 높이 정확도</dt><dd>±1µm</dd></div></dl>
 
     <section class="d-step">
@@ -480,7 +480,7 @@
   <template id="p-matching">
     <p class="d-meta">2023 · Review 프로그램 알고리즘과 리포트</p>
     <h2 id="detail-title">결함 좌표 매칭과 Review 리포트</h2>
-    <figure class="d-fig light"><img src="assets/img/fig-matching.webp" alt="기준 결함과 검사 결함을 짝지은 두 그림. 위치만 보면 44쌍 중 25쌍, 위치와 크기를 함께 보면 40쌍이 맞음" width="1000" height="520"><figcaption>합성 좌표로 재현한 원리. 장비 사이 위치 오차가 있으면 위치만으로는 옆 결함과 짝지어지고(왼쪽), 크기를 함께 보면 맞는 짝을 찾습니다(오른쪽).</figcaption></figure>
+    <figure class="d-fig light" data-widget="match"><img src="assets/img/fig-matching.webp" alt="기준 결함과 검사 결함을 짝지은 두 그림. 위치만 보면 44쌍 중 25쌍, 위치와 크기를 함께 보면 40쌍이 맞음" width="1000" height="520"><figcaption>합성 좌표로 재현한 원리. 장비 사이 위치 오차가 있으면 위치만으로는 옆 결함과 짝지어지고(왼쪽), 크기를 함께 보면 맞는 짝을 찾습니다(오른쪽).</figcaption></figure>
     <ul><li>Mask 결함 데이터와 검사 결과의 결함을 짝짓는 Mask Matching 에서, 위치 오차 때문에 크기 매칭이 틀어지던 알고리즘을 고치고 이후 기능을 계속 개선했습니다.</li><li>짝이 없는 결함이 위치 정보 없이 나오던 오류를 고치고, 매칭 대상 전체 개수와 결함 밝기(GV)를 함께 보여 주게 했습니다.</li><li>고객 요청 4건에 맞춰 Review 화면, 좌표 형식, 가로와 세로 형식 Excel 리포트를 바꿨습니다. 검사가 끝나면 좌표를 고객 형식으로 바꾸고 Y 축 반전을 고를 수 있습니다.</li></ul>
     <p class="d-source">근거: 2023 상반기, 하반기 평가서</p>
   </template>
@@ -566,6 +566,7 @@
     <p class="d-source">근거: 2025 상반기 업무성과 기술서 외</p>
   </template>
 
-  <script src="assets/site.js?v=20261121c"></script>
+  <script src="assets/widgets.js?v=20261121d"></script>
+  <script src="assets/site.js?v=20261121d"></script>
 </body>
 </html>
