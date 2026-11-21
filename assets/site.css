@@ -161,8 +161,8 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 .sheet-close { margin-left: auto; }
 .sheet-body { padding: 28px 40px 56px; display: flex; flex-direction: column; gap: 18px; }
 .sheet-body h2 { font-size: clamp(26px, 3vw, 34px); }
-.sheet-body h3 { font-size: 17px; margin-top: 10px; }
-.sheet-body ul { padding-left: 20px; display: grid; gap: 8px; color: var(--ink-2); }
+.sheet-body h3 { font-size: 20px; letter-spacing: -.015em; margin-top: 12px; }
+.sheet-body ul { padding-left: 20px; display: grid; gap: 8px; color: var(--ink-2); font-size: 16px; }
 .d-meta { color: var(--muted); font-size: 14.5px; }
 .d-fig { border-radius: var(--r); overflow: hidden; background: var(--fig-dark); }
 .d-fig.light { background: var(--fig-light); }
