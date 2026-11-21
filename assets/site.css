@@ -222,3 +222,4 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 .d-step p { color: var(--ink-2); font-size: 16px; }
 .d-step b { color: var(--ink); }
 @media (max-width: 1020px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
+.contact .mail { color: var(--ink); font-size: 18px; font-weight: 650; font-variant-numeric: tabular-nums; }
