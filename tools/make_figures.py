@@ -901,6 +901,77 @@ def fig_matching():
     _save_plt(fig, "fig-matching.webp")
     return res[0], res[1], idx.size
 
+
+# 24. 석사 연구 예시: 하나의 임계값 vs 도면 영역별 임계값, 미검·과검 곡선 (합성 데이터, 연구 결과 아님)
+def fig_research():
+    rng = np.random.default_rng(24)
+    plt = _plt()
+    h, w = 240, 360
+    region = np.zeros((h, w), np.uint8)              # 0 빈 영역, 1 배선, 2 패드
+    region[:, 120:240] = 1
+    region[:, 240:] = 2
+    noise_sigma = np.array([3.0, 7.0, 12.0])         # 영역마다 공정 편차가 다르다
+    ref = np.full((h, w), 90, np.float32)
+    for y in range(6, h, 12):
+        cv2.line(ref, (122, y), (238, y), 150, 4)
+    for y in range(8, h, 26):
+        for x in range(246, w - 6, 26):
+            cv2.rectangle(ref, (x, y), (x + 16, y + 16), 170, -1)
+
+    def diff_map(with_defects):
+        test = ref + rng.normal(0, 1, (h, w)) * noise_sigma[region]
+        pts = []
+        if with_defects:
+            for _ in range(90):
+                y, x = int(rng.uniform(4, h - 4)), int(rng.uniform(4, w - 4))
+                test[y - 1:y + 2, x - 1:x + 2] += rng.uniform(7, 22) * rng.choice([-1, 1])
+                pts.append((y, x))
+        d = cv2.blur(np.abs(test - ref), (3, 3))
+        return d, pts
+
+    d, pts = diff_map(True)
+    sig = noise_sigma[region]
+
+    near = np.zeros((h, w), bool)  # 결함 주변 (반경 3픽셀)
+    for y, x in pts:
+        near[max(0, y - 3):y + 4, max(0, x - 3):x + 4] = True
+
+    def score(mask):
+        found = sum(1 for y, x in pts if mask[y - 1:y + 2, x - 1:x + 2].any())
+        return int((mask & ~near).sum()), 100 * (1 - found / len(pts))  # 과검 픽셀 수, 미검률
+
+    glob = [score(d > t) for t in np.linspace(2, 30, 40)]
+    reg = [score(d > k * sig / 3) for k in np.linspace(1, 9, 40)]
+
+    fig = plt.figure(figsize=(10, 4.6), dpi=100)
+    gs = fig.add_gridspec(1, 2, width_ratios=[1, 1.15], wspace=.18)
+    ax = fig.add_subplot(gs[0, 0])
+    ax.imshow(ref, cmap="gray", vmin=0, vmax=255)
+    for x0, t in ((0, "빈 영역"), (120, "배선"), (240, "패드")):
+        ax.add_patch(plt.Rectangle((x0 + 2, 2), 116, h - 5, fill=False, ec=BLUE, lw=2))
+        ax.text(x0 + 60, h - 12, t, ha="center", fontsize=15, color="white",
+                bbox=dict(boxstyle="round,pad=.25", fc=BLUE, ec="none"))
+    ax.set_title("도면에서 나눈 영역", fontsize=17, color=INK, pad=8)
+    ax.axis("off")
+    bx = fig.add_subplot(gs[0, 1])
+    for pts_, col, lab in ((glob, "#9aa3ae", "하나의 임계값"), (reg, BLUE, "도면 영역별 임계값")):
+        fa, miss = zip(*pts_)
+        bx.plot(np.array(fa) + 1, miss, color=col, lw=2.4, marker="o", ms=3.5, label=lab)
+    bx.set_xscale("log")
+    bx.set_xlabel("과검 (정상 위치에서 검출된 픽셀 수 + 1)", fontsize=15, color=INK)
+    bx.set_ylabel("미검률 (%)", fontsize=15, color=INK)
+    bx.legend(frameon=False, fontsize=15, loc="upper right")
+    bx.set_title("왼쪽 아래로 갈수록 좋음", fontsize=15, color=MUTED, pad=8)
+    _clean(bx)
+    bx.tick_params(labelsize=13)
+    fig.subplots_adjust(left=.01, right=.98, top=.9, bottom=.13)
+    _save_plt(fig, "fig-research.webp")
+
+    def miss_at(curve, fa_max):
+        ok = [m for fa, m in curve if fa <= fa_max]
+        return min(ok) if ok else 100.0
+    return miss_at(glob, 10), miss_at(reg, 10)
+
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     est, align_a, align_v = fig_align()
@@ -927,6 +998,8 @@ if __name__ == "__main__":
     fig_optics()
     m_pos, m_both, m_n = fig_matching()
     print("matching", m_pos, m_both, m_n)
+    r_glob, r_reg = fig_research()
+    print("research miss at <=10 px", r_glob, r_reg)
     print("align score peak", a_est, "stable backlog", q_all, q_new, "light dev", round(light, 2), "tilt", tilt)
     print("score (old, new) per shot", score)
     print("hough old r", round(float(old[2])), "new r", round(float(new[2])))
@@ -947,3 +1020,4 @@ if __name__ == "__main__":
     assert q_all > 300 and q_new <= 1, "프레임 그림: 줄 세우기는 쌓이고 최신 1장은 1장 이하여야 함"
     assert interlock == (True, True), "Interlock 그림: 동시 이동만 간섭 영역을 지나야 함"
     assert m_both >= m_pos + 10, "좌표 매칭 그림: 크기를 함께 본 쪽이 확실히 나아야 함"
+    assert r_reg < r_glob - 20, "연구 예시 그림: 영역별 임계값이 확실히 나아야 함"

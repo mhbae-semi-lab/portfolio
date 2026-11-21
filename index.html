@@ -14,7 +14,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%232f62d6%22/%3E%3Ctext x=%2216%22 y=%2222.5%22 font-size=%2217%22 font-family=%22sans-serif%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22white%22%3E%EB%B0%B0%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="assets/site.css?v=20261121">
+  <link rel="stylesheet" href="assets/site.css?v=20261121b">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "배민혁", "jobTitle": "반도체 검사 장비 SW 엔지니어", "url": "https://mhbae-semi-lab.github.io/portfolio/", "email": "mailto:mhbae03@gmail.com", "image": "https://mhbae-semi-lab.github.io/portfolio/assets/img/profile.jpg", "sameAs": ["https://github.com/mhbae-semi-lab"], "alumniOf": [{"@type": "CollegeOrUniversity", "name": "인하대학교 제조혁신전문대학원"}, {"@type": "CollegeOrUniversity", "name": "한국공학대학교"}], "knowsAbout": ["Wafer Align", "결함 검출", "검사 Recipe 자동화", "영상처리", "OpenCV", "C++", "C#", "Auto Focus"]}</script>
 </head>
 <body>
@@ -26,6 +26,7 @@
         <a href="#method">일하는 방식</a>
         <a href="#demo">데모</a>
         <a href="#career">경력</a>
+        <a href="#research">연구</a>
       </nav>
       <a class="btn btn-sm" href="#contact">연락하기</a>
     </div>
@@ -231,6 +232,20 @@
           <li><b>데이터</b><span>Python, NumPy, CNN 학습, 로컬 LLM</span><span class="made">만든 것 <a href="#p-mark">CNN 학습 도구</a>, <a href="#p-crack">TB 급 영상 분할</a>, <a href="#p-matching">좌표 매칭</a></span></li>
         </ul>
       </div>
+    </section>
+
+    <section id="research" class="wrap">
+      <h2>석사 연구와 앞으로</h2>
+      <p class="sub">현업에서 확인한 한계를 연구 주제로 가져갔습니다. 인하대학교 제조혁신전문대학원 반도체공정지능화융합, 2026.03 ~ 2028.02</p>
+      <div class="research">
+        <ol class="research-flow">
+          <li class="reveal"><b>현업에서 본 한계</b><span>규칙 기반 로직은 제품과 공정 조건이 바뀔 때마다 사람이 검사 조건을 다시 조정해야 합니다.</span></li>
+          <li class="reveal"><b>연구 주제</b><span>설계 도면의 특징으로 영역별 검사 임계값을 자동으로 정하는 방법. 규칙 기반 방식과 미검·과검 곡선으로 비교합니다.</span></li>
+          <li class="reveal"><b>앞으로</b><span>문제를 숫자로 정의하고 검증 가능한 방법으로 풀어, 사람이 일일이 조정하지 않아도 되는 장비 SW 를 만들겠습니다.</span></li>
+        </ol>
+        <figure class="d-fig light reveal"><img src="assets/img/fig-research.webp" alt="왼쪽은 빈 영역, 배선, 패드로 나눈 합성 도면, 오른쪽은 과검과 미검률 곡선. 도면 영역별 임계값 곡선이 하나의 임계값 곡선보다 왼쪽 아래에 있음" loading="lazy" width="1000" height="460"><figcaption>연구에서 비교할 두 방식을 합성 데이터로 미리 그려 본 예시입니다. 영역마다 잡음이 다르면 하나의 임계값은 과검과 미검을 함께 줄이기 어렵습니다. 실제 연구 결과가 아닙니다.</figcaption></figure>
+      </div>
+      <p class="research-links">출발점이 된 업무: <a href="#p-recipe">검사 Recipe 자동 생성</a> (도면을 검사 영상으로 바꾸기), <a href="#p-crack">Die 가장자리 Crack 검출</a> (놓치거나 과검하던 결함)</p>
     </section>
 
     <section id="contact" class="wrap contact">
@@ -531,6 +546,6 @@
     <p class="d-source">근거: 2025 상반기 업무성과 기술서 외</p>
   </template>
 
-  <script src="assets/site.js?v=20261121"></script>
+  <script src="assets/site.js?v=20261121b"></script>
 </body>
 </html>

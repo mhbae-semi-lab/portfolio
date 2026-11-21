@@ -236,3 +236,14 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 .plain .made a:hover { text-decoration: underline; }
 .d-source { color: var(--muted); font-size: 13.5px; }
 @media (max-width: 860px) { .proof a { grid-template-columns: 1fr auto; } .proof span { grid-column: 1; } }
+
+/* 석사 연구와 앞으로 */
+.research { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.4fr); gap: 40px; margin-top: 32px; align-items: start; }
+.research-flow { list-style: none; padding: 0; border-top: 2px solid var(--ink); }
+.research-flow li { display: grid; gap: 6px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.research-flow b { font-size: 19px; letter-spacing: -.015em; }
+.research-flow span { color: var(--ink-2); font-size: 16px; }
+.research-links { margin-top: 22px; color: var(--ink-2); font-size: 15.5px; }
+.research-links a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.research-links a:hover { text-decoration: underline; }
+@media (max-width: 860px) { .research { grid-template-columns: 1fr; gap: 24px; } }
