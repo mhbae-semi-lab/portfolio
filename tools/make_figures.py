@@ -54,7 +54,9 @@ def fig_align():
         prof = r[h // 8: -h // 8, w // 8: -w // 8].mean(axis=1)
         return float(prof.var())
 
-    coarse = max(np.arange(-5, 5, 0.1), key=sharp)
+    grid = np.arange(-5, 5, 0.1)
+    curve = np.array([sharp(a) for a in grid])
+    coarse = grid[int(np.argmax(curve))]
     best = max(np.arange(coarse - 0.1, coarse + 0.1, 0.01), key=sharp)
     est = -best  # 되돌린 각도의 반대가 격자 회전각
 
@@ -84,7 +86,7 @@ def fig_align():
             cv2.circle(lay, (int(px), int(py)), 6, ACCENT, 2, cv2.LINE_AA)
     out = cv2.addWeighted(lay, 0.9, out, 0.1, 0)
     save("fig-align.webp", out)
-    return est
+    return est, -grid, curve
 
 
 # 2. 정렬 마크: 비슷한 패턴 사이 십자 마크 → 템플릿 매칭(규칙) → 상관 맵과 검출 결과
@@ -548,9 +550,305 @@ def fig_focus_contact():
     return found
 
 
+# 12. Wafer Align 점수: 격자 회전각을 바꿔 가며 잰 일치 점수. 실제 각도에서만 뾰족하다
+def fig_align_score(angles, vals):
+    plt = _plt()
+    v = (vals - vals.min()) / (vals.max() - vals.min())
+    o = np.argsort(angles)
+    a, v = angles[o], v[o]
+    fig, ax = plt.subplots(figsize=(9, 5), dpi=100)
+    ax.plot(a, v, color=INK, lw=2.2)
+    k = int(np.argmax(v))
+    ax.axvline(a[k], color=BLUE, lw=2)
+    ax.text(a[k] + .15, 1.02, f"추정 {a[k]:.1f}°", color=BLUE, fontsize=13, va="bottom")
+    ax.set_xlabel("가정한 격자 회전각 (°)", fontsize=13, color=INK)
+    ax.set_ylabel("격자 일치 점수 (정규화)", fontsize=13, color=INK)
+    ax.set_ylim(-.05, 1.15)
+    _clean(ax)
+    fig.tight_layout()
+    _save_plt(fig, "fig-align-score.webp")
+    return float(a[k])
+
+
+# 13. 신규 설비 SW: 화면 그리기가 촬영보다 조금 느리면, 모든 프레임을 줄 세울 때 대기열이 끝없이 쌓인다
+def fig_stable():
+    rng = np.random.default_rng(17)
+    plt = _plt()
+    dt, n = 1 / 30, 30 * 300          # 30fps, 5분
+    draw = rng.gamma(9, .036 / 9, n)  # 그리기 평균 36ms, 촬영 간격 33ms
+    arr = np.arange(n) * dt
+    done, fin = np.empty(n), 0.0
+    for i in range(n):                # 모든 프레임을 차례로 그림
+        fin = max(arr[i], fin) + draw[i]
+        done[i] = fin
+    t = np.linspace(0, arr[-1], 600)
+    q_all = np.searchsorted(arr, t, "right") - np.searchsorted(done, t, "right")
+    # 최신 1장만: 그리기가 끝나면 그 시점의 최신 프레임 하나만 그리고 나머지는 버린다
+    busy, i, waiting = 0.0, 0, []
+    while i < n:
+        start = max(arr[i], busy)
+        j = int(np.searchsorted(arr, start, "right")) - 1
+        busy = start + draw[j]
+        i = j + 1
+        waiting.append((start, busy, i))
+    ends = np.array([e for _, e, _ in waiting])
+    nxt = np.array([k for _, _, k in waiting])
+    q_new = []
+    for tt in t:  # 대기 = 도착했지만 아직 그리기 시작 전인 최신 프레임(0 또는 1장)
+        k = int(np.searchsorted(ends, tt, "right"))
+        arrived = int(np.searchsorted(arr, tt, "right"))
+        q_new.append(min(1, max(0, arrived - (nxt[k - 1] if k else 0) - 1)))
+    fig, ax = plt.subplots(figsize=(9, 5.4), dpi=100)
+    ax.plot(t / 60, q_all, color="#9aa3ae", lw=2.4)
+    ax.plot(t / 60, q_new, color=BLUE, lw=2.4)
+    ax.text(t[-1] / 60, q_all[-1] + 15, "모든 프레임을 차례로 그림", color=MUTED, fontsize=13, ha="right", va="bottom")
+    ax.text(t[-1] / 60, 30, "최신 1장만 그림", color=BLUE, fontsize=13, ha="right", va="bottom")
+    ax.set_xlabel("연속 촬영 시간 (분)", fontsize=13, color=INK)
+    ax.set_ylabel("화면에 못 그린 프레임 (장)", fontsize=13, color=INK)
+    _clean(ax)
+    fig.tight_layout()
+    _save_plt(fig, "fig-stable.webp")
+    return int(q_all[-1]), int(max(q_new))
+
+
+# 14. 프로그램 Down: 락 없이 쓰는 도중에 읽으면 두 프레임이 섞인 버퍼를 읽는다
+def fig_down():
+    rng = np.random.default_rng(18)
+    h, w = 420, 420
+
+    def frame(shift):
+        f = np.full((h, w), 66, np.float32)
+        for y in range(-80, h, 70):
+            for x in range(-80, w, 70):
+                cv2.rectangle(f, (x + shift + 6, y + shift // 2 + 6), (x + shift + 62, y + shift // 2 + 62), 138, -1)
+                cv2.circle(f, (x + shift + 34, y + shift // 2 + 34), 12, 196, -1, cv2.LINE_AA)
+        return np.clip(f + rng.normal(0, 5, f.shape), 0, 255).astype(np.uint8)
+
+    old, new = frame(0), frame(29)  # Stage 가 움직인 다음 프레임
+    buf, torn = old.copy(), None
+    for tick in range(h // 12):      # 쓰는 쪽은 12줄씩 복사
+        buf[tick * 12:(tick + 1) * 12] = new[tick * 12:(tick + 1) * 12]
+        if tick == 17:
+            torn = buf.copy()        # 락 없음: 쓰는 도중 읽음
+    seam = 18 * 12
+    out = np.full((600, 900, 3), (53, 47, 43), np.uint8)
+    for i, img in enumerate((torn, buf)):  # buf: 락, 쓰기가 끝난 뒤 읽음
+        p = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
+        if i == 0:
+            cv2.line(p, (0, seam), (24, seam), ACCENT, 4)
+            cv2.line(p, (w - 25, seam), (w - 1, seam), ACCENT, 4)
+        out[90:90 + h, 20 + i * 440: 20 + i * 440 + w] = p
+    save("fig-down.webp", out)
+    return seam
+
+
+# 15. Tip 파손 Interlock: XY 와 Z 를 동시에 움직이면 간섭 영역을 지나고, Z 를 먼저 올리면 피한다
+def fig_interlock():
+    plt = _plt()
+    box = (40, 70, 0, 30)  # x0, x1, z0, z1
+
+    def path(pts, n=400):
+        out = []
+        for (x0, z0), (x1, z1) in zip(pts, pts[1:]):
+            s = np.linspace(0, 1, n)
+            out += list(zip(x0 + (x1 - x0) * s, z0 + (z1 - z0) * s))
+        return np.array(out)
+
+    def first_hit(p):
+        inside = (p[:, 0] > box[0]) & (p[:, 0] < box[1]) & (p[:, 1] > box[2]) & (p[:, 1] < box[3])
+        return p[np.argmax(inside)] if inside.any() else None
+
+    a, b, safe_z = (10, 6), (100, 6), 42
+    both = path([a, (100, safe_z), b])
+    seq = path([a, (10, safe_z), (100, safe_z), b])
+    hit, hit2 = first_hit(both), first_hit(seq)
+    fig, ax = plt.subplots(figsize=(9, 5.4), dpi=100)
+    ax.add_patch(plt.Rectangle((box[0], box[2]), box[1] - box[0], box[3] - box[2], color="#dfe3e8", lw=0))
+    ax.text((box[0] + box[1]) / 2, box[3] / 2, "간섭 영역", ha="center", va="center", fontsize=13, color=MUTED)
+    ax.plot(both[:, 0], both[:, 1], color="#9aa3ae", lw=2.4, ls="--")
+    ax.plot(seq[:, 0], seq[:, 1], color=BLUE, lw=2.6)
+    ax.plot(*hit, marker="X", ms=14, color=INK)
+    ax.text(hit[0] - 2, hit[1] + 3, "충돌", fontsize=13, color=INK, ha="right")
+    ax.text(75, 27, "XY, Z 동시 이동", fontsize=13, color=MUTED)
+    ax.text(55, safe_z + 2, "Z 먼저 올린 뒤 XY", fontsize=13, color=BLUE, ha="center")
+    for x, z in (a, b):
+        ax.plot(x, z, "o", color=INK, ms=7)
+    ax.set_xlabel("X 위치", fontsize=13, color=INK)
+    ax.set_ylabel("Z 높이", fontsize=13, color=INK)
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.set_ylim(0, 52)
+    _clean(ax)
+    fig.tight_layout()
+    _save_plt(fig, "fig-interlock.webp")
+    return hit is not None, hit2 is None
+
+
+# 16. 광량 편차: 기준 영상과 현재 영상을 블록마다 비교한다
+def fig_light():
+    rng = np.random.default_rng(19)
+    plt = _plt()
+    h, w = 240, 324
+    yy, xx = np.mgrid[0:h, 0:w]
+    r2 = ((xx - w / 2) ** 2 + (yy - h / 2) ** 2) / (w / 2) ** 2
+    tex = cv2.GaussianBlur(rng.normal(0, 1, (h, w)).astype(np.float32), (0, 0), 2) * .02
+    ref = 205 * (1 - .10 * r2) * (1 + tex)
+    lamp = 1 - .02 - .05 * np.clip((xx - w * .3) / w, 0, 1)  # 전체가 조금, 오른쪽이 더 어두워짐
+    cur = ref * lamp
+    ref = np.clip(ref + rng.normal(0, 1.5, ref.shape), 0, 255)
+    cur = np.clip(cur + rng.normal(0, 1.5, cur.shape), 0, 255)
+    bh, bw = h // 4, w // 6
+    dev = (cur.reshape(4, bh, 6, bw).mean((1, 3)) / ref.reshape(4, bh, 6, bw).mean((1, 3)) - 1) * 100
+    fig = plt.figure(figsize=(10, 3.9), dpi=100)
+    gs = fig.add_gridspec(1, 3, wspace=.08)
+    for i, (img, t) in enumerate(((ref, "기준 영상"), (cur, "현재 영상"))):
+        ax = fig.add_subplot(gs[0, i])
+        ax.imshow(img, cmap="gray", vmin=0, vmax=255)
+        ax.set_title(t, fontsize=14, color=INK, pad=8)
+        ax.axis("off")
+    ax = fig.add_subplot(gs[0, 2])
+    ax.imshow(dev, cmap="Blues_r", vmin=-8, vmax=0)
+    for (r, c), v in np.ndenumerate(dev):
+        ax.text(c, r, f"{v:.1f}", ha="center", va="center", fontsize=12, color="white" if v < -4 else INK)
+    ax.set_title("블록별 밝기 편차 (%)", fontsize=14, color=INK, pad=8)
+    ax.axis("off")
+    fig.subplots_adjust(left=.01, right=.99, top=.88, bottom=.02)
+    _save_plt(fig, "fig-light.webp")
+    return float(dev.mean())
+
+
+# 17. 정적 분석: 경고 수 (평가 문서 수치)
+def fig_static():
+    plt = _plt()
+    fig, ax = plt.subplots(figsize=(9, 5.4), dpi=100)
+    x = np.array([0, 1.4])
+    ax.bar(x - .28, [468, 154], .5, color="#9aa3ae")
+    ax.bar(x + .28, [312, 106], .5, color=BLUE)
+    for xi, a, b in zip(x, (468, 154), (312, 106)):
+        ax.text(xi - .28, a + 8, f"{a}", ha="center", fontsize=14, color=INK)
+        ax.text(xi + .28, b + 8, f"{b}", ha="center", fontsize=14, color=BLUE, weight="bold")
+    ax.set_xticks(x, ["1차 정리", "2차 정리"], fontsize=13)
+    ax.text(.62, .95, "정리 전", color=MUTED, fontsize=13, transform=ax.transAxes, va="top")
+    ax.text(.77, .95, "정리 후", color=BLUE, fontsize=13, transform=ax.transAxes, va="top")
+    ax.set_ylabel("정적 분석 경고 (건)", fontsize=13, color=INK)
+    ax.set_ylim(0, 520)
+    _clean(ax)
+    fig.tight_layout()
+    _save_plt(fig, "fig-static.webp")
+
+
+# 18. 레시피 관리 도구: 장비와 서버가 공유 폴더를 메시지 채널로 쓴다
+def fig_recipe_tools():
+    plt = _plt()
+    from matplotlib.patches import FancyBboxPatch
+    fig, ax = plt.subplots(figsize=(10, 5.2), dpi=100)
+    ax.set_xlim(0, 100)
+    ax.set_ylim(0, 52)
+    ax.axis("off")
+
+    def node(x, y, w, h, title, lines, accent=False):
+        ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0,rounding_size=2.2",
+                                    fc="#ffffff", ec=BLUE if accent else LINE, lw=2 if accent else 1.4))
+        ax.text(x + w / 2, y + h - 4.5, title, ha="center", va="center", fontsize=15, color=INK, weight="bold")
+        for k, t in enumerate(lines):
+            ax.text(x + w / 2, y + h - 10.5 - k * 4.6, t, ha="center", va="center", fontsize=12, color=MUTED)
+
+    node(2, 14, 26, 26, "장비 프로그램", ["버전 확인", "검사 전 버전 검증"])
+    node(37, 14, 26, 26, "공유 폴더", ["요청 파일", "결과 파일"])
+    node(72, 14, 26, 26, "서버 프로그램", ["버전 저장소, 이력", "일괄 수정, 배포", "복원, 기준 등록"], accent=True)
+    kw = dict(arrowstyle="-|>", mutation_scale=18, lw=1.8)
+    for (x0, x1, y, c, t) in ((28, 37, 31, INK, "요청"), (63, 72, 31, INK, "요청"),
+                              (72, 63, 22, BLUE, "결과"), (37, 28, 22, BLUE, "결과")):
+        ax.annotate("", (x1, y), (x0, y), arrowprops=dict(color=c, **kw))
+        ax.text((x0 + x1) / 2, y + 1.6, t, ha="center", fontsize=11.5, color=c)
+    ax.text(50, 8, "임시 파일에 쓴 뒤 이름 바꾸기  ·  같은 요청은 한 번만 처리  ·  일시 오류만 재시도",
+            ha="center", fontsize=12.5, color=INK)
+    ax.text(50, 47, "도구 3개로 나뉘어 있던 기능을 하나로", ha="center", fontsize=14, color=BLUE)
+    fig.subplots_adjust(left=.01, right=.99, top=.99, bottom=.01)
+    _save_plt(fig, "fig-recipe-tools.webp")
+
+
+def _hbars(name, rows, xlabel, xmax, size=(9, 4.6)):
+    """rows: (라벨, 값, 표시 글, 색)"""
+    plt = _plt()
+    fig, ax = plt.subplots(figsize=size, dpi=100)
+    y = np.arange(len(rows))[::-1]
+    for yi, (lab, v, txt, col) in zip(y, rows):
+        ax.barh(yi, v, .56, color=col)
+        ax.text(v + xmax * .015, yi, txt, va="center", fontsize=14, color=col if col == BLUE else INK,
+                weight="bold" if col == BLUE else "normal")
+    ax.set_yticks(y, [r[0] for r in rows], fontsize=13)
+    ax.set_xlim(0, xmax)
+    ax.set_xlabel(xlabel, fontsize=13, color=INK)
+    _clean(ax)
+    ax.tick_params(axis="y", length=0, colors=INK)
+    fig.tight_layout()
+    _save_plt(fig, name)
+
+
+# 19. 백업 도구, 20. 대용량 전송 (평가 문서 수치)
+def fig_backup():
+    _hbars("fig-backup.webp", [("기존", 1500, "25분", "#9aa3ae"), ("복사를 비동기로 분리", 260, "4분 20초", BLUE),
+                               ("로그 화면을 끄면", 2, "2초", BLUE)], "3.5GB, 파일 4,373개 백업 시간 (초)", 1750)
+
+
+def fig_ftp():
+    _hbars("fig-ftp.webp", [("1.2GB", 29, f"29초, 약 {1.2 * 1024 / 29:.0f}MB/s", BLUE),
+                            ("4GB", 65, f"65초, 약 {4 * 1024 / 65:.0f}MB/s", BLUE)], "전송 시간 (초)", 92)
+
+
+# 21. Vision Setup: Stage 높이 맵, Y 위치별 Z 보간 구동 전후 (합성 높이 맵)
+def fig_setup():
+    rng = np.random.default_rng(21)
+    plt = _plt()
+    n = 61
+    y, x = np.mgrid[0:300:n * 1j, 0:300:n * 1j]
+    hmap = 7.5 * y / 300 + 2.5 * x / 300 + 1.2 * np.sin(x / 60) + rng.normal(0, .15, x.shape)
+    ky = np.linspace(0, 300, 7)  # Y 방향 7점에서 잰 높이로 Z 보간 구동
+    zk = [hmap[int(np.argmin(abs(y[:, 0] - k))), n // 2] for k in ky]
+    after = hmap - np.interp(y[:, 0], ky, zk)[:, None]
+    lo, hi = hmap.min() - hmap.mean(), hmap.max() - hmap.mean()
+    fig = plt.figure(figsize=(10, 4.6), dpi=100)
+    gs = fig.add_gridspec(1, 3, width_ratios=[1, 1, .06], wspace=.12)
+    for i, (m, t) in enumerate(((hmap - hmap.mean(), "보정 전"), (after - after.mean(), "Y 위치별 Z 보간 구동 후"))):
+        ax = fig.add_subplot(gs[0, i])
+        im = ax.imshow(m, cmap="cividis", vmin=lo, vmax=hi, origin="lower")
+        ax.set_title(t, fontsize=14, color=INK, pad=8)
+        ax.axis("off")
+    cb = fig.colorbar(im, cax=fig.add_subplot(gs[0, 2]))
+    cb.set_label("높이 (µm)", fontsize=12, color=INK)
+    cb.ax.tick_params(colors=MUTED, labelsize=10)
+    cb.outline.set_visible(False)
+    fig.subplots_adjust(left=.01, right=.93, top=.9, bottom=.03)
+    _save_plt(fig, "fig-setup.webp")
+    return round(float(np.ptp(hmap)), 1), round(float(np.ptp(after)), 1)
+
+
+# 22. 신규 광학계 평가 (평가 문서 수치)
+def fig_optics():
+    plt = _plt()
+    fig, ax = plt.subplots(figsize=(9, 4.6), dpi=100)
+    ax.barh(2, 14 / 15 * 100, .5, color=BLUE)
+    ax.barh(1, 100, .5, color=BLUE)
+    ax.barh(0, 70.7, .5, color="#e3e7ec")
+    ax.barh(0, 92.6 - 70.7, .5, left=70.7, color=BLUE)
+    ax.plot([70, 70], [-.38, .38], color=INK, lw=2)
+    ax.text(70, -.48, "목표 70%", ha="center", va="top", fontsize=12, color=INK)
+    for yv, t in ((2, "14/15"), (1, "10/10"), (0, "70.7~92.6%")):
+        ax.text(101.5, yv, t, va="center", fontsize=14, color=BLUE, weight="bold")
+    ax.set_yticks([2, 1, 0], ["고해상도 시료 시인성", "검출력", "신규 자재 검출률"], fontsize=13)
+    ax.set_xlim(0, 122)
+    ax.set_ylim(-.9, 2.5)
+    ax.set_xticks([0, 25, 50, 75, 100])
+    ax.set_xlabel("%", fontsize=12, color=MUTED)
+    _clean(ax)
+    ax.tick_params(axis="y", length=0, colors=INK)
+    fig.tight_layout()
+    _save_plt(fig, "fig-optics.webp")
+
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
-    est = fig_align()
+    est, align_a, align_v = fig_align()
     fig_mark()
     fig_recipe()
     fig_crack()
@@ -561,6 +859,18 @@ if __name__ == "__main__":
     n_round, n_floor = fig_interp()
     dh = fig_focus_stack()
     contact = fig_focus_contact()
+    a_est = fig_align_score(align_a, align_v)
+    q_all, q_new = fig_stable()
+    fig_down()
+    interlock = fig_interlock()
+    light = fig_light()
+    fig_static()
+    fig_recipe_tools()
+    fig_backup()
+    fig_ftp()
+    tilt = fig_setup()
+    fig_optics()
+    print("align score peak", a_est, "stable backlog", q_all, q_new, "light dev", round(light, 2), "tilt", tilt)
     print("score (old, new) per shot", score)
     print("hough old r", round(float(old[2])), "new r", round(float(new[2])))
     print("rgb final medians BGR", rgb)
@@ -576,3 +886,6 @@ if __name__ == "__main__":
     assert abs(int(np.argmax(strong)) * 4 - 60 - 6) <= 4, "뚜렷한 바닥의 선명도 봉우리가 실제 높이에서 벗어남"
     assert abs(abs(est) - 1.8) < 0.2, f"격자 각도 추정이 틀림: {est}"
     print("ok, theta estimate", round(abs(est), 2))
+    assert abs(a_est - 1.8) < .15, "격자 점수 그림: 봉우리가 실제 회전각에서 벗어남"
+    assert q_all > 300 and q_new <= 1, "프레임 그림: 줄 세우기는 쌓이고 최신 1장은 1장 이하여야 함"
+    assert interlock == (True, True), "Interlock 그림: 동시 이동만 간섭 영역을 지나야 함"

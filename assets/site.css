@@ -103,16 +103,9 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 
 /* 그 외 프로젝트: 주제별 4묶음, 묶음마다 위 선 하나 */
 .more-head { font-size: 22px; letter-spacing: -.02em; margin: 72px 0 20px; }
-.groups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px 48px; }
+.groups { display: grid; gap: 44px; }
 .group { border-top: 2px solid var(--ink); padding-top: 14px; }
 .group h4 { margin: 0 0 6px; font-size: 15px; color: var(--muted); font-weight: 600; }
-.group ul { list-style: none; padding: 0; margin: 0; }
-.group a { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 0; text-decoration: none; }
-.group a:hover b { color: var(--accent); }
-.group b { font-weight: 600; }
-.group b::after { content: " →"; color: var(--muted); font-weight: 500; opacity: 0; transition: opacity .2s ease; }
-.group a:hover b::after { opacity: 1; }
-.group span { color: var(--muted); text-align: right; font-size: 15px; white-space: nowrap; font-variant-numeric: tabular-nums; }
 
 /* 일하는 방식: 4단계 한 줄 */
 .steps { list-style: none; padding: 0; margin-top: 36px; display: grid; grid-template-columns: repeat(4, 1fr); counter-reset: s; }
@@ -200,7 +193,7 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
   .bento { grid-template-columns: 1fr; gap: 16px; }
   .card, .card-wide, .card-stat, .card-5, .card-7 { grid-column: auto; }
   .card > img { height: 220px; }
-  .demos, .career, .groups { grid-template-columns: 1fr; }
+  .demos, .career { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
   .demo:nth-child(2) { margin-top: 0; }
   .career { gap: 40px; }
@@ -210,8 +203,6 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 }
 @media (max-width: 420px) {
   .steps { grid-template-columns: 1fr; }
-  .group a { flex-direction: column; gap: 2px; }
-  .group span { text-align: left; white-space: normal; }
 }
 
 /* 그 외 프로젝트: 그림 카드 */
@@ -223,7 +214,6 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 .tile b { padding: 14px 16px 2px; font-size: 16px; font-weight: 650; line-height: 1.4; }
 .tile span { padding: 0 16px 16px; color: var(--muted); font-size: 14.5px; font-variant-numeric: tabular-nums; }
 .tile:hover b { color: var(--accent); }
-.group:has(.tiles) { grid-column: 1 / -1; }
 
 /* 세부 패널: 단계마다 번호, 그림, 짧은 글 */
 .d-step { display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--line); padding-top: 22px; margin-top: 6px; }
