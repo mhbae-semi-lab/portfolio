@@ -22,6 +22,7 @@
 ## 구조
 ```
 index.html, assets/      포트폴리오 한 페이지, 카드를 누르면 #p-이름 으로 세부 패널이 열림
+resume.html              1장 이력서 (인쇄하면 A4 1쪽 PDF). index.html 수치를 바꾸면 여기도 같이 바꿈
 tools/make_figures.py    합성 데이터로 사례 그림(assets/img/fig-*.webp)을 다시 만듦
 apps/01-log-analyzer/    gen.js 합성 로그 · analyze.js 파싱 · 군집 · 검증 · app.js 화면
 apps/02-weekly-report/   core.js 주제 묶기 · 검증 · deck.js PPT · app.js 화면

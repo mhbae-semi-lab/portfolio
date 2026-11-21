@@ -268,3 +268,29 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 .widget-ctl input[type="range"] { flex: 1 1 200px; accent-color: var(--accent); min-height: 28px; }
 .widget-ctl output { min-width: 4.5em; font-weight: 650; font-variant-numeric: tabular-nums; color: #2f62d6; }
 .widget-read { padding: 6px 14px 0; font-size: 14px; color: #5f6773; font-variant-numeric: tabular-nums; }
+
+/* 검사 흐름 지도: 순서 6단계 + 모든 단계에 걸친 일 */
+.flowmap { list-style: none; padding: 0; margin-top: 32px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0 16px; counter-reset: f; }
+.flowmap li { counter-increment: f; display: flex; flex-direction: column; gap: 7px; padding-top: 14px; border-top: 2px solid var(--ink); }
+.flowmap b { font-size: 17px; letter-spacing: -.015em; margin-bottom: 4px; }
+.flowmap b::before { content: counter(f) "  "; color: var(--accent); font-variant-numeric: tabular-nums; }
+.flowmap a, .flow-all a { color: var(--ink-2); font-size: 15px; line-height: 1.4; text-decoration: none; }
+.flowmap a:hover, .flow-all a:hover { color: var(--accent); }
+.flow-all { margin-top: 24px; padding: 14px 18px; background: var(--surface); border-radius: var(--r); display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: baseline; }
+.flow-all b { font-size: 15px; color: var(--muted); font-weight: 600; }
+@media (max-width: 1020px) { .flowmap { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 16px; } }
+@media (max-width: 420px) { .flowmap { grid-template-columns: 1fr 1fr; } }
+
+/* 일하는 방식: 틀렸던 것과 바꾼 것 */
+.lessons-head { font-size: 22px; letter-spacing: -.02em; margin-top: 64px; }
+.lessons { list-style: none; padding: 0; margin-top: 20px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.lessons li { background: var(--surface); border-radius: var(--r); padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; }
+.lessons b { font-size: 18px; letter-spacing: -.015em; }
+.lessons p { color: var(--ink-2); font-size: 16px; }
+.lessons a { margin-top: auto; padding-top: 4px; font-size: 15px; font-weight: 600; color: var(--accent); text-decoration: none; }
+.lessons a::after { content: " →"; }
+@media (max-width: 860px) { .lessons { grid-template-columns: 1fr; } }
+
+/* 세부 패널 안의 다른 프로젝트 링크 */
+.sheet-body p a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.sheet-body p a:hover { text-decoration: underline; }

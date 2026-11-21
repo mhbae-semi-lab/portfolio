@@ -18,7 +18,12 @@ RNG = np.random.default_rng(7)
 
 
 def save(name, img):
-    cv2.imwrite(os.path.join(OUT, name), img, [cv2.IMWRITE_WEBP_QUALITY, 82])
+    # imencode/tofile: cv2.imwrite 는 Windows 한글 경로에 쓰지 못한다
+    cv2.imencode(".webp", img, [cv2.IMWRITE_WEBP_QUALITY, 82])[1].tofile(os.path.join(OUT, name))
+
+
+def _read(path):
+    return cv2.imdecode(np.fromfile(path, np.uint8), cv2.IMREAD_COLOR)
 
 
 def noisy(gray, sigma=6.0, stripes=0.0):
@@ -240,7 +245,7 @@ def fig_focus():
     path = os.path.join(OUT, "_focus.png")
     fig.savefig(path, facecolor="#f4f4f4")
     plt.close(fig)
-    save("fig-focus.webp", cv2.imread(path))
+    save("fig-focus.webp", _read(path))
     os.remove(path)
     return strong, weak
 
@@ -271,7 +276,7 @@ def _save_plt(fig, name):
     path = os.path.join(OUT, "_tmp.png")
     fig.savefig(path, facecolor=PAPER)
     plt.close(fig)
-    save(name, cv2.imread(path))
+    save(name, _read(path))
     os.remove(path)
 
 
@@ -972,6 +977,34 @@ def fig_research():
         return min(ok) if ok else 100.0
     return miss_at(glob, 10), miss_at(reg, 10)
 
+# 25. 레시피 배포 도구: 재시작 때 처리 루프가 준비되기 전에 온 첫 메시지는 버려져 멈춘다
+def fig_race():
+    rng = np.random.default_rng(25)
+    plt = _plt()
+    from matplotlib.patches import Rectangle
+    n = 200
+    loop_ready = rng.gamma(6, 30 / 6, n)   # 처리 루프 준비까지 (ms)
+    first_msg = rng.gamma(6, 42 / 6, n)    # 장비가 다시 붙어 첫 메시지를 보내기까지 (ms)
+    before = first_msg < loop_ready         # 수정 전: 준비 전에 온 메시지는 버려짐
+    after = np.maximum(first_msg, loop_ready) < loop_ready  # 수정 후: 루프 준비 뒤에야 수신 시작
+    fig, axes = plt.subplots(2, 1, figsize=(9, 6), dpi=100)
+    for ax, lost, title, col in ((axes[0], before, f"수정 전   200회 재시작 중 {before.sum()}회 멈춤", INK),
+                                 (axes[1], after, f"수정 후   200회 재시작 중 {after.sum()}회 멈춤", BLUE)):
+        for k in range(n):
+            x, y = k % 25, 7 - k // 25
+            ax.add_patch(Rectangle((x + .08, y + .08), .84, .84, color=INK if lost[k] else "#d5d9df"))
+        ax.set_xlim(0, 25)
+        ax.set_ylim(0, 8)
+        ax.set_aspect("equal")
+        ax.axis("off")
+        ax.set_title(title, loc="left", fontsize=15, color=col, weight="bold", pad=8)
+    fig.text(.02, .02, "■ 멈춤   ", color=INK, fontsize=12.5)
+    fig.text(.11, .02, "■ 정상 시작", color="#b3b9c2", fontsize=12.5)
+    fig.subplots_adjust(left=.02, right=.98, top=.93, bottom=.08, hspace=.32)
+    _save_plt(fig, "fig-race.webp")
+    return int(before.sum()), int(after.sum())
+
+
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     est, align_a, align_v = fig_align()
@@ -1000,6 +1033,8 @@ if __name__ == "__main__":
     print("matching", m_pos, m_both, m_n)
     r_glob, r_reg = fig_research()
     print("research miss at <=10 px", r_glob, r_reg)
+    race = fig_race()
+    print("race stops before, after", race)
     print("align score peak", a_est, "stable backlog", q_all, q_new, "light dev", round(light, 2), "tilt", tilt)
     print("score (old, new) per shot", score)
     print("hough old r", round(float(old[2])), "new r", round(float(new[2])))
@@ -1021,3 +1056,4 @@ if __name__ == "__main__":
     assert interlock == (True, True), "Interlock 그림: 동시 이동만 간섭 영역을 지나야 함"
     assert m_both >= m_pos + 10, "좌표 매칭 그림: 크기를 함께 본 쪽이 확실히 나아야 함"
     assert r_reg < r_glob - 20, "연구 예시 그림: 영역별 임계값이 확실히 나아야 함"
+    assert 40 <= race[0] <= 60 and race[1] == 0, "레이스 그림: 수정 전 약 4번에 1번, 수정 후 0번이어야 함"
