@@ -3,28 +3,248 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>배민혁 · 포트폴리오</title>
-  <meta name="description" content="반도체 검사 장비 SW 엔지니어 포트폴리오 — AX 앱과 반도체 도메인 데모">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-  <link rel="stylesheet" href="assets/style.css">
+  <title>배민혁 | 반도체 검사 장비 SW 엔지니어</title>
+  <meta name="description" content="Wafer Align, 결함 검출, Recipe 자동화를 설계부터 양산 안정화까지 맡아 온 반도체 검사 장비 SW 엔지니어 포트폴리오">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-  <header class="top">
-    <div class="wrap top-in">
-      <a class="brand" href="#/">배민혁<span>Portfolio</span></a>
-      <nav>
-        <a href="#/" data-nav="home">홈</a>
-        <a href="#/apps" data-nav="apps">앱</a>
-        <a href="#/resume" data-nav="resume">이력서 · PDF</a>
+  <header class="nav">
+    <div class="wrap nav-in">
+      <a class="brand" href="#top">배민혁</a>
+      <nav aria-label="주요 메뉴">
+        <a href="#work">프로젝트</a>
+        <a href="#method">일하는 방식</a>
+        <a href="#career">경력</a>
+        <a href="#demo">데모</a>
       </nav>
+      <a class="btn btn-sm" href="#contact">연락하기</a>
     </div>
   </header>
-  <main id="main" class="wrap" aria-live="polite">
-    <p class="loading">불러오는 중…</p>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-text">
+        <p class="role">반도체 검사 장비 SW · AI 응용 엔지니어</p>
+        <h1>배민혁</h1>
+        <p class="lead">Wafer Align, 결함 검출, Recipe 자동화를 설계부터 양산 안정화까지 맡고 있습니다.</p>
+        <div class="cta">
+          <a class="btn" href="#work">프로젝트 보기</a>
+          <a class="btn btn-line" href="#contact">연락하기</a>
+        </div>
+      </div>
+      <figure class="hero-photo">
+        <img src="assets/img/profile.jpg" alt="배민혁 증명사진" width="236" height="304">
+      </figure>
+    </section>
+
+    <section class="figures wrap" aria-label="주요 성과">
+      <div class="fig-num reveal"><strong>−79<span>%</span></strong><p>정렬 마크 Align 시간<br><small>템플릿 방식 대비, 현장 12/12 Slot 검출</small></p></div>
+      <div class="fig-num reveal"><strong>−92<span>%</span></strong><p>Bump Recipe 작성 시간<br><small>도면 기반 자동 배치</small></p></div>
+      <div class="fig-num reveal"><strong>0<span>건</span></strong><p>오판정 합격<br><small>격자 정합 재설계 후, 합성 및 사내 검증</small></p></div>
+      <div class="fig-num reveal"><strong>264<span>h</span></strong><p>연속 운전 장애 0건<br><small>신규 설비 양산 투입 후</small></p></div>
+    </section>
+
+    <section id="work" class="wrap">
+      <h2>대표 프로젝트</h2>
+
+      <article class="proj proj-wide reveal">
+        <figure class="proj-fig">
+          <img src="assets/img/fig-align.webp" alt="1.8도 회전한 합성 Die 격자 위에 추정한 격자를 겹친 그림" loading="lazy" width="1200" height="750">
+          <figcaption>합성 Die 격자(1.8° 회전, 열 고정 잡음)에서 추정한 격자</figcaption>
+        </figure>
+        <div class="proj-body">
+          <h3>Feature 등록 없는 Wafer Align</h3>
+          <p>Die 배열의 주기에 격자를 맞춰 회전각을 구하고, 틀린 결과는 스스로 거릅니다.</p>
+          <dl class="kpi">
+            <div><dt>오판정 합격</dt><dd>0건</dd></div>
+            <div><dt>최대 각도 오차</dt><dd>−98%</dd></div>
+          </dl>
+          <details>
+            <summary>문제와 접근</summary>
+            <ul>
+              <li>등록 Feature 매칭은 Recipe 마다 등록 공수가 들고, 1차 방식은 저대비 영상에서 틀린 각도에 높은 점수를 줬습니다.</li>
+              <li>합성 영상으로 실패를 재현해 원인(카메라 고정 잡음)을 찾고, 여러 지점의 일관성을 점수로 쓰는 격자 정합으로 다시 설계했습니다.</li>
+              <li>Python 으로 검증한 뒤 C++ 로 옮기고 조건별 결과를 값 단위로 대조했습니다. 현장 병행 검증 중입니다.</li>
+            </ul>
+            <p class="who">알고리즘 설계, 실험, C++ 구현, 현장 검증</p>
+          </details>
+        </div>
+      </article>
+
+      <div class="proj-pair">
+        <article class="proj reveal">
+          <figure class="proj-fig">
+            <img src="assets/img/fig-mark.webp" alt="비슷한 패드 사이 십자 마크 세 개, 두 개는 실선 상자, 흐린 하나는 점선 상자, 오른쪽 아래 상관 맵" loading="lazy" width="900" height="600">
+            <figcaption>규칙 검출(실선)과 점수 미달로 놓친 흐린 마크(점선), 오른쪽 아래는 상관 맵</figcaption>
+          </figure>
+          <div class="proj-body">
+            <h3>정렬 마크 검출, 규칙 + CNN</h3>
+            <p>템플릿 없이 Die 마크를 찾고, 규칙이 놓친 흐린 마크는 CNN 이 보완합니다.</p>
+            <dl class="kpi">
+              <div><dt>Align 시간</dt><dd>−79%</dd></div>
+              <div><dt>오검출 (CNN 보완)</dt><dd>−59%</dd></div>
+            </dl>
+            <details>
+              <summary>문제와 접근</summary>
+              <ul>
+                <li>템플릿 방식은 느리고, 새 Site 마다 마크를 다시 등록해야 했습니다.</li>
+                <li>규칙 기반 검출을 기본으로 두고, 현장 이미지로 규칙 파라미터를 학습하는 도구를 만들었습니다.</li>
+                <li>CNN 은 바로 바꾸지 않고 병행(Shadow) 운용 중입니다. 검출 향상은 통계적으로 유의하지 않아 그대로 보고했습니다.</li>
+              </ul>
+              <p class="who">검출 알고리즘, 학습 도구, Shadow 판정 도구</p>
+            </details>
+          </div>
+        </article>
+
+        <article class="proj reveal">
+          <figure class="proj-fig fig-light">
+            <img src="assets/img/fig-recipe.webp" alt="미세 원형 패턴 변환 비교, 왼쪽은 찌그러진 모양, 오른쪽은 고른 모양" loading="lazy" width="900" height="480">
+            <figcaption>왼쪽 단순 변환, 오른쪽 좌표 Snapping + Oversampling</figcaption>
+          </figure>
+          <div class="proj-body">
+            <h3>검사 Recipe 자동 생성</h3>
+            <p>설계 도면과 맵에서 검사 Recipe 를 만들어 수작업 Teaching 을 줄였습니다.</p>
+            <dl class="kpi">
+              <div><dt>Recipe 작성 시간</dt><dd>−92%</dd></div>
+              <div><dt>대면적 변환 시간</dt><dd>−87%</dd></div>
+            </dl>
+            <details>
+              <summary>문제와 접근</summary>
+              <ul>
+                <li>도면을 영상으로 바꾸면 미세 원형 패턴이 찌그러지고 위치가 어긋났습니다.</li>
+                <li>좌표 Snapping 으로 위치를, Oversampling 과 Threshold 로 형상을 복원하고, 실제 Layer 영역만 Tile 병렬로 처리했습니다.</li>
+                <li>양산 검증을 통과했고, 같은 주제를 석사 연구(도면 특징으로 검사 임계값 정하기)로 이어가고 있습니다.</li>
+              </ul>
+              <p class="who">변환, Masking 알고리즘, 자동 시퀀스, UI</p>
+            </details>
+          </div>
+        </article>
+      </div>
+
+      <div class="proj-split">
+        <article class="proj reveal">
+          <figure class="proj-fig">
+            <img src="assets/img/fig-crack.webp" alt="Die 가장자리 검사 밴드와 안쪽 제외 영역, 밴드 안에서 검출된 Crack" loading="lazy" width="900" height="600">
+            <figcaption>가장자리 검사 밴드(파랑)와 제외 영역(빗금), 검출된 Crack</figcaption>
+          </figure>
+          <div class="proj-body">
+            <h3>Die 가장자리 Crack 검출</h3>
+            <p>기존 검사가 놓치거나 과검하던 가장자리 Crack 을 다단계 알고리즘으로 잡습니다.</p>
+            <dl class="kpi">
+              <div><dt>전체 결함 중 새로 검출</dt><dd>28%</dd></div>
+            </dl>
+            <details>
+              <summary>문제와 접근</summary>
+              <ul>
+                <li>가장자리 탐색, 가변 Mask, 결함 검출, 크기 필터, Interlock 순서로 단계를 나눴습니다.</li>
+                <li>장당 TB 급 영상을 Tile 로 나눠 일반 PC 에서 필요한 영역만 여는 도구도 함께 만들었습니다.</li>
+              </ul>
+              <p class="who">알고리즘과 분석 도구 개발 전체</p>
+            </details>
+          </div>
+        </article>
+
+        <article class="proj proj-stat reveal">
+          <h3>신규 Particle 제거 설비 SW</h3>
+          <p>참고 코드가 없는 신규 설비를, 양산에서 멈추지 않을 때까지 안정화했습니다.</p>
+          <div class="stat-big"><strong>264<span>h</span></strong><span>연속 운전, 장애 0건</span></div>
+          <dl class="kpi">
+            <div><dt>Auto Focus 시간</dt><dd>−72%</dd></div>
+            <div><dt>메모리 사용</dt><dd>−33%</dd></div>
+          </dl>
+          <details>
+            <summary>문제와 접근</summary>
+            <ul>
+              <li>양산 투입 후 48시간 안에 프로그램이 멈췄습니다. 25일 현장에 상주하며 재현, 로그 분석, 수정을 반복했습니다.</li>
+              <li>영상 기반 Focus 를 접촉 감지 방식으로 바꾸고, 카메라 처리를 비동기로 바꿔 프레임 누적을 없앴습니다.</li>
+              <li>기능검사 9건 무결점, 3자 인증을 통과했습니다.</li>
+            </ul>
+            <p class="who">Vision, 시퀀스, UI, Interlock, 카메라 제어</p>
+          </details>
+        </article>
+      </div>
+
+      <h3 class="more-head">그 외</h3>
+      <ul class="more">
+        <li><b>흩어진 레시피 관리 도구 통합</b><span>도구 3개를 하나로, 서버 프로그램 추가</span></li>
+        <li><b>패턴 매칭 점수 오판정 개선</b><span>비정상 100점 고정을 10~50점대로</span></li>
+        <li><b>조명 자동 보정을 R, G, B 채널별로</b><span>1회 촬영으로 3채널 동시 측정</span></li>
+        <li><b>반복성 평가 중 프로그램 Down 해결</b><span>패치 후 재발 0건</span></li>
+        <li><b>Interlock 개선, 서보 정밀도 검증</b><span>1,000회 반복 구동 3σ 0.16~0.19µm</span></li>
+        <li><b>정적 분석 경고 정리</b><span>경고 298건을 106건으로</span></li>
+      </ul>
+    </section>
+
+    <section id="method" class="wrap">
+      <h2>일하는 방식</h2>
+      <p class="sub">개선된 것과 아닌 것을 나눠 보고합니다. 현장 데이터로 확인된 것만 기본값으로 바꿉니다.</p>
+      <ol class="steps">
+        <li class="reveal"><b>재현</b><span>실패를 합성 영상으로 먼저 재현</span></li>
+        <li class="reveal"><b>설계</b><span>Python 으로 설계하고 같은 세트로 전후 비교</span></li>
+        <li class="reveal"><b>이식</b><span>C++ 로 옮긴 뒤 결과를 값 단위로 대조</span></li>
+        <li class="reveal"><b>전환</b><span>Shadow 병행으로 현장 데이터를 쌓은 뒤 전환</span></li>
+      </ol>
+    </section>
+
+    <section id="demo" class="wrap">
+      <h2>직접 써 보는 데모</h2>
+      <p class="sub">팀의 반복 업무를 줄이려고 만든 도구를, 합성 데이터로 다시 만들었습니다.</p>
+      <div class="demos">
+        <a class="demo reveal" href="apps/01-log-analyzer/">
+          <img src="assets/img/demo-01.webp" alt="설비 로그 분석기 화면, 모듈별 타임라인과 알람" loading="lazy" width="800" height="506">
+          <b>설비 로그 분석기</b>
+          <span>로그를 넣으면 알람을 묶고 원인 후보와 근거 줄을 보여줍니다</span>
+        </a>
+        <a class="demo reveal" href="apps/02-weekly-report/">
+          <img src="assets/img/demo-02.webp" alt="주간 보고 생성기 화면, 주제별 요약과 검증 결과" loading="lazy" width="800" height="506">
+          <b>주간 보고 생성기</b>
+          <span>git 커밋을 묶어 요약하고, 입력에 없는 숫자를 걸러 PPT 로 냅니다</span>
+        </a>
+      </div>
+      <p class="soon">만드는 중: Klarf 웨이퍼 맵 뷰어, 레시피 기준 관리, 정렬 마크 검출 비교, 메일 분류기</p>
+    </section>
+
+    <section id="career" class="wrap career">
+      <div>
+        <h2>경력</h2>
+        <ol class="timeline">
+          <li><time>2026</time><p>Align, 정렬 마크 검출, Recipe 자동 생성, Crack 검출 알고리즘 설계</p></li>
+          <li><time>2025</time><p>신규 Particle 제거 설비 SW, Stage 검사 시퀀스, 광학계 시료 평가</p></li>
+          <li><time>2023</time><p>2D, 3D 검사 설비 Vision Setup, 높이 보간 가변 Focus, Tilt 보정</p></li>
+          <li><time>2022</time><p>반도체 검사장비 기업 SW팀 입사 (일학습병행), 설비 유지보수와 고객 이슈 대응</p></li>
+        </ol>
+      </div>
+      <div class="side">
+        <h3>학력</h3>
+        <ul class="plain">
+          <li><b>인하대학교 제조혁신전문대학원</b><span>반도체공정지능화융합 석사, 재직자 과정 (2028.02 졸업 예정)</span></li>
+          <li><b>한국공학대학교 컴퓨터전자공학과</b><span>일학습병행 (2026.02 졸업)</span></li>
+        </ul>
+        <h3>기술</h3>
+        <ul class="plain">
+          <li><b>영상처리</b><span>OpenCV, IPP, NCC 매칭, 서브픽셀 피팅, 원근 변환</span></li>
+          <li><b>장비 SW</b><span>C++ (MFC), C# (WPF, WinForms), C++/CLI</span></li>
+          <li><b>카메라와 센서</b><span>Line Scan (TDI), Area, 3D 공초점 센서, DAQ</span></li>
+          <li><b>데이터</b><span>Python, NumPy, CNN 학습, 로컬 LLM</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact" class="wrap contact">
+      <h2>함께 일할 팀을 찾고 있습니다</h2>
+      <p>2028년 3월 입사 가능, 석사 졸업 후 전문연구요원 편입을 희망합니다.</p>
+      <div class="cta">
+        <a class="btn" href="mailto:TODO">이메일 보내기</a>
+        <a class="btn btn-line" href="https://github.com/mhbae-semi-lab" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </section>
   </main>
-  <footer class="foot">
-    <div class="wrap">모든 데모는 합성 · 공개 데이터만 사용합니다.</div>
+
+  <footer class="foot wrap">
+    <p>그림과 데모는 모두 합성 또는 공개 데이터로 만들었습니다. 설비 화면, 고객 정보, 설계 데이터는 없습니다. 수치는 현장 실측 또는 사내 검증 기준입니다.</p>
   </footer>
-  <script src="assets/app.js"></script>
+  <script src="assets/site.js"></script>
 </body>
 </html>
