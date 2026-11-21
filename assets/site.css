@@ -294,3 +294,18 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 /* 세부 패널 안의 다른 프로젝트 링크 */
 .sheet-body p a { color: var(--accent); font-weight: 600; text-decoration: none; }
 .sheet-body p a:hover { text-decoration: underline; }
+
+/* 일하는 방식: 검증에 쓴 반복과 시험 */
+.checks { list-style: none; padding: 0; margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.checks a { display: block; height: 100%; padding: 16px 18px; background: var(--surface); border-radius: var(--r); text-decoration: none; color: var(--ink-2); font-size: 14.5px; line-height: 1.45; border: 1px solid transparent; transition: border-color .2s ease; }
+.checks a:hover { border-color: var(--line); }
+.checks strong { display: block; margin-bottom: 6px; font-size: 28px; font-weight: 750; letter-spacing: -.035em; line-height: 1.1; color: var(--accent); font-variant-numeric: tabular-nums; }
+.checks strong span { font-size: .5em; margin-left: 2px; letter-spacing: 0; color: var(--muted); font-weight: 650; }
+
+/* 언어 전환 스위치 (KO / EN) */
+.lang-switch { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; flex: none; }
+.lang-switch a { padding: 6px 10px; font-size: 13px; font-weight: 650; letter-spacing: .02em; color: var(--muted); text-decoration: none; }
+.lang-switch a:hover { color: var(--ink); }
+.lang-switch a[aria-current] { background: var(--ink); color: var(--bg); }
+.nav-in .lang-switch + .btn-sm { margin-left: -14px; }
+@media (max-width: 860px) { .nav .lang-switch { margin-left: auto; } .nav .lang-switch + .btn-sm { margin-left: 0; } }

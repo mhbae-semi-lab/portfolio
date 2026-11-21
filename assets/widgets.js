@@ -230,12 +230,37 @@ function throttle(fn) {
 }
 
 let FM, AM, MM; // 모델은 처음 쓸 때 한 번만 만든다
+
+// 화면 문구 (페이지 <html lang> 으로 고른다)
+const TXT = {
+  ko: {
+    fLabel: "초점 높이", fAria: "초점 높이에 따른 합성 입자 영상과 입자, 바닥 선명도 곡선", floor: "바닥", part: "입자", fAxis: "초점 높이 (µm)",
+    fRead: (p, f, pz, fz) => `지금 선명도 입자 ${p}%, 바닥 ${f}%. 가장 선명한 높이 입자 ${pz}µm, 바닥 ${fz}µm, 차이 ${pz - fz}µm 가 입자 높이입니다.`,
+    aLabel: "가정한 회전각", aAria: "합성 Die 격자 위에 가정한 각도의 선을 겹친 그림과 격자 일치 점수 곡선",
+    aPeak: (v) => `최고점 ${v}°`, aAxis: "가정한 격자 회전각 (°)",
+    aRead: (s, v) => `격자 일치 점수 ${s}% (최고점 대비). 선이 Die 사이 틈과 나란해지는 ${v}° 에서 점수가 가장 높습니다.`,
+    mLabel: "장비 사이 위치 오차", mAria: "기준 결함과 검사 결함을 위치만으로, 위치와 크기를 함께 써서 짝지은 두 그림",
+    mPos: "위치만 보고 짝짓기", mBoth: "위치와 크기를 함께", mTitle: (t, ok, n) => `${t}, 맞는 짝 ${ok}/${n}`,
+    mRead: (a, b) => `빈 원은 기준 결함, 채운 원은 검사 결함, 점선은 틀린 짝입니다. 위치만 ${a}쌍, 위치와 크기 ${b}쌍이 맞습니다. 오차를 키우면 위치만 쓰는 쪽이 먼저 무너집니다.`,
+  },
+  en: {
+    fLabel: "Focus height", fAria: "Synthetic particle image at the chosen focus height, with particle and floor sharpness curves", floor: "Floor", part: "Particle", fAxis: "Focus height (µm)",
+    fRead: (p, f, pz, fz) => `Sharpness now: particle ${p}%, floor ${f}%. Sharpest at ${pz}µm for the particle and ${fz}µm for the floor; the ${pz - fz}µm gap is the particle height.`,
+    aLabel: "Assumed angle", aAria: "Lines at the assumed angle over a synthetic die grid, with the grid match score curve",
+    aPeak: (v) => `Peak ${v}°`, aAxis: "Assumed grid rotation (°)",
+    aRead: (s, v) => `Grid match score ${s}% of the peak. The score is highest at ${v}°, where the lines run parallel to the gaps between dies.`,
+    mLabel: "Position error between tools", mAria: "Reference and inspection defects paired by position only, and by position and size",
+    mPos: "Position only", mBoth: "Position and size", mTitle: (t, ok, n) => `${t}, correct pairs ${ok}/${n}`,
+    mRead: (a, b) => `Hollow circles are reference defects, filled circles are inspection defects, dashed lines are wrong pairs. Position only: ${a} correct; position and size: ${b}. As the error grows, position-only matching breaks down first.`,
+  },
+};
+const L = TXT[typeof document !== "undefined" && document.documentElement.lang === "en" ? "en" : "ko"];
 const WIDGETS = {
   focus(fig) {
     FM = FM || focusModel();
-    const ui = makeUI(fig, { label: "초점 높이", min: 0, max: 80, step: 1, value: 30, unit: "µm", aspect: 0.47 });
+    const ui = makeUI(fig, { label: L.fLabel, min: 0, max: 80, step: 1, value: 30, unit: "µm", aspect: 0.47 });
     const { g } = ui;
-    ui.cv.setAttribute("aria-label", "초점 높이에 따른 합성 입자 영상과 입자, 바닥 선명도 곡선");
+    ui.cv.setAttribute("aria-label", L.fAria);
     const draw = () => {
       const z = +ui.input.value, t = FM.render(z), [p, f] = FM.sharp(t);
       g.fillStyle = COL.paper; g.fillRect(0, 0, 1200, 564);
@@ -248,12 +273,12 @@ const WIDGETS = {
       box(FM.roiP, COL.blue, []);
       FM.roiF.forEach((roi) => box(roi, "#e8eaee", [10, 8]));
       chart(g, [620, 40, 540, 400], FM.zs, [
-        { ys: FM.sf, color: COL.gray, label: "바닥" },
-        { ys: FM.sp, color: COL.blue, label: "입자" },
-      ], "초점 높이 (µm)", z, (v) => `${v}`);
+        { ys: FM.sf, color: COL.gray, label: L.floor },
+        { ys: FM.sp, color: COL.blue, label: L.part },
+      ], L.fAxis, z, (v) => `${v}`);
       ui.out.value = `${z}µm`;
       const pz = FM.zs[FM.sp.indexOf(1)], fz = FM.zs[FM.sf.indexOf(1)];
-      ui.read.textContent = `지금 선명도 입자 ${Math.round((p / FM.mp) * 100)}%, 바닥 ${Math.round((f / FM.mf) * 100)}%. 가장 선명한 높이 입자 ${pz}µm, 바닥 ${fz}µm, 차이 ${pz - fz}µm 가 입자 높이입니다.`;
+      ui.read.textContent = L.fRead(Math.round((p / FM.mp) * 100), Math.round((f / FM.mf) * 100), pz, fz);
     };
     ui.input.addEventListener("input", throttle(draw));
     draw();
@@ -261,9 +286,9 @@ const WIDGETS = {
 
   align(fig) {
     AM = AM || alignModel();
-    const ui = makeUI(fig, { label: "가정한 회전각", min: -5, max: 5, step: 0.1, value: -2, unit: "°", aspect: 0.47 });
+    const ui = makeUI(fig, { label: L.aLabel, min: -5, max: 5, step: 0.1, value: -2, unit: "°", aspect: 0.47 });
     const { g } = ui;
-    ui.cv.setAttribute("aria-label", "합성 Die 격자 위에 가정한 각도의 선을 겹친 그림과 격자 일치 점수 곡선");
+    ui.cv.setAttribute("aria-label", L.aAria);
     const draw = () => {
       const a = +ui.input.value, s = (AM.score(a) - AM.lo) / (AM.hi - AM.lo);
       g.fillStyle = COL.paper; g.fillRect(0, 0, 1200, 564);
@@ -277,10 +302,10 @@ const WIDGETS = {
         g.beginPath(); g.moveTo(ox - Math.cos(ra) * L, oy - Math.sin(ra) * L); g.lineTo(ox + Math.cos(ra) * L, oy + Math.sin(ra) * L); g.stroke();
       }
       g.restore();
-      chart(g, [620, 40, 540, 400], AM.as, [{ ys: AM.norm, color: COL.ink, label: `최고점 ${AM.peak.toFixed(1)}°` }],
-        "가정한 격자 회전각 (°)", a, (v) => `${v}`);
+      chart(g, [620, 40, 540, 400], AM.as, [{ ys: AM.norm, color: COL.ink, label: L.aPeak(AM.peak.toFixed(1)) }],
+        L.aAxis, a, (v) => `${v}`);
       ui.out.value = `${a.toFixed(1)}°`;
-      ui.read.textContent = `격자 일치 점수 ${Math.round(s * 100)}% (최고점 대비). 선이 Die 사이 틈과 나란해지는 ${AM.peak.toFixed(1)}° 에서 점수가 가장 높습니다.`;
+      ui.read.textContent = L.aRead(Math.round(s * 100), AM.peak.toFixed(1));
     };
     ui.input.addEventListener("input", throttle(draw));
     draw();
@@ -288,21 +313,21 @@ const WIDGETS = {
 
   match(fig) {
     MM = MM || matchModel();
-    const ui = makeUI(fig, { label: "장비 사이 위치 오차", min: 0, max: 3, step: 0.1, value: 1, unit: "배", aspect: 0.5 });
+    const ui = makeUI(fig, { label: L.mLabel, min: 0, max: 3, step: 0.1, value: 1, unit: "배", aspect: 0.5 });
     const { g } = ui;
-    ui.cv.setAttribute("aria-label", "기준 결함과 검사 결함을 위치만으로, 위치와 크기를 함께 써서 짝지은 두 그림");
+    ui.cv.setAttribute("aria-label", L.mAria);
     const xs = MM.ref.map((p) => p[0]), ys = MM.ref.map((p) => p[1]);
     const bx = [Math.min(...xs) - 8, Math.max(...xs) + 8], by = [Math.min(...ys) - 8, Math.max(...ys) + 8];
     const draw = () => {
       const e = +ui.input.value, R = MM.run(e);
       g.fillStyle = COL.paper; g.fillRect(0, 0, 1200, 600);
-      [[R.byPos, R.okPos, "위치만 보고 짝짓기", 20], [R.byBoth, R.okBoth, "위치와 크기를 함께", 610]].forEach(([pairs, ok, title, X]) => {
+      [[R.byPos, R.okPos, L.mPos, 20], [R.byBoth, R.okBoth, L.mBoth, 610]].forEach(([pairs, ok, title, X]) => {
         const W = 570, H = 500, Y = 70;
         const px = (v) => X + ((v - bx[0]) / (bx[1] - bx[0])) * W, py = (v) => Y + ((v - by[0]) / (by[1] - by[0])) * H;
         g.fillStyle = COL.white; g.fillRect(X, Y, W, H);
         g.strokeStyle = COL.line; g.lineWidth = 2; g.strokeRect(X, Y, W, H);
         g.fillStyle = COL.ink; g.font = `600 28px ${FONT}`; g.textAlign = "center";
-        g.fillText(`${title}, 맞는 짝 ${ok}/${MM.n}`, X + W / 2, 46);
+        g.fillText(L.mTitle(title, ok, MM.n), X + W / 2, 46);
         MM.ref.forEach((p, i) => {
           g.strokeStyle = COL.gray; g.lineWidth = 2.5; g.beginPath();
           g.arc(px(p[0]), py(p[1]), 3 + MM.size[i] * 1.6, 0, 7); g.stroke();
@@ -319,7 +344,7 @@ const WIDGETS = {
         g.setLineDash([]);
       });
       ui.out.value = `×${e.toFixed(1)}`;
-      ui.read.textContent = `빈 원은 기준 결함, 채운 원은 검사 결함, 점선은 틀린 짝입니다. 위치만 ${R.okPos}쌍, 위치와 크기 ${R.okBoth}쌍이 맞습니다. 오차를 키우면 위치만 쓰는 쪽이 먼저 무너집니다.`;
+      ui.read.textContent = L.mRead(R.okPos, R.okBoth);
     };
     ui.input.addEventListener("input", throttle(draw));
     draw();

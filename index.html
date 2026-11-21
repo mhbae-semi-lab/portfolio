@@ -6,6 +6,9 @@
   <title>배민혁 | 반도체 검사 장비 SW 엔지니어</title>
   <meta name="description" content="Wafer Align, 결함 검출, Recipe 자동화를 설계부터 양산 안정화까지 맡아 온 반도체 검사 장비 SW 엔지니어 포트폴리오">
   <meta name="color-scheme" content="light dark">
+  <link rel="alternate" hreflang="ko" href="https://mhbae-semi-lab.github.io/portfolio/">
+  <link rel="alternate" hreflang="en" href="https://mhbae-semi-lab.github.io/portfolio/en.html">
+  <script>try{var l=localStorage.getItem("lang"),c=document.documentElement.lang;if(l&&l!==c)location.replace((l==="en"?"en.html":"./")+location.hash)}catch(e){}</script>
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mhbae-semi-lab.github.io/portfolio/">
   <meta property="og:title" content="배민혁 | 반도체 검사 장비 SW 엔지니어">
@@ -14,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%232f62d6%22/%3E%3Ctext x=%2216%22 y=%2222.5%22 font-size=%2217%22 font-family=%22sans-serif%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22white%22%3E%EB%B0%B0%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="assets/site.css?v=20261121e">
+  <link rel="stylesheet" href="assets/site.css?v=20261121f">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "배민혁", "jobTitle": "반도체 검사 장비 SW 엔지니어", "url": "https://mhbae-semi-lab.github.io/portfolio/", "email": "mailto:mhbae03@gmail.com", "image": "https://mhbae-semi-lab.github.io/portfolio/assets/img/profile.jpg", "sameAs": ["https://github.com/mhbae-semi-lab"], "alumniOf": [{"@type": "CollegeOrUniversity", "name": "인하대학교 제조혁신전문대학원"}, {"@type": "CollegeOrUniversity", "name": "한국공학대학교"}], "knowsAbout": ["Wafer Align", "결함 검출", "검사 Recipe 자동화", "영상처리", "OpenCV", "C++", "C#", "Auto Focus"]}</script>
 </head>
 <body>
@@ -29,6 +32,7 @@
         <a href="#research">연구</a>
         <a href="resume.html">이력서</a>
       </nav>
+      <div class="lang-switch" role="group" aria-label="언어 선택"><a href="./" lang="ko" hreflang="ko" aria-current="true">KO</a><a href="en.html" lang="en" hreflang="en">EN</a></div>
       <a class="btn btn-sm" href="#contact">연락하기</a>
     </div>
   </header>
@@ -195,6 +199,16 @@
         <li class="reveal"><b>이식</b><span>C++ 로 옮긴 뒤 결과를 값 단위로 대조</span></li>
         <li class="reveal"><b>전환</b><span>Shadow 병행으로 현장 데이터를 쌓은 뒤 전환</span></li>
       </ol>
+      <h3 class="lessons-head">검증에 쓴 반복과 시험</h3>
+      <ul class="checks">
+        <li class="reveal"><a href="#p-recipe-deploy"><strong>200<span>회</span></strong>재시작 반복으로 시작 레이스 재발 확인</a></li>
+        <li class="reveal"><a href="#p-interlock"><strong>1,000<span>회</span></strong>Lifter 서보 반복 구동, 위치 반복성</a></li>
+        <li class="reveal"><a href="#p-align"><strong>100<span>회</span></strong>회전 자재 Align, Fail 0건</a></li>
+        <li class="reveal"><a href="#p-light"><strong>100<span>회</span></strong>광량 반복 측정, 평균 편차 0.52%</a></li>
+        <li class="reveal"><a href="#p-focus"><strong>20<span>회</span></strong>입자 높이 반복, ±2µm</a></li>
+        <li class="reveal"><a href="#p-recipe-deploy"><strong>54<span>개</span></strong>단위 테스트, 모두 통과</a></li>
+        <li class="reveal"><a href="#p-recipe-tools"><strong>68<span>항목</span></strong>자체 검증 49, 연동 시험 19</a></li>
+      </ul>
       <h3 class="lessons-head">틀렸던 것과 바꾼 것</h3>
       <ul class="lessons">
         <li class="reveal"><b>통과한 방식도 다시 봅니다</b><p>1차 Align 은 양산 수천 회 평가에서 고객 기준을 넘었지만, 저대비 영상에서 틀린 각도에 높은 점수를 주는 경우를 찾았습니다. 틀리면 점수가 떨어지게 다시 설계했고, 늘어난 연산 시간(150 → 700ms)도 함께 보고했습니다.</p><a href="#p-align">Feature 없는 Wafer Align</a></li>
@@ -220,6 +234,13 @@
         </a>
       </div>
       <p class="soon">만드는 중: Klarf 웨이퍼 맵 뷰어, 레시피 기준 관리, 정렬 마크 검출 비교, 메일 분류기</p>
+      <h3 class="lessons-head">AI 와 일하는 방식</h3>
+      <ul class="lessons">
+        <li class="reveal"><b>설계와 검증 기준은 직접 정합니다</b><p>무엇을 만들지, 무엇을 맞다고 볼지, 어떻게 확인할지는 제가 먼저 적습니다.</p></li>
+        <li class="reveal"><b>구현은 AI 코딩 도구와 함께</b><p>코드 작성과 정리에 Claude Code, Cursor 같은 AI 코딩 도구를 씁니다. 작업 지시문을 저장소에 남겨 같은 기준으로 이어 갑니다.</p></li>
+        <li class="reveal"><b>결과는 테스트로 확인합니다</b><p>단위 테스트, 자체 검증, Python 과 C++ 결과의 값 대조를 통과한 것만 씁니다.</p></li>
+        <li class="reveal"><b>모델 출력은 규칙으로 거릅니다</b><p>위 데모의 LLM 결과는 매번 규칙으로 검증하고, 입력에 없는 숫자나 근거가 나오면 규칙 기반 결과로 바꿉니다.</p></li>
+      </ul>
     </section>
 
     <section id="career" class="wrap career">
@@ -615,7 +636,7 @@
     <p class="d-source">근거: 2025 상반기 업무성과 기술서 외</p>
   </template>
 
-  <script src="assets/widgets.js?v=20261121d"></script>
-  <script src="assets/site.js?v=20261121e"></script>
+  <script src="assets/widgets.js?v=20261121f"></script>
+  <script src="assets/site.js?v=20261121f"></script>
 </body>
 </html>

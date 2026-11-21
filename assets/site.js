@@ -54,3 +54,9 @@ dlg.addEventListener("click", (e) => { // 시트 바깥(배경)을 누르면 닫
 });
 window.addEventListener("hashchange", route);
 route();
+
+// 언어 전환 (KO / EN): 고른 언어를 기억하고, 보던 위치(#)를 그대로 연다. 첫 화면 이동은 <head> 의 짧은 스크립트가 한다.
+document.querySelectorAll(".lang-switch a").forEach((a) => a.addEventListener("click", (e) => {
+  try { localStorage.setItem("lang", a.lang); } catch (_) { /* 저장이 막혀도 이동은 된다 */ }
+  if (location.hash) { e.preventDefault(); location.href = a.getAttribute("href") + location.hash; }
+}));
