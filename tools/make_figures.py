@@ -243,6 +243,311 @@ def fig_focus():
     return strong, weak
 
 
+# ---- 아래부터는 그림마다 따로 난수를 써서, 위 그림들의 결과를 바꾸지 않는다 ----
+INK, MUTED, LINE, BLUE, PAPER = "#3a414b", "#687180", "#c9ced6", "#2f62d6", "#f4f4f4"
+
+
+def _plt():
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    plt.rcParams["font.family"] = "Malgun Gothic"
+    plt.rcParams["axes.unicode_minus"] = False
+    return plt
+
+
+def _clean(ax):
+    for s in ("top", "right"):
+        ax.spines[s].set_visible(False)
+    for s in ("left", "bottom"):
+        ax.spines[s].set_color(LINE)
+    ax.tick_params(colors=MUTED, labelsize=11)
+
+
+def _save_plt(fig, name):
+    plt = _plt()
+    path = os.path.join(OUT, "_tmp.png")
+    fig.savefig(path, facecolor=PAPER)
+    plt.close(fig)
+    save(name, cv2.imread(path))
+    os.remove(path)
+
+
+def _dashed_circle(img, c, r, color, seg=8):
+    for a in range(0, 360, seg * 2):
+        cv2.ellipse(img, c, (r, r), 0, a, a + seg, color, 2, cv2.LINE_AA)
+
+
+# 6. 패턴 매칭 점수: 점수 맵을 자기 최소, 최대로 정규화하면 90° 돌아간 자재도 100점
+def fig_score():
+    rng = np.random.default_rng(11)
+    plt = _plt()
+    size, px, py = 240, 80, 48  # 직사각형 Die: 90° 돌면 가로, 세로 주기가 바뀐다
+    pat = np.full((size, size), 84, np.float32)
+    for y in range(0, size, py):
+        for x in range(0, size, px):
+            cv2.rectangle(pat, (x + 4, y + 4), (x + px - 5, y + py - 5), 138, -1)
+            cv2.rectangle(pat, (x + 12, y + 10), (x + 46, y + 17), 205, -1)  # 방향이 있는 기준 무늬
+            cv2.rectangle(pat, (x + 12, y + 10), (x + 19, y + 36), 205, -1)
+    tpl = pat[30:150, 30:150].astype(np.uint8)
+    shots = [np.clip(np.rot90(pat, k) + rng.normal(0, 8, pat.shape), 0, 255).astype(np.uint8) for k in (0, 1)]
+
+    res = []
+    for img in shots:
+        m = cv2.matchTemplate(img, tpl, cv2.TM_CCOEFF_NORMED)
+        _, peak, _, loc = cv2.minMaxLoc(m)
+        old = (peak - m.min()) / (m.max() - m.min()) * 100  # 맵 자체로 정규화: 봉우리는 늘 100
+        res.append((img, loc, old, max(peak, 0) * 100))
+
+    fig = plt.figure(figsize=(9, 6), dpi=100)
+    gs = fig.add_gridspec(2, 2, height_ratios=[3.3, 1], hspace=.25, wspace=.3)
+    for i, (img, loc, old, new) in enumerate(res):
+        ax = fig.add_subplot(gs[0, i])
+        ax.imshow(img, cmap="gray", vmin=0, vmax=255)
+        ax.add_patch(plt.Rectangle(loc, 120, 120, fill=False, ec=BLUE, lw=2.5))
+        ax.set_title(("정상 방향", "90° 돌아간 자재")[i], fontsize=15, color=INK, pad=10)
+        ax.axis("off")
+        bx = fig.add_subplot(gs[1, i])
+        bx.barh([1, 0], [old, new], color=["#9aa3ae", BLUE], height=.62)
+        for y, v, lab in ((1, old, "기존"), (0, new, "수정")):
+            bx.text(-3, y, lab, ha="right", va="center", fontsize=13, color=INK)
+            bx.text(v + 2, y, f"{v:.0f}점", va="center", fontsize=13, color=INK)
+        bx.set_xlim(0, 135)
+        bx.axis("off")
+    fig.subplots_adjust(left=.08, right=.97, top=.92, bottom=.04)
+    _save_plt(fig, "fig-score.webp")
+    return [(round(o), round(n)) for _, _, o, n in res]
+
+
+# 7. 웨이퍼 외곽 원: 고정 파라미터는 대비가 큰 안쪽 격자 원을 잡고, 고친 파라미터는 외곽을 잡는다
+def fig_hough():
+    rng = np.random.default_rng(12)
+    h, w, c, R = 600, 900, (450, 300), 262
+    # 배경 조명이 오른쪽으로 갈수록 밝아져 외곽 원 오른쪽은 대비가 거의 없다
+    img = np.tile(np.linspace(28, 112, w, dtype=np.float32), (h, 1))
+    cv2.circle(img, c, R, 120, -1, cv2.LINE_AA)
+    pitch = 30
+    for y in range(c[1] - 240, c[1] + 240, pitch):
+        for x in range(c[0] - 240, c[0] + 240, pitch):
+            if all(math.hypot(px - c[0], py - c[1]) < 200 for px in (x, x + pitch) for py in (y, y + pitch)):
+                cv2.rectangle(img, (x + 3, y + 3), (x + pitch - 4, y + pitch - 4), 128, -1)
+    cv2.circle(img, c, 212, 182, 3, cv2.LINE_AA)  # 격자 경계 원: 외곽보다 대비가 크다
+    img = np.clip(img + rng.normal(0, 5, img.shape), 0, 255).astype(np.uint8)
+
+    def find(blur, canny, rmin, rmax, dp):
+        b = cv2.GaussianBlur(img, (blur, blur), 0)
+        cs = cv2.HoughCircles(b, cv2.HOUGH_GRADIENT, dp=dp, minDist=300, param1=canny, param2=30,
+                              minRadius=rmin, maxRadius=rmax)
+        return None if cs is None else cs[0][0]
+
+    old = find(3, 100, 100, 400, 1)  # 고정 임계값, 넓은 반경 범위
+    otsu, _ = cv2.threshold(cv2.GaussianBlur(img, (15, 15), 0), 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    new = find(15, float(otsu), int(R * .9), int(R * 1.1), 1.5)  # 큰 Blur, Otsu 임계값, 웨이퍼 크기로 좁힌 반경
+
+    # 왼쪽 기존(점선, 안쪽 격자 원), 오른쪽 수정(실선, 외곽)
+    out = np.full((600, 900, 3), (53, 47, 43), np.uint8)
+    for i, (cx, cy, r) in enumerate((old, new)):
+        p = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
+        if i == 0:
+            _dashed_circle(p, (int(cx), int(cy)), int(r), ACCENT, seg=6)
+        else:
+            cv2.circle(p, (int(cx), int(cy)), int(r), ACCENT, 3, cv2.LINE_AA)
+        p = cv2.resize(p[:, 150:750], (420, 420), interpolation=cv2.INTER_AREA)
+        out[90:510, 20 + i * 440: 440 + i * 440] = p
+    save("fig-hough.webp", out)
+    return old, new
+
+
+# 8. 조명 보정: 세 채널에 같은 조명값을 쓰면 색이 틀어지고, 채널별 이분 탐색은 한 번 촬영으로 셋을 함께 맞춘다
+def fig_rgb():
+    rng = np.random.default_rng(13)
+    plt = _plt()
+    refl = rng.uniform(.3, .85, (4, 6, 3))
+    refl[1] = np.linspace(.3, .85, 6)[:, None]  # 무채색 줄
+    scene = cv2.resize(refl, (300, 200), interpolation=cv2.INTER_NEAREST)
+    gain = np.array([.62, 1.0, 1.34])  # B, G, R 채널 감도 차이
+
+    def shoot(L):
+        x = np.clip(scene * gain * (np.asarray(L, float) / 255) * 1.5, 0, 1) ** (1 / 2.2)
+        return np.clip(x * 255 + rng.normal(0, 2, x.shape), 0, 255).astype(np.uint8)
+
+    target = 128
+    lo, hi = 0.0, 255.0  # 기존: 조명 하나로 전체 밝기만 맞춤
+    for _ in range(9):
+        L = round((lo + hi) / 2)
+        if np.median(shoot([L] * 3)) < target:
+            lo = L
+        else:
+            hi = L
+    before = shoot([L] * 3)
+
+    lo, hi, hist = np.zeros(3), np.full(3, 255.0), []  # 수정: 채널별 이분 탐색
+    for _ in range(9):
+        L = np.round((lo + hi) / 2)
+        med = np.median(shoot(L).reshape(-1, 3), axis=0)  # 한 장에서 세 채널을 함께 잰다
+        hist.append(med)
+        lo, hi = np.where(med < target, L, lo), np.where(med < target, hi, L)
+    after = shoot(L)
+    hist = np.array(hist)
+
+    fig = plt.figure(figsize=(9, 6), dpi=100)
+    gs = fig.add_gridspec(2, 2, width_ratios=[1, 1.35], wspace=.18, hspace=.3)
+    for i, (img, t) in enumerate(((before, "같은 조명값"), (after, "채널별 보정"))):
+        ax = fig.add_subplot(gs[i, 0])
+        ax.imshow(img[:, :, ::-1])
+        ax.set_title(t, fontsize=14, color=INK, pad=8)
+        ax.axis("off")
+    ax = fig.add_subplot(gs[:, 1])
+    ax.axhline(target, color=MUTED, lw=1.2, ls="--")
+    ax.text(.9, target - 3, "목표", color=MUTED, fontsize=12, va="top")
+    it = np.arange(1, len(hist) + 1)
+    for ch, col, lab in ((2, "#c0504d", "R"), (1, "#4e9a57", "G"), (0, BLUE, "B")):
+        ax.plot(it, hist[:, ch], color=col, lw=2.2, marker="o", ms=5)
+        ax.text(1.15, hist[0, ch], lab, color=col, fontsize=13, va="center")
+    ax.set_xlabel("촬영 회차", fontsize=13, color=INK)
+    ax.set_ylabel("채널 중앙값 밝기", fontsize=13, color=INK)
+    ax.set_xticks(it)
+    _clean(ax)
+    fig.subplots_adjust(left=.03, right=.97, top=.93, bottom=.11)
+    _save_plt(fig, "fig-rgb.webp")
+    return hist[-1]
+
+
+# 9. 보간 좌표 처리: 같은 영상을 좌표 반올림과 절삭으로 줄이면 작은 결함이 다르게 남는다
+def fig_interp():
+    rng = np.random.default_rng(14)
+    h, w = 300, 450
+    src = np.full((h, w), 92, np.float32) + rng.normal(0, 3, (h, w))
+    for _ in range(420):  # 1~2 픽셀 크기 결함
+        y, x = rng.uniform(4, h - 4), rng.uniform(4, w - 4)
+        amp, s = rng.uniform(40, 75), rng.uniform(.45, .85)
+        y0, x0 = int(y) - 3, int(x) - 3
+        yy, xx = np.mgrid[y0:y0 + 7, x0:x0 + 7]
+        src[y0:y0 + 7, x0:x0 + 7] += amp * np.exp(-((yy - y) ** 2 + (xx - x) ** 2) / (2 * s * s))
+    scale = .7
+    H, W = int(h * scale), int(w * scale)
+
+    def shrink(fn):
+        yi = np.clip(fn(np.arange(H) / scale), 0, h - 1).astype(int)
+        xi = np.clip(fn(np.arange(W) / scale), 0, w - 1).astype(int)
+        return np.clip(src[np.ix_(yi, xi)], 0, 255).astype(np.uint8)
+
+    def detect(img):
+        n, _, st, _ = cv2.connectedComponentsWithStats((img > 125).astype(np.uint8), connectivity=8)
+        return st[1:, :4]
+
+    imgs = [shrink(np.round), shrink(np.floor)]
+    boxes = [detect(i) for i in imgs]
+    k, cell = 42, 10  # 차이가 가장 많은 42 x 42 구간을 10배로 키워 보여준다
+
+    def in_win(b, y, x):
+        return [r for r in b if x <= r[0] < x + k - r[2] and y <= r[1] < y + k - r[3]]
+
+    best = max(((y, x) for y in range(0, H - k, 6) for x in range(0, W - k, 6)),
+               key=lambda p: abs(len(in_win(boxes[0], *p)) - len(in_win(boxes[1], *p)))
+               + .01 * len(in_win(boxes[0], *p)))
+    y, x = best
+    out = np.full((600, 900, 3), (53, 47, 43), np.uint8)  # --fig-dark
+    for i, (img, b) in enumerate(zip(imgs, boxes)):
+        z = cv2.resize(img[y:y + k, x:x + k], (k * cell, k * cell), interpolation=cv2.INTER_NEAREST)
+        z = cv2.cvtColor(z, cv2.COLOR_GRAY2BGR)
+        for bx, by, bw, bh in in_win(b, y, x):
+            p1 = ((bx - x) * cell - 3, (by - y) * cell - 3)
+            p2 = ((bx - x + bw) * cell + 2, (by - y + bh) * cell + 2)
+            cv2.rectangle(z, p1, p2, ACCENT, 2, cv2.LINE_AA)
+        ox = 30 + i * (k * cell + 20)
+        out[90:90 + k * cell, ox:ox + k * cell] = z
+    save("fig-interp.webp", out)
+    return len(boxes[0]), len(boxes[1])
+
+
+# 10. 입자 높이 영상 AF: 초점 높이를 바꾸며 입자와 주변 네 방향 바닥의 선명도를 함께 잰다
+def fig_focus_stack():
+    rng = np.random.default_rng(15)
+    plt = _plt()
+    s, top = 200, 60  # 입자 윗면 높이 60µm, 바닥 0µm
+    yy, xx = np.mgrid[0:s, 0:s]
+    d = np.hypot(yy - s / 2, xx - s / 2)
+    floor = cv2.GaussianBlur(rng.normal(0, 1, (s, s)).astype(np.float32), (0, 0), 1.3) * 60 + 105
+    part = cv2.GaussianBlur(rng.normal(0, 1, (s, s)).astype(np.float32), (0, 0), 1.0) * 45 + 185 - d * .9
+    mask = (d < 34).astype(np.float32)
+    zs = [0, 15, 30, 45, 60]
+    roi_p = (s // 2 - 14, s // 2 - 14, 28)
+    roi_f = [(s // 2 - 14 + dx, s // 2 - 14 + dy, 28) for dx, dy in ((0, -66), (66, 0), (0, 66), (-66, 0))]
+
+    def blur(img, dz):
+        return cv2.GaussianBlur(img, (0, 0), .35 + abs(dz) / 6)
+
+    def lap(img, r):
+        x, y, n = r
+        return float(cv2.Laplacian(img[y:y + n, x:x + n], cv2.CV_32F).var())
+
+    tiles, sp, sf = [], [], []
+    for z in zs:
+        m = blur(mask, z - top)
+        t = blur(floor, z) * (1 - m) + blur(part, z - top) * m + rng.normal(0, 1.5, (s, s))
+        t = t.astype(np.float32)
+        tiles.append(t)
+        sp.append(lap(t, roi_p))
+        sf.append(np.mean([lap(t, r) for r in roi_f]))
+    sp, sf = np.array(sp) / max(sp), np.array(sf) / max(sf)
+
+    fig = plt.figure(figsize=(10, 4.4), dpi=100)
+    gs = fig.add_gridspec(2, 5, height_ratios=[3, .8], hspace=.02, wspace=.08)
+    for i, (z, t) in enumerate(zip(zs, tiles)):
+        ax = fig.add_subplot(gs[0, i])
+        ax.imshow(np.clip(t, 0, 255), cmap="gray", vmin=0, vmax=255)
+        x, y, n = roi_p
+        ax.add_patch(plt.Rectangle((x, y), n, n, fill=False, ec=BLUE, lw=2))
+        for x, y, n in roi_f:
+            ax.add_patch(plt.Rectangle((x, y), n, n, fill=False, ec="#e8eaee", lw=1.4, ls="--"))
+        ax.set_title(f"{z}µm", fontsize=13, color=INK, pad=6)
+        ax.axis("off")
+        bx = fig.add_subplot(gs[1, i])
+        bx.barh([1, 0], [sp[i], sf[i]], color=[BLUE, "#9aa3ae"], height=.6)
+        bx.set_xlim(0, 1.05)
+        bx.axis("off")
+    fig.text(.012, .19, "입자", color=BLUE, fontsize=12, va="center")
+    fig.text(.012, .09, "바닥", color=MUTED, fontsize=12, va="center")
+    fig.subplots_adjust(left=.06, right=.99, top=.9, bottom=.03)
+    _save_plt(fig, "fig-focus-stack.webp")
+    return zs[int(np.argmax(sp))] - zs[int(np.argmax(sf))]
+
+
+# 11. 접촉 감지 AF: 하강 간격이 촘촘할수록 임계값을 넘는 순간을 실제 접촉 높이 가까이에서 잡는다
+def fig_focus_contact():
+    rng = np.random.default_rng(16)
+    plt = _plt()
+    zc, th = 73.4, 1.6
+
+    def sig(z):
+        return .2 + 3.0 / (1 + np.exp(-(z - zc) / .6))
+
+    fig, ax = plt.subplots(figsize=(9, 5.4), dpi=100)
+    zz = np.linspace(40, 100, 600)
+    ax.plot(zz, sig(zz), color=LINE, lw=6, solid_capstyle="round")
+    ax.axhline(th, color=MUTED, lw=1.2, ls="--")
+    ax.text(41, th + .08, "감지 임계값", color=MUTED, fontsize=12)
+    found = {}
+    for step, col, mk in ((8.0, "#9aa3ae", "s"), (1.0, BLUE, "o")):
+        z = np.arange(40, 101, step)
+        v = sig(z) + rng.normal(0, .03, z.size)
+        hit = z[np.argmax(v > th)]
+        found[step] = hit - zc
+        ax.plot(z, v, color=col, lw=0, marker=mk, ms=7 if step > 1 else 4.5, label=f"{step:g}µm 간격, 오차 +{hit - zc:.1f}µm")
+        ax.axvline(hit, color=col, lw=1.6)
+    ax.axvline(zc, color=INK, lw=1.2, ls=":")
+    ax.text(zc - .6, 3.35, "실제 접촉", color=INK, fontsize=12, ha="right")
+    ax.set_xlabel("하강 거리 (µm)", fontsize=13, color=INK)
+    ax.set_ylabel("감지 신호 (상대값)", fontsize=13, color=INK)
+    ax.set_ylim(0, 3.6)
+    ax.legend(frameon=False, fontsize=12, loc="center right")
+    _clean(ax)
+    fig.tight_layout()
+    _save_plt(fig, "fig-focus-contact.webp")
+    return found
+
+
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     est = fig_align()
@@ -250,6 +555,23 @@ if __name__ == "__main__":
     fig_recipe()
     fig_crack()
     strong, weak = fig_focus()
+    score = fig_score()
+    old, new = fig_hough()
+    rgb = fig_rgb()
+    n_round, n_floor = fig_interp()
+    dh = fig_focus_stack()
+    contact = fig_focus_contact()
+    print("score (old, new) per shot", score)
+    print("hough old r", round(float(old[2])), "new r", round(float(new[2])))
+    print("rgb final medians BGR", rgb)
+    print("interp defects round", n_round, "floor", n_floor)
+    print("focus stack height", dh, "contact error", contact)
+    assert score[0][0] == 100 and score[1][0] == 100 and score[1][1] < score[0][1] - 30, "점수 그림이 기존 100점 고정을 재현하지 못함"
+    assert abs(float(old[2]) - 212) < 12 and abs(float(new[2]) - 262) < 12, "외곽 원 그림: 기존은 안쪽, 수정은 외곽이어야 함"
+    assert np.all(np.abs(rgb - 128) <= 3), "채널별 보정이 목표에 수렴하지 않음"
+    assert n_round != n_floor, "보간 그림: 두 방식의 결함 수가 같음"
+    assert dh == 60, "영상 AF 그림: 입자와 바닥 선명도 봉우리 차이가 실제 높이와 다름"
+    assert contact[1.0] < contact[8.0], "접촉 감지 그림: 촘촘한 간격이 더 정확해야 함"
     # 뚜렷한 바닥은 봉우리가 실제 높이 근처, 약한 바닥은 곡선이 평평(봉우리 대비 주변이 높음)
     assert abs(int(np.argmax(strong)) * 4 - 60 - 6) <= 4, "뚜렷한 바닥의 선명도 봉우리가 실제 높이에서 벗어남"
     assert abs(abs(est) - 1.8) < 0.2, f"격자 각도 추정이 틀림: {est}"

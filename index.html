@@ -115,12 +115,12 @@
       <div class="groups">
         <div class="group">
           <h4>영상 알고리즘</h4>
-          <ul>
-            <li><a href="#p-score"><b>패턴 매칭 점수 오판정 개선</b><span>100점 고정 해소</span></a></li>
-            <li><a href="#p-hough"><b>웨이퍼 외곽 원 검출 개선</b><span>재현 0건</span></a></li>
-            <li><a href="#p-rgb"><b>조명 보정을 R, G, B 채널별로</b><span>1회 촬영</span></a></li>
-            <li><a href="#p-interp"><b>보간 방식 차이 추적</b><span>결함 수 2.8% 차이</span></a></li>
-          </ul>
+          <div class="tiles">
+            <a class="tile reveal" href="#p-score"><img class="light" src="assets/img/fig-score.webp" alt="" loading="lazy" width="900" height="600"><b>패턴 매칭 점수 오판정 개선</b><span>100점 고정 해소</span></a>
+            <a class="tile reveal" href="#p-hough"><img src="assets/img/fig-hough.webp" alt="" loading="lazy" width="900" height="600"><b>웨이퍼 외곽 원 검출 개선</b><span>재현 0건</span></a>
+            <a class="tile reveal" href="#p-rgb"><img class="light" src="assets/img/fig-rgb.webp" alt="" loading="lazy" width="900" height="600"><b>조명 보정을 R, G, B 채널별로</b><span>1회 촬영으로 세 채널</span></a>
+            <a class="tile reveal" href="#p-interp"><img src="assets/img/fig-interp.webp" alt="" loading="lazy" width="900" height="600"><b>보간 방식 차이 추적</b><span>결함 수 2.8% 차이</span></a>
+          </div>
         </div>
         <div class="group">
           <h4>안정화와 Interlock</h4>
@@ -258,14 +258,26 @@
   <template id="p-focus">
     <p class="d-meta">2025 · 신규 Particle 제거 설비, 설계와 현장 검증</p>
     <h2 id="detail-title">입자 높이 Auto Focus, 영상에서 접촉 감지로</h2>
-    <figure class="d-fig light"><img src="assets/img/fig-focus.webp" alt="높이에 따른 영상 선명도 곡선. 무늬가 뚜렷한 바닥은 실제 높이에서 봉우리, 무늬가 약한 바닥은 엉뚱한 높이에서 봉우리"><figcaption>합성 바닥 영상으로 계산한 선명도 곡선. 무늬가 약하면 봉우리가 실제 높이와 어긋납니다.</figcaption></figure>
+    <figure class="d-fig light"><img src="assets/img/fig-focus-stack.webp" alt="초점 높이 0, 15, 30, 45, 60µm 에서 찍은 합성 입자 영상과 입자, 바닥 선명도 막대. 바닥은 0µm, 입자는 60µm 에서 가장 선명" width="1000" height="440"><figcaption>초점을 올리며 입자(파란 상자)와 주변 네 방향 바닥(점선)의 선명도를 함께 잽니다. 두 봉우리의 높이 차이가 입자 높이입니다. 합성 영상</figcaption></figure>
     <dl class="kpi"><div><dt>영상 AF 시간</dt><dd>−72%</dd></div><div><dt>높이 반복성 (20회)</dt><dd>±2µm</dd></div><div><dt>Shear 높이 정확도</dt><dd>±1µm</dd></div></dl>
-    <h3>1단계, 영상 기반 AF</h3>
-    <ul><li>입자 윗면은 선명도가 가장 높은 위치로, 바닥은 주변 여러 방향 영역의 선명도로 판정하고 그 차이를 높이로 씁니다.</li><li>방향별로 하나씩 확인하던 것을 모든 방향 동시 검증으로 바꿔 AF 시간을 72% 줄였습니다.</li><li>하지만 바닥 무늬가 약하거나 Shear 뒤 영상 변화가 없으면 높이를 구분할 수 없었습니다.</li></ul>
-    <h3>2단계, 접촉 감지 AF</h3>
-    <ul><li>바닥과 입자 윗면을 각각 전압 임계값으로 감지하고, 하강 간격을 더 잘게 나눴습니다.</li><li>200µm 이하 작은 입자에서 바닥 감지가 안 되던 것을 감지 기준점을 입자 중심으로 옮겨 해결했습니다.</li><li>허공을 바닥으로 잘못 감지하면 전압을 다시 읽고, 높이가 범위를 벗어나면 Shear 를 막는 Interlock 을 넣었습니다.</li><li>Vacuum 이 꺼진 상태에서 바닥을 감지하다 Tip 이 파손된 뒤, 모든 바닥 감지 시퀀스에 Vacuum 제어를 넣었습니다.</li></ul>
-    <h3>검증</h3>
-    <ul><li>높이를 계측한 자재가 현장에 없어 입자별 개별 반복성으로 검증했습니다.</li><li>300µm 이상 입자 20회 반복에서 ±2µm, 50~100µm 구간 Shear 높이 ±1µm. 양산 자재 연속, 다중 Shear 정상.</li></ul>
+
+    <section class="d-step">
+      <h3><span>1</span>영상 AF 를 빠르게, 그리고 한계</h3>
+      <figure class="d-fig light"><img src="assets/img/fig-focus.webp" alt="높이에 따른 선명도 곡선. 무늬가 뚜렷한 바닥은 실제 높이에서 봉우리, 무늬가 약한 바닥은 곡선이 평평" width="900" height="600"><figcaption>무늬가 약한 바닥은 선명도 곡선이 평평해 봉우리를 믿을 수 없습니다. 합성 바닥 영상</figcaption></figure>
+      <p>방향별로 하나씩 보던 바닥 판정을 모든 방향 동시 검증으로 바꿔 <b>AF 시간을 72% 줄였습니다.</b> 하지만 바닥 무늬가 약하거나 Shear 뒤 영상 변화가 없으면 높이를 구분할 수 없었습니다.</p>
+    </section>
+
+    <section class="d-step">
+      <h3><span>2</span>접촉 감지로 다시 설계</h3>
+      <figure class="d-fig light"><img src="assets/img/fig-focus-contact.webp" alt="하강 거리에 따른 감지 신호. 8µm 간격은 접촉을 6.6µm 늦게, 1µm 간격은 0.6µm 늦게 감지" width="900" height="540"><figcaption>하강 간격이 촘촘할수록 임계값을 넘는 순간이 실제 접촉에 가깝습니다. 합성 신호</figcaption></figure>
+      <p>바닥과 입자 윗면을 각각 전압 임계값으로 감지하고 하강 간격을 잘게 나눴습니다.</p>
+      <ul><li>200µm 이하 작은 입자는 감지 기준점을 입자 중심으로 옮겨 바닥을 찾게 했습니다.</li><li>허공을 바닥으로 잘못 감지하면 다시 읽고, 높이가 범위를 벗어나면 Shear 를 막습니다.</li><li>Tip 파손 뒤 모든 바닥 감지 시퀀스에 Vacuum 제어를 넣었습니다.</li></ul>
+    </section>
+
+    <section class="d-step">
+      <h3><span>3</span>현장 검증</h3>
+      <p>높이를 계측한 자재가 현장에 없어 입자별 반복성으로 검증했습니다. 300µm 이상 입자 20회 반복 <b>±2µm</b>, 50~100µm 구간 Shear 높이 <b>±1µm</b>, 양산 자재 연속, 다중 Shear 정상.</p>
+    </section>
     <p class="d-tags">C#, 모션 제어, DAQ, OpenCV</p>
   </template>
 
@@ -340,24 +352,28 @@
   <template id="p-score">
     <p class="d-meta">2026</p>
     <h2 id="detail-title">패턴 매칭 점수 오판정 개선</h2>
+    <figure class="d-fig light"><img src="assets/img/fig-score.webp" alt="정상 방향과 90도 돌아간 합성 Die 패턴의 매칭 결과. 기존 점수는 둘 다 100점, 수정 후 97점과 31점" width="900" height="600"><figcaption>합성 패턴으로 재현한 원리. 점수 맵을 자기 최소, 최대로 정규화하면 돌아간 자재도 100점이 됩니다.</figcaption></figure>
     <ul><li>90° 회전한 Wafer 가 정상으로 판정되던 원인을 정규화로 점수 분포가 왜곡된 데서 찾았습니다.</li><li>매칭 모드별 최소, 최대 점수 산출식을 다시 설계해, 비정상일 때 100점 고정이 아니라 10~50점대가 나오게 했습니다.</li><li>패턴이 부족한 영상용으로 위상 상관(3~5배 빠름)과 여러 점수를 섞는 판정 전략을 따로 정리했습니다.</li></ul>
   </template>
 
   <template id="p-hough">
     <p class="d-meta">2025</p>
     <h2 id="detail-title">웨이퍼 외곽 원 검출 개선</h2>
+    <figure class="d-fig"><img src="assets/img/fig-hough.webp" alt="같은 합성 웨이퍼 영상에서 왼쪽은 안쪽 격자 원을 점선으로, 오른쪽은 외곽 원을 실선으로 검출" width="900" height="600"><figcaption>왼쪽 기존 파라미터는 대비가 큰 안쪽 격자 원을(점선), 오른쪽 수정 파라미터는 외곽을(실선) 잡습니다. 합성 영상에 OpenCV HoughCircles</figcaption></figure>
     <ul><li>웨이퍼 안쪽 격자 원을 외곽으로 잘못 잡던 문제를 고쳤습니다.</li><li>Blur 크기를 키우고, 고정 Canny 임계값을 Otsu 동적 값으로, 반경 범위와 누적 해상도를 조정했습니다. 패치 후 재현 0건.</li></ul>
   </template>
 
   <template id="p-interp">
     <p class="d-meta">2025</p>
     <h2 id="detail-title">보간 방식 차이로 바뀐 결함 수 추적</h2>
+    <figure class="d-fig"><img src="assets/img/fig-interp.webp" alt="같은 영역을 좌표 반올림과 절삭으로 줄인 두 영상. 검출된 작은 결함 상자 수가 다름" width="900" height="600"><figcaption>같은 합성 영상을 좌표 반올림(왼쪽)과 절삭(오른쪽)으로 줄인 뒤 같은 임계값으로 검출한 일부 구간. 전체로는 228개 대 215개</figcaption></figure>
     <ul><li>같은 자재인데 결함 수가 2.8% 줄어든 원인을 추적해, 영상 보간이 반올림에서 절삭으로 바뀐 것을 찾았습니다.</li><li>반올림을 다시 적용해 결과를 되돌렸습니다.</li></ul>
   </template>
 
   <template id="p-rgb">
     <p class="d-meta">2026</p>
     <h2 id="detail-title">조명 자동 보정을 R, G, B 채널별로</h2>
+    <figure class="d-fig light"><img src="assets/img/fig-rgb.webp" alt="같은 조명값으로 찍은 색이 틀어진 장면과 채널별 보정 후 장면, 그리고 촬영 회차마다 R, G, B 중앙값이 목표 128 에 모이는 그래프" width="900" height="600"><figcaption>세 채널에 같은 조명값을 쓰면 색이 틀어집니다. 채널별 이분 탐색은 한 번 찍을 때마다 세 채널을 함께 재서 9회 안에 목표에 모입니다. 합성 장면</figcaption></figure>
     <ul><li>조명 하나만 기준으로 맞추던 자동 보정을 채널별로 바꿨습니다.</li><li>영상 1회 촬영으로 3채널 밝기를 함께 재고, 채널별 중앙값 밝기를 목표값에 맞추도록 이분 탐색으로 수렴시킵니다.</li><li>단색 판정, 탐색 진동, 조명값 하한 버그를 함께 고쳤습니다.</li></ul>
   </template>
 
