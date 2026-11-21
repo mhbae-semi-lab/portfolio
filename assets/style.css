@@ -75,6 +75,15 @@ section { margin-top: 56px; }
 .badge.st-live { background: var(--red); color: #fff; }
 .badge.st-wip { color: var(--red); background: #fff; }
 .badge.st-planned { color: var(--mid); border-color: var(--line); background: #fff; }
+.badge.st-done { color: var(--ink); border-color: var(--ink); background: #fff; }
+.group-head { font-size: 15px; color: var(--ink-2); margin: 24px 0 10px; }
+.group-head:first-of-type { margin-top: 0; }
+.group-head small { color: var(--mid); font-weight: 600; margin-left: 4px; }
+.case-demo { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 600; color: var(--red); text-decoration: none; }
+.shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.shots figure { margin: 0; }
+.shots img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+.shots figcaption { color: var(--mid); font-size: 13px; margin-top: 6px; }
 
 /* rows (문제 / 한 일 / 결과) */
 .rows { display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; margin: 0; }
@@ -164,7 +173,7 @@ section { margin-top: 56px; }
 @page { size: A4; margin: 14mm 14mm 16mm; }
 @media print {
   body { font-size: 10.5pt; line-height: 1.5; }
-  .top, .foot, .print-bar, .back, .pager, .actions, .sec-head a { display: none !important; }
+  .top, .foot, .print-bar, .back, .pager, .actions, .sec-head a, .case-demo { display: none !important; }
   .wrap { max-width: none; padding: 0; }
   main { padding: 0; min-height: 0; }
   .resume { margin: 0; max-width: none; }

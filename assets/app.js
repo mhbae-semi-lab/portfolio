@@ -1,7 +1,7 @@
 // 포트폴리오 단일 페이지: projects.json → 해시 라우팅 (#/, #/apps, #/app/02, #/resume)
 "use strict";
 
-const STATUS = { live: "데모 공개", wip: "제작 중", planned: "예정" };
+const STATUS = { live: "데모 공개", done: "완성 · 화면 공개", wip: "제작 중", planned: "예정" };
 let DATA = null;
 
 const $ = (s) => document.querySelector(s);
@@ -27,7 +27,8 @@ function links(app, cls = "") {
   const a = [];
   if (app.demo) a.push(`<a class="btn ${cls}" href="${esc(app.demo)}" target="_blank" rel="noopener">데모 열기</a>`);
   if (app.repo) a.push(`<a class="btn ghost ${cls}" href="${esc(app.repo)}" target="_blank" rel="noopener">소스</a>`);
-  if (!a.length) a.push(`<span class="btn disabled ${cls}">데모 준비 중</span>`);
+  // 데스크톱 앱(화면만 공개)은 버튼 없이 아래 화면 목록으로 보여준다
+  if (!a.length && !app.shots?.length) a.push(`<span class="btn disabled ${cls}">데모 준비 중</span>`);
   return a.join("");
 }
 
@@ -57,7 +58,24 @@ function caseBlock(c) {
       <dt>결과</dt><dd>${t(c.result)}</dd>
     </dl>
     ${c.tags?.length ? `<div class="chips">${c.tags.map((x) => `<span>${esc(x)}</span>`).join("")}</div>` : ""}
+    ${caseDemo(c)}
   </article>`;
+}
+
+// 사례는 사내 일이라 코드 · 화면이 없으니, 같은 개념을 합성 데이터로 다시 만든 데모 카드로 잇는다
+function caseDemo(c) {
+  const a = c.demo && DATA.apps.find((x) => x.id === c.demo);
+  return a ? `<a class="case-demo" href="#/app/${esc(a.id)}">관련 데모: ${esc(a.id)} ${esc(a.name)} →</a>` : "";
+}
+
+// 태그(AX · 도메인 데모 …)별로 묶어 처음 나온 순서대로 보여준다
+function appGroups() {
+  const tags = [...new Set(DATA.apps.map((a) => a.tag))];
+  return tags.map((tag) => {
+    const list = DATA.apps.filter((a) => a.tag === tag);
+    return `<h3 class="group-head">${esc(tag)} <small>${list.length}</small></h3>
+    <div class="grid">${list.map(appCard).join("")}</div>`;
+  }).join("");
 }
 
 function skills(p) {
@@ -76,15 +94,15 @@ function home() {
     ${p.summary ? `<p class="lead">${t(p.summary)}</p>` : ""}
     <div class="hero-links">${linkList(p.links)}</div>
   </section>
-  <section>
-    <div class="sec-head"><h2>앱 5종</h2><a href="#/apps">전체 보기 →</a></div>
-    <div class="grid">${DATA.apps.map(appCard).join("")}</div>
-  </section>
   ${DATA.cases.length ? `<section>
     <div class="sec-head"><h2>실무 사례</h2></div>
     <p class="note">사내 코드 · 화면 · 데이터 없이 익명화한 서술만 싣습니다.</p>
     ${DATA.cases.map(caseBlock).join("")}
   </section>` : ""}
+  <section>
+    <div class="sec-head"><h2>앱 ${DATA.apps.length}종</h2><a href="#/apps">전체 보기 →</a></div>
+    ${appGroups()}
+  </section>
   <section>
     <div class="sec-head"><h2>기술</h2></div>
     ${skills(p)}
@@ -94,9 +112,9 @@ function home() {
 function apps() {
   return `
   <section>
-    <div class="sec-head"><h2>앱 5종</h2></div>
-    <p class="note">AX 2종 + 반도체 도메인 데모 3종. 모두 서버 없는 웹이고 합성 · 공개 데이터만 사용합니다.</p>
-    <div class="grid">${DATA.apps.map(appCard).join("")}</div>
+    <div class="sec-head"><h2>앱 ${DATA.apps.length}종</h2></div>
+    <p class="note">웹 데모는 서버 없는 정적 웹, 데스크톱 앱은 화면으로 보여줍니다. 모두 합성 · 공개 데이터만 사용합니다.</p>
+    ${appGroups()}
   </section>`;
 }
 
@@ -118,6 +136,11 @@ function app(id) {
     <dt>만든 것</dt><dd>${esc(a.build)}</dd>
     <dt>결과물</dt><dd>${esc(a.result)}</dd>
   </dl>
+  ${a.shots?.length ? `<section>
+    <h2 class="h-small">화면</h2>
+    <div class="shots">${a.shots.map((s) =>
+      `<figure><a href="${esc(s.src)}" target="_blank" rel="noopener"><img src="${esc(s.src)}" alt="${esc(s.alt)}" loading="lazy"></a><figcaption>${esc(s.alt)}</figcaption></figure>`).join("")}</div>
+  </section>` : ""}
   <section>
     <h2 class="h-small">동작 흐름</h2>
     <ol class="flow">${a.flow.map((f, k) =>
@@ -156,7 +179,7 @@ function resume() {
     </header>
     ${p.summary ? `<p class="lead">${t(p.summary)}</p>` : ""}
     ${DATA.cases.length ? `<h2>실무 사례</h2>${DATA.cases.map(caseBlock).join("")}` : ""}
-    <h2>앱 5종</h2>
+    <h2>앱 ${DATA.apps.length}종</h2>
     <div class="r-apps">${DATA.apps.map((a) => `
       <div class="r-app">
         <div class="r-app-head"><span class="num">${esc(a.id)}</span><strong>${esc(a.name)}</strong>${badge(a)}</div>
