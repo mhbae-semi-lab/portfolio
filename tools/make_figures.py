@@ -717,20 +717,21 @@ def fig_light():
     return float(dev.mean())
 
 
-# 17. 정적 분석: 경고 수 (평가 문서 수치)
+# 17. 정적 분석과 코드 정리 (평가 문서 수치: 2025 상 SonarQube 버그, 2025 하 정적 분석 경고)
 def fig_static():
     plt = _plt()
     fig, ax = plt.subplots(figsize=(9, 5.4), dpi=100)
     x = np.array([0, 1.4])
-    ax.bar(x - .28, [468, 154], .5, color="#9aa3ae")
-    ax.bar(x + .28, [312, 106], .5, color=BLUE)
-    for xi, a, b in zip(x, (468, 154), (312, 106)):
+    before, after = (468, 298), (312, 106)
+    ax.bar(x - .28, before, .5, color="#9aa3ae")
+    ax.bar(x + .28, after, .5, color=BLUE)
+    for xi, a, b in zip(x, before, after):
         ax.text(xi - .28, a + 8, f"{a}", ha="center", fontsize=14, color=INK)
         ax.text(xi + .28, b + 8, f"{b}", ha="center", fontsize=14, color=BLUE, weight="bold")
-    ax.set_xticks(x, ["1차 정리", "2차 정리"], fontsize=13)
+    ax.set_xticks(x, ["SonarQube 버그 (2025 상)", "정적 분석 경고 (2025 하)"], fontsize=13)
     ax.text(.62, .95, "정리 전", color=MUTED, fontsize=13, transform=ax.transAxes, va="top")
     ax.text(.77, .95, "정리 후", color=BLUE, fontsize=13, transform=ax.transAxes, va="top")
-    ax.set_ylabel("정적 분석 경고 (건)", fontsize=13, color=INK)
+    ax.set_ylabel("건수", fontsize=13, color=INK)
     ax.set_ylim(0, 520)
     _clean(ax)
     fig.tight_layout()
@@ -828,22 +829,19 @@ def fig_setup():
 def fig_optics():
     plt = _plt()
     fig, ax = plt.subplots(figsize=(9, 4.6), dpi=100)
-    ax.barh(2, 14 / 15 * 100, .5, color=BLUE)
-    ax.barh(1, 100, .5, color=BLUE)
-    ax.barh(0, 70.7, .5, color="#e3e7ec")
-    ax.barh(0, 92.6 - 70.7, .5, left=70.7, color=BLUE)
-    ax.plot([70, 70], [-.38, .38], color=INK, lw=2)
-    ax.text(70, -.48, "목표 70%", ha="center", va="top", fontsize=12, color=INK)
-    for yv, t in ((2, "14/15"), (1, "10/10"), (0, "70.7~92.6%")):
+    ax.barh(1, 14 / 15 * 100, .5, color=BLUE)
+    ax.barh(0, 100, .5, color=BLUE)
+    for yv, t in ((1, "14/15"), (0, "10/10")):
         ax.text(101.5, yv, t, va="center", fontsize=14, color=BLUE, weight="bold")
-    ax.set_yticks([2, 1, 0], ["고해상도 시료 시인성", "검출력", "신규 자재 검출률"], fontsize=13)
-    ax.set_xlim(0, 122)
-    ax.set_ylim(-.9, 2.5)
+    ax.set_yticks([1, 0], ["고해상도 시료 시인성", "검출력"], fontsize=13)
+    ax.set_xlim(0, 118)
+    ax.set_ylim(-.5, 1.5)
     ax.set_xticks([0, 25, 50, 75, 100])
     ax.set_xlabel("%", fontsize=12, color=MUTED)
     _clean(ax)
     ax.tick_params(axis="y", length=0, colors=INK)
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0, 1, .9))
+    fig.text(.5, .95, "적외선 시료 반복성 평가 7건 (일주일)  ·  Glass 202매 평가 (2일)", fontsize=13, color=INK, ha="center", va="center")
     _save_plt(fig, "fig-optics.webp")
 
 
