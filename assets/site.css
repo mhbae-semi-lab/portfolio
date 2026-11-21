@@ -101,12 +101,18 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 .stat-big strong span { font-size: .45em; letter-spacing: 0; margin-left: 4px; }
 .stat-big > span { display: block; margin-top: 8px; font-weight: 600; }
 
-.more-head { font-size: 18px; margin: 56px 0 12px; color: var(--ink-2); }
-.more { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
-.more a { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 14px 0; border-top: 1px solid var(--line); text-decoration: none; }
-.more a:hover b { color: var(--accent); }
-.more b { font-weight: 600; }
-.more span { color: var(--muted); text-align: right; font-size: 15px; white-space: nowrap; }
+/* 그 외 프로젝트: 주제별 4묶음, 묶음마다 위 선 하나 */
+.more-head { font-size: 22px; letter-spacing: -.02em; margin: 72px 0 20px; }
+.groups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px 48px; }
+.group { border-top: 2px solid var(--ink); padding-top: 14px; }
+.group h4 { margin: 0 0 6px; font-size: 15px; color: var(--muted); font-weight: 600; }
+.group ul { list-style: none; padding: 0; margin: 0; }
+.group a { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 0; text-decoration: none; }
+.group a:hover b { color: var(--accent); }
+.group b { font-weight: 600; }
+.group b::after { content: " →"; color: var(--muted); font-weight: 500; opacity: 0; transition: opacity .2s ease; }
+.group a:hover b::after { opacity: 1; }
+.group span { color: var(--muted); text-align: right; font-size: 15px; white-space: nowrap; font-variant-numeric: tabular-nums; }
 
 /* 일하는 방식: 4단계 한 줄 */
 .steps { list-style: none; padding: 0; margin-top: 36px; display: grid; grid-template-columns: repeat(4, 1fr); counter-reset: s; }
@@ -144,7 +150,8 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 .foot { padding: 64px 0 40px; color: var(--muted); font-size: 13.5px; }
 
 /* 세부 내용 패널: 오른쪽에서 열리는 시트 */
-.sheet { margin: 0 0 0 auto; height: 100dvh; max-height: 100dvh; width: min(760px, 100vw); max-width: 100vw; padding: 0; border: 0; background: var(--surface); color: var(--ink); box-shadow: -24px 0 60px rgb(10 20 40 / .18); }
+.sheet { margin: 0 0 0 auto; height: 100dvh; max-height: 100dvh; width: min(760px, 100vw); max-width: 100vw; padding: 0; border: 0; background: var(--surface); color: var(--ink); box-shadow: -16px 0 40px rgb(0 0 0 / .12); border-left: 1px solid var(--line); }
+@media (prefers-color-scheme: dark) { .sheet { box-shadow: none; } }
 .sheet::backdrop { background: rgb(12 16 22 / .45); backdrop-filter: blur(2px); }
 .sheet-bar { position: sticky; top: 0; z-index: 1; display: flex; gap: 8px; align-items: center; padding: 14px 28px; background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
 .sheet-nav, .sheet-close { font: 600 14px var(--font); color: var(--ink-2); text-decoration: none; background: none; border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px; cursor: pointer; }
@@ -170,7 +177,8 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
   .sheet[open] { animation: sheet-in .38s cubic-bezier(.16, 1, .3, 1); }
   .sheet[open]::backdrop { animation: fade-in .3s ease; }
 }
-@keyframes sheet-in { from { transform: translateX(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+/* 투명도는 애니메이션하지 않음: 애니메이션이 멈춘 환경에서도 시트 내용이 보이게 */
+@keyframes sheet-in { from { transform: translateX(48px); } to { transform: none; } }
 @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
@@ -192,7 +200,7 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
   .bento { grid-template-columns: 1fr; gap: 16px; }
   .card, .card-wide, .card-stat, .card-5, .card-7 { grid-column: auto; }
   .card > img { height: 220px; }
-  .demos, .career, .more { grid-template-columns: 1fr; }
+  .demos, .career, .groups { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
   .demo:nth-child(2) { margin-top: 0; }
   .career { gap: 40px; }
@@ -202,6 +210,6 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 }
 @media (max-width: 420px) {
   .steps { grid-template-columns: 1fr; }
-  .more a { flex-direction: column; gap: 2px; }
-  .more span { text-align: left; white-space: normal; }
+  .group a { flex-direction: column; gap: 2px; }
+  .group span { text-align: left; white-space: normal; }
 }
