@@ -16,8 +16,8 @@
       <nav aria-label="주요 메뉴">
         <a href="#work">프로젝트</a>
         <a href="#method">일하는 방식</a>
-        <a href="#career">경력</a>
         <a href="#demo">데모</a>
+        <a href="#career">경력</a>
       </nav>
       <a class="btn btn-sm" href="#contact">연락하기</a>
     </div>
@@ -40,140 +40,87 @@
     </section>
 
     <section class="figures wrap" aria-label="주요 성과">
-      <div class="fig-num reveal"><strong>−79<span>%</span></strong><p>정렬 마크 Align 시간<br><small>템플릿 방식 대비, 현장 12/12 Slot 검출</small></p></div>
-      <div class="fig-num reveal"><strong>−92<span>%</span></strong><p>Bump Recipe 작성 시간<br><small>도면 기반 자동 배치</small></p></div>
-      <div class="fig-num reveal"><strong>0<span>건</span></strong><p>오판정 합격<br><small>격자 정합 재설계 후, 합성 및 사내 검증</small></p></div>
-      <div class="fig-num reveal"><strong>264<span>h</span></strong><p>연속 운전 장애 0건<br><small>신규 설비 양산 투입 후</small></p></div>
+      <a class="fig-num reveal" href="#p-mark"><strong>−79<span>%</span></strong><p>정렬 마크 Align 시간<br><small>템플릿 방식 대비, 현장 12/12 Slot 검출</small></p></a>
+      <a class="fig-num reveal" href="#p-recipe"><strong>−92<span>%</span></strong><p>Bump Recipe 작성 시간<br><small>도면 기반 자동 배치</small></p></a>
+      <a class="fig-num reveal" href="#p-focus"><strong>−72<span>%</span></strong><p>Auto Focus 시간<br><small>접촉 감지 방식, 반복성 ±2µm</small></p></a>
+      <a class="fig-num reveal" href="#p-stable"><strong>264<span>h</span></strong><p>연속 운전 장애 0건<br><small>신규 설비 양산 투입 후</small></p></a>
     </section>
 
     <section id="work" class="wrap">
       <h2>대표 프로젝트</h2>
+      <p class="sub">카드를 누르면 문제, 접근, 결과를 볼 수 있습니다.</p>
 
-      <article class="proj proj-wide reveal">
-        <figure class="proj-fig">
-          <img src="assets/img/fig-align.webp" alt="1.8도 회전한 합성 Die 격자 위에 추정한 격자를 겹친 그림" loading="lazy" width="1200" height="750">
-          <figcaption>합성 Die 격자(1.8° 회전, 열 고정 잡음)에서 추정한 격자</figcaption>
-        </figure>
-        <div class="proj-body">
-          <h3>Feature 등록 없는 Wafer Align</h3>
-          <p>Die 배열의 주기에 격자를 맞춰 회전각을 구하고, 틀린 결과는 스스로 거릅니다.</p>
-          <dl class="kpi">
-            <div><dt>오판정 합격</dt><dd>0건</dd></div>
-            <div><dt>최대 각도 오차</dt><dd>−98%</dd></div>
-          </dl>
-          <details>
-            <summary>문제와 접근</summary>
-            <ul>
-              <li>등록 Feature 매칭은 Recipe 마다 등록 공수가 들고, 1차 방식은 저대비 영상에서 틀린 각도에 높은 점수를 줬습니다.</li>
-              <li>합성 영상으로 실패를 재현해 원인(카메라 고정 잡음)을 찾고, 여러 지점의 일관성을 점수로 쓰는 격자 정합으로 다시 설계했습니다.</li>
-              <li>Python 으로 검증한 뒤 C++ 로 옮기고 조건별 결과를 값 단위로 대조했습니다. 현장 병행 검증 중입니다.</li>
-            </ul>
-            <p class="who">알고리즘 설계, 실험, C++ 구현, 현장 검증</p>
-          </details>
-        </div>
-      </article>
+      <div class="bento">
+        <a class="card card-wide reveal" href="#p-align">
+          <img src="assets/img/fig-align.webp" alt="" loading="lazy" width="1200" height="750">
+          <div class="card-body">
+            <h3>Feature 등록 없는 Wafer Align</h3>
+            <p>Die 배열의 주기에 격자를 맞춰 회전각을 구하고, 틀린 결과는 스스로 거릅니다.</p>
+            <dl class="kpi"><div><dt>오판정 합격</dt><dd>0건</dd></div><div><dt>최대 각도 오차</dt><dd>−98%</dd></div></dl>
+            <span class="more-link">자세히 보기</span>
+          </div>
+        </a>
 
-      <div class="proj-pair">
-        <article class="proj reveal">
-          <figure class="proj-fig">
-            <img src="assets/img/fig-mark.webp" alt="비슷한 패드 사이 십자 마크 세 개, 두 개는 실선 상자, 흐린 하나는 점선 상자, 오른쪽 아래 상관 맵" loading="lazy" width="900" height="600">
-            <figcaption>규칙 검출(실선)과 점수 미달로 놓친 흐린 마크(점선), 오른쪽 아래는 상관 맵</figcaption>
-          </figure>
-          <div class="proj-body">
+        <a class="card card-stat reveal" href="#p-stable">
+          <div class="card-body">
+            <h3>신규 Particle 제거 설비 SW</h3>
+            <p>참고 코드 없는 신규 설비를 양산에서 멈추지 않을 때까지 안정화했습니다.</p>
+            <div class="stat-big"><strong>264<span>h</span></strong><span>연속 운전, 장애 0건</span></div>
+            <span class="more-link">자세히 보기</span>
+          </div>
+        </a>
+
+        <a class="card card-5 reveal" href="#p-focus">
+          <img class="light" src="assets/img/fig-focus.webp" alt="" loading="lazy" width="900" height="600">
+          <div class="card-body">
+            <h3>접촉 감지 Auto Focus</h3>
+            <p>바닥 무늬가 약하면 영상 선명도는 엉뚱한 높이를 고릅니다. 높이를 직접 재는 방식으로 바꿨습니다.</p>
+            <dl class="kpi"><div><dt>Focus 시간</dt><dd>−72%</dd></div><div><dt>반복성</dt><dd>±2µm</dd></div></dl>
+            <span class="more-link">자세히 보기</span>
+          </div>
+        </a>
+
+        <a class="card card-7 reveal" href="#p-mark">
+          <img src="assets/img/fig-mark.webp" alt="" loading="lazy" width="900" height="600">
+          <div class="card-body">
             <h3>정렬 마크 검출, 규칙 + CNN</h3>
             <p>템플릿 없이 Die 마크를 찾고, 규칙이 놓친 흐린 마크는 CNN 이 보완합니다.</p>
-            <dl class="kpi">
-              <div><dt>Align 시간</dt><dd>−79%</dd></div>
-              <div><dt>오검출 (CNN 보완)</dt><dd>−59%</dd></div>
-            </dl>
-            <details>
-              <summary>문제와 접근</summary>
-              <ul>
-                <li>템플릿 방식은 느리고, 새 Site 마다 마크를 다시 등록해야 했습니다.</li>
-                <li>규칙 기반 검출을 기본으로 두고, 현장 이미지로 규칙 파라미터를 학습하는 도구를 만들었습니다.</li>
-                <li>CNN 은 바로 바꾸지 않고 병행(Shadow) 운용 중입니다. 검출 향상은 통계적으로 유의하지 않아 그대로 보고했습니다.</li>
-              </ul>
-              <p class="who">검출 알고리즘, 학습 도구, Shadow 판정 도구</p>
-            </details>
+            <dl class="kpi"><div><dt>Align 시간</dt><dd>−79%</dd></div><div><dt>오검출 (CNN 보완)</dt><dd>−59%</dd></div></dl>
+            <span class="more-link">자세히 보기</span>
           </div>
-        </article>
+        </a>
 
-        <article class="proj reveal">
-          <figure class="proj-fig fig-light">
-            <img src="assets/img/fig-recipe.webp" alt="미세 원형 패턴 변환 비교, 왼쪽은 찌그러진 모양, 오른쪽은 고른 모양" loading="lazy" width="900" height="480">
-            <figcaption>왼쪽 단순 변환, 오른쪽 좌표 Snapping + Oversampling</figcaption>
-          </figure>
-          <div class="proj-body">
+        <a class="card card-7 reveal" href="#p-recipe">
+          <img class="light" src="assets/img/fig-recipe.webp" alt="" loading="lazy" width="900" height="480">
+          <div class="card-body">
             <h3>검사 Recipe 자동 생성</h3>
             <p>설계 도면과 맵에서 검사 Recipe 를 만들어 수작업 Teaching 을 줄였습니다.</p>
-            <dl class="kpi">
-              <div><dt>Recipe 작성 시간</dt><dd>−92%</dd></div>
-              <div><dt>대면적 변환 시간</dt><dd>−87%</dd></div>
-            </dl>
-            <details>
-              <summary>문제와 접근</summary>
-              <ul>
-                <li>도면을 영상으로 바꾸면 미세 원형 패턴이 찌그러지고 위치가 어긋났습니다.</li>
-                <li>좌표 Snapping 으로 위치를, Oversampling 과 Threshold 로 형상을 복원하고, 실제 Layer 영역만 Tile 병렬로 처리했습니다.</li>
-                <li>양산 검증을 통과했고, 같은 주제를 석사 연구(도면 특징으로 검사 임계값 정하기)로 이어가고 있습니다.</li>
-              </ul>
-              <p class="who">변환, Masking 알고리즘, 자동 시퀀스, UI</p>
-            </details>
+            <dl class="kpi"><div><dt>Recipe 작성 시간</dt><dd>−92%</dd></div><div><dt>대면적 변환 시간</dt><dd>−87%</dd></div></dl>
+            <span class="more-link">자세히 보기</span>
           </div>
-        </article>
-      </div>
+        </a>
 
-      <div class="proj-split">
-        <article class="proj reveal">
-          <figure class="proj-fig">
-            <img src="assets/img/fig-crack.webp" alt="Die 가장자리 검사 밴드와 안쪽 제외 영역, 밴드 안에서 검출된 Crack" loading="lazy" width="900" height="600">
-            <figcaption>가장자리 검사 밴드(파랑)와 제외 영역(빗금), 검출된 Crack</figcaption>
-          </figure>
-          <div class="proj-body">
+        <a class="card card-5 reveal" href="#p-crack">
+          <img src="assets/img/fig-crack.webp" alt="" loading="lazy" width="900" height="600">
+          <div class="card-body">
             <h3>Die 가장자리 Crack 검출</h3>
             <p>기존 검사가 놓치거나 과검하던 가장자리 Crack 을 다단계 알고리즘으로 잡습니다.</p>
-            <dl class="kpi">
-              <div><dt>전체 결함 중 새로 검출</dt><dd>28%</dd></div>
-            </dl>
-            <details>
-              <summary>문제와 접근</summary>
-              <ul>
-                <li>가장자리 탐색, 가변 Mask, 결함 검출, 크기 필터, Interlock 순서로 단계를 나눴습니다.</li>
-                <li>장당 TB 급 영상을 Tile 로 나눠 일반 PC 에서 필요한 영역만 여는 도구도 함께 만들었습니다.</li>
-              </ul>
-              <p class="who">알고리즘과 분석 도구 개발 전체</p>
-            </details>
+            <dl class="kpi"><div><dt>전체 결함 중 새로 검출</dt><dd>28%</dd></div></dl>
+            <span class="more-link">자세히 보기</span>
           </div>
-        </article>
-
-        <article class="proj proj-stat reveal">
-          <h3>신규 Particle 제거 설비 SW</h3>
-          <p>참고 코드가 없는 신규 설비를, 양산에서 멈추지 않을 때까지 안정화했습니다.</p>
-          <div class="stat-big"><strong>264<span>h</span></strong><span>연속 운전, 장애 0건</span></div>
-          <dl class="kpi">
-            <div><dt>Auto Focus 시간</dt><dd>−72%</dd></div>
-            <div><dt>메모리 사용</dt><dd>−33%</dd></div>
-          </dl>
-          <details>
-            <summary>문제와 접근</summary>
-            <ul>
-              <li>양산 투입 후 48시간 안에 프로그램이 멈췄습니다. 25일 현장에 상주하며 재현, 로그 분석, 수정을 반복했습니다.</li>
-              <li>영상 기반 Focus 를 접촉 감지 방식으로 바꾸고, 카메라 처리를 비동기로 바꿔 프레임 누적을 없앴습니다.</li>
-              <li>기능검사 9건 무결점, 3자 인증을 통과했습니다.</li>
-            </ul>
-            <p class="who">Vision, 시퀀스, UI, Interlock, 카메라 제어</p>
-          </details>
-        </article>
+        </a>
       </div>
 
-      <h3 class="more-head">그 외</h3>
+      <h3 class="more-head">그 외 프로젝트</h3>
       <ul class="more">
-        <li><b>흩어진 레시피 관리 도구 통합</b><span>도구 3개를 하나로, 서버 프로그램 추가</span></li>
-        <li><b>패턴 매칭 점수 오판정 개선</b><span>비정상 100점 고정을 10~50점대로</span></li>
-        <li><b>조명 자동 보정을 R, G, B 채널별로</b><span>1회 촬영으로 3채널 동시 측정</span></li>
-        <li><b>반복성 평가 중 프로그램 Down 해결</b><span>패치 후 재발 0건</span></li>
-        <li><b>Interlock 개선, 서보 정밀도 검증</b><span>1,000회 반복 구동 3σ 0.16~0.19µm</span></li>
-        <li><b>정적 분석 경고 정리</b><span>경고 298건을 106건으로</span></li>
+        <li><a href="#p-rcms"><b>흩어진 레시피 관리 도구 통합</b><span>도구 3개를 하나로</span></a></li>
+        <li><a href="#p-score"><b>패턴 매칭 점수 오판정 개선</b><span>비정상 100점 고정 해소</span></a></li>
+        <li><a href="#p-rgb"><b>조명 자동 보정을 R, G, B 채널별로</b><span>1회 촬영 3채널 측정</span></a></li>
+        <li><a href="#p-down"><b>반복성 평가 중 프로그램 Down 해결</b><span>패치 후 재발 0건</span></a></li>
+        <li><a href="#p-interlock"><b>Interlock 개선, 서보 정밀도 검증</b><span>3σ 0.16~0.19µm</span></a></li>
+        <li><a href="#p-setup"><b>2D, 3D 검사 설비 Vision Setup</b><span>위치 오차 ±4 → ±1µm</span></a></li>
+        <li><a href="#p-optics"><b>신규 광학계 시료 평가</b><span>검출력 10/10</span></a></li>
+        <li><a href="#p-static"><b>정적 분석 경고 정리</b><span>경고 −64%</span></a></li>
       </ul>
     </section>
 
@@ -245,6 +192,153 @@
   <footer class="foot wrap">
     <p>그림과 데모는 모두 합성 또는 공개 데이터로 만들었습니다. 설비 화면, 고객 정보, 설계 데이터는 없습니다. 수치는 현장 실측 또는 사내 검증 기준입니다.</p>
   </footer>
+
+  <!-- 세부 내용 패널: 카드를 누르면 #p-이름 으로 열린다 -->
+  <dialog id="detail" class="sheet" aria-labelledby="detail-title">
+    <div class="sheet-bar">
+      <a class="sheet-nav" data-dir="prev" href="#">이전</a>
+      <a class="sheet-nav" data-dir="next" href="#">다음</a>
+      <button class="sheet-close" type="button" aria-label="닫기">닫기</button>
+    </div>
+    <div class="sheet-body"></div>
+  </dialog>
+
+  <template id="p-align">
+    <p class="d-meta">2026 · 알고리즘 설계, 실험, C++ 구현, 현장 검증</p>
+    <h2 id="detail-title">Feature 등록 없는 Wafer Align</h2>
+    <figure class="d-fig"><img src="assets/img/fig-align.webp" alt="1.8도 회전한 합성 Die 격자 위에 추정한 격자를 겹친 그림"><figcaption>합성 Die 격자(1.8° 회전, 열 고정 잡음)에서 추정한 격자. 생성 코드 tools/make_figures.py</figcaption></figure>
+    <dl class="kpi"><div><dt>오판정 합격</dt><dd>0건</dd></div><div><dt>최대 각도 오차</dt><dd>−98%</dd></div></dl>
+    <h3>문제</h3>
+    <ul><li>사람이 등록한 Feature 를 매칭하는 방식은 Recipe 마다 등록 공수가 들고, Fail 이 남았습니다.</li><li>1차 방식은 양산 자재 수천 회 평가에서 고객 기준을 만족했지만, 저대비 영상에서 틀린 각도에 높은 점수를 주는 경우가 있었습니다.</li></ul>
+    <h3>접근</h3>
+    <ul><li>합성 영상으로 실패를 재현해 원인을 카메라 고정 잡음으로 좁혔습니다.</li><li>Die 배열이 일정한 주기를 갖는다는 점을 이용해 격자에 맞추고, 여러 지점의 일관성을 점수로 삼아 틀리면 점수가 떨어지게 했습니다.</li><li>Python 으로 검증한 뒤 C++ 로 옮기고, 조건별 결과를 값 단위로 대조했습니다.</li></ul>
+    <h3>결과와 한계</h3>
+    <ul><li>오판정 합격 0건 (기존 방식 대비, 합성 및 사내 영상 통합)</li><li>보이는 Die 가 적은 영역은 판정을 거부하도록 설계했습니다. 현장 병행 검증 중입니다.</li></ul>
+    <p class="d-tags">C++, Python, OpenCV</p>
+  </template>
+
+  <template id="p-stable">
+    <p class="d-meta">2025-2026 · Vision, 시퀀스, UI, Interlock, 카메라 제어</p>
+    <h2 id="detail-title">신규 Particle 제거 설비 SW</h2>
+    <div class="stat-big"><strong>264<span>h</span></strong><span>계획 중단 3시간을 뺀 연속 운전, 장애 0건</span></div>
+    <dl class="kpi"><div><dt>가동률</dt><dd>98.86%</dd></div><div><dt>메모리 사용</dt><dd>−33%</dd></div><div><dt>카메라 사용 시간</dt><dd>−55%</dd></div></dl>
+    <h3>문제</h3>
+    <ul><li>수동 장비를 Semi Auto 로 바꾸는 신규 설비라 참고할 코드가 없고 납기는 정해져 있었습니다.</li><li>양산 투입 후 48시간 안에 프로그램이 멈췄습니다.</li></ul>
+    <h3>접근</h3>
+    <ul><li>현장에 25일 상주하며 재현, 로그 분석, 수정, 재검증을 반복했습니다.</li><li>카메라 처리를 비동기로 바꿔 프레임 누적을 없앴습니다.</li><li>가동률과 MTBI 를 로그에서 자동으로 기록하게 했습니다.</li></ul>
+    <h3>결과</h3>
+    <ul><li>기능검사 9건 무결점, 3자 인증 통과</li><li>사고 재발 0건</li></ul>
+    <p class="d-tags">C# (WinForms), OpenCV</p>
+  </template>
+
+  <template id="p-focus">
+    <p class="d-meta">2025 · 신규 Particle 제거 설비, 설계와 현장 검증</p>
+    <h2 id="detail-title">접촉 감지 Auto Focus</h2>
+    <figure class="d-fig light"><img src="assets/img/fig-focus.webp" alt="높이에 따른 영상 선명도 곡선. 무늬가 뚜렷한 바닥은 실제 높이에서 봉우리, 무늬가 약한 바닥은 엉뚱한 높이에서 봉우리"><figcaption>합성 바닥 영상으로 계산한 선명도 곡선. 무늬가 약하면 봉우리가 실제 높이와 어긋납니다.</figcaption></figure>
+    <dl class="kpi"><div><dt>Focus 시간</dt><dd>−72%</dd></div><div><dt>반복성</dt><dd>±2µm</dd></div></dl>
+    <h3>문제</h3>
+    <ul><li>높이를 바꿔 가며 영상 선명도를 비교하는 방식이라 오래 걸렸습니다.</li><li>Cartridge 바닥 표면 무늬가 약하면 선명도 곡선이 평평해져 반복성이 떨어졌습니다.</li></ul>
+    <h3>접근</h3>
+    <ul><li>탐색 간격만 줄이는 방법은 시간 단축에 한계가 있어 버렸습니다.</li><li>바닥 높이를 접촉 감지로 직접 재는 방식으로 바꿨습니다.</li><li>허공을 바닥으로 잘못 감지할 수 있어, 오감지를 걸러내는 판정을 함께 설계했습니다.</li></ul>
+    <h3>결과</h3>
+    <ul><li>Focus 시간 72% 단축, 반복성 ±2µm</li></ul>
+    <p class="d-tags">C#, 모션 제어, DAQ</p>
+  </template>
+
+  <template id="p-mark">
+    <p class="d-meta">2026 · 검출 알고리즘, 학습 도구, Shadow 판정 도구</p>
+    <h2 id="detail-title">정렬 마크 검출, 규칙 + CNN</h2>
+    <figure class="d-fig"><img src="assets/img/fig-mark.webp" alt="비슷한 패드 사이 십자 마크 세 개, 두 개는 실선 상자, 흐린 하나는 점선 상자, 오른쪽 아래 상관 맵"><figcaption>규칙 검출(실선)과 점수 미달로 놓친 흐린 마크(점선), 오른쪽 아래는 상관 맵</figcaption></figure>
+    <dl class="kpi"><div><dt>Align 시간</dt><dd>−79%</dd></div><div><dt>오검출 (CNN 보완)</dt><dd>−59%</dd></div><div><dt>현장 Slot 검출</dt><dd>12/12</dd></div></dl>
+    <h3>문제</h3>
+    <ul><li>템플릿 방식 Align 은 느리고, 새 Site 마다 마크를 다시 등록해야 했습니다.</li><li>규칙 파라미터가 이미지마다 맞지 않아 오검출이 생겼습니다.</li></ul>
+    <h3>접근</h3>
+    <ul><li>Die 단위 규칙 마크를 템플릿 없이 검출하고, 촬영 범위를 7줄에서 약 3줄로 줄였습니다.</li><li>현장 이미지로 규칙 파라미터를 학습하는 도구를 만들었습니다. 라벨, 학습, 평가, 적용까지 한 화면에서 합니다.</li><li>날짜 단위 고정 평가셋으로 같은 날 프레임이 학습과 평가에 섞이지 않게 했습니다.</li><li>규칙이 실패하면 CNN 위치를 씁니다. 바로 바꾸지 않고 Shadow 로 병행 운용합니다.</li></ul>
+    <h3>결과</h3>
+    <ul><li>Align 시간 79% 단축, 현장 12/12 Slot 검출</li><li>CNN 은 검출을 유지하면서 오검출을 줄였습니다. 검출 향상은 통계적으로 유의하지 않아 그대로 보고했습니다.</li></ul>
+    <p class="d-tags">C#, C++, OpenCV, PyTorch, ONNX</p>
+  </template>
+
+  <template id="p-recipe">
+    <p class="d-meta">2026 · 변환과 Masking 알고리즘, 자동 시퀀스, UI, 사용자 Manual</p>
+    <h2 id="detail-title">검사 Recipe 자동 생성</h2>
+    <figure class="d-fig light"><img src="assets/img/fig-recipe.webp" alt="미세 원형 패턴 변환 비교, 왼쪽은 찌그러진 모양, 오른쪽은 고른 모양"><figcaption>왼쪽 단순 변환, 오른쪽 좌표 Snapping + Oversampling (합성 패턴)</figcaption></figure>
+    <dl class="kpi"><div><dt>Recipe 작성 시간</dt><dd>−92%</dd></div><div><dt>대면적 변환 시간</dt><dd>−87%</dd></div><div><dt>현장 수행 시간</dt><dd>−57%</dd></div></dl>
+    <h3>문제</h3>
+    <ul><li>Recipe 한 건에 수 시간의 수동 Teaching 이 들었습니다.</li><li>도면을 영상으로 바꾸면 미세 원형 패턴이 찌그러지고 위치가 어긋났습니다.</li></ul>
+    <h3>접근</h3>
+    <ul><li>좌표 Snapping 으로 위치를, Oversampling 과 Threshold 로 형상을 복원했습니다.</li><li>실제 Layer 영역만 Tile 병렬로 처리하고, 4점 원근 보정으로 Bump 수십만 개를 자동 배치했습니다.</li><li>맵 파일만으로 Recipe 를 만드는 자동 시퀀스를 설계했습니다.</li></ul>
+    <h3>결과</h3>
+    <ul><li>양산 검증 통과, 통합 도구에 핵심 기능 이식</li><li>같은 주제를 석사 연구(도면 특징으로 영역별 검사 임계값 정하기)로 이어가고 있습니다.</li></ul>
+    <p class="d-tags">C# (WPF), C++, Python</p>
+  </template>
+
+  <template id="p-crack">
+    <p class="d-meta">2026 · 알고리즘과 분석 도구 개발 전체</p>
+    <h2 id="detail-title">Die 가장자리 Crack 검출</h2>
+    <figure class="d-fig"><img src="assets/img/fig-crack.webp" alt="Die 가장자리 검사 밴드와 안쪽 제외 영역, 밴드 안에서 검출된 Crack"><figcaption>가장자리 검사 밴드(파랑)와 제외 영역(빗금), 검출된 Crack (합성 영상)</figcaption></figure>
+    <dl class="kpi"><div><dt>전체 결함 중 새로 검출</dt><dd>28%</dd></div></dl>
+    <h3>문제</h3>
+    <ul><li>적층 메모리 Die 가장자리 Crack 을 기존 검사가 놓치거나 과검했습니다.</li><li>장당 TB 급 영상은 일반 PC 에서 열 수 없었습니다.</li></ul>
+    <h3>접근</h3>
+    <ul><li>가장자리 탐색, 가변 Mask, 결함 검출, 크기 필터, Interlock 으로 단계를 나눴습니다.</li><li>영상을 Tile 로 나눠 필요한 영역만 여는 독립 프로그램을 만들었습니다.</li><li>고객 요구 Align 지표 7종을 로그에서 자동 집계해 엑셀로 내는 도구도 만들었습니다.</li></ul>
+    <p class="d-tags">C++, C# (WPF), OpenCV</p>
+  </template>
+
+  <template id="p-rcms">
+    <p class="d-meta">2026 · 설계와 구현</p>
+    <h2 id="detail-title">흩어진 레시피 관리 도구 통합</h2>
+    <h3>문제</h3>
+    <ul><li>레시피 관리 기능이 도구 3개로 나뉘어 있어, 버전 확인, 수정, 배포, 복원을 도구를 옮겨 다니며 처리했습니다.</li></ul>
+    <h3>접근</h3>
+    <ul><li>버전 저장소와 이력, 일괄 수정, 배포, 복원, 기준 등록과 검사 전 버전 검증을 하나의 도구로 6단계에 걸쳐 옮겼습니다.</li><li>서버 프로그램을 새로 만들고, 공유 폴더를 메시지 채널로 써서 요청과 결과를 멱등하게 처리했습니다. 일시 오류만 재시도하고, 임시 파일에 쓴 뒤 이름을 바꿉니다.</li></ul>
+    <h3>결과</h3>
+    <ul><li>자체 검증 모드(장비 측 38, 서버 11 항목)와 연동 시험 19항목을 갖췄습니다. 장비 현장 검증 예정입니다.</li></ul>
+    <p class="d-tags">C# (WPF), Client/Server</p>
+  </template>
+
+  <template id="p-score">
+    <p class="d-meta">2026</p>
+    <h2 id="detail-title">패턴 매칭 점수 오판정 개선</h2>
+    <ul><li>90° 회전한 Wafer 가 정상으로 판정되던 원인을 정규화로 점수 분포가 왜곡된 데서 찾았습니다.</li><li>매칭 모드별 최소, 최대 점수 산출식을 다시 설계했습니다.</li><li>비정상 100점 고정이 10~50점대로 내려와 걸러집니다.</li></ul>
+  </template>
+
+  <template id="p-rgb">
+    <p class="d-meta">2026</p>
+    <h2 id="detail-title">조명 자동 보정을 R, G, B 채널별로</h2>
+    <ul><li>조명 하나만 기준으로 맞추던 자동 보정을 채널별로 바꿨습니다.</li><li>영상 1회 촬영으로 3채널 밝기를 함께 재고, 채널별 중앙값 밝기를 목표값에 맞추도록 이분 탐색으로 수렴시킵니다.</li><li>단색 판정, 탐색 진동, 조명값 하한 버그를 함께 고쳤습니다.</li></ul>
+  </template>
+
+  <template id="p-down">
+    <p class="d-meta">2026</p>
+    <h2 id="detail-title">반복성 평가 중 프로그램 Down 해결</h2>
+    <ul><li>영상 버퍼 읽기와 쓰기에 락을 걸고, async void 를 async Task 로 바꿨습니다.</li><li>UI 갱신을 메인 스레드 큐로 고정했습니다. 패치 후 재발 0건입니다.</li></ul>
+  </template>
+
+  <template id="p-interlock">
+    <p class="d-meta">2026</p>
+    <h2 id="detail-title">Interlock 개선, 서보 정밀도 검증</h2>
+    <ul><li>XY 축과 Z 축 동시 이동을 막는 상호 배제 Interlock 을 넣었습니다.</li><li>Lifter 서보모터를 1,000회 반복 구동해 3σ 0.16~0.19µm 를 확인했습니다. 사고 재발 0건입니다.</li></ul>
+  </template>
+
+  <template id="p-setup">
+    <p class="d-meta">2023-2025</p>
+    <h2 id="detail-title">2D, 3D 검사 설비 Vision Setup</h2>
+    <ul><li>Line Scan 과 3D 센서 촬영 시퀀스, 높이 보간 가변 Focus 를 구성했습니다. 위치별 오차 ±4µm 를 ±1µm 로 줄였습니다.</li><li>Stage 높이 데이터로 YZ 보간 구동을 해 Tilt 를 10µm 에서 6µm 로 줄였습니다.</li></ul>
+  </template>
+
+  <template id="p-optics">
+    <p class="d-meta">2025-2026</p>
+    <h2 id="detail-title">신규 광학계 시료 평가</h2>
+    <ul><li>적외선 광학계 반복성 평가 7건을 진행했습니다.</li><li>고해상도 신규 시료의 시인성 14/15, 검출력 10/10 을 확인했습니다.</li></ul>
+  </template>
+
+  <template id="p-static">
+    <p class="d-meta">2025</p>
+    <h2 id="detail-title">정적 분석 경고 정리</h2>
+    <ul><li>메모리와 스레드 안전성 경고를 정리해 정적 분석 경고를 298건에서 106건으로 줄였습니다.</li></ul>
+  </template>
+
   <script src="assets/site.js"></script>
 </body>
 </html>

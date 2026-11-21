@@ -196,11 +196,61 @@ def fig_crack():
     save("fig-crack.webp", out)
 
 
+# 5. Auto Focus: 높이를 바꿔 가며 잰 영상 선명도. 바닥 무늬가 약하면 곡선이 평평해져 봉우리를 못 믿는다
+def fig_focus():
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    plt.rcParams["font.family"] = "Malgun Gothic"
+    plt.rcParams["axes.unicode_minus"] = False
+
+    base = RNG.normal(0, 1, (160, 160)).astype(np.float32)
+    z = np.arange(-60, 61, 4)  # µm
+    z0 = 6.0                    # 실제 바닥 높이
+
+    def curve(texture):
+        tex = cv2.GaussianBlur(base, (0, 0), 1.2) * texture + 128
+        vals = []
+        for zi in z:
+            s = 0.4 + abs(zi - z0) / 9.0  # 초점에서 멀수록 흐림
+            img = (cv2.GaussianBlur(tex, (0, 0), s) + RNG.normal(0, 2.2, tex.shape)).astype(np.float32)
+            vals.append(cv2.Laplacian(img, cv2.CV_32F).var())
+        v = np.array(vals)
+        return (v - v.min()) / (v.max() - v.min())
+
+    strong, weak = curve(40), curve(2.2)
+    fig, ax = plt.subplots(figsize=(9, 6), dpi=100)
+    ax.axvspan(z0 - 2, z0 + 2, color="#2f62d6", alpha=.12, lw=0)
+    ax.axvline(z0, color="#2f62d6", lw=2)
+    ax.plot(z, strong, color="#3a414b", lw=2.2, marker="o", ms=4, label="무늬가 뚜렷한 바닥")
+    ax.plot(z, weak, color="#9aa3ae", lw=2.2, marker="o", ms=4, label="무늬가 약한 바닥")
+    ax.text(z0 + 3, 1.03, "접촉 감지로 잰 높이 (±2µm)", color="#2f62d6", fontsize=13, va="bottom")
+    ax.set_xlabel("높이 (µm)", fontsize=13, color="#3a414b")
+    ax.set_ylabel("영상 선명도 (정규화)", fontsize=13, color="#3a414b")
+    ax.set_ylim(-.05, 1.15)
+    for s in ("top", "right"):
+        ax.spines[s].set_visible(False)
+    for s in ("left", "bottom"):
+        ax.spines[s].set_color("#c9ced6")
+    ax.tick_params(colors="#687180", labelsize=11)
+    ax.legend(frameon=False, fontsize=12, loc="upper left")
+    fig.tight_layout()
+    path = os.path.join(OUT, "_focus.png")
+    fig.savefig(path, facecolor="#f4f4f4")
+    plt.close(fig)
+    save("fig-focus.webp", cv2.imread(path))
+    os.remove(path)
+    return strong, weak
+
+
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     est = fig_align()
     fig_mark()
     fig_recipe()
     fig_crack()
+    strong, weak = fig_focus()
+    # 뚜렷한 바닥은 봉우리가 실제 높이 근처, 약한 바닥은 곡선이 평평(봉우리 대비 주변이 높음)
+    assert abs(int(np.argmax(strong)) * 4 - 60 - 6) <= 4, "뚜렷한 바닥의 선명도 봉우리가 실제 높이에서 벗어남"
     assert abs(abs(est) - 1.8) < 0.2, f"격자 각도 추정이 틀림: {est}"
     print("ok, theta estimate", round(abs(est), 2))
