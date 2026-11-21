@@ -846,6 +846,63 @@ def fig_optics():
     fig.tight_layout()
     _save_plt(fig, "fig-optics.webp")
 
+
+# 23. 결함 좌표 매칭: 위치만 보면 오차 때문에 옆 결함과 짝지어지고, 크기까지 함께 보면 맞는 짝을 찾는다
+def fig_matching():
+    rng = np.random.default_rng(23)
+    plt = _plt()
+    n, k = 46, 7
+    centers = rng.uniform(12, 88, (k, 2))
+    ref = centers[rng.integers(0, k, n)] + rng.normal(0, 3.2, (n, 2))  # 결함은 모여서 생긴다
+    size = rng.lognormal(1.1, .65, n)
+    keep = rng.random(n) > .1                                          # 검사 쪽에서 일부 누락
+    idx = np.flatnonzero(keep)
+    ins = ref[idx] + [1.6, -1.1] + rng.normal(0, 1.3, (idx.size, 2))  # 장비 간 위치 오차
+    isize = size[idx] * rng.normal(1, .07, idx.size)
+
+    def greedy(cost, limit):
+        pairs, used_r, used_i = {}, set(), set()
+        for c in np.argsort(cost, axis=None):
+            i, r = np.unravel_index(c, cost.shape)
+            if cost[i, r] > limit:
+                break
+            if i in used_i or r in used_r:
+                continue
+            pairs[i] = r
+            used_i.add(i)
+            used_r.add(r)
+        return pairs
+
+    d = np.linalg.norm(ins[:, None, :] - ref[None, :, :], axis=2)
+    by_pos = greedy(d, 4.0)                                             # 위치만, 반경 4
+    ds = np.abs(np.log(isize[:, None] / size[None, :]))
+    by_both = greedy(np.where(d < 6.0, d / 6.0 + ds / .25, np.inf), 2.0)  # 위치 + 크기, 반경 6
+
+    fig, axes = plt.subplots(1, 2, figsize=(10, 5.2), dpi=100)
+    res = []
+    for ax, pairs, title in ((axes[0], by_pos, "위치만 보고 짝짓기"), (axes[1], by_both, "위치와 크기를 함께")):
+        ok = sum(1 for i, r in pairs.items() if r == idx[i])
+        res.append(ok)
+        ax.scatter(ref[:, 0], ref[:, 1], s=size * 34, facecolors="none", edgecolors="#9aa3ae", lw=1.2)
+        ax.scatter(ins[:, 0], ins[:, 1], s=isize * 34, color=BLUE, alpha=.5, lw=0)
+        for i, r in pairs.items():
+            good = r == idx[i]
+            ax.plot([ins[i, 0], ref[r, 0]], [ins[i, 1], ref[r, 1]], color=BLUE if good else INK,
+                    lw=1.8 if good else 2.6, ls="-" if good else (0, (2, 1.2)))
+        ax.set_title(f"{title}, 맞는 짝 {ok}/{idx.size}", fontsize=14, color=INK, pad=8)
+        ax.set_xlim(ref[:, 0].min() - 6, ref[:, 0].max() + 6)
+        ax.set_ylim(ref[:, 1].min() - 6, ref[:, 1].max() + 6)
+        ax.set_aspect("equal")
+        ax.set_xticks([])
+        ax.set_yticks([])
+        for s in ax.spines.values():
+            s.set_color(LINE)
+    fig.text(.5, .03, "빈 원: 기준 결함   채운 원: 검사 결함 (크기 = 결함 크기)   점선: 틀린 짝",
+             ha="center", fontsize=12, color=MUTED)
+    fig.subplots_adjust(left=.02, right=.98, top=.9, bottom=.09, wspace=.06)
+    _save_plt(fig, "fig-matching.webp")
+    return res[0], res[1], idx.size
+
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     est, align_a, align_v = fig_align()
@@ -870,6 +927,8 @@ if __name__ == "__main__":
     fig_ftp()
     tilt = fig_setup()
     fig_optics()
+    m_pos, m_both, m_n = fig_matching()
+    print("matching", m_pos, m_both, m_n)
     print("align score peak", a_est, "stable backlog", q_all, q_new, "light dev", round(light, 2), "tilt", tilt)
     print("score (old, new) per shot", score)
     print("hough old r", round(float(old[2])), "new r", round(float(new[2])))
@@ -889,3 +948,4 @@ if __name__ == "__main__":
     assert abs(a_est - 1.8) < .15, "격자 점수 그림: 봉우리가 실제 회전각에서 벗어남"
     assert q_all > 300 and q_new <= 1, "프레임 그림: 줄 세우기는 쌓이고 최신 1장은 1장 이하여야 함"
     assert interlock == (True, True), "Interlock 그림: 동시 이동만 간섭 영역을 지나야 함"
+    assert m_both >= m_pos + 10, "좌표 매칭 그림: 크기를 함께 본 쪽이 확실히 나아야 함"
