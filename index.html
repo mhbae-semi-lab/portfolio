@@ -14,7 +14,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%232f62d6%22/%3E%3Ctext x=%2216%22 y=%2222.5%22 font-size=%2217%22 font-family=%22sans-serif%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22white%22%3E%EB%B0%B0%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="assets/site.css?v=20261121b">
+  <link rel="stylesheet" href="assets/site.css?v=20261121c">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "배민혁", "jobTitle": "반도체 검사 장비 SW 엔지니어", "url": "https://mhbae-semi-lab.github.io/portfolio/", "email": "mailto:mhbae03@gmail.com", "image": "https://mhbae-semi-lab.github.io/portfolio/assets/img/profile.jpg", "sameAs": ["https://github.com/mhbae-semi-lab"], "alumniOf": [{"@type": "CollegeOrUniversity", "name": "인하대학교 제조혁신전문대학원"}, {"@type": "CollegeOrUniversity", "name": "한국공학대학교"}], "knowsAbout": ["Wafer Align", "결함 검출", "검사 Recipe 자동화", "영상처리", "OpenCV", "C++", "C#", "Auto Focus"]}</script>
 </head>
 <body>
@@ -98,7 +98,7 @@
         <a class="card card-7 reveal" href="#p-mark">
           <img src="assets/img/fig-mark.webp" alt="" loading="lazy" width="900" height="600">
           <div class="card-body">
-            <h3>정렬 마크 검출, 규칙 + CNN</h3>
+            <h3>Shot Key 정렬 마크 검출, 규칙 + CNN</h3>
             <p>템플릿 없이 Die 마크를 찾고, 규칙이 놓친 흐린 마크는 CNN 이 보완합니다.</p>
             <dl class="kpi"><div><dt>Align 시간</dt><dd>−79%</dd></div><div><dt>오검출 (CNN 보완)</dt><dd>−59%</dd></div></dl>
             <span class="more-link">자세히 보기</span>
@@ -108,7 +108,7 @@
         <a class="card card-7 reveal" href="#p-recipe">
           <img class="light" src="assets/img/fig-recipe.webp" alt="" loading="lazy" width="900" height="480">
           <div class="card-body">
-            <h3>검사 Recipe 자동 생성</h3>
+            <h3>검사 Recipe 자동 생성 (RAC)</h3>
             <p>설계 도면과 맵에서 검사 Recipe 를 만들어 수작업 Teaching 을 줄였습니다.</p>
             <dl class="kpi"><div><dt>Recipe 작성 시간</dt><dd>−92%</dd></div><div><dt>대면적 변환 시간</dt><dd>−87%</dd></div></dl>
             <span class="more-link">자세히 보기</span>
@@ -240,12 +240,27 @@
       <div class="research">
         <ol class="research-flow">
           <li class="reveal"><b>현업에서 본 한계</b><span>규칙 기반 로직은 제품과 공정 조건이 바뀔 때마다 사람이 검사 조건을 다시 조정해야 합니다.</span></li>
+          <li class="reveal"><b>바탕이 된 과제, RAC 와 Shot Key Align</b><span>RAC(Recipe Auto Creation)는 도면(GDS)을 검사 영상으로 바꾸고 Recipe 를 만든 뒤 조명, Focus, Align 을 자동으로 맞춥니다. Shot Key Align 은 사람이 맞추던 마크 검출 허용치를 현장 이미지 라벨로 학습하고, 규칙이 놓친 키는 CNN 이 보완합니다. 검사 임계값은 아직 사람이 정한 Preset 을 씁니다.</span></li>
           <li class="reveal"><b>연구 주제</b><span>설계 도면의 특징으로 영역별 검사 임계값을 자동으로 정하는 방법. 규칙 기반 방식과 미검·과검 곡선으로 비교합니다.</span></li>
           <li class="reveal"><b>앞으로</b><span>문제를 숫자로 정의하고 검증 가능한 방법으로 풀어, 사람이 일일이 조정하지 않아도 되는 장비 SW 를 만들겠습니다.</span></li>
         </ol>
         <figure class="d-fig light reveal"><img src="assets/img/fig-research.webp" alt="왼쪽은 빈 영역, 배선, 패드로 나눈 합성 도면, 오른쪽은 과검과 미검률 곡선. 도면 영역별 임계값 곡선이 하나의 임계값 곡선보다 왼쪽 아래에 있음" loading="lazy" width="1000" height="460"><figcaption>연구에서 비교할 두 방식을 합성 데이터로 미리 그려 본 예시입니다. 영역마다 잡음이 다르면 하나의 임계값은 과검과 미검을 함께 줄이기 어렵습니다. 실제 연구 결과가 아닙니다.</figcaption></figure>
       </div>
-      <p class="research-links">출발점이 된 업무: <a href="#p-recipe">검사 Recipe 자동 생성</a> (도면을 검사 영상으로 바꾸기), <a href="#p-crack">Die 가장자리 Crack 검출</a> (놓치거나 과검하던 결함)</p>
+      <div class="pipeline reveal">
+        <p>RAC 가 자동으로 하는 순서와, 연구가 더할 단계</p>
+        <ol>
+          <li><a href="#p-recipe">도면(GDS) → 검사 영상</a></li>
+          <li>Recipe 생성</li>
+          <li>Centering</li>
+          <li>Auto Illum</li>
+          <li>Auto Focus</li>
+          <li><a href="#p-align">Featureless Align</a></li>
+          <li>Origin</li>
+          <li>Feature</li>
+          <li class="next">영역별 검사 임계값 <small>연구</small></li>
+        </ol>
+        <p class="pipeline-side"><a href="#p-mark">Shot Key Align</a> 마크 검출 허용치를 현장 라벨로 학습, CNN 보완, 회귀 차단</p>
+      </div>
     </section>
 
     <section id="contact" class="wrap contact">
@@ -274,7 +289,7 @@
   </dialog>
 
   <template id="p-align">
-    <p class="d-meta">2026 · 알고리즘 설계, 실험, C++ 구현, 현장 검증</p>
+    <p class="d-meta">2026 · RAC 전 Site 통합 과제 · 알고리즘 설계, 실험, C++ 구현, 현장 검증</p>
     <h2 id="detail-title">Feature 등록 없는 Wafer Align</h2>
     <figure class="d-fig"><img src="assets/img/fig-align.webp" alt="1.8도 회전한 합성 Die 격자 위에 추정한 격자를 겹친 그림" width="1200" height="750"><figcaption>합성 Die 격자(1.8° 회전, 열 고정 잡음)에서 추정한 격자</figcaption></figure>
     <dl class="kpi"><div><dt>오판정 합격</dt><dd>0건</dd></div><div><dt>최대 각도 오차</dt><dd>0.0013°</dd></div><div><dt>회전 자재 100회</dt><dd>Fail 0</dd></div></dl>
@@ -356,7 +371,7 @@
 
   <template id="p-mark">
     <p class="d-meta">2026 · 검출 알고리즘, 학습 도구, Shadow 판정 도구</p>
-    <h2 id="detail-title">정렬 마크 검출, 규칙 + CNN</h2>
+    <h2 id="detail-title">Shot Key Align, 규칙 + CNN</h2>
     <figure class="d-fig"><img src="assets/img/fig-mark.webp" alt="비슷한 패드 사이 십자 마크 세 개, 두 개는 실선 상자, 흐린 하나는 점선 상자, 오른쪽 아래 상관 맵" width="900" height="600"><figcaption>규칙 검출(실선)과 점수 미달로 놓친 흐린 마크(점선), 오른쪽 아래는 상관 맵. 합성 영상</figcaption></figure>
     <dl class="kpi"><div><dt>Align 시간</dt><dd>−79%</dd></div><div><dt>오검출 (CNN 보완)</dt><dd>−59%</dd></div><div><dt>현장 Slot 검출</dt><dd>12/12</dd></div></dl>
     <section class="d-step">
@@ -369,19 +384,20 @@
     </section>
     <section class="d-step">
       <h3><span>3</span>현장 이미지로 파라미터 학습</h3>
-      <p>라벨, 학습, 평가, 적용을 한 화면에서 하는 도구를 만들었습니다. 날짜 단위 고정 평가셋으로 같은 날 프레임이 학습과 평가에 섞이지 않게 했습니다.</p>
+      <p>사람이 맞추던 규칙 검출 허용치를 현장 이미지 라벨로 학습해, 장비가 읽는 프로파일 파일로 내보내는 도구를 만들었습니다. 이미지 가져오기, 자동 라벨과 확인, 학습과 평가, 장비 적용을 한 화면에서 합니다.</p>
+      <ul><li>날짜 단위 고정 평가셋으로 같은 날 찍은 거의 같은 프레임이 학습과 평가에 섞이지 않게 했습니다.</li><li>같은 평가셋에서 이전보다 검출이 줄거나 과검이 늘면 새 모델로 바꾸지 않습니다(회귀 차단).</li><li>모델끼리 의견이 갈리는 화면부터 라벨을 확인하게 해, 같은 라벨 수로 더 많이 배우게 했습니다.</li></ul>
     </section>
     <section class="d-step">
       <h3><span>4</span>CNN 은 Shadow 로 먼저</h3>
       <p>규칙이 실패하면 CNN 위치를 씁니다. 바로 바꾸지 않고 Shadow 로 병행 운용합니다. CNN 은 검출을 유지하면서 오검출을 59% 줄였고, 검출 향상은 통계적으로 유의하지 않아 그대로 보고했습니다.</p>
     </section>
     <p class="d-tags">C#, C++, OpenCV, PyTorch, ONNX</p>
-    <p class="d-source">근거: 2026 상반기 업무성과 자료</p>
+    <p class="d-source">근거: 2026 상반기 업무성과 자료, Shot Key 학습 도구 문서</p>
   </template>
 
   <template id="p-recipe">
     <p class="d-meta">2026 · 변환과 Masking 알고리즘, 자동 시퀀스, UI, 사용자 Manual</p>
-    <h2 id="detail-title">검사 Recipe 자동 생성</h2>
+    <h2 id="detail-title">검사 Recipe 자동 생성 (RAC)</h2>
     <figure class="d-fig light"><img src="assets/img/fig-recipe.webp" alt="미세 원형 패턴 변환 비교, 왼쪽은 찌그러진 모양, 오른쪽은 고른 모양" width="900" height="480"><figcaption>왼쪽 단순 변환, 오른쪽 좌표 Snapping + Oversampling (합성 패턴)</figcaption></figure>
     <dl class="kpi"><div><dt>Bump Recipe 작성 시간</dt><dd>−92%</dd></div><div><dt>대면적 변환 시간</dt><dd>−87%</dd></div><div><dt>자동 배치 Bump</dt><dd>약 25만 개</dd></div></dl>
     <section class="d-step">
@@ -399,6 +415,10 @@
     <section class="d-step">
       <h3><span>4</span>Bump 25만 개 자동 배치</h3>
       <p>4점 원근 보정으로 Bump 약 25만 개를 배치하고, 첫 Layer 의 보정값을 다음 Layer 가 물려받게 했습니다. Bump Recipe 작성은 <b>4시간에서 20분</b>으로 줄었습니다. 같은 주제를 석사 연구(도면 특징으로 영역별 검사 임계값 정하기)로 이어가고 있습니다.</p>
+    </section>
+    <section class="d-step">
+      <h3><span>5</span>흩어진 RAC 를 하나로</h3>
+      <p>Site 마다 따로 운영되던 Recipe 생성 환경을 묶는 통합 도구를 만들고, 도면 → BMP 변환과 Auto Masking 을 하는 GDS Editor 를 구현했습니다. 전 Site 적용은 예정입니다. RAC 운영 방안, 사용자 Manual, Featureless Align 양산 전환 계획 등 고객 공유 문서 4건을 썼습니다.</p>
     </section>
     <p class="d-tags">C# (WPF), C++, Python</p>
     <p class="d-source">근거: 2026 상반기 업무성과 기술서</p>
@@ -546,6 +566,6 @@
     <p class="d-source">근거: 2025 상반기 업무성과 기술서 외</p>
   </template>
 
-  <script src="assets/site.js?v=20261121b"></script>
+  <script src="assets/site.js?v=20261121c"></script>
 </body>
 </html>
