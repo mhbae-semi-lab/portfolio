@@ -114,15 +114,19 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 .steps b { display: block; font-size: 22px; letter-spacing: -.02em; margin-top: 6px; }
 .steps span { display: block; color: var(--ink-2); margin-top: 6px; font-size: 16px; }
 
-/* 데모: 큰 화면 2개를 엇갈리게 */
-.demos { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; margin-top: 32px; align-items: start; }
-.demo { text-decoration: none; display: grid; gap: 8px; }
-.demo:nth-child(2) { margin-top: 64px; }
-.demo img { border-radius: var(--r); border: 1px solid var(--line); transition: transform .3s cubic-bezier(.16, 1, .3, 1); }
-.demo:hover img { transform: translateY(-4px); }
+/* 공개 앱: 화면 + 관점 · 해결 · 차별점 3줄 */
+.demos { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); gap: 40px 24px; margin-top: 32px; align-items: start; }
+.demo { display: grid; gap: 8px; }
+.demo-main { display: grid; gap: 8px; text-decoration: none; }
+.demo img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: left top; border-radius: var(--r); border: 1px solid var(--line); transition: transform .3s cubic-bezier(.16, 1, .3, 1); }
+.demo-main:hover img { transform: translateY(-4px); }
 .demo b { font-size: 20px; margin-top: 8px; }
 .demo b::after { content: " →"; color: var(--accent); }
-.demo span { color: var(--ink-2); font-size: 16px; }
+.demo-kind { color: var(--muted); font-size: 14px; }
+.demo-why { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin: 6px 0 0; font-size: 15px; }
+.demo-why dt { color: var(--muted); font-weight: 600; }
+.demo-why dd { margin: 0; color: var(--ink-2); }
+.demo-src { justify-self: start; font-size: 15px; color: var(--accent); }
 .soon { margin-top: 28px; color: var(--muted); font-size: 15px; }
 
 /* 경력 */
@@ -195,7 +199,6 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
   .card > img { height: 220px; }
   .demos, .career { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
-  .demo:nth-child(2) { margin-top: 0; }
   .career { gap: 40px; }
   .sheet { width: 100vw; }
   .sheet-bar { padding: 12px 16px; }

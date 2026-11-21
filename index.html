@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%232f62d6%22/%3E%3Ctext x=%2216%22 y=%2222.5%22 font-size=%2217%22 font-family=%22sans-serif%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22white%22%3E%EB%B0%B0%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="assets/site.css?v=20261121g">
+  <link rel="stylesheet" href="assets/site.css?v=20261121h">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "배민혁", "jobTitle": "반도체 검사 장비 SW 엔지니어", "url": "https://mhbae-semi-lab.github.io/portfolio/", "email": "mailto:mhbae03@gmail.com", "image": "https://mhbae-semi-lab.github.io/portfolio/assets/img/profile.jpg", "sameAs": ["https://github.com/mhbae-semi-lab"], "alumniOf": [{"@type": "CollegeOrUniversity", "name": "인하대학교 제조혁신전문대학원"}, {"@type": "CollegeOrUniversity", "name": "한국공학대학교"}], "knowsAbout": ["Wafer Align", "결함 검출", "검사 Recipe 자동화", "영상처리", "OpenCV", "C++", "C#", "Auto Focus"]}</script>
 </head>
 <body>
@@ -27,7 +27,7 @@
       <nav aria-label="주요 메뉴">
         <a href="#work">프로젝트</a>
         <a href="#method">일하는 방식</a>
-        <a href="#demo">데모</a>
+        <a href="#demo">앱</a>
         <a href="#career">경력</a>
         <a href="#research">연구</a>
         <a href="resume.html">이력서</a>
@@ -178,7 +178,7 @@
             <a class="tile reveal" href="#p-backup"><img class="light" src="assets/img/fig-backup.webp" alt="" loading="lazy" width="900" height="600"><b>설비 데이터 백업과 용량 관리</b><span>25분 → 4분</span></a>
             <a class="tile reveal" href="#p-ftp"><img class="light" src="assets/img/fig-ftp.webp" alt="" loading="lazy" width="900" height="600"><b>검사 결과 대용량 전송</b><span>4GB 65초</span></a>
             <a class="tile reveal" href="#p-matching"><img class="light" src="assets/img/fig-matching.webp" alt="" loading="lazy" width="1000" height="520"><b>결함 좌표 매칭과 Review 리포트</b><span>2023, 위치 오차 보정</span></a>
-            <a class="tile reveal" href="#p-weekly"><img src="assets/img/demo-02.webp" alt="" loading="lazy" width="800" height="506"><b>주간 업무 보고 자동화 (사내)</b><span>팀 10명 사용, 50명 확장 예정</span></a>
+            <a class="tile reveal" href="#p-weekly"><img src="assets/img/app-weekly-report.webp" alt="" loading="lazy" width="960" height="600"><b>주간 업무 보고 자동화 (사내)</b><span>팀 10명 사용, 50명 확장 예정</span></a>
           </div>
         </div>
         <div class="group">
@@ -231,19 +231,61 @@
     </section>
 
     <section id="demo" class="wrap">
-      <h2>직접 써 보는 데모</h2>
-      <p class="sub">팀의 반복 업무를 줄이려고 만든 도구를, 합성 데이터로 다시 만들었습니다.</p>
+      <h2>직접 써 보는 앱</h2>
+      <p class="sub">장비 SW 현장에서 반복되던 일을 줄이려고 만든 도구를, 누구나 자기 데이터로 쓸 수 있게 공개했습니다. 데이터는 사용자 기기에만 저장되고, 앱마다 재현 → 비교 → Shadow → 전환 · 롤백 절차를 같은 방식으로 넣었습니다.</p>
       <div class="demos">
-        <a class="demo reveal" href="apps/01-log-analyzer/">
-          <img src="assets/img/demo-01.webp" alt="설비 로그 분석기 화면, 모듈별 타임라인과 알람" loading="lazy" width="800" height="506">
-          <b>설비 로그 분석기</b>
-          <span>로그를 넣으면 알람을 묶고 원인 후보와 근거 줄을 보여줍니다</span>
-        </a>
-        <a class="demo reveal" href="apps/02-weekly-report/">
-          <img src="assets/img/demo-02.webp" alt="주간 보고 생성기 화면, 주제별 요약과 검증 결과" loading="lazy" width="800" height="506">
-          <b>주간 보고 생성기</b>
-          <span>git 커밋을 묶어 요약하고, 입력에 없는 숫자를 걸러 PPT 로 냅니다</span>
-        </a>
+        <article class="demo reveal">
+          <a class="demo-main" href="https://mhbae-semi-lab.github.io/log-analyzer/" target="_blank" rel="noopener">
+            <img src="assets/img/app-log-analyzer.webp" alt="설비 로그 분석기 화면, 요약 수치와 모듈별 타임라인" loading="lazy" width="960" height="600">
+            <b>설비 로그 분석기</b>
+          </a>
+          <span class="demo-kind">웹 앱 · 설치 없음 · v1.0.0</span>
+          <dl class="demo-why">
+            <dt>관점</dt><dd>설비 Down 뒤 수만 줄 로그에서 무엇이 먼저 깨졌는지 찾는 시간을 줄입니다.</dd>
+            <dt>해결</dt><dd>알람을 발생 단위로 묶고, 앞서 반복된 경고를 리드 타임 통계로 찾아 근거 줄 번호와 함께 보여줍니다.</dd>
+            <dt>차별점</dt><dd>라벨한 Down 사례마다 조기 경보 규칙이 몇 분 먼저 잡았는지 다시 계산합니다. 수집 서버 없이 파일 하나로 동작합니다.</dd>
+          </dl>
+          <a class="demo-src" href="https://github.com/mhbae-semi-lab/log-analyzer" target="_blank" rel="noopener">소스 코드</a>
+        </article>
+        <article class="demo reveal">
+          <a class="demo-main" href="https://mhbae-semi-lab.github.io/weekly-report/" target="_blank" rel="noopener">
+            <img src="assets/img/app-weekly-report.webp" alt="주간 보고 생성기 화면, 현장 검증 절차 4단계와 막힌 표현 기록" loading="lazy" width="960" height="600">
+            <b>주간 보고 생성기</b>
+          </a>
+          <span class="demo-kind">웹 앱 · 설치 없음 · v1.0.0</span>
+          <dl class="demo-why">
+            <dt>관점</dt><dd>커밋과 현장 메모를 주간 보고 PPT 로 옮기는 반복 업무를, 숫자를 지어내지 않게 자동화합니다.</dd>
+            <dt>해결</dt><dd>커밋을 현장 이슈 · 모듈 · 설비별 주제로 묶고, 3줄 요약과 지난주 대비 진척을 PPTX 로 냅니다.</dd>
+            <dt>차별점</dt><dd>입력에 없는 숫자 · 수량어 · 상태어 · 효과어를 함께 막고 막힌 이유를 보여줍니다. 서버 · 클라우드 계정 없이 로컬 git log 로 동작합니다.</dd>
+          </dl>
+          <a class="demo-src" href="https://github.com/mhbae-semi-lab/weekly-report" target="_blank" rel="noopener">소스 코드</a>
+        </article>
+        <article class="demo reveal">
+          <a class="demo-main" href="https://github.com/mhbae-semi-lab/llm-pulse/releases/latest" target="_blank" rel="noopener">
+            <img src="assets/img/app-llm-pulse.webp" alt="LLM Pulse 대시보드, 내 구독 안에서 고른 오늘의 추천과 바뀐 이유" loading="lazy" width="960" height="600">
+            <b>LLM Pulse</b>
+          </a>
+          <span class="demo-kind">Windows 앱 · 설치 파일 · 자동 업데이트 · v1.0.0</span>
+          <dl class="demo-why">
+            <dt>관점</dt><dd>벤치마크를 검사 데이터처럼 다룹니다. 숫자마다 출처와 측정일을 붙이고, 소스끼리 어긋나면 표시합니다.</dd>
+            <dt>해결</dt><dd>여러 공개 소스를 합쳐 분야별 최고 · 가성비 모델을 매일 추천하고, 1위가 바뀐 이유를 지표 단위로 보여줍니다.</dd>
+            <dt>차별점</dt><dd>내가 결제한 구독 안에서만 추천하고, 구독과 API 의 손익분기를 보여줍니다.</dd>
+          </dl>
+          <a class="demo-src" href="https://github.com/mhbae-semi-lab/llm-pulse" target="_blank" rel="noopener">소스 코드</a>
+        </article>
+        <article class="demo reveal">
+          <a class="demo-main" href="https://github.com/mhbae-semi-lab/prompt-advisor/releases/latest" target="_blank" rel="noopener">
+            <img src="assets/img/app-prompt-advisor.webp" alt="프롬프트 어드바이저 분석 화면, 짧은 장비 SW 요청에 붙은 경고와 예상 낭비 토큰" loading="lazy" width="960" height="600">
+            <b>프롬프트 어드바이저</b>
+          </a>
+          <span class="demo-kind">Windows 앱 · 설치 파일 · 자동 업데이트 · v1.0.0</span>
+          <dl class="demo-why">
+            <dt>관점</dt><dd>장비 SW 를 AI 코딩 도구로 고칠 때, 장비 · 버전 · 로그 · 재현 조건이 빠진 짧은 요청이 정정 턴과 토큰을 반복해서 씁니다.</dd>
+            <dt>해결</dt><dd>보내기 전에 프롬프트를 점검해 빠진 정보를 짚고, 내 과거 기록으로 예상 낭비와 출력 토큰을 보여줍니다.</dd>
+            <dt>차별점</dt><dd>경고마다 내 Claude Code · Cursor 기록에서 그 경고가 뜬 요청이 턴을 얼마나 더 썼는지 붙입니다. 개선안은 로컬 Ollama 로 만들어 프롬프트가 PC 밖으로 나가지 않습니다.</dd>
+          </dl>
+          <a class="demo-src" href="https://github.com/mhbae-semi-lab/prompt-advisor" target="_blank" rel="noopener">소스 코드</a>
+        </article>
       </div>
       <p class="soon">만드는 중: Klarf 웨이퍼 맵 뷰어, 레시피 기준 관리, 정렬 마크 검출 비교, 메일 분류기</p>
       <h3 class="lessons-head">AI 와 일하는 방식</h3>
@@ -587,14 +629,14 @@
   <template id="p-weekly">
     <p class="d-meta">2026 · 사내 도구 설계와 구현 · 공개 데모는 합성 데이터로 다시 만든 것</p>
     <h2 id="detail-title">주간 업무 보고 자동화 (사내)</h2>
-    <figure class="d-fig"><img src="assets/img/demo-02.webp" alt="주간 보고 생성기 공개 데모 화면, 주제별 요약과 검증 결과" width="800" height="506"><figcaption>공개 데모 화면. 사내 도구와 같은 흐름을 합성 커밋으로 다시 만들었습니다.</figcaption></figure>
+    <figure class="d-fig"><img src="assets/img/app-weekly-report.webp" alt="주간 보고 생성기 공개 앱 화면, 현장 검증 절차 4단계와 막힌 표현 기록" width="960" height="600"><figcaption>공개 앱 화면. 사내 도구와 같은 흐름을 누구나 자기 git log 로 쓸 수 있게 다시 만들었습니다.</figcaption></figure>
     <dl class="kpi"><div><dt>지금 쓰는 사람</dt><dd>10명</dd></div><div><dt>확장 예정</dt><dd>50명</dd></div></dl>
     <h3>문제</h3>
     <ul><li>주간 보고를 쓸 때마다 한 주의 커밋과 메모를 다시 읽고, 사내 양식 PPT 에 손으로 옮겨 적었습니다.</li></ul>
     <h3>접근</h3>
     <ul><li>한 주의 git 커밋을 규칙으로 주제별로 묶고, 주제마다 제목과 요약 3줄을 만들어 양식 PPT 로 냅니다.</li><li>요약은 로컬 LLM 으로만 만들어 데이터가 밖으로 나가지 않습니다.</li><li>요약은 매번 검사합니다. 3줄, 줄당 80자, 입력에 없는 숫자나 "완료" 같은 상태어가 나오면 한 번 다시 만들고, 그래도 안 되면 규칙 기반 문장으로 바꿉니다.</li><li>Claude Code 명령으로도 쓸 수 있게 했습니다.</li></ul>
     <h3>결과</h3>
-    <ul><li>팀 10명이 쓰고 있고, 50명으로 넓힐 예정입니다.</li><li>같은 흐름을 합성 데이터로 다시 만든 <a href="apps/02-weekly-report/">공개 데모</a>에서 직접 써 볼 수 있습니다.</li></ul>
+    <ul><li>팀 10명이 쓰고 있고, 50명으로 넓힐 예정입니다.</li><li>같은 흐름을 다시 만든 <a href="https://mhbae-semi-lab.github.io/weekly-report/" target="_blank" rel="noopener">공개 앱</a>을 자기 git log 로 써 볼 수 있습니다.</li></ul>
     <p class="d-tags">Python, python-pptx, 로컬 LLM (Ollama), Claude Code</p>
     <p class="d-source">근거: 사내 도구 사용 현황 (2026.11)</p>
   </template>
@@ -680,7 +722,7 @@
     <p class="d-source">근거: 2025 상반기 업무성과 기술서 외</p>
   </template>
 
-  <script src="assets/widgets.js?v=20261121g"></script>
-  <script src="assets/site.js?v=20261121g"></script>
+  <script src="assets/widgets.js?v=20261121h"></script>
+  <script src="assets/site.js?v=20261121h"></script>
 </body>
 </html>
