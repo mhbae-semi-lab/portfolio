@@ -60,7 +60,7 @@
 
     <section class="figures wrap" aria-label="주요 성과">
       <a class="fig-num reveal" href="#p-mark"><strong>−79<span>%</span></strong><p>정렬 마크 Align 시간<br><small>템플릿 방식 대비, 현장 12/12 Slot 검출</small></p></a>
-      <a class="fig-num reveal" href="#p-recipe"><strong>−92<span>%</span></strong><p>Bump Recipe 작성 시간<br><small>도면 기반 자동 배치</small></p></a>
+      <a class="fig-num reveal" href="#p-recipe"><strong>−92<span>%</span></strong><p>Bump Recipe 작성 시간<br><small>4시간 → 20분, 도면 기반 자동 배치</small></p></a>
       <a class="fig-num reveal" href="#p-focus"><strong>−72<span>%</span></strong><p>Auto Focus 시간<br><small>영상 AF 동시 검증, 이후 접촉 감지로 ±2µm</small></p></a>
       <a class="fig-num reveal" href="#p-stable"><strong>264<span>h</span></strong><p>운영 중 Failure 0건<br><small>신규 설비 11일 운영, Vision UpTime 98.86%</small></p></a>
     </section>
@@ -221,18 +221,20 @@
 
     <section id="notes" class="wrap">
       <h2>기술 노트</h2>
-      <p class="sub">현업에서 겪은 문제의 원리를 합성 데이터로 다시 풀어 쓴 글입니다.</p>
+      <p class="sub">현업에서 겪은 문제의 원리와 공개 앱의 검증 방법을 합성 데이터로 풀어 쓴 글입니다.</p>
       <ul class="notes">
         <li class="reveal"><a href="notes/score-normalization.html"><b>매칭 점수가 100점이 되는 이유</b><span>점수 맵을 자기 최소, 최대로 정규화하면 90° 돌아간 자재도 100점이 됩니다.</span></a></li>
         <li class="reveal"><a href="notes/frame-backlog.html"><b>화면 그리기가 촬영을 따라가지 못할 때</b><span>그리기가 프레임당 3ms 만 느려도, 모든 프레임을 줄 세우면 5분에 700장이 쌓입니다.</span></a></li>
         <li class="reveal"><a href="notes/eval-leakage.html"><b>평가 점수가 너무 좋을 때</b><span>파일 이름 해시로 나누면 같은 날 프레임이 섞여 점수가 부풉니다. 합성 실험에서 100% 대 84%.</span></a></li>
+        <li class="reveal"><a href="notes/klarf-map-check.html"><b>결함 지도가 그럴듯하게 틀릴 때</b><span>맵 정의가 틀려도 지도는 오류 없이 그려집니다. 결함 배열의 다이 주기와 빈 스크라이브 띠로 pitch · 원점을 확인합니다.</span></a></li>
+        <li class="reveal"><a href="notes/queue-model-check.html"><b>시뮬레이터의 답을 믿기 전에</b><span>대기열 시뮬레이터를 분석식과 맞춰 봤습니다. 1회 흔들림이 최대 ±7.5% 라 시드 100개 평균으로 2% 기준을 판정했습니다.</span></a></li>
       </ul>
       <p class="research-links">그림을 만든 코드: <a href="https://github.com/mhbae-semi-lab/portfolio/blob/main/tools/make_figures.py" target="_blank" rel="noopener">tools/make_figures.py</a>. 모든 그림을 합성 데이터로 다시 만들고, 그림마다 결과를 assert 로 검사합니다.</p>
     </section>
 
     <section id="demo" class="wrap">
       <h2>직접 써 보는 앱</h2>
-      <p class="sub">장비 SW 현장에서 반복되던 일을 줄이려고 만든 도구를, 누구나 자기 데이터로 쓸 수 있게 공개했습니다. 데이터는 사용자 기기에만 저장되고, 앱마다 재현 → 비교 → Shadow → 전환 · 롤백 절차를 같은 방식으로 넣었습니다.</p>
+      <p class="sub">장비 SW 현장에서 반복되던 일을 줄이려고 만든 도구를, 누구나 자기 데이터로 쓸 수 있게 공개했습니다. 데이터는 사용자 기기에만 저장되고, 앱마다 재현 → 비교 → Shadow → 전환 · 롤백 절차를 같은 방식으로 넣었습니다. 앱의 측정값은 모두 합성 데이터 기준입니다.</p>
       <div class="demos">
         <article class="demo reveal">
           <a class="demo-main" href="https://mhbae-semi-lab.github.io/klarf-viewer/" target="_blank" rel="noopener">
@@ -309,7 +311,7 @@
           </ul>
         </article>
       </div>
-      <p class="soon">만드는 중: 정렬 마크 검출 비교</p>
+      <p class="soon">다음에 만들 앱: 정렬 마크 검출 비교 (규칙 vs CNN, 평가 분할 방식에 따른 누수)</p>
       <h3 class="lessons-head">AI 와 일하는 방식</h3>
       <ul class="lessons">
         <li class="reveal"><b>설계와 검증 기준은 직접 정합니다</b><p>무엇을 만들지, 무엇을 맞다고 볼지, 어떻게 확인할지는 제가 먼저 적습니다.</p></li>

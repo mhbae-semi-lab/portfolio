@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When drawing cannot keep up with the camera | Minhyeok Bae tech notes</title>
+  <meta name="description" content="If drawing is even slightly slower than capture, queuing every frame makes the queue grow without end. How drawing only the latest frame fixes it.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="../../assets/site.css?v=20261122b">
+</head>
+<body>
+  <main class="note">
+    <a class="note-back" href="../../en.html#notes">← Portfolio</a>
+    <h1>When drawing cannot keep up with the camera</h1>
+    <p class="d-meta">Tech note · Concurrency, equipment UI · Related project <a href="../../en.html#p-stable">New particle-removal tool SW</a></p>
+
+    <h2>What looked wrong</h2>
+    <p>On the new tool, during long continuous capture the display fell further and further behind, memory kept growing, and in the end the program froze. Capture itself was fine. The problem was on the side that drew the received frames on screen.</p>
+
+    <h2>Cause: a small slowness piles up without end</h2>
+    <p>Say the camera sends a frame every 33 ms (30 fps) and drawing takes 36 ms on average. The gap is only 3 ms per frame, but if every received frame is drawn in turn, the number of frames not yet drawn keeps growing in proportion to time. When processing is slower than arrival, the queue can never shrink.</p>
+    <figure class="d-fig light"><img src="../../assets/img/en/fig-stable.webp" alt="Frames not yet drawn over continuous capture time. Drawing every frame piles up over 700 in 5 minutes; drawing only the latest stays at 1 or fewer" width="900" height="540"><figcaption>Synthetic simulation: 30 fps capture, 36 ms average drawing time. Drawing every frame in order piles up over 700 frames in 5 minutes; drawing only the latest stays at 1 or fewer. The code is fig_stable in tools/make_figures.py</figcaption></figure>
+    <p>A bigger buffer only delays the freeze. The piled-up frames take memory, and the screen shows a moment further and further in the past.</p>
+
+    <h2>The fix: only the latest frame, one at a time</h2>
+    <p>The screen does not need to show every frame. What people look at is the current state. So when a new frame arrives, the previous frame that has not been drawn yet is dropped, and only one draw runs at a time.</p>
+<pre><code>// Concept code (C#). Keep only the most recent frame and a "drawing" flag
+Frame? latest;
+int drawing;
+
+void OnFrame(Frame f)                      // camera thread
+{
+    Interlocked.Exchange(ref latest, f)?.Dispose();          // drop the previous frame that was not drawn
+    if (Interlocked.CompareExchange(ref drawing, 1, 0) == 0)  // if not drawing, schedule a draw
+        ui.BeginInvoke(Draw);
+}
+
+void Draw()                                 // UI thread
+{
+    var f = Interlocked.Exchange(ref latest, null);
+    if (f != null) { Render(f); f.Dispose(); }
+    Volatile.Write(ref drawing, 0);
+    // if a new frame arrived while drawing, run once more
+    if (Volatile.Read(ref latest) != null && Interlocked.CompareExchange(ref drawing, 1, 0) == 0)
+        ui.BeginInvoke(Draw);
+}</code></pre>
+    <ul>
+      <li>I split what can be dropped (the display) from what must not be dropped (inspection results, images to save) into separate paths. The code above is used only on the display path.</li>
+      <li>So that a frame arriving during a draw is not missed, it checks once more after clearing the flag.</li>
+      <li>On the tool, this fix together with the move to 64-bit and camera reconnection gave 0 freezes over 20 slots in a row, and memory went from 18 GB to 12 GB.</li>
+    </ul>
+
+    <h2>Takeaway</h2>
+    <p>A queue whose processing is slower than arrival will overflow sooner or later, whatever the buffer size. First decide “can this data be dropped?”, and on the paths where it can, keep only the latest value. Also check that the worst-case processing time, not the average, is shorter than the arrival interval.</p>
+    <p>To calculate it yourself from your own settings or timing logs, use the <a href="https://mhbae-semi-lab.github.io/frame-backlog-sim/" target="_blank" rel="noopener">Frame backlog simulator</a>. Run the "Slow drawing" example for 5 minutes and hundreds of frames pile up, as in the figure above.</p>
+    <p class="note-foot">The figure and code were made from scratch to explain the principle. They are not code from the equipment.</p>
+  </main>
+</body>
+</html>

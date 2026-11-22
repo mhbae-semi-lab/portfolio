@@ -7,7 +7,7 @@
   <meta name="description" content="파일 이름 해시로 학습과 평가를 나누면 같은 날 프레임이 섞여 점수가 부풉니다. 날짜 단위로 나누는 이유와 합성 실험.">
   <meta name="color-scheme" content="light dark">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="../assets/site.css?v=20261121h">
+  <link rel="stylesheet" href="../assets/site.css?v=20261122b">
 </head>
 <body>
   <main class="note">
@@ -26,7 +26,7 @@
 <pre><code># 나쁜 예: 파일 이름 해시로 나눔. 같은 날 프레임이 학습과 평가에 섞인다
 is_test = zlib.crc32(name.encode()) % 5 == 0
 
-# 바꾼 예: 날짜 단위로 통째로 나눔. 평가 날짜는 고정해 두고 바꾸지 않는다
+# 바꾼 예: 날짜 단위로 통째로 나눔. 개발 20일 중 마지막 4일을 평가로 고정해 두고 바꾸지 않는다
 test_days = sorted(set(days))[-4:]
 is_test = day in test_days</code></pre>
 

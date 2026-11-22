@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When an evaluation score looks too good | Minhyeok Bae tech notes</title>
+  <meta name="description" content="Splitting training and evaluation by file-name hash mixes same-day frames and inflates the score. Why to split by date, with a synthetic test.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="../../assets/site.css?v=20261122b">
+</head>
+<body>
+  <main class="note">
+    <a class="note-back" href="../../en.html#notes">← Portfolio</a>
+    <h1>When an evaluation score looks too good</h1>
+    <p class="d-meta">Tech note · Evaluation design · Related project <a href="../../en.html#p-mark">Shot Key mark detection</a></p>
+
+    <h2>What looked wrong</h2>
+    <p>While building a tool that learns alignment mark detection parameters from field images, I first split training and evaluation by the hash of the file name. The evaluation score came out better than expected. The better a score looks, the sooner I suspect it.</p>
+
+    <h2>Cause: same-day frames landed on both sides</h2>
+    <p>Equipment images differ a little from day to day in lighting, focus, and material condition, and frames taken on the same day are nearly identical. Splitting by file-name hash puts near-identical frames from the same day into both training and evaluation. The model is then not predicting images it has never seen, but images it has already seen.</p>
+    <p>I reproduced this gap with synthetic data. I made 50 frames a day for 25 days, with lighting a little different each day, and had the model decide whether a mark is present from the nearest training frame. The first 20 days were used for development, and the last 5 days were held back as “unseen dates” to measure real accuracy.</p>
+    <figure class="d-fig light"><img src="../../assets/img/en/fig-leak.webp" alt="Accuracy of the same classifier. Evaluation split by file-name hash 100 percent, split by date 84 percent, real accuracy on unseen dates 88 percent" width="900" height="400"><figcaption>Synthetic test results, not real equipment numbers. The hash-split evaluation inflates to 100%, and the date-split evaluation (84%) is close to the real accuracy on unseen dates (88%). The code is fig_leak in tools/make_figures.py</figcaption></figure>
+
+<pre><code># Bad: split by file-name hash. Same-day frames mix into training and evaluation
+is_test = zlib.crc32(name.encode()) % 5 == 0
+
+# Changed: split by whole dates. Fix the last 4 of the 20 development days as evaluation and do not change them
+test_days = sorted(set(days))[-4:]
+is_test = day in test_days</code></pre>
+
+    <h2>What I changed</h2>
+    <ul>
+      <li>Split the evaluation set by date, and fixed the evaluation dates once chosen. Every model change is compared on the same dates.</li>
+      <li>Kept evaluation results as a history. If detections drop or false detections rise on the same evaluation set compared with before, the new model does not replace the current one.</li>
+      <li>When I report a score, I also note how the data was split, which side the labels favor, and whether it has been applied in the field yet.</li>
+    </ul>
+
+    <h2>Takeaway</h2>
+    <p>An evaluation set should be split to look like “the data we will meet next.” Equipment data clusters by date, tool, lot, and wafer, so a random split almost always inflates the score. Find the unit the data clusters by, split by whole units, and if the score still looks too good, suspect it once more.</p>
+    <p class="note-foot">The test uses synthetic data made to show the principle. It is not in-house images or real evaluation numbers.</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When a defect map is plausibly wrong | Minhyeok Bae tech notes</title>
+  <meta name="description" content="A KLARF defect map draws without errors even when the map definition is wrong. How the die period of the defect positions and the defect-free band check DiePitch and the grid origin.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="../../assets/site.css?v=20261122b">
+</head>
+<body>
+  <main class="note">
+    <a class="note-back" href="../../en.html#notes">← Portfolio</a>
+    <h1>When a defect map is plausibly wrong</h1>
+    <p class="d-meta">Tech note · Wafer maps, defect files · Related app <a href="https://mhbae-semi-lab.github.io/klarf-viewer/">Klarf Wafer Map Viewer</a></p>
+
+    <h2>What the problem is</h2>
+    <p>KLARF writes each defect position as a die number (XINDEX, YINDEX) and a position inside the die (XREL, YREL). The position on the wafer is computed from these with DiePitch and the wafer center location. If the inspection tool wrote these values with a wrong map definition, the file is still consistent with itself. So a viewer draws the map without any error, and the defects land on the wrong dies.</p>
+    <p>When I built recipes and maps, I checked the map definition before looking at any defects. Klarf Wafer Map Viewer does the same from the defect file side. Every time a file opens, it compares five things against the defect layout: pitch, scribe (grid origin), origin die, defects outside the wafer, and die index. This note covers pitch and scribe. The code is in <a href="https://github.com/mhbae-semi-lab/klarf-viewer/blob/main/src/check.js">src/check.js</a>.</p>
+
+    <h2>Pitch: find the die period from the defect positions</h2>
+    <p>Even if the tool split positions into die numbers and relative positions with a wrong pitch, joining them back with the same pitch (die number × pitch + relative position) returns the position the tool measured. Those positions keep structure that repeats in every die: repeating defects at the same spot in each die, and the empty band of the scribe that is not inspected. Their period is the real die period, whatever the declared value says.</p>
+    <p>The app bins the defect X positions into cells pitch/32 wide, and for each of 201 candidate periods within ±5% of the declared pitch it averages the strength of the 1st to 8th harmonics. Random positions give a strength of about 1; repeating structure makes it rise at the real period. The best candidate, refined with a parabola, is the measured period.</p>
+<pre><code>// From src/check.js, with the default rule values written as numbers
+const per = period(ax ? W.y : W.x, n, p, g.R);   // measured period q, signal strength z (noise = 1)
+const dev = ((per.q - p) / p) * 100;
+const pitchBad = per.z >= 8 &amp;&amp; Math.abs(dev) > 1.0;   // only with enough signal; error if off by more than 1%</code></pre>
+    <figure class="d-fig light"><img src="../../assets/img/en/note-klarf-pitch.webp" alt="Die overlay of a synthetic pitch-error file. Repeating defects are smeared into horizontal dotted lines, and the check panel shows an error: declared DiePitch X 9,840 µm, die period of the defect positions 9,600 µm, -2.44%, period signal 75" width="1174" height="566"><figcaption>A synthetic file with DiePitch X written 2.5% too large (9,840 µm). Folding all dies into one, the repeating defects that should stack on the same spot smear into horizontal dotted lines. Measured period 9,599.8 µm (real 9,600), signal strength 75</figcaption></figure>
+
+    <h2>Scribe: is the defect-free band on the die boundary?</h2>
+    <p>The scribe is not inspected, so it has no defects. If the map definition is right, this empty band must sit across the die boundary (0 = pitch) in the relative positions. The app splits XREL into 400 cells and finds the longest run of cells with fewer than 15% of the mean count. If an edge of the band is more than 2% of the pitch away from the boundary, it is an error, and the band center gives the estimated origin offset.</p>
+    <figure class="d-fig light"><img src="../../assets/img/en/note-klarf-scribe.webp" alt="Die overlay of a synthetic scribe-error file. A vertical defect-free band marked in red sits inside the die near its right side, and the check panel shows an error: the band is at 7,152 to 7,248 µm, so the X grid origin looks off by about -2,400 µm" width="1174" height="566"><figcaption>A synthetic file with the grid origin shifted 2,400 µm in X. The empty band (red) is not on the boundary but inside the die at 7,152–7,248 µm, and the app estimates the origin should move by −2,400 µm</figcaption></figure>
+
+    <h2>Guards against false alarms</h2>
+    <ul>
+      <li>If the period signal is weaker than 8, the app does not judge and writes a note instead. On structureless random positions (8,000 points, 5 seeds) the strength is 1.4–2.4 and the "period" found falls anywhere from 9,267 to 10,080 µm. Without this floor, that would become a pitch error.</li>
+      <li>With fewer than 2,000 defects, pitch and scribe are not judged. The scribe check looks only at empty bands, because repeating defects also make dense bands. A band wider than 20% of the pitch, or one where fewer than 30 defects would be expected, may be empty by chance, so it is skipped.</li>
+      <li>Symptoms explained by a cause are not counted separately. If the pitch is wrong, the scribe is not judged, and defects outside the wafer are counted after correcting the origin die and the index. One error should not be reported as several.</li>
+    </ul>
+
+    <h2>Result</h2>
+    <p>On five synthetic files with one map error each, all five were found, and each file reported only the error that was put in. On 24 normal synthetic wafers (4 samples, 20 other seeds) there were 0 false alarms. On those normal wafers the weakest period signal was 44 and the largest difference from the declared pitch was 0.03%, far from the limits. Re-checking the map with the estimated fix gives 0 errors for pitch, scribe, origin and index; defects outside the wafer remain, because they are real defects. You can check this with <code>node --test</code> in the repository. The limits were tuned on synthetic data only, and real files with weaker repeating structure may need them tuned again.</p>
+
+    <h2>Takeaway</h2>
+    <p>A file being consistent with itself is not the same as its map definition being right. The defect layout itself carries the die period and the scribe position, so it is independent evidence to compare against the declared map definition. Before interpreting a distribution, check the coordinate system it was drawn in, and when there is not enough signal to judge, say it was not judged instead of raising an error.</p>
+    <p class="note-foot">The figures and numbers come from data made by the app's synthetic KLARF generator (src/gen.js). They are not real tool or product files.</p>
+  </main>
+</body>
+</html>

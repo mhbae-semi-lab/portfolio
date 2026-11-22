@@ -26,7 +26,8 @@
 ```
 index.html, assets/      포트폴리오 한 페이지, 카드를 누르면 #p-이름 으로 세부 패널이 열림
 resume.html              1장 이력서 (인쇄하면 A4 1쪽 PDF). index.html 수치를 바꾸면 여기도 같이 바꿈
-notes/                   기술 노트 (한국어만). 그림은 make_figures.py 가 만든 합성 데이터 그림을 같이 씀
+notes/                   기술 노트. 현업 사례 노트는 make_figures.py 의 합성 데이터 그림, 공개 앱 노트는 앱 화면(합성 데이터)을 씀
+notes/en/                기술 노트 영문판. 한국어 노트를 고치면 여기도 같이 고친다
 tools/make_figures.py    합성 데이터로 사례 그림(assets/img/fig-*.webp)을 다시 만듦
 en.html                  영문판. index.html 을 고치면 영문판의 같은 곳도 고친다 (상단 KO / EN 스위치, 고른 언어는 브라우저에 기억)
 tools/make_figures_en.py 영문판 그림(assets/img/en/), 같은 데이터에 그림 글자만 영어로. 빠진 번역이 있으면 실패

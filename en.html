@@ -60,7 +60,7 @@
 
     <section class="figures wrap" aria-label="Key results">
       <a class="fig-num reveal" href="#p-mark"><strong>−79<span>%</span></strong><p>Mark-based align time<br><small>vs. the template method, 12/12 slots found on site</small></p></a>
-      <a class="fig-num reveal" href="#p-recipe"><strong>−92<span>%</span></strong><p>Bump recipe authoring time<br><small>automatic placement from design data</small></p></a>
+      <a class="fig-num reveal" href="#p-recipe"><strong>−92<span>%</span></strong><p>Bump recipe authoring time<br><small>4 h → 20 min, automatic placement from design data</small></p></a>
       <a class="fig-num reveal" href="#p-focus"><strong>−72<span>%</span></strong><p>Auto Focus time<br><small>image AF with parallel checks, then contact sensing at ±2µm</small></p></a>
       <a class="fig-num reveal" href="#p-stable"><strong>264<span>h</span></strong><p>0 failures in operation<br><small>new tool, 11 days running, Vision uptime 98.86%</small></p></a>
     </section>
@@ -221,18 +221,20 @@
 
     <section id="notes" class="wrap">
       <h2>Tech notes</h2>
-      <p class="sub">Problems I met at work, explained again from first principles with synthetic data. The notes are in Korean.</p>
+      <p class="sub">Problems I met at work and how I check my public apps, explained from first principles with synthetic data.</p>
       <ul class="notes">
-        <li class="reveal"><a href="notes/score-normalization.html"><b>Why a match score hits 100</b><span>Normalizing a score map by its own min and max gives even a 90°-rotated wafer 100 points.</span></a></li>
-        <li class="reveal"><a href="notes/frame-backlog.html"><b>When drawing cannot keep up with the camera</b><span>If drawing is just 3 ms slower per frame, queuing every frame piles up 700 frames in 5 minutes.</span></a></li>
-        <li class="reveal"><a href="notes/eval-leakage.html"><b>When an evaluation score looks too good</b><span>Splitting by file-name hash mixes same-day frames and inflates the score: 100% vs 84% in a synthetic test.</span></a></li>
+        <li class="reveal"><a href="notes/en/score-normalization.html"><b>Why a match score hits 100</b><span>Normalizing a score map by its own min and max gives even a 90°-rotated wafer 100 points.</span></a></li>
+        <li class="reveal"><a href="notes/en/frame-backlog.html"><b>When drawing cannot keep up with the camera</b><span>If drawing is just 3 ms slower per frame, queuing every frame piles up 700 frames in 5 minutes.</span></a></li>
+        <li class="reveal"><a href="notes/en/eval-leakage.html"><b>When an evaluation score looks too good</b><span>Splitting by file-name hash mixes same-day frames and inflates the score: 100% vs 84% in a synthetic test.</span></a></li>
+        <li class="reveal"><a href="notes/en/klarf-map-check.html"><b>When a defect map is plausibly wrong</b><span>A wrong map definition still draws a clean map. The die period in the defects and the empty scribe band check the pitch and origin.</span></a></li>
+        <li class="reveal"><a href="notes/en/queue-model-check.html"><b>Before trusting the simulator's answer</b><span>I checked the queue simulator against analytic formulas. One run swings up to ±7.5%, so the 2% criterion is judged on a 100-seed mean.</span></a></li>
       </ul>
       <p class="research-links">Code for every figure: <a href="https://github.com/mhbae-semi-lab/portfolio/blob/main/tools/make_figures.py" target="_blank" rel="noopener">tools/make_figures.py</a>. It rebuilds each figure from synthetic data and checks its result with asserts.</p>
     </section>
 
     <section id="demo" class="wrap">
       <h2>Apps you can use</h2>
-      <p class="sub">Tools I built to cut repetitive work on equipment software, released so anyone can use them on their own data. Data stays on the user’s device, and every app follows the same field procedure: reproduce, compare, shadow, then switch with rollback. The apps have Korean and English screens.</p>
+      <p class="sub">Tools I built to cut repetitive work on equipment software, released so anyone can use them on their own data. Data stays on the user’s device, and every app follows the same field procedure: reproduce, compare, shadow, then switch with rollback. The apps have Korean and English screens. All app measurements are on synthetic data.</p>
       <div class="demos">
         <article class="demo reveal">
           <a class="demo-main" href="https://mhbae-semi-lab.github.io/klarf-viewer/" target="_blank" rel="noopener">
@@ -309,7 +311,7 @@
           </ul>
         </article>
       </div>
-      <p class="soon">In progress: alignment mark detection comparison</p>
+      <p class="soon">Next app: alignment mark detection comparison (rules vs CNN, leakage from how the evaluation set is split)</p>
       <h3 class="lessons-head">How I work with AI</h3>
       <ul class="lessons">
         <li class="reveal"><b>I set the design and the pass criteria</b><p>I write down first what to build, what counts as correct, and how to check it.</p></li>

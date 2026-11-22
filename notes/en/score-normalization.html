@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Why a match score hits 100 | Minhyeok Bae tech notes</title>
+  <meta name="description" content="Normalizing a score map by its own min and max gives even a 90°-rotated wafer 100 points. The cause and the fix.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="../../assets/site.css?v=20261122b">
+</head>
+<body>
+  <main class="note">
+    <a class="note-back" href="../../en.html#notes">← Portfolio</a>
+    <h1>Why a match score hits 100</h1>
+    <p class="d-meta">Tech note · Pattern matching · Related project <a href="../../en.html#p-score">Fixing pattern-match score misjudgment</a></p>
+
+    <h2>What looked wrong</h2>
+    <p>A wafer rotated 90° passed as normal. The match results gave 100 points to both the wafer in normal orientation and the rotated one. The rotated wafer did not have the same shape as the reference pattern, yet its score was the same.</p>
+    <figure class="d-fig light"><img src="../../assets/img/en/fig-score.webp" alt="Matching on a normal and a 90-degree-rotated synthetic die pattern. Old score 100 for both; after the fix 97 and 31" width="900" height="600"><figcaption>Reproduced with a synthetic pattern. The old method gives both wafers 100 points; the fixed method gives 97 and 31. The figure is made by fig_score in tools/make_figures.py</figcaption></figure>
+
+    <h2>Cause: the score was compared only within that image</h2>
+    <p>Template matching computes how similar the image is to the template at every position and builds a score map. The old code stretched this map to 0 to 100 using <b>the map’s own minimum and maximum</b>. Then the highest position always scores 100, whatever the map looks like.</p>
+    <p>This score does not say “how similar is this to the reference pattern.” It only says “where in this image is the best match, relative to the rest.” That is fine for finding the position, but wrong when used to decide pass or fail.</p>
+<pre><code># Old: normalize by the map's own min and max. The peak is always 100
+m = cv2.matchTemplate(img, tpl, cv2.TM_CCOEFF_NORMED)
+score = (m.max() - m.min()) / (m.max() - m.min()) * 100   # = 100
+
+# Fixed: normalize by the range of values the matching mode can produce
+# Normalized correlation (TM_CCOEFF_NORMED) is -1 to 1; no similarity or below scores 0
+score = max(m.max(), 0) * 100</code></pre>
+
+    <h2>What I fixed</h2>
+    <ul>
+      <li>For each matching mode I set the theoretical minimum and maximum score, and scored within that range. Abnormal wafers now score 10 to 50 instead of a fixed 100.</li>
+      <li>When I need “how distinct is the peak within the image,” I do not mix it into the score. I look at a separate measure, such as the gap between the first and second peaks.</li>
+      <li>For low-pattern images, I separately documented a decision strategy that combines phase correlation (3 to 5 times faster) with several scores.</li>
+    </ul>
+
+    <h2>Takeaway</h2>
+    <p>Normalization changes what a score is compared against. If you do not separate an absolute reference (the theoretical range) from a relative one (rank within the image), the code finds the right position but makes the wrong decision. Before using a score as a pass criterion, I first check: “Is there any case where this score cannot be 100?”</p>
+    <p class="note-foot">The figure and code reproduce the principle with synthetic data. They are not code or images from the equipment.</p>
+  </main>
+</body>
+</html>
