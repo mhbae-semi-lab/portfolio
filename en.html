@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%232f62d6%22/%3E%3Ctext x=%2216%22 y=%2222.5%22 font-size=%2217%22 font-family=%22sans-serif%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22white%22%3E%EB%B0%B0%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="assets/site.css?v=20261122a">
+  <link rel="stylesheet" href="assets/site.css?v=20261122b">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Minhyeok Bae", "alternateName": "배민혁", "jobTitle": "Semiconductor Inspection Equipment SW Engineer", "url": "https://mhbae-semi-lab.github.io/portfolio/en.html", "email": "mailto:mhbae03@gmail.com", "image": "https://mhbae-semi-lab.github.io/portfolio/assets/img/profile.jpg", "sameAs": ["https://github.com/mhbae-semi-lab"], "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Inha University, Graduate School of Manufacturing Innovation"}, {"@type": "CollegeOrUniversity", "name": "Tech University of Korea"}], "knowsAbout": ["Wafer Align", "Defect detection", "Inspection recipe automation", "Image processing", "OpenCV", "C++", "C#", "Auto Focus"]}</script>
 </head>
 <body>
@@ -235,32 +235,6 @@
       <p class="sub">Tools I built to cut repetitive work on equipment software, released so anyone can use them on their own data. Data stays on the user’s device, and every app follows the same field procedure: reproduce, compare, shadow, then switch with rollback. The apps have Korean and English screens.</p>
       <div class="demos">
         <article class="demo reveal">
-          <a class="demo-main" href="https://mhbae-semi-lab.github.io/log-analyzer/" target="_blank" rel="noopener">
-            <img src="assets/img/en/app-log-analyzer.webp" alt="Equipment log analyzer with summary counts and a per-module timeline" loading="lazy" width="960" height="600">
-            <b>Equipment log analyzer</b>
-          </a>
-          <span class="demo-kind">Web app · no install · v1.0.0</span>
-          <dl class="demo-why">
-            <dt>Angle</dt><dd>Cuts the time it takes to find what broke first in tens of thousands of log lines after a tool goes down.</dd>
-            <dt>Solves</dt><dd>Groups alarms into occurrences, finds warnings that repeat before them with lead-time statistics, and cites the evidence line numbers.</dd>
-            <dt>Different</dt><dd>For each labeled down case, it recomputes how many minutes earlier a warning rule would have caught it. Works on a single file with no collection server.</dd>
-          </dl>
-          <a class="demo-src" href="https://github.com/mhbae-semi-lab/log-analyzer" target="_blank" rel="noopener">Source code</a>
-        </article>
-        <article class="demo reveal">
-          <a class="demo-main" href="https://mhbae-semi-lab.github.io/weekly-report/" target="_blank" rel="noopener">
-            <img src="assets/img/en/app-weekly-report.webp" alt="Weekly report builder with a topic summary and the phrases the fact check blocked" loading="lazy" width="960" height="600">
-            <b>Weekly report builder</b>
-          </a>
-          <span class="demo-kind">Web app · no install · v1.0.0</span>
-          <dl class="demo-why">
-            <dt>Angle</dt><dd>Automates turning commits and field notes into the weekly report deck, without making up numbers.</dd>
-            <dt>Solves</dt><dd>Groups commits by field issue, module and tool, then exports three-line summaries and week-over-week progress as PPTX.</dd>
-            <dt>Different</dt><dd>Blocks numbers, quantity words, status words and effect words that are not in the input, and shows why. Runs on a local git log with no server or cloud account.</dd>
-          </dl>
-          <a class="demo-src" href="https://github.com/mhbae-semi-lab/weekly-report" target="_blank" rel="noopener">Source code</a>
-        </article>
-        <article class="demo reveal">
           <a class="demo-main" href="https://mhbae-semi-lab.github.io/klarf-viewer/" target="_blank" rel="noopener">
             <img src="assets/img/en/app-klarf-viewer.webp" alt="Klarf wafer map viewer with a scribe offset error found in the die overlay" loading="lazy" width="960" height="600">
             <b>Klarf wafer map viewer</b>
@@ -287,19 +261,6 @@
           <a class="demo-src" href="https://github.com/mhbae-semi-lab/recipe-golden" target="_blank" rel="noopener">Source code</a>
         </article>
         <article class="demo reveal">
-          <a class="demo-main" href="https://mhbae-semi-lab.github.io/mdcv/" target="_blank" rel="noopener">
-            <img src="assets/img/en/app-mdcv.webp" alt="MDCV inbox with equipment and alarm code tags and the reasons behind each mail's result" loading="lazy" width="960" height="600">
-            <b>MDCV mail classifier</b>
-          </a>
-          <span class="demo-kind">Web app · no install · Docker self-host · v1.0.0</span>
-          <dl class="demo-why">
-            <dt>Angle</dt><dd>Adds an equipment-aware layer on top of the inbox, so a tool owner reading 30 to 100 mails a day does not miss tool faults, reply requests or deadlines.</dd>
-            <dt>Solves</dt><dd>Pulls tool IDs, modules, alarm codes and deadlines from each mail into per-tool mail threads and a to-do list sorted by due date. It never sends mail on its own.</dd>
-            <dt>Different</dt><dd>Turns Korean deadline phrases such as "this week", "next Tuesday" or "by 11/24 (Tue)" into dates. Works in the browser from .eml, .mbox and .msg files, with no mailbox connection.</dd>
-          </dl>
-          <a class="demo-src" href="https://github.com/mhbae-semi-lab/mdcv" target="_blank" rel="noopener">Source code</a>
-        </article>
-        <article class="demo reveal">
           <a class="demo-main" href="https://mhbae-semi-lab.github.io/frame-backlog-sim/" target="_blank" rel="noopener">
             <img src="assets/img/en/app-frame-backlog-sim.webp" alt="Frame backlog simulator results with the time memory hits its limit and per-stage latency" loading="lazy" width="960" height="600">
             <b>Frame backlog simulator</b>
@@ -311,6 +272,19 @@
             <dt>Different</dt><dd>Uses the same overflow policies as camera SDKs as the built-in model, so you only fill in fields. Replays your own timing log and computes when memory will hit its limit.</dd>
           </dl>
           <a class="demo-src" href="https://github.com/mhbae-semi-lab/frame-backlog-sim" target="_blank" rel="noopener">Source code</a>
+        </article>
+        <article class="demo reveal">
+          <a class="demo-main" href="https://mhbae-semi-lab.github.io/log-analyzer/" target="_blank" rel="noopener">
+            <img src="assets/img/en/app-log-analyzer.webp" alt="Equipment log analyzer with summary counts and a per-module timeline" loading="lazy" width="960" height="600">
+            <b>Equipment log analyzer</b>
+          </a>
+          <span class="demo-kind">Web app · no install · v1.0.0</span>
+          <dl class="demo-why">
+            <dt>Angle</dt><dd>Cuts the time it takes to find what broke first in tens of thousands of log lines after a tool goes down.</dd>
+            <dt>Solves</dt><dd>Groups alarms into occurrences, finds warnings that repeat before them with lead-time statistics, and cites the evidence line numbers.</dd>
+            <dt>Different</dt><dd>For each labeled down case, it recomputes how many minutes earlier a warning rule would have caught it. Works on a single file with no collection server.</dd>
+          </dl>
+          <a class="demo-src" href="https://github.com/mhbae-semi-lab/log-analyzer" target="_blank" rel="noopener">Source code</a>
         </article>
         <article class="demo reveal">
           <a class="demo-main" href="https://mhbae-semi-lab.github.io/equip-sw-lint/viewer/" target="_blank" rel="noopener">
@@ -325,31 +299,14 @@
           </dl>
           <a class="demo-src" href="https://github.com/mhbae-semi-lab/equip-sw-lint" target="_blank" rel="noopener">Source code</a>
         </article>
-        <article class="demo reveal">
-          <a class="demo-main" href="https://github.com/mhbae-semi-lab/llm-pulse/releases/latest" target="_blank" rel="noopener">
-            <img src="assets/img/en/app-llm-pulse.webp" alt="LLM Pulse dashboard with today’s pick within my subscriptions and what changed" loading="lazy" width="960" height="600">
-            <b>LLM Pulse</b>
-          </a>
-          <span class="demo-kind">Windows app · installer · auto-update · v1.0.0</span>
-          <dl class="demo-why">
-            <dt>Angle</dt><dd>Treats benchmarks like inspection data: every number carries its source and date, and disagreements between sources are flagged.</dd>
-            <dt>Solves</dt><dd>Merges several public sources into a daily pick of the best and best-value model per category, and shows which metric changed the top spot.</dd>
-            <dt>Different</dt><dd>Recommends only within the subscriptions I actually pay for, and shows the break-even point between a subscription and the API.</dd>
-          </dl>
-          <a class="demo-src" href="https://github.com/mhbae-semi-lab/llm-pulse" target="_blank" rel="noopener">Source code</a>
-        </article>
-        <article class="demo reveal">
-          <a class="demo-main" href="https://github.com/mhbae-semi-lab/prompt-advisor/releases/latest" target="_blank" rel="noopener">
-            <img src="assets/img/en/app-prompt-advisor.webp" alt="Prompt Advisor analysis screen with warnings and estimated wasted tokens on a short equipment software request" loading="lazy" width="960" height="600">
-            <b>Prompt Advisor</b>
-          </a>
-          <span class="demo-kind">Windows app · installer · auto-update · v1.0.0</span>
-          <dl class="demo-why">
-            <dt>Angle</dt><dd>When fixing equipment software with AI coding tools, short requests that leave out the tool, version, log and repro steps keep burning correction turns and tokens.</dd>
-            <dt>Solves</dt><dd>Checks a prompt before it is sent, points out what is missing, and estimates wasted and output tokens from my own history.</dd>
-            <dt>Different</dt><dd>Each warning shows how many more turns flagged requests took in my own Claude Code and Cursor history. Rewrites run on a local Ollama model, so prompts never leave the PC.</dd>
-          </dl>
-          <a class="demo-src" href="https://github.com/mhbae-semi-lab/prompt-advisor" target="_blank" rel="noopener">Source code</a>
+        <article class="demo demo-more reveal">
+          <h3>Other public apps</h3>
+          <ul>
+            <li><a href="https://mhbae-semi-lab.github.io/mdcv/" target="_blank" rel="noopener">MDCV mail classifier</a> <span class="demo-kind">Web · Docker self-host</span><p>Pulls tool IDs, alarm codes and Korean deadlines from mail into per-tool threads and a due-date to-do list. <a class="demo-src" href="https://github.com/mhbae-semi-lab/mdcv" target="_blank" rel="noopener">Source</a></p></li>
+            <li><a href="https://mhbae-semi-lab.github.io/weekly-report/" target="_blank" rel="noopener">Weekly report builder</a> <span class="demo-kind">Web</span><p>Turns a git log into three-line topic summaries as PPTX, and blocks numbers that are not in the input. <a class="demo-src" href="https://github.com/mhbae-semi-lab/weekly-report" target="_blank" rel="noopener">Source</a></p></li>
+            <li><a href="https://github.com/mhbae-semi-lab/prompt-advisor/releases/latest" target="_blank" rel="noopener">Prompt Advisor</a> <span class="demo-kind">Windows</span><p>Flags missing tool, version, log and repro details in AI coding requests before you send them. <a class="demo-src" href="https://github.com/mhbae-semi-lab/prompt-advisor" target="_blank" rel="noopener">Source</a></p></li>
+            <li><a href="https://github.com/mhbae-semi-lab/llm-pulse/releases/latest" target="_blank" rel="noopener">LLM Pulse</a> <span class="demo-kind">Windows</span><p>Recommends models per field within the subscriptions you pay for, and shows why the top pick changed. <a class="demo-src" href="https://github.com/mhbae-semi-lab/llm-pulse" target="_blank" rel="noopener">Source</a></p></li>
+          </ul>
         </article>
       </div>
       <p class="soon">In progress: alignment mark detection comparison</p>
@@ -787,7 +744,7 @@
     <p class="d-source">Source: H1 2025 performance report and others</p>
   </template>
 
-  <script src="assets/widgets.js?v=20261122a"></script>
-  <script src="assets/site.js?v=20261122a"></script>
+  <script src="assets/widgets.js?v=20261122b"></script>
+  <script src="assets/site.js?v=20261122b"></script>
 </body>
 </html>

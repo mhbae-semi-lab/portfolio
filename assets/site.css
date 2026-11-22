@@ -126,6 +126,12 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 .demo-why { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin: 6px 0 0; font-size: 15px; }
 .demo-why dt { color: var(--muted); font-weight: 600; }
 .demo-why dd { margin: 0; color: var(--ink-2); }
+.demo-more { align-self: stretch; align-content: start; padding: 24px; background: var(--surface); border-radius: var(--r); }
+.demo-more h3 { margin: 0 0 4px; font-size: 18px; }
+.demo-more ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+.demo-more li > a { font-weight: 650; color: var(--ink); text-decoration: none; }
+.demo-more li > a::after { content: " →"; color: var(--accent); }
+.demo-more p { margin: 2px 0 0; font-size: 15px; color: var(--ink-2); }
 .demo-src { justify-self: start; font-size: 15px; color: var(--accent); }
 .soon { margin-top: 28px; color: var(--muted); font-size: 15px; }
 

@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%232f62d6%22/%3E%3Ctext x=%2216%22 y=%2222.5%22 font-size=%2217%22 font-family=%22sans-serif%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22white%22%3E%EB%B0%B0%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="assets/site.css?v=20261122a">
+  <link rel="stylesheet" href="assets/site.css?v=20261122b">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "배민혁", "jobTitle": "반도체 검사 장비 SW 엔지니어", "url": "https://mhbae-semi-lab.github.io/portfolio/", "email": "mailto:mhbae03@gmail.com", "image": "https://mhbae-semi-lab.github.io/portfolio/assets/img/profile.jpg", "sameAs": ["https://github.com/mhbae-semi-lab"], "alumniOf": [{"@type": "CollegeOrUniversity", "name": "인하대학교 제조혁신전문대학원"}, {"@type": "CollegeOrUniversity", "name": "한국공학대학교"}], "knowsAbout": ["Wafer Align", "결함 검출", "검사 Recipe 자동화", "영상처리", "OpenCV", "C++", "C#", "Auto Focus"]}</script>
 </head>
 <body>
@@ -235,32 +235,6 @@
       <p class="sub">장비 SW 현장에서 반복되던 일을 줄이려고 만든 도구를, 누구나 자기 데이터로 쓸 수 있게 공개했습니다. 데이터는 사용자 기기에만 저장되고, 앱마다 재현 → 비교 → Shadow → 전환 · 롤백 절차를 같은 방식으로 넣었습니다.</p>
       <div class="demos">
         <article class="demo reveal">
-          <a class="demo-main" href="https://mhbae-semi-lab.github.io/log-analyzer/" target="_blank" rel="noopener">
-            <img src="assets/img/app-log-analyzer.webp" alt="설비 로그 분석기 화면, 요약 수치와 모듈별 타임라인" loading="lazy" width="960" height="600">
-            <b>설비 로그 분석기</b>
-          </a>
-          <span class="demo-kind">웹 앱 · 설치 없음 · v1.0.0</span>
-          <dl class="demo-why">
-            <dt>관점</dt><dd>설비 Down 뒤 수만 줄 로그에서 무엇이 먼저 깨졌는지 찾는 시간을 줄입니다.</dd>
-            <dt>해결</dt><dd>알람을 발생 단위로 묶고, 앞서 반복된 경고를 리드 타임 통계로 찾아 근거 줄 번호와 함께 보여줍니다.</dd>
-            <dt>차별점</dt><dd>라벨한 Down 사례마다 조기 경보 규칙이 몇 분 먼저 잡았는지 다시 계산합니다. 수집 서버 없이 파일 하나로 동작합니다.</dd>
-          </dl>
-          <a class="demo-src" href="https://github.com/mhbae-semi-lab/log-analyzer" target="_blank" rel="noopener">소스 코드</a>
-        </article>
-        <article class="demo reveal">
-          <a class="demo-main" href="https://mhbae-semi-lab.github.io/weekly-report/" target="_blank" rel="noopener">
-            <img src="assets/img/app-weekly-report.webp" alt="주간 보고 생성기 화면, 현장 검증 절차 4단계와 막힌 표현 기록" loading="lazy" width="960" height="600">
-            <b>주간 보고 생성기</b>
-          </a>
-          <span class="demo-kind">웹 앱 · 설치 없음 · v1.0.0</span>
-          <dl class="demo-why">
-            <dt>관점</dt><dd>커밋과 현장 메모를 주간 보고 PPT 로 옮기는 반복 업무를, 숫자를 지어내지 않게 자동화합니다.</dd>
-            <dt>해결</dt><dd>커밋을 현장 이슈 · 모듈 · 설비별 주제로 묶고, 3줄 요약과 지난주 대비 진척을 PPTX 로 냅니다.</dd>
-            <dt>차별점</dt><dd>입력에 없는 숫자 · 수량어 · 상태어 · 효과어를 함께 막고 막힌 이유를 보여줍니다. 서버 · 클라우드 계정 없이 로컬 git log 로 동작합니다.</dd>
-          </dl>
-          <a class="demo-src" href="https://github.com/mhbae-semi-lab/weekly-report" target="_blank" rel="noopener">소스 코드</a>
-        </article>
-        <article class="demo reveal">
           <a class="demo-main" href="https://mhbae-semi-lab.github.io/klarf-viewer/" target="_blank" rel="noopener">
             <img src="assets/img/app-klarf-viewer.webp" alt="Klarf 웨이퍼 맵 뷰어 화면, 다이 겹치기에서 찾은 스크라이브 위치 어긋남 오류" loading="lazy" width="960" height="600">
             <b>Klarf 웨이퍼 맵 뷰어</b>
@@ -287,19 +261,6 @@
           <a class="demo-src" href="https://github.com/mhbae-semi-lab/recipe-golden" target="_blank" rel="noopener">소스 코드</a>
         </article>
         <article class="demo reveal">
-          <a class="demo-main" href="https://mhbae-semi-lab.github.io/mdcv/" target="_blank" rel="noopener">
-            <img src="assets/img/app-mdcv.webp" alt="MDCV 받은 메일 화면, 장비 · 알람 코드 태그와 메일별 판정 근거" loading="lazy" width="960" height="600">
-            <b>MDCV 메일 분류기</b>
-          </a>
-          <span class="demo-kind">웹 앱 · 설치 없음 · Docker 셀프호스트 · v1.0.0</span>
-          <dl class="demo-why">
-            <dt>관점</dt><dd>설비 담당자가 하루 30~100통 메일에서 설비 이상 · 회신 요청 · 마감을 놓치지 않게, 메일함 위에 설비를 아는 분류 층을 얹습니다.</dd>
-            <dt>해결</dt><dd>메일마다 장비 · 모듈 · 알람 코드와 마감을 뽑아 설비별 메일 흐름과 기한순 할 일을 만듭니다. 메일을 스스로 보내지 않습니다.</dd>
-            <dt>차별점</dt><dd>"금주 중 · 차주 화요일 · 11/24(화)까지" 같은 한국어 마감 표현을 날짜로 바꿉니다. 메일함을 연결하지 않고 .eml · .mbox · .msg 파일만으로 브라우저 안에서 처리합니다.</dd>
-          </dl>
-          <a class="demo-src" href="https://github.com/mhbae-semi-lab/mdcv" target="_blank" rel="noopener">소스 코드</a>
-        </article>
-        <article class="demo reveal">
           <a class="demo-main" href="https://mhbae-semi-lab.github.io/frame-backlog-sim/" target="_blank" rel="noopener">
             <img src="assets/img/app-frame-backlog-sim.webp" alt="프레임 대기열 시뮬레이터 결과 화면, 메모리 한도 도달 시각과 단계별 지연" loading="lazy" width="960" height="600">
             <b>프레임 대기열 시뮬레이터</b>
@@ -311,6 +272,19 @@
             <dt>차별점</dt><dd>카메라 SDK 와 같은 넘침 정책을 기본 모델로 두어 칸만 채우면 됩니다. 내 타이밍 로그를 그대로 재생하고, 메모리 한도에 닿는 시각을 미리 계산합니다.</dd>
           </dl>
           <a class="demo-src" href="https://github.com/mhbae-semi-lab/frame-backlog-sim" target="_blank" rel="noopener">소스 코드</a>
+        </article>
+        <article class="demo reveal">
+          <a class="demo-main" href="https://mhbae-semi-lab.github.io/log-analyzer/" target="_blank" rel="noopener">
+            <img src="assets/img/app-log-analyzer.webp" alt="설비 로그 분석기 화면, 요약 수치와 모듈별 타임라인" loading="lazy" width="960" height="600">
+            <b>설비 로그 분석기</b>
+          </a>
+          <span class="demo-kind">웹 앱 · 설치 없음 · v1.0.0</span>
+          <dl class="demo-why">
+            <dt>관점</dt><dd>설비 Down 뒤 수만 줄 로그에서 무엇이 먼저 깨졌는지 찾는 시간을 줄입니다.</dd>
+            <dt>해결</dt><dd>알람을 발생 단위로 묶고, 앞서 반복된 경고를 리드 타임 통계로 찾아 근거 줄 번호와 함께 보여줍니다.</dd>
+            <dt>차별점</dt><dd>라벨한 Down 사례마다 조기 경보 규칙이 몇 분 먼저 잡았는지 다시 계산합니다. 수집 서버 없이 파일 하나로 동작합니다.</dd>
+          </dl>
+          <a class="demo-src" href="https://github.com/mhbae-semi-lab/log-analyzer" target="_blank" rel="noopener">소스 코드</a>
         </article>
         <article class="demo reveal">
           <a class="demo-main" href="https://mhbae-semi-lab.github.io/equip-sw-lint/viewer/" target="_blank" rel="noopener">
@@ -325,31 +299,14 @@
           </dl>
           <a class="demo-src" href="https://github.com/mhbae-semi-lab/equip-sw-lint" target="_blank" rel="noopener">소스 코드</a>
         </article>
-        <article class="demo reveal">
-          <a class="demo-main" href="https://github.com/mhbae-semi-lab/llm-pulse/releases/latest" target="_blank" rel="noopener">
-            <img src="assets/img/app-llm-pulse.webp" alt="LLM Pulse 대시보드, 내 구독 안에서 고른 오늘의 추천과 바뀐 이유" loading="lazy" width="960" height="600">
-            <b>LLM Pulse</b>
-          </a>
-          <span class="demo-kind">Windows 앱 · 설치 파일 · 자동 업데이트 · v1.0.0</span>
-          <dl class="demo-why">
-            <dt>관점</dt><dd>벤치마크를 검사 데이터처럼 다룹니다. 숫자마다 출처와 측정일을 붙이고, 소스끼리 어긋나면 표시합니다.</dd>
-            <dt>해결</dt><dd>여러 공개 소스를 합쳐 분야별 최고 · 가성비 모델을 매일 추천하고, 1위가 바뀐 이유를 지표 단위로 보여줍니다.</dd>
-            <dt>차별점</dt><dd>내가 결제한 구독 안에서만 추천하고, 구독과 API 의 손익분기를 보여줍니다.</dd>
-          </dl>
-          <a class="demo-src" href="https://github.com/mhbae-semi-lab/llm-pulse" target="_blank" rel="noopener">소스 코드</a>
-        </article>
-        <article class="demo reveal">
-          <a class="demo-main" href="https://github.com/mhbae-semi-lab/prompt-advisor/releases/latest" target="_blank" rel="noopener">
-            <img src="assets/img/app-prompt-advisor.webp" alt="프롬프트 어드바이저 분석 화면, 짧은 장비 SW 요청에 붙은 경고와 예상 낭비 토큰" loading="lazy" width="960" height="600">
-            <b>프롬프트 어드바이저</b>
-          </a>
-          <span class="demo-kind">Windows 앱 · 설치 파일 · 자동 업데이트 · v1.0.0</span>
-          <dl class="demo-why">
-            <dt>관점</dt><dd>장비 SW 를 AI 코딩 도구로 고칠 때, 장비 · 버전 · 로그 · 재현 조건이 빠진 짧은 요청이 정정 턴과 토큰을 반복해서 씁니다.</dd>
-            <dt>해결</dt><dd>보내기 전에 프롬프트를 점검해 빠진 정보를 짚고, 내 과거 기록으로 예상 낭비와 출력 토큰을 보여줍니다.</dd>
-            <dt>차별점</dt><dd>경고마다 내 Claude Code · Cursor 기록에서 그 경고가 뜬 요청이 턴을 얼마나 더 썼는지 붙입니다. 개선안은 로컬 Ollama 로 만들어 프롬프트가 PC 밖으로 나가지 않습니다.</dd>
-          </dl>
-          <a class="demo-src" href="https://github.com/mhbae-semi-lab/prompt-advisor" target="_blank" rel="noopener">소스 코드</a>
+        <article class="demo demo-more reveal">
+          <h3>그 밖에 공개한 앱</h3>
+          <ul>
+            <li><a href="https://mhbae-semi-lab.github.io/mdcv/" target="_blank" rel="noopener">MDCV 메일 분류기</a> <span class="demo-kind">웹 · Docker 셀프호스트</span><p>메일에서 장비 · 알람 코드 · 한국어 마감을 뽑아 설비별 흐름과 기한순 할 일로 만듭니다. <a class="demo-src" href="https://github.com/mhbae-semi-lab/mdcv" target="_blank" rel="noopener">소스</a></p></li>
+            <li><a href="https://mhbae-semi-lab.github.io/weekly-report/" target="_blank" rel="noopener">주간 보고 생성기</a> <span class="demo-kind">웹</span><p>git log 를 주제별 3줄 요약 PPTX 로 만들고, 입력에 없는 숫자는 막습니다. <a class="demo-src" href="https://github.com/mhbae-semi-lab/weekly-report" target="_blank" rel="noopener">소스</a></p></li>
+            <li><a href="https://github.com/mhbae-semi-lab/prompt-advisor/releases/latest" target="_blank" rel="noopener">프롬프트 어드바이저</a> <span class="demo-kind">Windows</span><p>AI 코딩 요청에서 빠진 장비 · 버전 · 로그 · 재현 조건을 보내기 전에 짚습니다. <a class="demo-src" href="https://github.com/mhbae-semi-lab/prompt-advisor" target="_blank" rel="noopener">소스</a></p></li>
+            <li><a href="https://github.com/mhbae-semi-lab/llm-pulse/releases/latest" target="_blank" rel="noopener">LLM Pulse</a> <span class="demo-kind">Windows</span><p>내가 결제한 구독 안에서 분야별 모델을 추천하고, 1위가 바뀐 이유를 보여 줍니다. <a class="demo-src" href="https://github.com/mhbae-semi-lab/llm-pulse" target="_blank" rel="noopener">소스</a></p></li>
+          </ul>
         </article>
       </div>
       <p class="soon">만드는 중: 정렬 마크 검출 비교</p>
@@ -787,7 +744,7 @@
     <p class="d-source">근거: 2025 상반기 업무성과 기술서 외</p>
   </template>
 
-  <script src="assets/widgets.js?v=20261122a"></script>
-  <script src="assets/site.js?v=20261122a"></script>
+  <script src="assets/widgets.js?v=20261122b"></script>
+  <script src="assets/site.js?v=20261122b"></script>
 </body>
 </html>
