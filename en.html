@@ -59,7 +59,7 @@
     </section>
 
     <section class="figures wrap" aria-label="Key results">
-      <a class="fig-num reveal" href="#p-mark"><strong>−79<span>%</span></strong><p>Mark-based align time<br><small>vs. the template method, 12/12 slots found on site</small></p></a>
+      <a class="fig-num reveal" href="#p-mark"><strong>−84<span>%</span></strong><p>Mark-based align time<br><small>140 s → 23 s vs. the template method, 12/12 slots on site</small></p></a>
       <a class="fig-num reveal" href="#p-recipe"><strong>−92<span>%</span></strong><p>Bump recipe authoring time<br><small>4 h → 20 min, automatic placement from design data</small></p></a>
       <a class="fig-num reveal" href="#p-focus"><strong>−72<span>%</span></strong><p>Auto Focus time<br><small>image AF with parallel checks, then contact sensing at ±2µm</small></p></a>
       <a class="fig-num reveal" href="#p-stable"><strong>264<span>h</span></strong><p>0 failures in operation<br><small>new tool, 11 days running, Vision uptime 98.86%</small></p></a>
@@ -119,7 +119,7 @@
           <div class="card-body">
             <h3>Shot Key mark detection, rules + CNN</h3>
             <p>Finds die marks without templates; a CNN covers faint marks the rules miss.</p>
-            <dl class="kpi"><div><dt>Align time</dt><dd>−79%</dd></div><div><dt>False detections (with CNN)</dt><dd>−59%</dd></div></dl>
+            <dl class="kpi"><div><dt>Align time</dt><dd>−84%</dd></div><div><dt>False detections (with CNN)</dt><dd>−59%</dd></div></dl>
             <span class="more-link">Details</span>
           </div>
         </a>
@@ -518,14 +518,14 @@
     <p class="d-meta">2026 · detection algorithm, training tool, CNN training and ONNX deployment, shadow judgment tool</p>
     <h2 id="detail-title">Shot Key Align, rules + CNN</h2>
     <figure class="d-fig"><img src="assets/img/fig-mark.webp" alt="Three cross marks among similar pads: two in solid boxes, one faint mark in a dashed box, correlation map at bottom right" width="900" height="600"><figcaption>Rule detections (solid) and a faint mark missed by score (dashed); bottom right is the correlation map. Synthetic image</figcaption></figure>
-    <dl class="kpi"><div><dt>Align time</dt><dd>−79%</dd></div><div><dt>False detections (with CNN)</dt><dd>−59%</dd></div><div><dt>Field slot detection</dt><dd>12/12</dd></div><div><dt>Inference p95 latency</dt><dd>−58%</dd></div></dl>
+    <dl class="kpi"><div><dt>Align time</dt><dd>−84%</dd></div><div><dt>False detections (with CNN)</dt><dd>−59%</dd></div><div><dt>Field slot detection</dt><dd>12/12</dd></div><div><dt>Inference p95 latency</dt><dd>−58%</dd></div></dl>
     <section class="d-step">
       <h3><span>1</span>Slow, and re-registered at every site</h3>
       <p>Template-based align was slow and needed marks re-registered at every new site. Rule parameters did not fit every image, causing false detections.</p>
     </section>
     <section class="d-step">
       <h3><span>2</span>Find marks by rules, without templates</h3>
-      <p>Detected die-level rule marks without templates and cut the capture range from 7 lines to about 3. Align time <b>−79%</b>, <b>12/12 slots</b> detected on site.</p>
+      <p>Detected die-level rule marks without templates and cut the capture range from 7 lines to about 3. Align time <b>140 s → 23 s (−84%)</b>, <b>12/12 slots</b> detected on site.</p>
     </section>
     <section class="d-step">
       <h3><span>3</span>Learn parameters from field images</h3>
@@ -542,7 +542,7 @@
       <ul><li>Performance review: the CNN kept detections while cutting false detections by 59%; the detection gain was not statistically significant, and I reported it that way.</li><li>Offline evaluation in the training tool with a date split: the combined policy brought both the rule-only misses (about 2.6%) and false detections on mark-free images (about 5.1%) to 0. This is on in-house images, the evaluation labels lean toward the rules, and it has not been applied in the field yet.</li></ul>
     </section>
     <p class="d-tags">C#, C++, OpenCV, PyTorch, ONNX, HOG</p>
-    <p class="d-source">Source: H1 2026 performance materials, Shot Key training tool documentation</p>
+    <p class="d-source">Source: H1 2026 performance materials, 2026 week 37 work report, Shot Key training tool documentation</p>
   </template>
 
   <template id="p-recipe">
