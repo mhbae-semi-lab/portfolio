@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%232f62d6%22/%3E%3Ctext x=%2216%22 y=%2222.5%22 font-size=%2217%22 font-family=%22sans-serif%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22white%22%3E%EB%B0%B0%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="assets/site.css?v=20261121h">
+  <link rel="stylesheet" href="assets/site.css?v=20261122a">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Minhyeok Bae", "alternateName": "배민혁", "jobTitle": "Semiconductor Inspection Equipment SW Engineer", "url": "https://mhbae-semi-lab.github.io/portfolio/en.html", "email": "mailto:mhbae03@gmail.com", "image": "https://mhbae-semi-lab.github.io/portfolio/assets/img/profile.jpg", "sameAs": ["https://github.com/mhbae-semi-lab"], "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Inha University, Graduate School of Manufacturing Innovation"}, {"@type": "CollegeOrUniversity", "name": "Tech University of Korea"}], "knowsAbout": ["Wafer Align", "Defect detection", "Inspection recipe automation", "Image processing", "OpenCV", "C++", "C#", "Auto Focus"]}</script>
 </head>
 <body>
@@ -261,6 +261,71 @@
           <a class="demo-src" href="https://github.com/mhbae-semi-lab/weekly-report" target="_blank" rel="noopener">Source code</a>
         </article>
         <article class="demo reveal">
+          <a class="demo-main" href="https://mhbae-semi-lab.github.io/klarf-viewer/" target="_blank" rel="noopener">
+            <img src="assets/img/en/app-klarf-viewer.webp" alt="Klarf wafer map viewer with a scribe offset error found in the die overlay" loading="lazy" width="960" height="600">
+            <b>Klarf wafer map viewer</b>
+          </a>
+          <span class="demo-kind">Web app · no install · v1.0.0</span>
+          <dl class="demo-why">
+            <dt>Angle</dt><dd>Built from the view of someone who made recipes and maps: check that the map definition is right before looking at defects.</dd>
+            <dt>Solves</dt><dd>Opens KLARF files on any PC, not just the tool PC, with wafer map, overlay and two-file compare. Opens one million defects in under 3 seconds.</dd>
+            <dt>Different</dt><dd>Reads both KLARF 1.2 and 1.8 locally in the browser with no install. On open it checks five map-definition items such as pitch, scribe and origin die, and lets you view an estimated fix.</dd>
+          </dl>
+          <a class="demo-src" href="https://github.com/mhbae-semi-lab/klarf-viewer" target="_blank" rel="noopener">Source code</a>
+        </article>
+        <article class="demo reveal">
+          <a class="demo-main" href="https://mhbae-semi-lab.github.io/recipe-golden/" target="_blank" rel="noopener">
+            <img src="assets/img/en/app-recipe-golden.webp" alt="Recipe baseline manager with the tool-by-version board and the pre-run check" loading="lazy" width="960" height="600">
+            <b>Recipe baseline manager</b>
+          </a>
+          <span class="demo-kind">Web app · no install · v1.0.0</span>
+          <dl class="demo-why">
+            <dt>Angle</dt><dd>Shows which tool differs from the baseline and what changed when, from recipe files alone, with no SECS/GEM or MES link.</dd>
+            <dt>Solves</dt><dd>Reads JSON, INI, XML, CSV and key=value into one parameter tree, diffs with tolerance and units, and gives a pass or block with reasons before a run.</dd>
+            <dt>Different</dt><dd>Tool-by-version board, one-tool pilot then full rollout bundle, and rollback bundle on one screen. Runs in the browser from files only, with no server or agent.</dd>
+          </dl>
+          <a class="demo-src" href="https://github.com/mhbae-semi-lab/recipe-golden" target="_blank" rel="noopener">Source code</a>
+        </article>
+        <article class="demo reveal">
+          <a class="demo-main" href="https://mhbae-semi-lab.github.io/mdcv/" target="_blank" rel="noopener">
+            <img src="assets/img/en/app-mdcv.webp" alt="MDCV inbox with equipment and alarm code tags and the reasons behind each mail's result" loading="lazy" width="960" height="600">
+            <b>MDCV mail classifier</b>
+          </a>
+          <span class="demo-kind">Web app · no install · Docker self-host · v1.0.0</span>
+          <dl class="demo-why">
+            <dt>Angle</dt><dd>Adds an equipment-aware layer on top of the inbox, so a tool owner reading 30 to 100 mails a day does not miss tool faults, reply requests or deadlines.</dd>
+            <dt>Solves</dt><dd>Pulls tool IDs, modules, alarm codes and deadlines from each mail into per-tool mail threads and a to-do list sorted by due date. It never sends mail on its own.</dd>
+            <dt>Different</dt><dd>Turns Korean deadline phrases such as "this week", "next Tuesday" or "by 11/24 (Tue)" into dates. Works in the browser from .eml, .mbox and .msg files, with no mailbox connection.</dd>
+          </dl>
+          <a class="demo-src" href="https://github.com/mhbae-semi-lab/mdcv" target="_blank" rel="noopener">Source code</a>
+        </article>
+        <article class="demo reveal">
+          <a class="demo-main" href="https://mhbae-semi-lab.github.io/frame-backlog-sim/" target="_blank" rel="noopener">
+            <img src="assets/img/en/app-frame-backlog-sim.webp" alt="Frame backlog simulator results with the time memory hits its limit and per-stage latency" loading="lazy" width="960" height="600">
+            <b>Frame backlog simulator</b>
+          </a>
+          <span class="demo-kind">Web app · no install · v1.0.0</span>
+          <dl class="demo-why">
+            <dt>Angle</dt><dd>Finds, before deploying to the tool, the one slightly slow stage that fills the queue and memory hours later.</dd>
+            <dt>Solves</dt><dd>Simulates per-stage processing time, workers, queue size and overflow policy, and reports p99 latency, dropped frames and the queue size needed for zero loss.</dd>
+            <dt>Different</dt><dd>Uses the same overflow policies as camera SDKs as the built-in model, so you only fill in fields. Replays your own timing log and computes when memory will hit its limit.</dd>
+          </dl>
+          <a class="demo-src" href="https://github.com/mhbae-semi-lab/frame-backlog-sim" target="_blank" rel="noopener">Source code</a>
+        </article>
+        <article class="demo reveal">
+          <a class="demo-main" href="https://mhbae-semi-lab.github.io/equip-sw-lint/viewer/" target="_blank" rel="noopener">
+            <img src="assets/img/en/app-equip-sw-lint.webp" alt="Equipment software risk-code lint report with a serial read without timeout, how the tool stalls and how to fix it" loading="lazy" width="960" height="600">
+            <b>Equipment SW risk-code lint</b>
+          </a>
+          <span class="demo-kind">Roslyn analyzer · dotnet tool (NuGet) · browser report · v1.0.0</span>
+          <dl class="demo-why">
+            <dt>Angle</dt><dd>C# equipment software runs for weeks on a tool PC, so many downs only show up over time. Finds the code shapes that actually caused downs, before commit.</dd>
+            <dt>Solves</dt><dd>Checks 11 rules through a NuGet analyzer in the build and a no-build CLI, and shows the evidence line, how the tool stalls and how to fix it in a browser report.</dd>
+            <dt>Different</dt><dd>Nine rules for patterns that only show up in long runs, such as 32-bit TickCount comparisons that wrap after 24.9 days and timer callback reentrancy, each with a reproduction test.</dd>
+          </dl>
+          <a class="demo-src" href="https://github.com/mhbae-semi-lab/equip-sw-lint" target="_blank" rel="noopener">Source code</a>
+        </article>
+        <article class="demo reveal">
           <a class="demo-main" href="https://github.com/mhbae-semi-lab/llm-pulse/releases/latest" target="_blank" rel="noopener">
             <img src="assets/img/en/app-llm-pulse.webp" alt="LLM Pulse dashboard with today’s pick within my subscriptions and what changed" loading="lazy" width="960" height="600">
             <b>LLM Pulse</b>
@@ -287,7 +352,7 @@
           <a class="demo-src" href="https://github.com/mhbae-semi-lab/prompt-advisor" target="_blank" rel="noopener">Source code</a>
         </article>
       </div>
-      <p class="soon">In progress: Klarf wafer map viewer, recipe baseline manager, alignment mark detection comparison, mail classifier</p>
+      <p class="soon">In progress: alignment mark detection comparison</p>
       <h3 class="lessons-head">How I work with AI</h3>
       <ul class="lessons">
         <li class="reveal"><b>I set the design and the pass criteria</b><p>I write down first what to build, what counts as correct, and how to check it.</p></li>
@@ -722,7 +787,7 @@
     <p class="d-source">Source: H1 2025 performance report and others</p>
   </template>
 
-  <script src="assets/widgets.js?v=20261121h"></script>
-  <script src="assets/site.js?v=20261121h"></script>
+  <script src="assets/widgets.js?v=20261122a"></script>
+  <script src="assets/site.js?v=20261122a"></script>
 </body>
 </html>

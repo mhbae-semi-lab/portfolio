@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%232f62d6%22/%3E%3Ctext x=%2216%22 y=%2222.5%22 font-size=%2217%22 font-family=%22sans-serif%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22white%22%3E%EB%B0%B0%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="assets/site.css?v=20261121h">
+  <link rel="stylesheet" href="assets/site.css?v=20261122a">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "배민혁", "jobTitle": "반도체 검사 장비 SW 엔지니어", "url": "https://mhbae-semi-lab.github.io/portfolio/", "email": "mailto:mhbae03@gmail.com", "image": "https://mhbae-semi-lab.github.io/portfolio/assets/img/profile.jpg", "sameAs": ["https://github.com/mhbae-semi-lab"], "alumniOf": [{"@type": "CollegeOrUniversity", "name": "인하대학교 제조혁신전문대학원"}, {"@type": "CollegeOrUniversity", "name": "한국공학대학교"}], "knowsAbout": ["Wafer Align", "결함 검출", "검사 Recipe 자동화", "영상처리", "OpenCV", "C++", "C#", "Auto Focus"]}</script>
 </head>
 <body>
@@ -261,6 +261,71 @@
           <a class="demo-src" href="https://github.com/mhbae-semi-lab/weekly-report" target="_blank" rel="noopener">소스 코드</a>
         </article>
         <article class="demo reveal">
+          <a class="demo-main" href="https://mhbae-semi-lab.github.io/klarf-viewer/" target="_blank" rel="noopener">
+            <img src="assets/img/app-klarf-viewer.webp" alt="Klarf 웨이퍼 맵 뷰어 화면, 다이 겹치기에서 찾은 스크라이브 위치 어긋남 오류" loading="lazy" width="960" height="600">
+            <b>Klarf 웨이퍼 맵 뷰어</b>
+          </a>
+          <span class="demo-kind">웹 앱 · 설치 없음 · v1.0.0</span>
+          <dl class="demo-why">
+            <dt>관점</dt><dd>레시피와 맵을 만들던 사람의 눈으로, 결함을 보기 전에 맵 정의가 맞는지부터 확인합니다.</dd>
+            <dt>해결</dt><dd>장비 PC 가 아닌 아무 PC 에서 KLARF 파일을 열어 웨이퍼 맵 · 겹치기 · 두 파일 비교를 봅니다. 결함 100만 개를 3초 안에 엽니다.</dd>
+            <dt>차별점</dt><dd>설치 없이 브라우저에서 KLARF 1.2 와 1.8 을 모두 로컬로 읽습니다. 열 때 pitch · 스크라이브 · 원점 다이 등 맵 정의 5가지를 검사하고, 추정값으로 고쳐 봅니다.</dd>
+          </dl>
+          <a class="demo-src" href="https://github.com/mhbae-semi-lab/klarf-viewer" target="_blank" rel="noopener">소스 코드</a>
+        </article>
+        <article class="demo reveal">
+          <a class="demo-main" href="https://mhbae-semi-lab.github.io/recipe-golden/" target="_blank" rel="noopener">
+            <img src="assets/img/app-recipe-golden.webp" alt="레시피 기준 관리 화면, 장비 × 버전 현황판과 검사 전 검증" loading="lazy" width="960" height="600">
+            <b>레시피 기준 관리</b>
+          </a>
+          <span class="demo-kind">웹 앱 · 설치 없음 · v1.0.0</span>
+          <dl class="demo-why">
+            <dt>관점</dt><dd>SECS/GEM · MES 연동 없이 레시피 파일만으로, 어느 장비가 기준과 다른지와 무엇이 언제 바뀌었는지 봅니다.</dd>
+            <dt>해결</dt><dd>JSON · INI · XML · CSV · key=value 를 같은 파라미터 트리로 읽고, 허용 오차 · 단위를 반영한 차이와 검사 전 통과 / 차단 사유를 냅니다.</dd>
+            <dt>차별점</dt><dd>장비 × 버전 현황판, 1대 시범 → 전체 배포 묶음, 롤백 묶음을 한 화면에서 만듭니다. 서버 · 에이전트 없이 브라우저에서 파일만으로 동작합니다.</dd>
+          </dl>
+          <a class="demo-src" href="https://github.com/mhbae-semi-lab/recipe-golden" target="_blank" rel="noopener">소스 코드</a>
+        </article>
+        <article class="demo reveal">
+          <a class="demo-main" href="https://mhbae-semi-lab.github.io/mdcv/" target="_blank" rel="noopener">
+            <img src="assets/img/app-mdcv.webp" alt="MDCV 받은 메일 화면, 장비 · 알람 코드 태그와 메일별 판정 근거" loading="lazy" width="960" height="600">
+            <b>MDCV 메일 분류기</b>
+          </a>
+          <span class="demo-kind">웹 앱 · 설치 없음 · Docker 셀프호스트 · v1.0.0</span>
+          <dl class="demo-why">
+            <dt>관점</dt><dd>설비 담당자가 하루 30~100통 메일에서 설비 이상 · 회신 요청 · 마감을 놓치지 않게, 메일함 위에 설비를 아는 분류 층을 얹습니다.</dd>
+            <dt>해결</dt><dd>메일마다 장비 · 모듈 · 알람 코드와 마감을 뽑아 설비별 메일 흐름과 기한순 할 일을 만듭니다. 메일을 스스로 보내지 않습니다.</dd>
+            <dt>차별점</dt><dd>"금주 중 · 차주 화요일 · 11/24(화)까지" 같은 한국어 마감 표현을 날짜로 바꿉니다. 메일함을 연결하지 않고 .eml · .mbox · .msg 파일만으로 브라우저 안에서 처리합니다.</dd>
+          </dl>
+          <a class="demo-src" href="https://github.com/mhbae-semi-lab/mdcv" target="_blank" rel="noopener">소스 코드</a>
+        </article>
+        <article class="demo reveal">
+          <a class="demo-main" href="https://mhbae-semi-lab.github.io/frame-backlog-sim/" target="_blank" rel="noopener">
+            <img src="assets/img/app-frame-backlog-sim.webp" alt="프레임 대기열 시뮬레이터 결과 화면, 메모리 한도 도달 시각과 단계별 지연" loading="lazy" width="960" height="600">
+            <b>프레임 대기열 시뮬레이터</b>
+          </a>
+          <span class="demo-kind">웹 앱 · 설치 없음 · v1.0.0</span>
+          <dl class="demo-why">
+            <dt>관점</dt><dd>조금 느린 단계 하나가 몇 시간 뒤 대기열과 메모리를 터뜨리는 문제를, 장비에 올리기 전에 찾습니다.</dd>
+            <dt>해결</dt><dd>단계별 처리 시간 · 작업자 수 · 큐 크기 · 넘칠 때 정책으로 시뮬레이션해 지연 p99, 버린 프레임, 손실 0 에 필요한 큐 크기를 냅니다.</dd>
+            <dt>차별점</dt><dd>카메라 SDK 와 같은 넘침 정책을 기본 모델로 두어 칸만 채우면 됩니다. 내 타이밍 로그를 그대로 재생하고, 메모리 한도에 닿는 시각을 미리 계산합니다.</dd>
+          </dl>
+          <a class="demo-src" href="https://github.com/mhbae-semi-lab/frame-backlog-sim" target="_blank" rel="noopener">소스 코드</a>
+        </article>
+        <article class="demo reveal">
+          <a class="demo-main" href="https://mhbae-semi-lab.github.io/equip-sw-lint/viewer/" target="_blank" rel="noopener">
+            <img src="assets/img/app-equip-sw-lint.webp" alt="장비 SW 위험 코드 린트 보고서 화면, 타임아웃 없는 시리얼 읽기 경고와 장비에서 멈추는 방식 · 고치는 법" loading="lazy" width="960" height="600">
+            <b>장비 SW 위험 코드 린트</b>
+          </a>
+          <span class="demo-kind">Roslyn 분석기 · dotnet tool (NuGet) · 브라우저 보고서 · v1.0.0</span>
+          <dl class="demo-why">
+            <dt>관점</dt><dd>장비 PC 에서 몇 주씩 도는 C# 설비 SW 는 시간이 지나야 Down 이 드러납니다. 실제로 Down 을 낸 코드 모양을 커밋 전에 찾습니다.</dd>
+            <dt>해결</dt><dd>규칙 11개를 빌드에 붙는 NuGet 분석기와 빌드 없는 CLI 로 검사하고, 브라우저 보고서에서 근거 줄 · 장비에서 멈추는 방식 · 고치는 법을 봅니다.</dd>
+            <dt>차별점</dt><dd>24.9일 뒤 넘어가는 TickCount 비교, 타이머 콜백 재진입처럼 오래 돌려야 드러나는 패턴을 규칙 9개로 두고, 규칙마다 재현 테스트를 붙였습니다.</dd>
+          </dl>
+          <a class="demo-src" href="https://github.com/mhbae-semi-lab/equip-sw-lint" target="_blank" rel="noopener">소스 코드</a>
+        </article>
+        <article class="demo reveal">
           <a class="demo-main" href="https://github.com/mhbae-semi-lab/llm-pulse/releases/latest" target="_blank" rel="noopener">
             <img src="assets/img/app-llm-pulse.webp" alt="LLM Pulse 대시보드, 내 구독 안에서 고른 오늘의 추천과 바뀐 이유" loading="lazy" width="960" height="600">
             <b>LLM Pulse</b>
@@ -287,7 +352,7 @@
           <a class="demo-src" href="https://github.com/mhbae-semi-lab/prompt-advisor" target="_blank" rel="noopener">소스 코드</a>
         </article>
       </div>
-      <p class="soon">만드는 중: Klarf 웨이퍼 맵 뷰어, 레시피 기준 관리, 정렬 마크 검출 비교, 메일 분류기</p>
+      <p class="soon">만드는 중: 정렬 마크 검출 비교</p>
       <h3 class="lessons-head">AI 와 일하는 방식</h3>
       <ul class="lessons">
         <li class="reveal"><b>설계와 검증 기준은 직접 정합니다</b><p>무엇을 만들지, 무엇을 맞다고 볼지, 어떻게 확인할지는 제가 먼저 적습니다.</p></li>
@@ -722,7 +787,7 @@
     <p class="d-source">근거: 2025 상반기 업무성과 기술서 외</p>
   </template>
 
-  <script src="assets/widgets.js?v=20261121h"></script>
-  <script src="assets/site.js?v=20261121h"></script>
+  <script src="assets/widgets.js?v=20261122a"></script>
+  <script src="assets/site.js?v=20261122a"></script>
 </body>
 </html>
