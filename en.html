@@ -61,7 +61,7 @@
     <section class="figures wrap" aria-label="Key results">
       <a class="fig-num reveal" href="#p-mark"><strong>−84<span>%</span></strong><p>Mark-based align time<br><small>140 s → 23 s vs. the template method, 12/12 slots on site</small></p></a>
       <a class="fig-num reveal" href="#p-recipe"><strong>−92<span>%</span></strong><p>Bump recipe authoring time<br><small>4 h → 20 min, automatic placement from design data</small></p></a>
-      <a class="fig-num reveal" href="#p-focus"><strong>−72<span>%</span></strong><p>Auto Focus time<br><small>image AF with parallel checks, then contact sensing at ±2µm</small></p></a>
+      <a class="fig-num reveal" href="#p-focus"><strong>−72<span>%</span></strong><p>Auto Focus time<br><small>90 s → 25 s, image AF with parallel checks, then contact sensing at ±2µm</small></p></a>
       <a class="fig-num reveal" href="#p-stable"><strong>264<span>h</span></strong><p>0 failures in operation<br><small>new tool, 11 days running, Vision uptime 98.86%</small></p></a>
     </section>
 
@@ -496,7 +496,7 @@
     <section class="d-step">
       <h3><span>1</span>Faster image AF, and its limit</h3>
       <figure class="d-fig light"><img src="assets/img/en/fig-focus.webp" alt="Sharpness vs. height. A well-textured floor peaks at the true height; a weakly textured floor gives a flat curve" width="900" height="600"><figcaption>On a weakly textured floor the sharpness curve is flat, so its peak cannot be trusted. Synthetic floor image</figcaption></figure>
-      <p>Checking the floor one direction at a time became a simultaneous check of all directions, <b>cutting AF time by 72%.</b> But with a weakly textured floor, or no image change after a shear, the height could not be told apart.</p>
+      <p>Checking the floor one direction at a time became a simultaneous check of all directions, <b>cutting AF time from 90 s to 25 s (−72%).</b> But with a weakly textured floor, or no image change after a shear, the height could not be told apart.</p>
     </section>
 
     <section class="d-step">
@@ -511,7 +511,7 @@
       <p>No height-measured samples were available on site, so I validated by per-particle repeatability. Particles of 300 µm and up, 20 repeats: <b>±2µm</b>; shear height for 50 to 100 µm: <b>±1µm</b>; continuous production material and multiple shears normal.</p>
     </section>
     <p class="d-tags">C#, motion control, DAQ, OpenCV</p>
-    <p class="d-source">Source: H2 2025 performance report</p>
+    <p class="d-source">Source: H2 2025 performance report, 2025 week 38 work report</p>
   </template>
 
   <template id="p-mark">
