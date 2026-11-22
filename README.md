@@ -15,7 +15,7 @@
 | 06 | MDCV 메일 분류기 — 설비 · 알람 코드 분류 · 한국어 마감 → 기한순 할 일 (웹 + Docker 셀프호스트) | [열기](https://mhbae-semi-lab.github.io/mdcv/) | [mdcv](https://github.com/mhbae-semi-lab/mdcv) | v1.0.0 |
 | 07 | 프롬프트 어드바이저 — 보내기 전 낭비 경고 · 장비 SW 요청 린트 (Windows) | [설치 파일](https://github.com/mhbae-semi-lab/prompt-advisor/releases/latest) | [prompt-advisor](https://github.com/mhbae-semi-lab/prompt-advisor) | v1.0.0 |
 | 08 | 프레임 대기열 시뮬레이터 — 단계별 처리 시간 · 넘침 정책 · 메모리 한도 도달 시각 (웹) | [열기](https://mhbae-semi-lab.github.io/frame-backlog-sim/) | [frame-backlog-sim](https://github.com/mhbae-semi-lab/frame-backlog-sim) | v1.0.0 |
-| 09 | 장비 SW 위험 코드 린트 — 장시간 운영 Down 패턴 Roslyn 분석기 · dotnet tool CLI · 브라우저 보고서 (NuGet) | [보고서 뷰어](https://mhbae-semi-lab.github.io/equip-sw-lint/viewer/) · [NuGet](https://www.nuget.org/packages/EquipSwLint.Analyzers) | [equip-sw-lint](https://github.com/mhbae-semi-lab/equip-sw-lint) | v1.0.0 |
+| 09 | 장비 SW 위험 코드 린트 — 장시간 운영 Down 패턴 Roslyn 분석기 · dotnet tool CLI · 브라우저 보고서 (NuGet) | [보고서 뷰어](https://mhbae-semi-lab.github.io/equip-sw-lint/viewer/) · [NuGet](https://www.nuget.org/packages/EquipSwLint.Analyzers) | [equip-sw-lint](https://github.com/mhbae-semi-lab/equip-sw-lint) | v1.0.1 |
 
 ## 원칙
 - **데이터**: 합성 데이터 또는 공개 데이터셋만 씁니다. 실제 장비 로그 · 레시피 · 사내 양식은 들어 있지 않습니다.
