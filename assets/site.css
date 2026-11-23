@@ -171,6 +171,7 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 .d-fig.light { background: var(--fig-light); }
 .d-fig figcaption { font-size: 13px; color: #b9c0c9; padding: 9px 14px 10px; }
 .d-fig.light figcaption { color: #5f6773; }
+.d-fig.light figcaption summary { color: #2f62d6; }
 .d-tags { color: var(--muted); font-size: 14.5px; border-top: 1px solid var(--line); padding-top: 16px; margin-top: 8px; }
 
 /* 움직임: 스크롤로 들어올 때 한 번, 시트는 옆에서 들어옴. 움직임 줄이기 설정이면 끔 */
