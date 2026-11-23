@@ -45,7 +45,7 @@ EN = {
     "임시 파일에 쓴 뒤 이름 바꾸기  ·  같은 요청은 한 번만 처리  ·  일시 오류만 재시도":
         "Write temp, then rename  ·  Each request handled once  ·  Retry transient errors only",
     "입자": "Particle", "장비 프로그램": "Tool program",
-    "적외선 시료 반복성 평가 7건 (일주일)  ·  Glass 202매 평가 (2일)": "7 infrared repeatability evaluations (1 week)  ·  202 glass wafers (2 days)",
+    "적외선 시료 반복성 평가 7건 (일주일)  ·  Glass 자재 평가 (2일)": "7 infrared repeatability evaluations (1 week)  ·  glass wafer evaluation (2 days)",
     "전송 시간 (초)": "Transfer time (s)", "접촉 감지로 잰 높이 (±2µm)": "Height by contact sensing (±2µm)",
     "정리 전": "Before", "정리 후": "After", "정상 방향": "Normal orientation",
     "정적 분석 경고 (2025 하)": "Static analysis warnings (H2 2025)", "채널 중앙값 밝기": "Channel median brightness",

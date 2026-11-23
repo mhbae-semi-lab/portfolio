@@ -449,7 +449,7 @@
       <p>연산은 150ms 에서 약 700ms 로 늘었지만 양산 Takt 안에서 허용되는 수준입니다. 보이는 Die 가 적은 영역은 판정을 거부하도록 설계했고, 양산 전환 검증을 진행 중입니다.</p>
     </section>
     <p class="d-tags">C++, Python, OpenCV</p>
-    <p class="d-source">근거: 2026 상반기 업무성과 자료</p>
+    <p class="d-source">근거: 사내 평가 기록 (2026 상반기)</p>
   </template>
 
   <template id="p-stable">
@@ -485,7 +485,7 @@
       <p>Lifter 원점 방식, Vacuum 상태 감시, 웨이퍼 존재 재확인 등 Interlock 을 다시 정비했습니다. 이후 23 Slot 오동작 <b>0건</b>.</p>
     </section>
     <p class="d-tags">C# (WinForms), OpenCV</p>
-    <p class="d-source">근거: 2025 하반기 업무성과 기술서, 현장 Setup 과 펜딩 정리, 경력 정리 문서 (일정)</p>
+    <p class="d-source">근거: 사내 평가 기록 (2025 하반기), 현장 Setup 기록</p>
   </template>
 
   <template id="p-focus">
@@ -512,7 +512,7 @@
       <p>높이를 계측한 자재가 현장에 없어 입자별 반복성으로 검증했습니다. 300µm 이상 입자 20회 반복 <b>±2µm</b>, 50~100µm 구간 Shear 높이 <b>±1µm</b>, 양산 자재 연속, 다중 Shear 정상.</p>
     </section>
     <p class="d-tags">C#, 모션 제어, DAQ, OpenCV</p>
-    <p class="d-source">근거: 2025 하반기 업무성과 기술서, 2025년 38주차 업무 보고</p>
+    <p class="d-source">근거: 사내 평가 기록 (2025 하반기)</p>
   </template>
 
   <template id="p-mark">
@@ -540,10 +540,10 @@
     <section class="d-step">
       <h3><span>5</span>CNN 은 Shadow 로 먼저</h3>
       <p>규칙 결과를 CNN 이 검증하고, 실패하면 CNN 위치로 대체합니다. 바로 바꾸지 않고 Shadow 로 병행 운용하며, 단계적 투입과 즉시 롤백을 계획했습니다.</p>
-      <ul><li>업무성과 평가: CNN 은 검출을 유지하면서 오검출을 59% 줄였고, 검출 향상은 통계적으로 유의하지 않아 그대로 보고했습니다.</li><li>학습 도구의 날짜 분할 오프라인 평가: 결합 정책이 규칙 단독의 놓침(약 2.6%)과 마크 없는 화면 오검출(약 5.1%)을 모두 0으로 줄였습니다. 사내 이미지 기준이고, 평가 라벨이 규칙에 유리하게 치우쳐 있으며, 현장 적용 전입니다.</li></ul>
+      <ul><li>사내 평가: CNN 은 검출을 유지하면서 오검출을 59% 줄였고, 검출 향상은 통계적으로 유의하지 않아 그대로 보고했습니다.</li><li>학습 도구의 날짜 분할 오프라인 평가: 결합 정책이 규칙 단독의 놓침(약 2.6%)과 마크 없는 화면 오검출(약 5.1%)을 모두 0으로 줄였습니다. 사내 이미지 기준이고, 평가 라벨이 규칙에 유리하게 치우쳐 있으며, 현장 적용 전입니다.</li></ul>
     </section>
     <p class="d-tags">C#, C++, OpenCV, PyTorch, ONNX, HOG</p>
-    <p class="d-source">근거: 2026 상반기 업무성과 자료, 2026년 37주차 업무 보고, Shot Key 학습 도구 문서</p>
+    <p class="d-source">근거: 사내 평가 기록 (2026 상반기), 학습 도구 문서</p>
   </template>
 
   <template id="p-recipe">
@@ -557,7 +557,7 @@
     </section>
     <section class="d-step">
       <h3><span>2</span>모양과 위치를 함께 복원</h3>
-      <p>Min Pooling 방식을 좌표 Snapping, Oversampling, Box Resampling, Threshold 로 바꿨습니다(위 그림). 여러 크기의 VIA 와 Bump 로 기준 영상과 일치하는지 검증했고, 양산 자재(8µm VIA, 20µm Bump)로 위치와 형상이 일치해 <b>양산 검증을 통과</b>했습니다.</p>
+      <p>Min Pooling 방식을 좌표 Snapping, Oversampling, Box Resampling, Threshold 로 바꿨습니다(위 그림). 여러 크기의 VIA 와 Bump 로 기준 영상과 일치하는지 검증했고, 양산 자재(미세 VIA 와 Bump)로 위치와 형상이 일치해 <b>양산 검증을 통과</b>했습니다.</p>
     </section>
     <section class="d-step">
       <h3><span>3</span>대면적은 필요한 곳만</h3>
@@ -572,7 +572,7 @@
       <p>Site 마다 따로 운영되던 Recipe 생성 환경을 묶는 통합 도구를 만들고, 도면 → BMP 변환과 Auto Masking 을 하는 GDS Editor 를 구현했습니다. 전 Site 적용은 예정입니다. RAC 운영 방안, 사용자 Manual, Featureless Align 양산 전환 계획 등 고객 공유 문서 4건을 썼습니다. 통합 도구의 배포와 안정성은 <a href="#p-recipe-deploy">따로 정리했습니다</a>.</p>
     </section>
     <p class="d-tags">C# (WPF), C++, Python</p>
-    <p class="d-source">근거: 2026 상반기 업무성과 기술서</p>
+    <p class="d-source">근거: 사내 평가 기록 (2026 상반기)</p>
   </template>
 
   <template id="p-crack">
@@ -586,14 +586,14 @@
     </section>
     <section class="d-step">
       <h3><span>2</span>5단계로 나눈 검출</h3>
-      <p>가장자리 탐색, 가변 Mask, 결함 검출, 크기 필터, Interlock 의 5단계로 나누고, 가장자리 띠 폭과 밝기 조건을 파라미터로 뺐습니다. 전체 결함 1,883건 중 <b>524건</b>을 새로 검출했고, HBM4 4개 조건을 모두 통과했습니다(Real Rate 목표 70% 대비 최대 92.6%).</p>
+      <p>가장자리 탐색, 가변 Mask, 결함 검출, 크기 필터, Interlock 의 5단계로 나누고, 가장자리 띠 폭과 밝기 조건을 파라미터로 뺐습니다. 전체 결함 1,883건 중 <b>524건</b>을 새로 검출했고, 적층 메모리 평가 조건 4개를 모두 통과했습니다(Real Rate 최대 92.6%, 고객 기준 이상).</p>
     </section>
     <section class="d-step">
       <h3><span>3</span>TB 급 영상을 여는 도구</h3>
       <p>영상을 Tile 로 나눠 필요한 영역만 여는 독립 프로그램을 만들고 채널별 분리 저장도 넣었습니다. 고객 요구 Align 지표 7종을 로그에서 자동 집계해 엑셀로 내는 도구도 만들었습니다.</p>
     </section>
     <p class="d-tags">C++, C# (WPF), OpenCV</p>
-    <p class="d-source">근거: 2026 상반기 업무성과 기술서</p>
+    <p class="d-source">근거: 사내 평가 기록 (2026 상반기)</p>
   </template>
 
   <template id="p-recipe-tools">
@@ -631,7 +631,7 @@
     <figure class="d-fig light"><img src="assets/img/fig-backup.webp" alt="백업 시간 막대. 기존 25분, 복사를 비동기로 분리 4분 20초, 로그 화면을 끄면 2초" width="900" height="460"><figcaption>3.5GB, 파일 4,373개 백업 시간 (평가 기록)</figcaption></figure>
     <dl class="kpi"><div><dt>백업 시간 (3.5GB, 파일 4,373개)</dt><dd>25분 → 4분 20초</dd></div></dl>
     <ul><li><b>2022</b> 검사 결과 데이터를 자동으로 지우는 기능을 넣어 HDD 용량 문제를 줄였습니다.</li><li><b>2023</b> 오래된 설비 데이터를 옮기는 백업 프로그램을 만들고 백그라운드 실행, 트레이 아이콘, 자동 재부팅을 넣었습니다. 용량을 넘으면 데이터를 지우는 프로그램도 만들었습니다.</li><li><b>2024</b> 복사와 로그 화면 갱신이 한 흐름에 묶여 느리던 것을 비동기로 나눠 25분을 4분 20초로 줄였습니다. 로그 화면을 쓰지 않으면 2초에 끝납니다.</li></ul>
-    <p class="d-source">근거: 2022 하반기, 2023 평가서, 2024 상반기 성과발표</p>
+    <p class="d-source">근거: 사내 평가 기록 (2022 ~ 2024)</p>
   </template>
 
   <template id="p-ftp">
@@ -640,7 +640,7 @@
     <figure class="d-fig light"><img src="assets/img/fig-ftp.webp" alt="전송 시간 막대. 1.2GB 29초, 4GB 65초" width="900" height="460"><figcaption>검사 결과 전송 시간 (평가 기록)</figcaption></figure>
     <dl class="kpi"><div><dt>1.2GB 전송</dt><dd>29초</dd></div><div><dt>4GB 전송</dt><dd>65초</dd></div></dl>
     <ul><li>기본 FTP 요청을 전용 라이브러리로 바꾸고 폴더 생성 후 업로드 순서로 정리했습니다.</li><li>서버 쓰기 권한이 바뀌어 생긴 오류는 별도 스크립트로 우회하고 사용자 매뉴얼을 만들었습니다.</li></ul>
-    <p class="d-source">근거: 2026 상반기 업무성과 기술서</p>
+    <p class="d-source">근거: 사내 평가 기록 (2026 상반기)</p>
   </template>
 
   <template id="p-matching">
@@ -648,7 +648,7 @@
     <h2 id="detail-title">결함 좌표 매칭과 Review 리포트</h2>
     <figure class="d-fig light" data-widget="match"><img src="assets/img/fig-matching.webp" alt="기준 결함과 검사 결함을 짝지은 두 그림. 위치만 보면 44쌍 중 25쌍, 위치와 크기를 함께 보면 40쌍이 맞음" width="1000" height="520"><figcaption>합성 좌표로 재현한 원리. 장비 사이 위치 오차가 있으면 위치만으로는 옆 결함과 짝지어지고(왼쪽), 크기를 함께 보면 맞는 짝을 찾습니다(오른쪽).</figcaption></figure>
     <ul><li>Mask 결함 데이터와 검사 결과의 결함을 짝짓는 Mask Matching 에서, 위치 오차 때문에 크기 매칭이 틀어지던 알고리즘을 고치고 이후 기능을 계속 개선했습니다.</li><li>짝이 없는 결함이 위치 정보 없이 나오던 오류를 고치고, 매칭 대상 전체 개수와 결함 밝기(GV)를 함께 보여 주게 했습니다.</li><li>고객 요청 4건에 맞춰 Review 화면, 좌표 형식, 가로와 세로 형식 Excel 리포트를 바꿨습니다. 검사가 끝나면 좌표를 고객 형식으로 바꾸고 Y 축 반전을 고를 수 있습니다.</li></ul>
-    <p class="d-source">근거: 2023 상반기, 하반기 평가서</p>
+    <p class="d-source">근거: 사내 평가 기록 (2023)</p>
   </template>
 
   <template id="p-weekly">
@@ -686,7 +686,7 @@
     <h2 id="detail-title">패턴 매칭 점수 오판정 개선</h2>
     <figure class="d-fig light"><img src="assets/img/fig-score.webp" alt="정상 방향과 90도 돌아간 합성 Die 패턴의 매칭 결과. 기존 점수는 둘 다 100점, 수정 후 97점과 31점" width="900" height="600"><figcaption>합성 패턴으로 재현한 원리. 점수 맵을 자기 최소, 최대로 정규화하면 돌아간 자재도 100점이 됩니다.</figcaption></figure>
     <ul><li>90° 회전한 Wafer 가 정상으로 판정되던 원인을 정규화로 점수 분포가 왜곡된 데서 찾았습니다.</li><li>매칭 모드별 최소, 최대 점수 산출식을 다시 설계해, 비정상일 때 100점 고정이 아니라 10~50점대가 나오게 했습니다.</li><li>패턴이 부족한 영상용으로 위상 상관(3~5배 빠름)과 여러 점수를 섞는 판정 전략을 따로 정리했습니다.</li></ul>
-    <p class="d-source">근거: 2026 상반기 업무성과 기술서</p>
+    <p class="d-source">근거: 사내 평가 기록 (2026 상반기)</p>
   </template>
 
   <template id="p-hough">
@@ -694,7 +694,7 @@
     <h2 id="detail-title">웨이퍼 외곽 원 검출 개선</h2>
     <figure class="d-fig"><img src="assets/img/fig-hough.webp" alt="같은 합성 웨이퍼 영상에서 왼쪽은 안쪽 격자 원을 점선으로, 오른쪽은 외곽 원을 실선으로 검출" width="900" height="600"><figcaption>왼쪽 기존 파라미터는 대비가 큰 안쪽 격자 원을(점선), 오른쪽 수정 파라미터는 외곽을(실선) 잡습니다. 합성 영상에 OpenCV HoughCircles</figcaption></figure>
     <ul><li>격자 무늬, 잡음, 영상을 이어 붙인 경계 때문에 웨이퍼 외곽 원 검출이 불안정하던 문제를 고쳤습니다.</li><li>Blur 를 9×9 에서 31×31 로 키우고, 고정 Canny 임계값(50~255)을 Otsu 기반으로, 반경 범위와 누적 해상도를 조정했습니다. Hough 검출 실패로 생기던 Wafer Center 오판정과 재시도가 줄었습니다.</li></ul>
-    <p class="d-source">근거: 2025 하반기 업무성과 기술서</p>
+    <p class="d-source">근거: 사내 평가 기록 (2025 하반기)</p>
   </template>
 
   <template id="p-interp">
@@ -702,7 +702,7 @@
     <h2 id="detail-title">보간 방식 차이로 바뀐 결함 수 추적</h2>
     <figure class="d-fig"><img src="assets/img/fig-interp.webp" alt="같은 영역을 좌표 반올림과 절삭으로 줄인 두 영상. 검출된 작은 결함 상자 수가 다름" width="900" height="600"><figcaption>같은 합성 영상을 좌표 반올림(왼쪽)과 절삭(오른쪽)으로 줄인 뒤 같은 임계값으로 검출한 일부 구간. 전체로는 228개 대 215개</figcaption></figure>
     <ul><li>같은 자재인데 결함 수가 2.8% 줄어든 원인을 추적해, 영상 보간이 반올림에서 절삭으로 바뀐 것을 찾았습니다.</li><li>반올림을 다시 적용해 결과를 되돌렸습니다.</li></ul>
-    <p class="d-source">근거: 2026 상반기 업무성과 기술서</p>
+    <p class="d-source">근거: 사내 평가 기록 (2026 상반기)</p>
   </template>
 
   <template id="p-rgb">
@@ -710,7 +710,7 @@
     <h2 id="detail-title">조명 자동 보정을 R, G, B 채널별로</h2>
     <figure class="d-fig light"><img src="assets/img/fig-rgb.webp" alt="같은 조명값으로 찍은 색이 틀어진 장면과 채널별 보정 후 장면, 그리고 촬영 회차마다 R, G, B 중앙값이 목표 128 에 모이는 그래프" width="900" height="600"><figcaption>세 채널에 같은 조명값을 쓰면 색이 틀어집니다. 채널별 이분 탐색은 한 번 찍을 때마다 세 채널을 함께 재서 9회 안에 목표에 모입니다. 합성 장면</figcaption></figure>
     <ul><li>조명 하나만 기준으로 맞추던 자동 보정을 채널별로 바꿨습니다.</li><li>영상 1회 촬영으로 3채널 밝기를 함께 재고, 채널별 중앙값 밝기를 목표값에 맞추도록 이분 탐색으로 수렴시킵니다.</li><li>단색 판정, 탐색 진동, 조명값 하한 버그를 함께 고쳤습니다. 설비 검증은 예정입니다.</li></ul>
-    <p class="d-source">근거: 주간 업무 보고 (2026년 46주)</p>
+    <p class="d-source">근거: 사내 업무 기록 (2026.11)</p>
   </template>
 
   <template id="p-down">
@@ -718,7 +718,7 @@
     <h2 id="detail-title">반복성 평가 중 프로그램 Down 해결</h2>
     <figure class="d-fig"><img src="assets/img/fig-down.webp" alt="왼쪽은 위아래가 어긋난 두 프레임이 섞인 영상, 오른쪽은 한 프레임만 담긴 영상" width="900" height="600"><figcaption>락 없이 쓰는 도중에 읽으면(왼쪽) 두 프레임이 섞인 버퍼를 읽습니다. 락을 건 오른쪽은 한 프레임만 읽습니다. 합성 영상으로 재현한 원리</figcaption></figure>
     <ul><li>영상 버퍼 읽기와 쓰기에 락을 걸고, async void 를 async Task 로 바꿨습니다. UI 갱신은 메인 스레드 큐로 고정했습니다. 패치 후 재발 0건.</li><li>다른 설비에서는 Vision Down 4건 중 3건이 창 메시지 교착이었음을 찾아 정리했습니다.</li></ul>
-    <p class="d-source">근거: 2026 상반기 업무성과 기술서</p>
+    <p class="d-source">근거: 사내 평가 기록 (2026 상반기)</p>
   </template>
 
   <template id="p-interlock">
@@ -726,7 +726,7 @@
     <h2 id="detail-title">Tip 파손 재발 방지 Interlock</h2>
     <figure class="d-fig light"><img src="assets/img/fig-interlock.webp" alt="X 위치와 Z 높이 그림. XY 와 Z 를 동시에 움직이는 점선 경로는 간섭 영역에서 충돌, Z 를 먼저 올린 실선 경로는 통과" width="900" height="540"><figcaption>XY 와 Z 를 동시에 움직이면 간섭 영역을 지납니다. Z 를 먼저 올린 뒤 XY 를 움직이도록 막았습니다. 개념도</figcaption></figure>
     <ul><li>Interlock 판정 기준을 XY 축에서 Z 축으로 바로잡고, 축별 간섭 판정, 정지 확인, XY 와 Z 동시 이동 차단을 넣었습니다.</li><li>Lifter 서보모터를 1,000회 반복 구동해 위치 반복성을 확인했습니다.</li><li>조치 이후 재발 0건, 양산 Lot 정상 진행.</li></ul>
-    <p class="d-source">근거: 2026 상반기 업무성과 기술서, 서보 반복 구동 보고서</p>
+    <p class="d-source">근거: 사내 평가 기록 (2026 상반기), 서보 반복 구동 기록</p>
   </template>
 
   <template id="p-light">
@@ -734,7 +734,7 @@
     <h2 id="detail-title">광량, 밝기, 전압 Interlock</h2>
     <figure class="d-fig light"><img src="assets/img/fig-light.webp" alt="기준 영상, 현재 영상, 블록별 밝기 편차 맵" width="1000" height="390"><figcaption>기준 영상과 현재 영상을 블록마다 비교해, 편차가 기준을 넘으면 검사를 막습니다. 합성 영상</figcaption></figure>
     <ul><li><b>2022-2023</b> TDI 촬영 시 정해 둔 영역의 밝기(GV)가 범위를 벗어나면 막는 Interlock 과 검사 모듈 전압 Interlock 을 넣었습니다.</li><li><b>2026</b> 기준 밝은 영상과 현재 영상을 비교해 조명 광량이 흔들리면 검사를 막습니다. 100회 반복에서 평균 편차 0.52%, 기준을 정해 오판정을 막았습니다.</li></ul>
-    <p class="d-source">근거: 2022 하반기, 2023 평가서, 2026 상반기 업무성과 기술서</p>
+    <p class="d-source">근거: 사내 평가 기록 (2022 ~ 2023, 2026 상반기)</p>
   </template>
 
   <template id="p-static">
@@ -742,7 +742,7 @@
     <h2 id="detail-title">정적 분석 경고와 메모리 누수 정리</h2>
     <figure class="d-fig light"><img src="assets/img/fig-static.webp" alt="막대 그림. SonarQube 버그 468에서 312, 정적 분석 경고 298에서 106" width="900" height="540"><figcaption>정적 분석 경고 수 (사내 점검 기록)</figcaption></figure>
     <ul><li><b>2025 상반기</b> SonarQube 로 버그를 468건에서 312건으로 줄이고 메모리 누수 40건 이상을 고쳤습니다.</li><li><b>2025 하반기</b> 다른 설비의 정적 분석 경고를 298건에서 106건으로 줄였습니다(2차 정리 154건 → 106건). 32bit 시간 함수, 스레드 강제 종료 같은 위험 코드를 걷어내 프로그램 Down 을 2주에 1건 이하로 낮췄습니다.</li></ul>
-    <p class="d-source">근거: 2025 상반기, 하반기 업무성과</p>
+    <p class="d-source">근거: 사내 평가 기록 (2025)</p>
   </template>
 
   <template id="p-setup">
@@ -750,16 +750,16 @@
     <h2 id="detail-title">2D, 3D 검사 설비 Vision Setup</h2>
     <figure class="d-fig light"><img src="assets/img/fig-setup.webp" alt="Stage 높이 맵 두 장. 보정 전은 한쪽으로 기울어 있고, Y 위치별 Z 보간 구동 후는 고름" width="1000" height="460"><figcaption>Y 위치마다 잰 높이로 Z 를 보간 구동하면 Stage 기울기가 줄어듭니다. 합성 높이 맵</figcaption></figure>
     <dl class="kpi"><div><dt>위치별 오차</dt><dd>±4 → ±1µm</dd></div><div><dt>Stage Tilt</dt><dd>10 → 6µm</dd></div></dl>
-    <ul><li>Line Scan 과 3D 센서 촬영 시퀀스, 높이 보간 가변 Focus 를 구성했습니다.</li><li>검사를 빼고도 7분 12초 걸려 설정 Tact 6분을 넘던 것을, 2D 와 3D 검사를 포함해 6분 5초로 줄였습니다.</li><li><b>2025</b> 다른 3D 설비에서 Stage 높이 데이터로 YZ 보간 구동을 해 Tilt 를 10µm 에서 6µm 로, 고객 기준(8µm 이내) 안으로 줄였습니다.</li></ul>
-    <p class="d-source">근거: 2024 상반기 성과발표, 2025 상반기 업무성과 기술서</p>
+    <ul><li>Line Scan 과 3D 센서 촬영 시퀀스, 높이 보간 가변 Focus 를 구성했습니다.</li><li>검사를 빼고도 7분 12초 걸려 설정 Tact 6분을 넘던 것을, 2D 와 3D 검사를 포함해 6분 5초로 줄였습니다.</li><li><b>2025</b> 다른 3D 설비에서 Stage 높이 데이터로 YZ 보간 구동을 해 Tilt 를 10µm 에서 6µm 로, 고객 기준 안으로 줄였습니다.</li></ul>
+    <p class="d-source">근거: 사내 평가 기록 (2024 상반기, 2025 상반기)</p>
   </template>
 
   <template id="p-optics">
     <p class="d-meta">2025-2026</p>
     <h2 id="detail-title">신규 광학계와 자재 검출력 평가</h2>
-    <figure class="d-fig light"><img src="assets/img/fig-optics.webp" alt="평가 결과 막대. 고해상도 시료 시인성 14/15, 검출력 10/10, 적외선 시료 평가 7건, Glass 202매" width="900" height="460"><figcaption>신규 광학계 평가 결과 (평가 기록)</figcaption></figure>
-    <ul><li>적외선 광학계 시료 7건의 반복성 평가를 일주일 안에 끝내고 보고서를 냈고, 신규 광학계 교체 발주(2.5µm → 0.5µm)의 근거가 됐습니다.</li><li>고해상도 신규 시료 시인성 14/15, 검출력 10/10.</li><li>4명이 Glass 202매를 2일 만에 평가해 신규 장비 발주로 이어졌습니다.</li></ul>
-    <p class="d-source">근거: 2025 상반기 업무성과 기술서 외</p>
+    <figure class="d-fig light"><img src="assets/img/fig-optics.webp" alt="평가 결과 막대. 고해상도 시료 시인성 14/15, 검출력 10/10, 적외선 시료 평가 7건, Glass 자재 평가" width="900" height="460"><figcaption>신규 광학계 평가 결과 (평가 기록)</figcaption></figure>
+    <ul><li>적외선 광학계 시료 7건의 반복성 평가를 일주일 안에 끝내고 보고서를 냈고, 신규 광학계 교체 발주의 근거가 됐습니다.</li><li>고해상도 신규 시료 시인성 14/15, 검출력 10/10.</li><li>4명이 Glass 자재를 2일 만에 평가해 신규 장비 발주로 이어졌습니다.</li></ul>
+    <p class="d-source">근거: 사내 평가 기록 (2025 상반기 외)</p>
   </template>
 
   <script src="assets/widgets.js?v=20261123a"></script>

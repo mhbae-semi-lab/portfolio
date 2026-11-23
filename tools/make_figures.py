@@ -846,7 +846,7 @@ def fig_optics():
     _clean(ax)
     ax.tick_params(axis="y", length=0, colors=INK)
     fig.tight_layout(rect=(0, 0, 1, .9))
-    fig.text(.5, .95, "적외선 시료 반복성 평가 7건 (일주일)  ·  Glass 202매 평가 (2일)", fontsize=13, color=INK, ha="center", va="center")
+    fig.text(.5, .95, "적외선 시료 반복성 평가 7건 (일주일)  ·  Glass 자재 평가 (2일)", fontsize=13, color=INK, ha="center", va="center")
     _save_plt(fig, "fig-optics.webp")
 
 

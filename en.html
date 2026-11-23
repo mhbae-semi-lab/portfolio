@@ -449,7 +449,7 @@
       <p>Compute time went from 150 ms to about 700 ms, still within production takt. Regions with too few visible dies are rejected by design, and validation for the production switch is in progress.</p>
     </section>
     <p class="d-tags">C++, Python, OpenCV</p>
-    <p class="d-source">Source: H1 2026 performance materials</p>
+    <p class="d-source">Source: internal evaluation records (H1 2026)</p>
   </template>
 
   <template id="p-stable">
@@ -485,7 +485,7 @@
       <p>I rebuilt the interlocks: lifter homing method, vacuum state monitoring, wafer presence recheck. Malfunctions over the next 23 slots: <b>0</b>.</p>
     </section>
     <p class="d-tags">C# (WinForms), OpenCV</p>
-    <p class="d-source">Source: H2 2025 performance report, field setup and open-issue notes, career notes (dates)</p>
+    <p class="d-source">Source: internal evaluation records (H2 2025), field setup records</p>
   </template>
 
   <template id="p-focus">
@@ -512,7 +512,7 @@
       <p>No height-measured samples were available on site, so I validated by per-particle repeatability. Particles of 300 µm and up, 20 repeats: <b>±2µm</b>; shear height for 50 to 100 µm: <b>±1µm</b>; continuous production material and multiple shears normal.</p>
     </section>
     <p class="d-tags">C#, motion control, DAQ, OpenCV</p>
-    <p class="d-source">Source: H2 2025 performance report, 2025 week 38 work report</p>
+    <p class="d-source">Source: internal evaluation records (H2 2025)</p>
   </template>
 
   <template id="p-mark">
@@ -540,10 +540,10 @@
     <section class="d-step">
       <h3><span>5</span>CNN runs in shadow mode first</h3>
       <p>The CNN verifies rule results and replaces them with its own position when they fail. It is not switched on directly but runs in shadow mode, with staged rollout and instant rollback planned.</p>
-      <ul><li>Performance review: the CNN kept detections while cutting false detections by 59%; the detection gain was not statistically significant, and I reported it that way.</li><li>Offline evaluation in the training tool with a date split: the combined policy brought both the rule-only misses (about 2.6%) and false detections on mark-free images (about 5.1%) to 0. This is on in-house images, the evaluation labels lean toward the rules, and it has not been applied in the field yet.</li></ul>
+      <ul><li>Internal evaluation: the CNN kept detections while cutting false detections by 59%; the detection gain was not statistically significant, and I reported it that way.</li><li>Offline evaluation in the training tool with a date split: the combined policy brought both the rule-only misses (about 2.6%) and false detections on mark-free images (about 5.1%) to 0. This is on in-house images, the evaluation labels lean toward the rules, and it has not been applied in the field yet.</li></ul>
     </section>
     <p class="d-tags">C#, C++, OpenCV, PyTorch, ONNX, HOG</p>
-    <p class="d-source">Source: H1 2026 performance materials, 2026 week 37 work report, Shot Key training tool documentation</p>
+    <p class="d-source">Source: internal evaluation records (H1 2026), training tool documentation</p>
   </template>
 
   <template id="p-recipe">
@@ -557,7 +557,7 @@
     </section>
     <section class="d-step">
       <h3><span>2</span>Restore shape and position together</h3>
-      <p>Replaced min pooling with coordinate snapping, oversampling, box resampling, and thresholding (figure above). Verified against reference images with VIAs and bumps of several sizes; on production material (8 µm VIA, 20 µm bump) position and shape matched, and it <b>passed production validation</b>.</p>
+      <p>Replaced min pooling with coordinate snapping, oversampling, box resampling, and thresholding (figure above). Verified against reference images with VIAs and bumps of several sizes; on production material (fine VIAs and bumps) position and shape matched, and it <b>passed production validation</b>.</p>
     </section>
     <section class="d-step">
       <h3><span>3</span>Large areas: only where needed</h3>
@@ -572,7 +572,7 @@
       <p>Built a unified tool that combines the recipe-creation environments each site ran separately, and implemented a GDS Editor for drawing-to-BMP conversion and auto masking. Rollout to all sites is planned. Wrote 4 customer-facing documents, including the RAC operating plan, a user manual, and the Featureless Align production transition plan. The unified tool’s deployment and stability are <a href="#p-recipe-deploy">covered separately</a>.</p>
     </section>
     <p class="d-tags">C# (WPF), C++, Python</p>
-    <p class="d-source">Source: H1 2026 performance report</p>
+    <p class="d-source">Source: internal evaluation records (H1 2026)</p>
   </template>
 
   <template id="p-crack">
@@ -586,14 +586,14 @@
     </section>
     <section class="d-step">
       <h3><span>2</span>Detection in five stages</h3>
-      <p>Split into five stages (edge search, adaptive mask, defect detection, size filter, interlock), with edge band width and brightness as parameters. Found <b>524</b> new defects out of 1,883 total, and passed all 4 HBM4 conditions (real rate up to 92.6% vs. a 70% target).</p>
+      <p>Split into five stages (edge search, adaptive mask, defect detection, size filter, interlock), with edge band width and brightness as parameters. Found <b>524</b> new defects out of 1,883 total, and passed all 4 evaluation conditions for stacked memory (real rate up to 92.6%, above the customer criterion).</p>
     </section>
     <section class="d-step">
       <h3><span>3</span>A tool to open TB-scale images</h3>
       <p>Built a standalone program that tiles the image and opens only the needed region, with per-channel saving. Also built a tool that aggregates 7 customer-required align metrics from logs into Excel.</p>
     </section>
     <p class="d-tags">C++, C# (WPF), OpenCV</p>
-    <p class="d-source">Source: H1 2026 performance report</p>
+    <p class="d-source">Source: internal evaluation records (H1 2026)</p>
   </template>
 
   <template id="p-recipe-tools">
@@ -631,7 +631,7 @@
     <figure class="d-fig light"><img src="assets/img/en/fig-backup.webp" alt="Backup time bars: 25 min before, 4 min 20 s with async copying, 2 s without the log screen" width="900" height="460"><figcaption>Backup time for 3.5 GB, 4,373 files (evaluation records)</figcaption></figure>
     <dl class="kpi"><div><dt>Backup time (3.5 GB, 4,373 files)</dt><dd>25 min → 4 min 20 s</dd></div></dl>
     <ul><li><b>2022</b> Added automatic deletion of inspection result data to ease HDD capacity problems.</li><li><b>2023</b> Built a backup program that moves old tool data, with background running, a tray icon, and automatic reboot. Also built a program that deletes data when capacity is exceeded.</li><li><b>2024</b> Copying and log screen updates were tied in one flow; splitting them asynchronously cut 25 minutes to 4 min 20 s. Without the log screen it finishes in 2 seconds.</li></ul>
-    <p class="d-source">Source: H2 2022 and 2023 evaluations, H1 2024 performance presentation</p>
+    <p class="d-source">Source: internal evaluation records (2022 to 2024)</p>
   </template>
 
   <template id="p-ftp">
@@ -640,7 +640,7 @@
     <figure class="d-fig light"><img src="assets/img/en/fig-ftp.webp" alt="Transfer time bars: 1.2 GB in 29 s, 4 GB in 65 s" width="900" height="460"><figcaption>Inspection result transfer time (evaluation records)</figcaption></figure>
     <dl class="kpi"><div><dt>1.2 GB transfer</dt><dd>29 s</dd></div><div><dt>4 GB transfer</dt><dd>65 s</dd></div></dl>
     <ul><li>Replaced basic FTP requests with a dedicated library and reordered the flow to create folders before uploading.</li><li>Worked around errors from changed server write permissions with a separate script, and wrote a user manual.</li></ul>
-    <p class="d-source">Source: H1 2026 performance report</p>
+    <p class="d-source">Source: internal evaluation records (H1 2026)</p>
   </template>
 
   <template id="p-matching">
@@ -648,7 +648,7 @@
     <h2 id="detail-title">Defect coordinate matching and review reports</h2>
     <figure class="d-fig light" data-widget="match"><img src="assets/img/en/fig-matching.webp" alt="Two panels pairing reference and inspection defects: 25 of 44 pairs correct by position only, 40 with position and size" width="1000" height="520"><figcaption>The principle, reproduced with synthetic coordinates. With a position offset between tools, matching by position alone pairs neighbors (left); adding size finds the right pairs (right).</figcaption></figure>
     <ul><li>In mask matching, which pairs mask defect data with inspection defects, I fixed the algorithm whose size matching broke under position error, and kept improving the feature afterwards.</li><li>Fixed unmatched defects showing up without position info, and added the total match count and defect brightness (GV).</li><li>Changed the review screen, coordinate format, and horizontal and vertical Excel reports across 4 customer requests. After inspection, coordinates can be converted to the customer format with an optional Y-axis flip.</li></ul>
-    <p class="d-source">Source: H1 and H2 2023 evaluations</p>
+    <p class="d-source">Source: internal evaluation records (2023)</p>
   </template>
 
   <template id="p-weekly">
@@ -686,7 +686,7 @@
     <h2 id="detail-title">Fixing pattern-match score misjudgment</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-score.webp" alt="Matching on a normal and a 90-degree-rotated synthetic die pattern. Old score 100 for both; after the fix 97 and 31" width="900" height="600"><figcaption>The principle, reproduced with a synthetic pattern. Normalizing the score map by its own min and max gives even a rotated wafer 100 points.</figcaption></figure>
     <ul><li>Traced why a 90°-rotated wafer passed as normal: normalization distorted the score distribution.</li><li>Redesigned the min and max score formulas for each matching mode, so abnormal cases score 10 to 50 instead of a fixed 100.</li><li>Separately documented a decision strategy for low-pattern images that mixes phase correlation (3 to 5 times faster) with other scores.</li></ul>
-    <p class="d-source">Source: H1 2026 performance report</p>
+    <p class="d-source">Source: internal evaluation records (H1 2026)</p>
   </template>
 
   <template id="p-hough">
@@ -694,7 +694,7 @@
     <h2 id="detail-title">Better wafer edge circle detection</h2>
     <figure class="d-fig"><img src="assets/img/fig-hough.webp" alt="On the same synthetic wafer image, the inner grid circle detected (dashed) on the left and the outer edge (solid) on the right" width="900" height="600"><figcaption>Left: the old parameters catch the high-contrast inner grid circle (dashed). Right: the fixed parameters catch the outer edge (solid). OpenCV HoughCircles on a synthetic image</figcaption></figure>
     <ul><li>Fixed unstable wafer edge circle detection caused by grid patterns, noise, and stitching seams.</li><li>Increased blur from 9×9 to 31×31, switched the fixed Canny threshold (50 to 255) to an Otsu-based one, and tuned the radius range and accumulator resolution. Wafer center misjudgments and retries from Hough failures went down.</li></ul>
-    <p class="d-source">Source: H2 2025 performance report</p>
+    <p class="d-source">Source: internal evaluation records (H2 2025)</p>
   </template>
 
   <template id="p-interp">
@@ -702,7 +702,7 @@
     <h2 id="detail-title">Tracing a defect count change to interpolation</h2>
     <figure class="d-fig"><img src="assets/img/fig-interp.webp" alt="The same region downscaled with coordinate rounding and truncation; the number of small detected defect boxes differs" width="900" height="600"><figcaption>Part of the same synthetic image downscaled with coordinate rounding (left) and truncation (right), then detected with the same threshold. Overall 228 vs. 215</figcaption></figure>
     <ul><li>Traced why the defect count on the same material dropped by 2.8%, and found that image interpolation had changed from rounding to truncation.</li><li>Restored rounding and recovered the original results.</li></ul>
-    <p class="d-source">Source: H1 2026 performance report</p>
+    <p class="d-source">Source: internal evaluation records (H1 2026)</p>
   </template>
 
   <template id="p-rgb">
@@ -710,7 +710,7 @@
     <h2 id="detail-title">Per-channel R, G, B auto illumination</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-rgb.webp" alt="Color-shifted scene with equal light levels, the scene after per-channel correction, and R, G, B medians converging to the 128 target over shots" width="900" height="600"><figcaption>Using the same light level on all three channels shifts the color. A per-channel binary search measures all three channels in each shot and converges within 9 shots. Synthetic scene</figcaption></figure>
     <ul><li>Changed auto illumination from matching a single light to matching each channel.</li><li>One capture measures all three channel brightnesses; a binary search drives each channel’s median brightness to its target.</li><li>Also fixed the mono-color detection, search oscillation, and light lower-limit bugs. Validation on the tool is planned.</li></ul>
-    <p class="d-source">Source: weekly work report (2026, week 46)</p>
+    <p class="d-source">Source: internal work records (Nov 2026)</p>
   </template>
 
   <template id="p-down">
@@ -718,7 +718,7 @@
     <h2 id="detail-title">Fixing program crashes during repeatability tests</h2>
     <figure class="d-fig"><img src="assets/img/fig-down.webp" alt="Left: an image mixing two vertically offset frames. Right: an image with a single frame" width="900" height="600"><figcaption>Reading while another thread writes without a lock (left) returns a buffer mixing two frames. With a lock (right), you get one frame. The principle, reproduced with synthetic images</figcaption></figure>
     <ul><li>Locked image buffer reads and writes, and changed async void to async Task. UI updates are pinned to the main-thread queue. 0 recurrences after the patch.</li><li>On another tool, I found that 3 of 4 vision crashes were window-message deadlocks and fixed them.</li></ul>
-    <p class="d-source">Source: H1 2026 performance report</p>
+    <p class="d-source">Source: internal evaluation records (H1 2026)</p>
   </template>
 
   <template id="p-interlock">
@@ -726,7 +726,7 @@
     <h2 id="detail-title">Interlock against tip breakage</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-interlock.webp" alt="X position vs. Z height. The dashed path moving XY and Z together collides in the interference zone; the solid path raising Z first passes" width="900" height="540"><figcaption>Moving XY and Z together passes through the interference zone. The interlock forces Z up first, then XY. Concept diagram</figcaption></figure>
     <ul><li>Corrected the interlock criterion from the XY axes to the Z axis, and added per-axis interference checks, stop confirmation, and a block on simultaneous XY and Z moves.</li><li>Ran the lifter servo motor 1,000 times to confirm position repeatability.</li><li>0 recurrences since, production lots running normally.</li></ul>
-    <p class="d-source">Source: H1 2026 performance report, servo repeat-run report</p>
+    <p class="d-source">Source: internal evaluation records (H1 2026), servo repeat-run records</p>
   </template>
 
   <template id="p-light">
@@ -734,7 +734,7 @@
     <h2 id="detail-title">Light, brightness, and voltage interlocks</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-light.webp" alt="Reference image, current image, and per-block brightness deviation map" width="1000" height="390"><figcaption>Compares the reference and current images block by block, and blocks inspection when the deviation exceeds the limit. Synthetic image</figcaption></figure>
     <ul><li><b>2022 to 2023</b> Added an interlock that blocks TDI capture when a set region’s brightness (GV) is out of range, and an inspection module voltage interlock.</li><li><b>2026</b> Compares a bright reference image with the current one and blocks inspection when the light level drifts. Mean deviation 0.52% over 100 repeats; a limit was set to prevent misjudgments.</li></ul>
-    <p class="d-source">Source: H2 2022 and 2023 evaluations, H1 2026 performance report</p>
+    <p class="d-source">Source: internal evaluation records (2022 to 2023, H1 2026)</p>
   </template>
 
   <template id="p-static">
@@ -742,7 +742,7 @@
     <h2 id="detail-title">Static analysis warnings and memory leak cleanup</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-static.webp" alt="Bar chart: SonarQube bugs 468 to 312, static analysis warnings 298 to 106" width="900" height="540"><figcaption>Static analysis warning counts (internal review records)</figcaption></figure>
     <ul><li><b>H1 2025</b> Cut bugs from 468 to 312 with SonarQube and fixed 40+ memory leaks.</li><li><b>H2 2025</b> Cut static analysis warnings on another tool from 298 to 106 (second pass 154 → 106). Removing risky code such as 32-bit time functions and forced thread termination brought program crashes down to at most one every two weeks.</li></ul>
-    <p class="d-source">Source: H1 and H2 2025 performance reports</p>
+    <p class="d-source">Source: internal evaluation records (2025)</p>
   </template>
 
   <template id="p-setup">
@@ -750,16 +750,16 @@
     <h2 id="detail-title">2D/3D inspection tool vision setup</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-setup.webp" alt="Two stage height maps: tilted before correction, even after Y-position Z interpolation" width="1000" height="460"><figcaption>Driving Z by interpolating heights measured at each Y position reduces the stage tilt. Synthetic height map</figcaption></figure>
     <dl class="kpi"><div><dt>Error by position</dt><dd>±4 → ±1µm</dd></div><div><dt>Stage Tilt</dt><dd>10 → 6µm</dd></div></dl>
-    <ul><li>Built line-scan and 3D sensor capture sequences and height-interpolated variable focus.</li><li>Tact time took 7 min 12 s even without inspection, over the 6-minute target; with 2D and 3D inspection included it now takes 6 min 5 s.</li><li><b>2025</b> On another 3D tool, YZ-interpolated motion from stage height data cut tilt from 10 µm to 6 µm, within the customer limit (under 8 µm).</li></ul>
-    <p class="d-source">Source: H1 2024 performance presentation, H1 2025 performance report</p>
+    <ul><li>Built line-scan and 3D sensor capture sequences and height-interpolated variable focus.</li><li>Tact time took 7 min 12 s even without inspection, over the 6-minute target; with 2D and 3D inspection included it now takes 6 min 5 s.</li><li><b>2025</b> On another 3D tool, YZ-interpolated motion from stage height data cut tilt from 10 µm to 6 µm, within the customer limit.</li></ul>
+    <p class="d-source">Source: internal evaluation records (H1 2024, H1 2025)</p>
   </template>
 
   <template id="p-optics">
     <p class="d-meta">2025-2026</p>
     <h2 id="detail-title">New optics and material detectability evaluation</h2>
-    <figure class="d-fig light"><img src="assets/img/en/fig-optics.webp" alt="Evaluation bars: high-resolution sample visibility 14/15, detectability 10/10, 7 infrared sample evaluations, 202 glass wafers" width="900" height="460"><figcaption>New optics evaluation results (evaluation records)</figcaption></figure>
-    <ul><li>Finished repeatability evaluations of 7 infrared samples within a week and reported them; the results supported ordering the replacement optics (2.5 µm → 0.5 µm).</li><li>Visibility 14/15 and detectability 10/10 on new high-resolution samples.</li><li>Four of us evaluated 202 glass wafers in 2 days, which led to a new tool order.</li></ul>
-    <p class="d-source">Source: H1 2025 performance report and others</p>
+    <figure class="d-fig light"><img src="assets/img/en/fig-optics.webp" alt="Evaluation bars: high-resolution sample visibility 14/15, detectability 10/10, 7 infrared sample evaluations, glass wafer evaluation" width="900" height="460"><figcaption>New optics evaluation results (evaluation records)</figcaption></figure>
+    <ul><li>Finished repeatability evaluations of 7 infrared samples within a week and reported them; the results supported ordering the replacement optics.</li><li>Visibility 14/15 and detectability 10/10 on new high-resolution samples.</li><li>Four of us evaluated the glass wafers in 2 days, which led to a new tool order.</li></ul>
+    <p class="d-source">Source: internal evaluation records (H1 2025 and others)</p>
   </template>
 
   <script src="assets/widgets.js?v=20261123a"></script>
