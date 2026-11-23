@@ -45,7 +45,7 @@
         <p class="lead">I design and ship Wafer Align, defect detection, and recipe automation, from first design through stable mass production.</p>
         <ul class="proof">
           <li><a href="#p-stable"><b>From design to stable mass production</b><span>25 days on site for a new tool, 0 failures in 11 days of operation</span></a></li>
-          <li><a href="#p-align"><b>Reproduce the failure, then redesign the pass criteria</b><span>Reproduced misjudgments on synthetic images, 0 false passes</span></a></li>
+          <li><a href="#p-align"><b>Reproduce the failure, then redesign the pass criteria</b><span>Reproduced misjudgments on synthetic images; false passes cut from 134 to 0 on synthetic and in-house images</span></a></li>
           <li><a href="#p-recipe"><b>Apply what I learn to the tool right away</b><span>Working while studying; recipe auto-creation became my master’s research</span></a></li>
         </ul>
         <div class="cta">
@@ -62,7 +62,7 @@
       <a class="fig-num reveal" href="#p-mark"><strong>−84<span>%</span></strong><p>Mark-based align time<br><small>140 s → 23 s vs. the template method, 12/12 slots on site</small></p></a>
       <a class="fig-num reveal" href="#p-recipe"><strong>−92<span>%</span></strong><p>Bump recipe authoring time<br><small>4 h → 20 min, automatic placement from design data</small></p></a>
       <a class="fig-num reveal" href="#p-focus"><strong>−72<span>%</span></strong><p>Auto Focus time<br><small>90 s → 25 s, image AF with parallel checks, then contact sensing at ±2µm</small></p></a>
-      <a class="fig-num reveal" href="#p-stable"><strong>264<span>h</span></strong><p>0 failures in operation<br><small>new tool, 11 days running, Vision uptime 98.86%</small></p></a>
+      <a class="fig-num reveal" href="#p-stable"><strong>264<span>h</span></strong><p>0 failures in operation<br><small>new tool, 11 days running, Vision uptime 98.86% including 3 h of planned stops</small></p></a>
     </section>
 
     <section id="flow" class="wrap">
@@ -81,15 +81,16 @@
 
     <section id="work" class="wrap">
       <h2>Featured projects</h2>
-      <p class="sub">Open a card to see the problem, approach, and result.</p>
+      <p class="sub">Open a card to see the problem, approach, and result. The chip shows the validation stage (in production, field validated, in-house validated).</p>
 
       <div class="bento">
         <a class="card card-wide reveal" href="#p-align">
           <img src="assets/img/fig-align.webp" alt="" loading="lazy" width="1200" height="750">
           <div class="card-body">
+            <span class="st st-lab">In-house validated · production switch pending</span>
             <h3>Wafer Align without registered features</h3>
             <p>Fits a grid to the die-array period to find the rotation, and rejects its own wrong answers.</p>
-            <dl class="kpi"><div><dt>False passes</dt><dd>0</dd></div><div><dt>Max angle error</dt><dd>0.0013°</dd></div></dl>
+            <dl class="kpi"><div><dt>False passes (synthetic and in-house images)</dt><dd>134 → 0</dd></div><div><dt>Max angle error (100 rotated wafers)</dt><dd>0.0013°</dd></div></dl>
             <span class="more-link">Details</span>
           </div>
         </a>
@@ -97,6 +98,7 @@
         <a class="card card-stat reveal" href="#p-stable">
           <img class="light" src="assets/img/en/fig-stable.webp" alt="" loading="lazy" width="900" height="540">
           <div class="card-body">
+            <span class="st st-prod">In production</span>
             <h3>New particle-removal tool SW</h3>
             <p>Stabilized a brand-new tool with no reference code until it stopped halting in production.</p>
             <div class="stat-big"><strong>264<span>h</span></strong><span>11 days running, 0 failures</span></div>
@@ -107,6 +109,7 @@
         <a class="card card-5 reveal" href="#p-focus">
           <img class="light" src="assets/img/en/fig-focus.webp" alt="" loading="lazy" width="900" height="600">
           <div class="card-body">
+            <span class="st st-field">Field validated</span>
             <h3>Particle-height Auto Focus</h3>
             <p>Made image AF 72% faster, then redesigned it around contact sensing when blank floors defeated it.</p>
             <dl class="kpi"><div><dt>Image AF time</dt><dd>−72%</dd></div><div><dt>Height repeatability</dt><dd>±2µm</dd></div></dl>
@@ -117,9 +120,10 @@
         <a class="card card-7 reveal" href="#p-mark">
           <img src="assets/img/fig-mark.webp" alt="" loading="lazy" width="900" height="600">
           <div class="card-body">
+            <span class="st st-field">Rules field validated · CNN in shadow</span>
             <h3>Shot Key mark detection, rules + CNN</h3>
             <p>Finds die marks without templates; a CNN covers faint marks the rules miss.</p>
-            <dl class="kpi"><div><dt>Align time</dt><dd>−84%</dd></div><div><dt>False detections (with CNN)</dt><dd>−59%</dd></div></dl>
+            <dl class="kpi"><div><dt>Align time</dt><dd>−84%</dd></div><div><dt>False detections (with CNN, 280 → 114)</dt><dd>−59%</dd></div></dl>
             <span class="more-link">Details</span>
           </div>
         </a>
@@ -127,6 +131,7 @@
         <a class="card card-7 reveal" href="#p-recipe">
           <img class="light" src="assets/img/fig-recipe.webp" alt="" loading="lazy" width="900" height="480">
           <div class="card-body">
+            <span class="st st-prod">Passed production validation</span>
             <h3>Inspection recipe auto-creation (RAC)</h3>
             <p>Builds inspection recipes from design drawings and maps, cutting manual teaching.</p>
             <dl class="kpi"><div><dt>Recipe authoring time</dt><dd>−92%</dd></div><div><dt>Large-area conversion time</dt><dd>−87%</dd></div></dl>
@@ -137,9 +142,10 @@
         <a class="card card-5 reveal" href="#p-crack">
           <img src="assets/img/fig-crack.webp" alt="" loading="lazy" width="900" height="600">
           <div class="card-body">
+            <span class="st st-field">Passed customer evaluation</span>
             <h3>Die-edge crack detection</h3>
             <p>Catches edge cracks the old inspection missed or over-detected, with a multi-stage algorithm.</p>
-            <dl class="kpi"><div><dt>Newly found among all defects</dt><dd>28%</dd></div></dl>
+            <dl class="kpi"><div><dt>Newly found (524 of 1,883 defects)</dt><dd>28%</dd></div></dl>
             <span class="more-link">Details</span>
           </div>
         </a>
@@ -426,10 +432,10 @@
   </dialog>
 
   <template id="p-align">
-    <p class="d-meta">2026 · needed to unify RAC across all sites · algorithm design, experiments, C++ implementation, field validation</p>
+    <p class="d-meta"><span class="st st-lab">In-house validated · production switch pending</span> 2026 · needed to unify RAC across all sites · algorithm design, experiments, C++ implementation, field validation</p>
     <h2 id="detail-title">Wafer Align without registered features</h2>
     <figure class="d-fig"><img src="assets/img/fig-align.webp" alt="Estimated grid overlaid on a synthetic die array rotated 1.8 degrees" width="1200" height="750"><figcaption>Grid estimated on a synthetic die array (1.8° rotation, column fixed-pattern noise)</figcaption></figure>
-    <dl class="kpi"><div><dt>False passes</dt><dd>0</dd></div><div><dt>Max angle error</dt><dd>0.0013°</dd></div><div><dt>Rotated wafers, 100 runs</dt><dd>Fail 0</dd></div></dl>
+    <dl class="kpi"><div><dt>False passes (synthetic and in-house images)</dt><dd>134 → 0</dd></div><div><dt>Max angle error</dt><dd>0.0013°</dd></div><div><dt>Rotated wafers, 100 runs</dt><dd>Fail 0</dd></div></dl>
     <section class="d-step">
       <h3><span>1</span>No registration, and reject its own wrong answers</h3>
       <p>Matching features registered by people cost registration effort for every recipe and still left failures. The first version met the customer criteria over thousands of production runs, but on low-contrast images it sometimes gave a wrong angle a high score.</p>
@@ -442,7 +448,7 @@
     <section class="d-step">
       <h3><span>3</span>Port to C++ and validate</h3>
       <p>Validated in Python, ported to C++, and matched the results value by value for each condition. Wafers with no pattern are filtered first by a majority vote on center-region variance, skipping unnecessary align.</p>
-      <ul><li>False passes <b>0</b> (vs. the previous method, synthetic and in-house images combined)</li><li>±0.1 to 1° rotated wafers, 100 runs, 0 fails, max error <b>0.0013°</b> (previous method residual after correction about 0.02°)</li></ul>
+      <ul><li>False passes <b>134 → 0</b> (vs. the previous method, synthetic and in-house images combined)</li><li>±0.1 to 1° rotated wafers, 100 runs, 0 fails, max error <b>0.0013°</b> (previous method residual after correction about 0.02°)</li></ul>
     </section>
     <section class="d-step">
       <h3><span>4</span>Open items</h3>
@@ -453,10 +459,10 @@
   </template>
 
   <template id="p-stable">
-    <p class="d-meta">2025 to 2026 · vision, sequence, UI, interlocks, camera control</p>
+    <p class="d-meta"><span class="st st-prod">In production</span> 2025 to 2026 · vision, sequence, UI, interlocks, camera control</p>
     <h2 id="detail-title">New particle-removal tool SW</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-stable.webp" alt="Frames not yet drawn over continuous capture time. Drawing every frame piles up over 700 in 5 minutes; drawing only the latest stays at 1 or fewer" width="900" height="540"><figcaption>If drawing is even slightly slower than capture, drawing every frame in order makes the queue grow without end. Synthetic simulation</figcaption></figure>
-    <div class="stat-big"><strong>264<span>h</span></strong><span>0 failures over 11 days (264 hours) of operation, Vision uptime 98.86%</span></div>
+    <div class="stat-big"><strong>264<span>h</span></strong><span>0 failures over 11 days (264 hours) of operation, Vision uptime 98.86% including 3 h of planned stops</span></div>
     <dl class="kpi"><div><dt>Availability (432 h basis)</dt><dd>99.31%</dd></div><div><dt>Memory (10 shears)</dt><dd>18 → 12GB</dd></div><div><dt>Camera usage time</dt><dd>−55%</dd></div></dl>
     <h3>Timeline</h3>
     <ol class="timeline">
@@ -489,7 +495,7 @@
   </template>
 
   <template id="p-focus">
-    <p class="d-meta">2025 · new particle-removal tool, design and field validation</p>
+    <p class="d-meta"><span class="st st-field">Field validated</span> 2025 · new particle-removal tool, design and field validation</p>
     <h2 id="detail-title">Particle-height Auto Focus, from images to contact sensing</h2>
     <figure class="d-fig light" data-widget="focus"><img src="assets/img/en/fig-focus-stack.webp" alt="Synthetic particle images at focus heights 0, 15, 30, 45, 60 µm with particle and floor sharpness bars. The floor is sharpest at 0 µm, the particle at 60 µm" width="1000" height="440"><figcaption>Raise the focus and measure sharpness of the particle (blue box) and the floor in four directions (dashed) together. The height gap between the two peaks is the particle height. Synthetic image</figcaption></figure>
     <dl class="kpi"><div><dt>Image AF time</dt><dd>−72%</dd></div><div><dt>Height repeatability (20 runs)</dt><dd>±2µm</dd></div><div><dt>Shear height accuracy</dt><dd>±1µm</dd></div></dl>
@@ -516,10 +522,10 @@
   </template>
 
   <template id="p-mark">
-    <p class="d-meta">2026 · detection algorithm, training tool, CNN training and ONNX deployment, shadow judgment tool</p>
+    <p class="d-meta"><span class="st st-field">Rules field validated · CNN in shadow</span> 2026 · detection algorithm, training tool, CNN training and ONNX deployment, shadow judgment tool</p>
     <h2 id="detail-title">Shot Key Align, rules + CNN</h2>
     <figure class="d-fig"><img src="assets/img/fig-mark.webp" alt="Three cross marks among similar pads: two in solid boxes, one faint mark in a dashed box, correlation map at bottom right" width="900" height="600"><figcaption>Rule detections (solid) and a faint mark missed by score (dashed); bottom right is the correlation map. Synthetic image</figcaption></figure>
-    <dl class="kpi"><div><dt>Align time</dt><dd>−84%</dd></div><div><dt>False detections (with CNN)</dt><dd>−59%</dd></div><div><dt>Field slot detection</dt><dd>12/12</dd></div><div><dt>Inference p95 latency</dt><dd>−58%</dd></div></dl>
+    <dl class="kpi"><div><dt>Align time</dt><dd>−84%</dd></div><div><dt>False detections (with CNN, 280 → 114)</dt><dd>−59%</dd></div><div><dt>Field slot detection</dt><dd>12/12</dd></div><div><dt>Inference p95 latency</dt><dd>−58%</dd></div></dl>
     <section class="d-step">
       <h3><span>1</span>Slow, and re-registered at every site</h3>
       <p>Template-based align was slow and needed marks re-registered at every new site. Rule parameters did not fit every image, causing false detections.</p>
@@ -540,14 +546,14 @@
     <section class="d-step">
       <h3><span>5</span>CNN runs in shadow mode first</h3>
       <p>The CNN verifies rule results and replaces them with its own position when they fail. It is not switched on directly but runs in shadow mode, with staged rollout and instant rollback planned.</p>
-      <ul><li>Internal evaluation: the CNN kept detections while cutting false detections by 59%; the detection gain was not statistically significant, and I reported it that way.</li><li>Offline evaluation in the training tool with a date split: the combined policy brought both the rule-only misses (about 2.6%) and false detections on mark-free images (about 5.1%) to 0. This is on in-house images, the evaluation labels lean toward the rules, and it has not been applied in the field yet.</li></ul>
+      <ul><li>Internal evaluation: the CNN kept detections while cutting false detections from 280 to 114 (59%); the detection gain was not statistically significant, and I reported it that way.</li><li>Offline evaluation in the training tool with a date split: the combined policy brought both the rule-only misses (about 2.6%) and false detections on mark-free images (about 5.1%) to 0. This is on in-house images, the evaluation labels lean toward the rules, and it has not been applied in the field yet.</li></ul>
     </section>
     <p class="d-tags">C#, C++, OpenCV, PyTorch, ONNX, HOG</p>
     <p class="d-source">Source: internal evaluation records (H1 2026), training tool documentation</p>
   </template>
 
   <template id="p-recipe">
-    <p class="d-meta">2026 · conversion and masking algorithms, auto sequence, UI, user manual</p>
+    <p class="d-meta"><span class="st st-prod">Passed production validation</span> 2026 · conversion and masking algorithms, auto sequence, UI, user manual</p>
     <h2 id="detail-title">Inspection recipe auto-creation (RAC)</h2>
     <figure class="d-fig light"><img src="assets/img/fig-recipe.webp" alt="Fine circular pattern conversion: distorted on the left, uniform on the right" width="900" height="480"><figcaption>Left: naive conversion. Right: coordinate snapping + oversampling (synthetic pattern)</figcaption></figure>
     <dl class="kpi"><div><dt>Bump recipe authoring time</dt><dd>−92%</dd></div><div><dt>Large-area conversion time</dt><dd>−87%</dd></div><div><dt>Bumps placed automatically</dt><dd>About 250,000</dd></div></dl>
@@ -576,10 +582,10 @@
   </template>
 
   <template id="p-crack">
-    <p class="d-meta">2026 · algorithm and analysis tools, end to end</p>
+    <p class="d-meta"><span class="st st-field">Passed customer evaluation</span> 2026 · algorithm and analysis tools, end to end</p>
     <h2 id="detail-title">Die-edge crack detection</h2>
     <figure class="d-fig"><img src="assets/img/fig-crack.webp" alt="Die-edge inspection band and excluded inner region, with a crack detected inside the band" width="900" height="600"><figcaption>Edge inspection band (blue), excluded region (hatched), and the detected crack (synthetic image)</figcaption></figure>
-    <dl class="kpi"><div><dt>Newly found among all defects</dt><dd>28%</dd></div><div><dt>Images to split</dt><dd>TB-scale per wafer</dd></div></dl>
+    <dl class="kpi"><div><dt>Newly found (524 of 1,883 defects)</dt><dd>28%</dd></div><div><dt>Images to split</dt><dd>TB-scale per wafer</dd></div></dl>
     <section class="d-step">
       <h3><span>1</span>Edges that were missed or over-detected</h3>
       <p>The existing die-to-die comparison missed or over-detected edge cracks on stacked memory dies. TB-scale images could not even be opened on a regular PC.</p>
@@ -597,7 +603,7 @@
   </template>
 
   <template id="p-recipe-tools">
-    <p class="d-meta">2026 · design and implementation</p>
+    <p class="d-meta"><span class="st st-lab">In-house validated · field validation planned</span> 2026 · design and implementation</p>
     <h2 id="detail-title">Unifying scattered recipe management tools</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-recipe-tools.webp" alt="Diagram of request and result files passing between the tool program, a shared folder, and the server program" width="1000" height="520"><figcaption>The tool and the server use a shared folder as a message channel.</figcaption></figure>
     <h3>Problem</h3>
@@ -611,7 +617,7 @@
   </template>
 
   <template id="p-recipe-deploy">
-    <p class="d-meta">2026 · design and implementation end to end (creation tool, tool deployment, drawing converter) · the unified tool of <a href="#p-recipe">inspection recipe auto-creation</a></p>
+    <p class="d-meta"><span class="st st-lab">In-house validated · before tool deployment</span> 2026 · design and implementation end to end (creation tool, tool deployment, drawing converter) · the unified tool of <a href="#p-recipe">inspection recipe auto-creation</a></p>
     <h2 id="detail-title">Unified RAC tool, deployment and stability</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-race.webp" alt="Two 200-cell grids. Before the fix, 49 stalls scattered across 200 restarts; after the fix, all normal" width="900" height="600"><figcaption>On restart, if the tool’s first message arrives before the processing loop is ready, it is dropped and everything stalls. The fix starts receiving only after the loop is ready. Synthetic simulation</figcaption></figure>
     <dl class="kpi"><div><dt>Repeated starts, 200</dt><dd>0 stalls</dd></div><div><dt>Unit tests</dt><dd>41 → 54</dd></div></dl>
@@ -626,7 +632,7 @@
   </template>
 
   <template id="p-backup">
-    <p class="d-meta">2022-2024</p>
+    <p class="d-meta"><span class="st st-prod">In production</span> 2022-2024</p>
     <h2 id="detail-title">Tool data backup and disk management</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-backup.webp" alt="Backup time bars: 25 min before, 4 min 20 s with async copying, 2 s without the log screen" width="900" height="460"><figcaption>Backup time for 3.5 GB, 4,373 files (evaluation records)</figcaption></figure>
     <dl class="kpi"><div><dt>Backup time (3.5 GB, 4,373 files)</dt><dd>25 min → 4 min 20 s</dd></div></dl>
@@ -635,7 +641,7 @@
   </template>
 
   <template id="p-ftp">
-    <p class="d-meta">2026</p>
+    <p class="d-meta"><span class="st st-prod">In production</span> 2026</p>
     <h2 id="detail-title">Large inspection result transfer</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-ftp.webp" alt="Transfer time bars: 1.2 GB in 29 s, 4 GB in 65 s" width="900" height="460"><figcaption>Inspection result transfer time (evaluation records)</figcaption></figure>
     <dl class="kpi"><div><dt>1.2 GB transfer</dt><dd>29 s</dd></div><div><dt>4 GB transfer</dt><dd>65 s</dd></div></dl>
@@ -644,7 +650,7 @@
   </template>
 
   <template id="p-matching">
-    <p class="d-meta">2023 · review program algorithm and reports</p>
+    <p class="d-meta"><span class="st st-prod">In production</span> 2023 · review program algorithm and reports</p>
     <h2 id="detail-title">Defect coordinate matching and review reports</h2>
     <figure class="d-fig light" data-widget="match"><img src="assets/img/en/fig-matching.webp" alt="Two panels pairing reference and inspection defects: 25 of 44 pairs correct by position only, 40 with position and size" width="1000" height="520"><figcaption>The principle, reproduced with synthetic coordinates. With a position offset between tools, matching by position alone pairs neighbors (left); adding size finds the right pairs (right).</figcaption></figure>
     <ul><li>In mask matching, which pairs mask defect data with inspection defects, I fixed the algorithm whose size matching broke under position error, and kept improving the feature afterwards.</li><li>Fixed unmatched defects showing up without position info, and added the total match count and defect brightness (GV).</li><li>Changed the review screen, coordinate format, and horizontal and vertical Excel reports across 4 customer requests. After inspection, coordinates can be converted to the customer format with an optional Y-axis flip.</li></ul>
@@ -652,7 +658,7 @@
   </template>
 
   <template id="p-weekly">
-    <p class="d-meta">2026 · in-house tool, design and implementation · the public demo is a rebuild on synthetic data</p>
+    <p class="d-meta"><span class="st st-field">Used in-house</span> 2026 · in-house tool, design and implementation · the public demo is a rebuild on synthetic data</p>
     <h2 id="detail-title">Weekly report automation (in-house)</h2>
     <figure class="d-fig"><img src="assets/img/en/app-weekly-report.webp" alt="Public weekly report builder with a topic summary and the phrases the fact check blocked" width="960" height="600"><figcaption>The public app. It rebuilds the in-house tool’s flow so anyone can run it on their own git log.</figcaption></figure>
     <dl class="kpi"><div><dt>People using it now</dt><dd>10</dd></div><div><dt>Planned rollout</dt><dd>50</dd></div></dl>
@@ -667,7 +673,7 @@
   </template>
 
   <template id="p-release">
-    <p class="d-meta">2026 · in-house tool, design and implementation · the next step after <a href="#p-weekly">weekly report automation</a></p>
+    <p class="d-meta"><span class="st st-field">Used in-house</span> 2026 · in-house tool, design and implementation · the next step after <a href="#p-weekly">weekly report automation</a></p>
     <h2 id="detail-title">Release pack builder for tool patches (in-house)</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-release.webp" alt="Four inputs (weekly report slides, previous release report, previous release note, checked commits) go through the tool and become a release report, a release note and a patch folder. The patch folder holds the 4 changed files under per-commit folders, and the 1 deleted file appears only in the delete list" width="1000" height="600"><figcaption>Flow drawn with made-up names. The code that draws it checks that the patch folder holds as many files as were changed, and that deleted files never go into the folder.</figcaption></figure>
     <dl class="kpi"><div><dt>Rolled out to</dt><dd>about 30</dd></div><div><dt>Outputs in one run</dt><dd>3</dd></div></dl>
@@ -690,7 +696,7 @@
   </template>
 
   <template id="p-hough">
-    <p class="d-meta">2025</p>
+    <p class="d-meta"><span class="st st-prod">In production</span> 2025</p>
     <h2 id="detail-title">Better wafer edge circle detection</h2>
     <figure class="d-fig"><img src="assets/img/fig-hough.webp" alt="On the same synthetic wafer image, the inner grid circle detected (dashed) on the left and the outer edge (solid) on the right" width="900" height="600"><figcaption>Left: the old parameters catch the high-contrast inner grid circle (dashed). Right: the fixed parameters catch the outer edge (solid). OpenCV HoughCircles on a synthetic image</figcaption></figure>
     <ul><li>Fixed unstable wafer edge circle detection caused by grid patterns, noise, and stitching seams.</li><li>Increased blur from 9×9 to 31×31, switched the fixed Canny threshold (50 to 255) to an Otsu-based one, and tuned the radius range and accumulator resolution. Wafer center misjudgments and retries from Hough failures went down.</li></ul>
@@ -698,7 +704,7 @@
   </template>
 
   <template id="p-interp">
-    <p class="d-meta">2026</p>
+    <p class="d-meta"><span class="st st-prod">In production</span> 2026</p>
     <h2 id="detail-title">Tracing a defect count change to interpolation</h2>
     <figure class="d-fig"><img src="assets/img/fig-interp.webp" alt="The same region downscaled with coordinate rounding and truncation; the number of small detected defect boxes differs" width="900" height="600"><figcaption>Part of the same synthetic image downscaled with coordinate rounding (left) and truncation (right), then detected with the same threshold. Overall 228 vs. 215</figcaption></figure>
     <ul><li>Traced why the defect count on the same material dropped by 2.8%, and found that image interpolation had changed from rounding to truncation.</li><li>Restored rounding and recovered the original results.</li></ul>
@@ -706,7 +712,7 @@
   </template>
 
   <template id="p-rgb">
-    <p class="d-meta">2026</p>
+    <p class="d-meta"><span class="st st-dev">Implemented · tool validation planned</span> 2026</p>
     <h2 id="detail-title">Per-channel R, G, B auto illumination</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-rgb.webp" alt="Color-shifted scene with equal light levels, the scene after per-channel correction, and R, G, B medians converging to the 128 target over shots" width="900" height="600"><figcaption>Using the same light level on all three channels shifts the color. A per-channel binary search measures all three channels in each shot and converges within 9 shots. Synthetic scene</figcaption></figure>
     <ul><li>Changed auto illumination from matching a single light to matching each channel.</li><li>One capture measures all three channel brightnesses; a binary search drives each channel’s median brightness to its target.</li><li>Also fixed the mono-color detection, search oscillation, and light lower-limit bugs. Validation on the tool is planned.</li></ul>
@@ -714,7 +720,7 @@
   </template>
 
   <template id="p-down">
-    <p class="d-meta">2026</p>
+    <p class="d-meta"><span class="st st-prod">In production</span> 2026</p>
     <h2 id="detail-title">Fixing program crashes during repeatability tests</h2>
     <figure class="d-fig"><img src="assets/img/fig-down.webp" alt="Left: an image mixing two vertically offset frames. Right: an image with a single frame" width="900" height="600"><figcaption>Reading while another thread writes without a lock (left) returns a buffer mixing two frames. With a lock (right), you get one frame. The principle, reproduced with synthetic images</figcaption></figure>
     <ul><li>Locked image buffer reads and writes, and changed async void to async Task. UI updates are pinned to the main-thread queue. 0 recurrences after the patch.</li><li>On another tool, I found that 3 of 4 vision crashes were window-message deadlocks and fixed them.</li></ul>
@@ -722,7 +728,7 @@
   </template>
 
   <template id="p-interlock">
-    <p class="d-meta">2026</p>
+    <p class="d-meta"><span class="st st-prod">In production</span> 2026</p>
     <h2 id="detail-title">Interlock against tip breakage</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-interlock.webp" alt="X position vs. Z height. The dashed path moving XY and Z together collides in the interference zone; the solid path raising Z first passes" width="900" height="540"><figcaption>Moving XY and Z together passes through the interference zone. The interlock forces Z up first, then XY. Concept diagram</figcaption></figure>
     <ul><li>Corrected the interlock criterion from the XY axes to the Z axis, and added per-axis interference checks, stop confirmation, and a block on simultaneous XY and Z moves.</li><li>Ran the lifter servo motor 1,000 times to confirm position repeatability.</li><li>0 recurrences since, production lots running normally.</li></ul>
@@ -730,7 +736,7 @@
   </template>
 
   <template id="p-light">
-    <p class="d-meta">2022-2026</p>
+    <p class="d-meta"><span class="st st-prod">In production</span> 2022-2026</p>
     <h2 id="detail-title">Light, brightness, and voltage interlocks</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-light.webp" alt="Reference image, current image, and per-block brightness deviation map" width="1000" height="390"><figcaption>Compares the reference and current images block by block, and blocks inspection when the deviation exceeds the limit. Synthetic image</figcaption></figure>
     <ul><li><b>2022 to 2023</b> Added an interlock that blocks TDI capture when a set region’s brightness (GV) is out of range, and an inspection module voltage interlock.</li><li><b>2026</b> Compares a bright reference image with the current one and blocks inspection when the light level drifts. Mean deviation 0.52% over 100 repeats; a limit was set to prevent misjudgments.</li></ul>
@@ -738,7 +744,7 @@
   </template>
 
   <template id="p-static">
-    <p class="d-meta">2025</p>
+    <p class="d-meta"><span class="st st-prod">In production</span> 2025</p>
     <h2 id="detail-title">Static analysis warnings and memory leak cleanup</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-static.webp" alt="Bar chart: SonarQube bugs 468 to 312, static analysis warnings 298 to 106" width="900" height="540"><figcaption>Static analysis warning counts (internal review records)</figcaption></figure>
     <ul><li><b>H1 2025</b> Cut bugs from 468 to 312 with SonarQube and fixed 40+ memory leaks.</li><li><b>H2 2025</b> Cut static analysis warnings on another tool from 298 to 106 (second pass 154 → 106). Removing risky code such as 32-bit time functions and forced thread termination brought program crashes down to at most one every two weeks.</li></ul>
@@ -746,7 +752,7 @@
   </template>
 
   <template id="p-setup">
-    <p class="d-meta">2023-2025</p>
+    <p class="d-meta"><span class="st st-prod">In production</span> 2023-2025</p>
     <h2 id="detail-title">2D/3D inspection tool vision setup</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-setup.webp" alt="Two stage height maps: tilted before correction, even after Y-position Z interpolation" width="1000" height="460"><figcaption>Driving Z by interpolating heights measured at each Y position reduces the stage tilt. Synthetic height map</figcaption></figure>
     <dl class="kpi"><div><dt>Error by position</dt><dd>±4 → ±1µm</dd></div><div><dt>Stage Tilt</dt><dd>10 → 6µm</dd></div></dl>
@@ -755,7 +761,7 @@
   </template>
 
   <template id="p-optics">
-    <p class="d-meta">2025-2026</p>
+    <p class="d-meta"><span class="st st-field">Evaluation complete</span> 2025-2026</p>
     <h2 id="detail-title">New optics and material detectability evaluation</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-optics.webp" alt="Evaluation bars: high-resolution sample visibility 14/15, detectability 10/10, 7 infrared sample evaluations, glass wafer evaluation" width="900" height="460"><figcaption>New optics evaluation results (evaluation records)</figcaption></figure>
     <ul><li>Finished repeatability evaluations of 7 infrared samples within a week and reported them; the results supported ordering the replacement optics.</li><li>Visibility 14/15 and detectability 10/10 on new high-resolution samples.</li><li>Four of us evaluated the glass wafers in 2 days, which led to a new tool order.</li></ul>

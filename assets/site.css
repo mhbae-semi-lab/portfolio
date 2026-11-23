@@ -337,3 +337,10 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 .note pre { margin: 0; padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow-x: auto; font: 13.5px/1.6 ui-monospace, Consolas, monospace; color: var(--ink); }
 .note code { font: inherit; }
 .note .note-foot { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+/* 검증 단계 칩: 양산 적용 / 현장 검증 / 사내 검증 / 예정 */
+.st { display: inline-block; padding: 2px 10px; border-radius: 12px; border: 1px solid var(--line); color: var(--ink-2); font-size: 12.5px; font-weight: 650; line-height: 1.5; letter-spacing: 0; }
+.st-prod { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.st-field { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+.st-dev { border-style: dashed; }
+.card-body .st { align-self: flex-start; }
+.d-meta .st { margin-right: 8px; }
