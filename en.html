@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%232f62d6%22/%3E%3Ctext x=%2216%22 y=%2222.5%22 font-size=%2217%22 font-family=%22sans-serif%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22white%22%3E%EB%B0%B0%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="assets/site.css?v=20261122b">
+  <link rel="stylesheet" href="assets/site.css?v=20261123a">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Minhyeok Bae", "alternateName": "배민혁", "jobTitle": "Semiconductor Inspection Equipment SW Engineer", "url": "https://mhbae-semi-lab.github.io/portfolio/en.html", "email": "mailto:mhbae03@gmail.com", "image": "https://mhbae-semi-lab.github.io/portfolio/assets/img/profile.jpg", "sameAs": ["https://github.com/mhbae-semi-lab"], "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Inha University, Graduate School of Manufacturing Innovation"}, {"@type": "CollegeOrUniversity", "name": "Tech University of Korea"}], "knowsAbout": ["Wafer Align", "Defect detection", "Inspection recipe automation", "Image processing", "OpenCV", "C++", "C#", "Auto Focus"]}</script>
 </head>
 <body>
@@ -179,6 +179,7 @@
             <a class="tile reveal" href="#p-ftp"><img class="light" src="assets/img/en/fig-ftp.webp" alt="" loading="lazy" width="900" height="600"><b>Large inspection result transfer</b><span>4 GB in 65 s</span></a>
             <a class="tile reveal" href="#p-matching"><img class="light" src="assets/img/en/fig-matching.webp" alt="" loading="lazy" width="1000" height="520"><b>Defect coordinate matching and review reports</b><span>2023, position error handling</span></a>
             <a class="tile reveal" href="#p-weekly"><img src="assets/img/en/app-weekly-report.webp" alt="" loading="lazy" width="960" height="600"><b>Weekly report automation (in-house)</b><span>Used by 10 people, 50 planned</span></a>
+            <a class="tile reveal" href="#p-release"><img class="light" src="assets/img/en/fig-release.webp" alt="" loading="lazy" width="1000" height="600"><b>Release pack builder for tool patches (in-house)</b><span>Rolled out to about 30 people</span></a>
           </div>
         </div>
         <div class="group">
@@ -660,9 +661,24 @@
     <h3>Approach</h3>
     <ul><li>Rules group the week’s git commits by topic; each topic gets a title and a three-line summary in the template PPT.</li><li>Summaries come only from a local LLM, so no data leaves the machine.</li><li>Every summary is checked: three lines, 80 characters per line, and no numbers or status words such as “done” that are not in the input. On failure it retries once, then falls back to rule-based sentences.</li><li>It also runs as a Claude Code command.</li></ul>
     <h3>Result</h3>
-    <ul><li>10 people on the team use it, with a rollout to 50 planned.</li><li>You can run the same flow on your own git log in the <a href="https://mhbae-semi-lab.github.io/weekly-report/" target="_blank" rel="noopener">public app</a>.</li></ul>
+    <ul><li>10 people on the team use it, with a rollout to 50 planned.</li><li>You can run the same flow on your own git log in the <a href="https://mhbae-semi-lab.github.io/weekly-report/" target="_blank" rel="noopener">public app</a>.</li><li>For tool patches, this report feeds the <a href="#p-release">release pack builder</a>, which makes the release documents and the patch folder from it.</li></ul>
     <p class="d-tags">Python, python-pptx, local LLM (Ollama), Claude Code</p>
     <p class="d-source">Source: in-house tool usage (Nov 2026)</p>
+  </template>
+
+  <template id="p-release">
+    <p class="d-meta">2026 · in-house tool, design and implementation · the next step after <a href="#p-weekly">weekly report automation</a></p>
+    <h2 id="detail-title">Release pack builder for tool patches (in-house)</h2>
+    <figure class="d-fig light"><img src="assets/img/en/fig-release.webp" alt="Four inputs (weekly report slides, previous release report, previous release note, checked commits) go through the tool and become a release report, a release note and a patch folder. The patch folder holds the 4 changed files under per-commit folders, and the 1 deleted file appears only in the delete list" width="1000" height="600"><figcaption>Flow drawn with made-up names. The code that draws it checks that the patch folder holds as many files as were changed, and that deleted files never go into the folder.</figcaption></figure>
+    <dl class="kpi"><div><dt>Rolled out to</dt><dd>about 30</dd></div><div><dt>Outputs in one run</dt><dd>3</dd></div></dl>
+    <h3>Problem</h3>
+    <ul><li>For every tool patch I copied the same content three times: into the weekly report, the release report and the release note.</li><li>I copied the code to bring on site by hand, following the commit list and the folder structure.</li><li>A missing slide, a wrong version or date, or a missing file means another secure transfer once it is found on site.</li></ul>
+    <h3>Approach</h3>
+    <ul><li>No new template: the previous report and note are the template. The version is proposed as the previous one plus one, the note gets one row in the format of its last row, and only the version and date change in the file name. Formats that differed by author now follow the previous output.</li><li>Pick the tool section and slides in the weekly report and they move into the report body. Slides move between different pptx files at the XML level, with image and hyperlink relations reconnected.</li><li>The patch files come from the checked commits. Only changed files are copied, under a per-commit folder with their repository paths, and deleted files go into a separate list to remove on site.</li><li>Built for transfer into a secure area: it ships only the executable, the needed libraries and the source, and makes no network access.</li><li>Layout names, placeholder numbers and item lists that differ by tool or version live in a settings file, so a new format needs no code change.</li></ul>
+    <h3>Result</h3>
+    <ul><li>Rebuilding the next patch from the outputs of the previous one gave the same overview, note and slide layout as the real outputs made by hand.</li><li>On the real repository, applying the patch folder over the code from the last transfer gave files identical to the target commit, and it built. Picking only some commits can mix an earlier commit's change into the same file and break the build, so the tool now warns before it makes the folder.</li><li>Rolled out to about 30 people in the group.</li><li>Charts and videos are not moved yet (a warning is logged), and slide notes are not copied.</li></ul>
+    <p class="d-tags">Python, python-pptx, openpyxl, tkinter, git CLI, PyInstaller</p>
+    <p class="d-source">Source: in-house tool documentation and user manual (Nov 2026)</p>
   </template>
 
   <template id="p-score">
@@ -746,7 +762,7 @@
     <p class="d-source">Source: H1 2025 performance report and others</p>
   </template>
 
-  <script src="assets/widgets.js?v=20261122b"></script>
-  <script src="assets/site.js?v=20261122b"></script>
+  <script src="assets/widgets.js?v=20261123a"></script>
+  <script src="assets/site.js?v=20261123a"></script>
 </body>
 </html>

@@ -1064,6 +1064,62 @@ def fig_leak():
     return round(a_hash), round(a_date), round(a_real)
 
 
+# 25. 릴리스 묶음: 주간 보고와 직전 산출물, 체크한 커밋에서 Report · Note · 반입 폴더를 한 번에 (가짜 이름)
+RELEASE_COMMITS = {
+    "Patch_A": [("M", "Module_A/Motion/Axis.cs"), ("M", "Module_A/Ui/MainForm.cs"), ("A", "Module_A/Ui/ConfirmDialog.cs")],
+    "Patch_B": [("M", "Module_B/Sequence/Run.cs"), ("D", "Module_B/Old/LegacyStep.cs")],
+}
+
+
+def release_pack(commits):
+    """체크한 커밋 -> (반입 폴더에 넣을 경로, 현장 삭제 목록). 삭제 파일은 폴더에 넣지 않는다."""
+    files, deleted = [], []
+    for folder, changes in commits.items():
+        for st, path in changes:
+            if st == "D":
+                deleted.append(path)
+            else:
+                files.append(f"{folder}/{path}")
+    return files, deleted
+
+
+def fig_release():
+    plt = _plt()
+    from matplotlib.patches import FancyBboxPatch
+    files, deleted = release_pack(RELEASE_COMMITS)
+    fig, ax = plt.subplots(figsize=(10, 6), dpi=100)
+    ax.set_xlim(0, 100)
+    ax.set_ylim(0, 60)
+    ax.axis("off")
+
+    def box(x, y, w, h, title, lines, accent=False, size=11.5, align="center"):
+        ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0,rounding_size=1.6",
+                                    fc="#ffffff", ec=BLUE if accent else LINE, lw=2 if accent else 1.3))
+        ax.text(x + w / 2, y + h - 3.2, title, ha="center", va="center", fontsize=13, color=BLUE if accent else INK,
+                weight="bold")
+        tx = x + w / 2 if align == "center" else x + 2
+        for k, t in enumerate(lines):
+            ax.text(tx, y + h - 7.6 - k * 3.4, t, ha=align, va="center", fontsize=size, color=MUTED)
+
+    ins = [("주간 보고", ["설비 섹션 · 고른 슬라이드"]), ("직전 Release Report", ["양식 · 이전 버전"]),
+           ("직전 Release Note", ["마지막 행 서식"]), ("체크한 커밋", ["변경 · 추가 · 삭제"])]
+    for k, (t, ls) in enumerate(ins):
+        y = 47 - k * 13
+        box(1, y, 25, 10.5, t, ls)
+        ax.annotate("", (35, 30), (26, y + 5.2), arrowprops=dict(arrowstyle="-|>", mutation_scale=14, lw=1.3, color=INK))
+    box(35, 19, 24, 22, "릴리스 묶음 도구", ["슬라이드 이식 · 관계 재연결", "버전 +1 · 날짜 · 파일명 치환",
+                                       "변경 파일만 추출", "외부 통신 없음"], accent=True, size=10.5)
+    for y, h, t, ls in ((47, 10.5, "Release Report (pptx)", ["표지 · Overview · 본문"]),
+                        (34, 10.5, "Release Note (xlsx)", ["1행 추가: No · Ver · 날짜"])):
+        box(68, y, 31, h, t, ls)
+        ax.annotate("", (68, y + h / 2), (59, 30), arrowprops=dict(arrowstyle="-|>", mutation_scale=14, lw=1.5, color=BLUE))
+    box(68, 5, 31, 26, "반입 폴더", files + ["삭제 목록: " + d for d in deleted], size=9.5, align="left")
+    ax.annotate("", (68, 18), (59, 30), arrowprops=dict(arrowstyle="-|>", mutation_scale=14, lw=1.5, color=BLUE))
+    fig.subplots_adjust(left=.01, right=.99, top=.99, bottom=.01)
+    _save_plt(fig, "fig-release.webp")
+    return files, deleted
+
+
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     est, align_a, align_v = fig_align()
@@ -1097,6 +1153,10 @@ if __name__ == "__main__":
     leak = fig_leak()
     print("leak hash, date, real", leak)
     fig_research_pre()
+    rel_files, rel_deleted = fig_release()
+    n_changed = sum(st != "D" for ch in RELEASE_COMMITS.values() for st, _ in ch)
+    assert len(rel_files) == n_changed and len(rel_deleted) == 1, "릴리스 그림: 변경 파일 수와 그린 파일 수가 다름"
+    assert not any(d in f for d in rel_deleted for f in rel_files), "릴리스 그림: 삭제 파일이 반입 폴더에 들어감"
     print("align score peak", a_est, "stable backlog", q_all, q_new, "light dev", round(light, 2), "tilt", tilt)
     print("score (old, new) per shot", score)
     print("hough old r", round(float(old[2])), "new r", round(float(new[2])))
