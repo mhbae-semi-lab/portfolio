@@ -198,6 +198,30 @@
       </div>
     </section>
 
+    <section id="scope" class="wrap">
+      <h2>맡은 범위와 남긴 것</h2>
+      <p class="sub">장비 SW 의 어느 층을 맡았는지, 그 결과가 어떤 결정으로 이어졌는지 정리했습니다.</p>
+      <ol class="timeline layers">
+        <li class="reveal"><time>UI 와 도구</time><p>C# (WPF, WinForms). 검사 상태 화면, Recipe 생성과 배포 도구, 라벨과 학습 도구, TB 급 영상 분할 도구. <a href="#p-recipe-deploy">RAC 통합 도구</a>, <a href="#p-mark">학습 도구</a></p></li>
+        <li class="reveal"><time>시퀀스와 Interlock</time><p>촬영, Focus, Align 자동 시퀀스와 축 간섭, Vacuum, 광량 Interlock. <a href="#p-stable">신규 설비 SW</a>, <a href="#p-interlock">Tip 파손 Interlock</a></p></li>
+        <li class="reveal"><time>영상 엔진</time><p>C++, OpenCV, IPP. C# 화면과는 C++/CLI 로 연결. Python 으로 설계한 뒤 옮기고 값 단위로 대조. <a href="#p-align">Wafer Align</a>, <a href="#p-crack">Crack 검출</a>, <a href="#p-recipe">도면 변환</a></p></li>
+        <li class="reveal"><time>장치 연동</time><p>Line Scan (TDI) 과 Area 카메라, 3D 공초점 센서, 조명, DAQ, 축. <a href="#p-setup">2D, 3D Vision Setup</a>, <a href="#p-focus">접촉 감지 AF</a></p></li>
+        <li class="reveal"><time>동시성과 메모리</time><p>최신 프레임 1장만 그리기, 영상 버퍼 읽기와 쓰기에 락, UI 갱신은 메인 스레드 큐, Tile 단위 병렬로 메모리를 일정하게. <a href="#p-stable">프레임 대기열</a>, <a href="#p-down">프로그램 Down</a>, <a href="#p-recipe-deploy">도면 변환기</a></p></li>
+      </ol>
+      <h3 class="lessons-head">결정으로 이어진 결과</h3>
+      <ul class="lessons">
+        <li class="reveal"><b>발주 결정의 근거</b><p>적외선 광학계 시료 7건의 반복성 평가가 신규 광학계 교체 발주의 근거가 됐고, Glass 자재 평가는 신규 장비 발주로 이어졌습니다.</p><a href="#p-optics">신규 광학계, 자재 검출력 평가</a></li>
+        <li class="reveal"><b>신규 설비의 인증 통과</b><p>참고 코드 없는 신규 설비에서 기능검사의 SW 담당 항목을 모두 처리해 3자 인증을 통과했고, 11일(264시간) 운영 동안 Failure 0건이었습니다.</p><a href="#p-stable">신규 Particle 제거 설비 SW</a></li>
+        <li class="reveal"><b>고객 기준과 평가 통과</b><p>도면 변환은 양산 자재로 양산 검증을 통과했고, Crack 검출은 적층 메모리 평가 조건 4개를 모두 통과했습니다. Stage Tilt 는 고객 기준 안으로 줄였습니다.</p><a href="#p-crack">Die 가장자리 Crack 검출</a></li>
+        <li class="reveal"><b>반복되는 시간 절감</b><p>Bump Recipe 작성 4시간 → 20분, 정렬 마크 Align 140초 → 23초. Recipe 한 건, 웨이퍼 한 장마다 반복되는 시간입니다.</p><a href="#p-recipe">검사 Recipe 자동 생성</a></li>
+      </ul>
+      <h3 class="lessons-head">함께 일한 범위</h3>
+      <ul class="lessons">
+        <li class="reveal"><b>고객과 현장</b><p>국내 메모리 제조사 2곳 양산 라인에서 Setup 과 상주 대응. 신규 설비는 현장 출장 32회와 25일 상주. 운영 방안, 사용자 Manual, 양산 전환 계획 등 고객 공유 문서 8건을 썼습니다.</p><a href="#p-stable">신규 Particle 제거 설비 SW</a></li>
+        <li class="reveal"><b>사내</b><p>주간 보고 자동화 도구를 팀 10명이 쓰고, 패치 릴리스 묶음 도구를 그룹 약 30명에게 배포했습니다. 광학계와 자재 평가는 4명이 함께 했습니다.</p><a href="#p-release">설비 패치 릴리스 묶음 자동화</a></li>
+      </ul>
+    </section>
+
     <section id="method" class="wrap">
       <h2>일하는 방식</h2>
       <p class="sub">개선된 것과 아닌 것을 나눠 보고합니다. 현장 데이터로 확인된 것만 기본값으로 바꿉니다.</p>
@@ -331,7 +355,7 @@
     <section id="career" class="wrap career">
       <div>
         <h2>경력</h2>
-        <p class="sub">반도체 검사장비 기업 SW팀, 2022.01 입사. 대응 설비 7종 이상, 누적 작업 80건, 고객 공유 문서 8건 (2026 상반기 기준)</p>
+        <p class="sub">반도체 검사장비 기업 기업부설연구소 SW팀 주임, 2022.01 입사. 국내 메모리 제조사 2곳 양산 라인 Setup 과 상주. 대응 설비 7종 이상, 누적 작업 80건, 고객 공유 문서 8건 (2026 상반기 기준)</p>
         <ol class="timeline">
           <li><time>2026</time><p>Feature 없는 Align, 정렬 마크 검출, 도면 기반 Recipe 자동 생성, Crack 검출, Tip 파손 재발 방지, RAC 통합 도구</p></li>
           <li><time>2025</time><p>신규 Particle 제거 설비 SW 셋업과 현장 상주 안정화, 입자 높이 Auto Focus, 3D 검사 Stage Tilt 보정, 적외선 광학계 평가</p></li>
@@ -344,7 +368,7 @@
         <h3>학력</h3>
         <ul class="plain">
           <li><b>인하대학교 제조혁신전문대학원</b><span>반도체공정지능화융합 석사, 재직자 과정 (2026.03 ~ 2028.02 졸업 예정)</span></li>
-          <li><b>한국공학대학교 컴퓨터전자공학과</b><span>일학습병행 (2022.03 ~ 2026.02 졸업), 성적 우수 장학, C# (WPF) 개인 프로젝트 발표</span></li>
+          <li><b>한국공학대학교 컴퓨터전자공학과</b><span>일학습병행 (2022.03 ~ 2026.02 졸업), 학점 3.9 / 4.5, 성적 우수 장학, C# (WPF) 개인 프로젝트 발표</span></li>
           <li><b>서울로봇고등학교</b><span>마이스터고 (2019.03 ~ 2022.02)</span></li>
         </ul>
         <h3>자격</h3>
@@ -360,10 +384,12 @@
         </ul>
         <h3>기술</h3>
         <ul class="plain">
-          <li><b>영상처리</b><span>OpenCV, IPP, NCC 매칭, 서브픽셀 피팅, 원근 변환</span><span class="made">만든 것 <a href="#p-align">Wafer Align</a>, <a href="#p-mark">정렬 마크</a>, <a href="#p-crack">Crack 검출</a>, <a href="#p-recipe">도면 변환</a></span></li>
-          <li><b>장비 SW</b><span>C++ (MFC), C# (WPF, WinForms), C++/CLI</span><span class="made">만든 것 <a href="#p-stable">신규 설비 SW</a>, <a href="#p-focus">Auto Focus</a>, <a href="#p-interlock">Interlock</a>, <a href="#p-recipe-deploy">RAC 통합 도구</a></span></li>
-          <li><b>카메라와 센서</b><span>Line Scan (TDI), Area, 3D 공초점 센서, DAQ</span><span class="made">만든 것 <a href="#p-setup">2D, 3D Vision Setup</a>, <a href="#p-focus">접촉 감지 AF</a>, <a href="#p-light">광량 Interlock</a></span></li>
+          <li><b>영상처리</b><span>OpenCV, IPP, NCC 매칭, Edge · Hough, Blob, 서브픽셀 피팅, 원근 변환, 도면(GDS) 래스터화</span><span class="made">만든 것 <a href="#p-align">Wafer Align</a>, <a href="#p-mark">정렬 마크</a>, <a href="#p-crack">Crack 검출</a>, <a href="#p-recipe">도면 변환</a></span></li>
+          <li><b>장비 SW</b><span>C++ (MFC), C# (WPF, WinForms), C++/CLI, 멀티스레드 · 비동기, Tile 분할 병렬 처리, 메모리 최적화</span><span class="made">만든 것 <a href="#p-stable">신규 설비 SW</a>, <a href="#p-focus">Auto Focus</a>, <a href="#p-interlock">Interlock</a>, <a href="#p-recipe-deploy">RAC 통합 도구</a></span></li>
+          <li><b>카메라와 센서</b><span>Line Scan (TDI), Area, 3D 공초점 센서, DAQ, GigE Vision · USB3 Vision · Camera Link · CoaXPress, 프레임 그래버, Sapera · Matrox · Euresys · Cognex</span><span class="made">만든 것 <a href="#p-setup">2D, 3D Vision Setup</a>, <a href="#p-focus">접촉 감지 AF</a>, <a href="#p-light">광량 Interlock</a></span></li>
           <li><b>데이터</b><span>Python, NumPy, CNN 학습, 로컬 LLM</span><span class="made">만든 것 <a href="#p-mark">CNN 학습 도구</a>, <a href="#p-crack">TB 급 영상 분할</a>, <a href="#p-matching">좌표 매칭</a></span></li>
+          <li><b>도구와 협업</b><span>Git · GitHub (Fork, PR), Visual Studio, 정적 분석 (SonarQube), Jira · Notion</span><span class="made">만든 것 <a href="#p-static">정적 분석 정리</a>, <a href="#p-release">릴리스 묶음 자동화</a></span></li>
+          <li><b>반도체 도메인</b><span>Wafer Align (θ, XY), Die 비교 검사, Recipe, Bump 와 적층 메모리 검사, 반복성 (RNR), MTBI · 가동률, Klarf 출력</span></li>
         </ul>
       </div>
     </section>

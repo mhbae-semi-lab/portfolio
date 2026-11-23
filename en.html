@@ -198,6 +198,30 @@
       </div>
     </section>
 
+    <section id="scope" class="wrap">
+      <h2>What I owned and what it led to</h2>
+      <p class="sub">Which layers of the equipment software I owned, and which decisions the results fed into.</p>
+      <ol class="timeline layers">
+        <li class="reveal"><time>UI and tools</time><p>C# (WPF, WinForms). Inspection status screens, recipe creation and deployment tools, labeling and training tools, a TB-scale image splitter. <a href="#p-recipe-deploy">Unified RAC tool</a>, <a href="#p-mark">training tool</a></p></li>
+        <li class="reveal"><time>Sequences and interlocks</time><p>Automatic capture, focus, and align sequences; axis interference, vacuum, and light-level interlocks. <a href="#p-stable">New tool SW</a>, <a href="#p-interlock">tip breakage interlock</a></p></li>
+        <li class="reveal"><time>Image engine</time><p>C++, OpenCV, IPP, connected to the C# screens through C++/CLI. Designed in Python, then ported and matched value by value. <a href="#p-align">Wafer Align</a>, <a href="#p-crack">crack detection</a>, <a href="#p-recipe">design conversion</a></p></li>
+        <li class="reveal"><time>Devices</time><p>Line-scan (TDI) and area cameras, 3D confocal sensor, illumination, DAQ, axes. <a href="#p-setup">2D/3D vision setup</a>, <a href="#p-focus">contact-sensing AF</a></p></li>
+        <li class="reveal"><time>Concurrency and memory</time><p>Draw only the latest frame, lock image buffer reads and writes, keep UI updates on the main thread queue, and process tiles in parallel to keep memory flat. <a href="#p-stable">frame backlog</a>, <a href="#p-down">program crashes</a>, <a href="#p-recipe-deploy">design converter</a></p></li>
+      </ol>
+      <h3 class="lessons-head">Results that fed decisions</h3>
+      <ul class="lessons">
+        <li class="reveal"><b>Evidence for purchase decisions</b><p>Repeatability evaluations of 7 infrared optics samples supported ordering the replacement optics, and the glass wafer evaluation led to a new tool order.</p><a href="#p-optics">New optics and material detectability evaluation</a></li>
+        <li class="reveal"><b>Certification of a new tool</b><p>On a brand-new tool with no reference code, I cleared every SW item in the functional test and it passed third-party certification, with 0 failures over 11 days (264 hours) of operation.</p><a href="#p-stable">New particle-removal tool SW</a></li>
+        <li class="reveal"><b>Customer criteria and evaluations passed</b><p>Design conversion passed production validation on production material, and crack detection passed all 4 evaluation conditions for stacked memory. Stage tilt was brought within the customer limit.</p><a href="#p-crack">Die-edge crack detection</a></li>
+        <li class="reveal"><b>Recurring time saved</b><p>Bump recipe authoring 4 h → 20 min, mark-based align 140 s → 23 s. This time recurs for every recipe and every wafer.</p><a href="#p-recipe">Inspection recipe auto-creation</a></li>
+      </ul>
+      <h3 class="lessons-head">Who I worked with</h3>
+      <ul class="lessons">
+        <li class="reveal"><b>Customers and the field</b><p>Setup and on-site support on production lines of two Korean memory makers. For the new tool: 32 site visits and 25 days on site. Wrote 8 customer-facing documents, including an operation plan, a user manual, and a production switch plan.</p><a href="#p-stable">New particle-removal tool SW</a></li>
+        <li class="reveal"><b>In-house</b><p>The weekly report tool is used by a team of 10, and the release pack builder was rolled out to a group of about 30. Optics and material evaluations were done by a team of four.</p><a href="#p-release">Release pack builder for tool patches</a></li>
+      </ul>
+    </section>
+
     <section id="method" class="wrap">
       <h2>How I work</h2>
       <p class="sub">I report what improved and what did not, separately. Only what field data confirms becomes the default.</p>
@@ -331,7 +355,7 @@
     <section id="career" class="wrap career">
       <div>
         <h2>Career</h2>
-        <p class="sub">SW team at a semiconductor inspection equipment company, joined January 2022. 7+ tool types supported, 80 tasks, 8 customer-facing documents (as of H1 2026)</p>
+        <p class="sub">Engineer on the SW team of the corporate R&amp;D center at a semiconductor inspection equipment company, joined January 2022. Setup and on-site support on production lines of two Korean memory makers. 7+ tool types supported, 80 tasks, 8 customer-facing documents (as of H1 2026)</p>
         <ol class="timeline">
           <li><time>2026</time><p>Featureless Align, alignment mark detection, recipe auto-creation from design data, crack detection, preventing tip breakage, unified RAC tool</p></li>
           <li><time>2025</time><p>New particle-removal tool SW setup and on-site stabilization, particle-height Auto Focus, 3D inspection stage tilt correction, infrared optics evaluation</p></li>
@@ -344,7 +368,7 @@
         <h3>Education</h3>
         <ul class="plain">
           <li><b>Inha University, Graduate School of Manufacturing Innovation</b><span>M.S. in Semiconductor Process Intelligence Convergence, part-time program for working engineers (Mar 2026 to Feb 2028, expected)</span></li>
-          <li><b>Tech University of Korea, Computer and Electronic Engineering</b><span>Work-study program (Mar 2022 to Feb 2026, graduated), academic excellence scholarship, C# (WPF) personal project presentation</span></li>
+          <li><b>Tech University of Korea, Computer and Electronic Engineering</b><span>Work-study program (Mar 2022 to Feb 2026, graduated), GPA 3.9 / 4.5, academic excellence scholarship, C# (WPF) personal project presentation</span></li>
           <li><b>Seoul Robotics High School</b><span>Meister vocational high school (Mar 2019 to Feb 2022)</span></li>
         </ul>
         <h3>Certifications</h3>
@@ -360,10 +384,12 @@
         </ul>
         <h3>Skills</h3>
         <ul class="plain">
-          <li><b>Image processing</b><span>OpenCV, IPP, NCC matching, subpixel fitting, perspective transform</span><span class="made">Built with it: <a href="#p-align">Wafer Align</a>, <a href="#p-mark">alignment marks</a>, <a href="#p-crack">crack detection</a>, <a href="#p-recipe">design-to-image conversion</a></span></li>
-          <li><b>Equipment SW</b><span>C++ (MFC), C# (WPF, WinForms), C++/CLI</span><span class="made">Built with it: <a href="#p-stable">new tool SW</a>, <a href="#p-focus">Auto Focus</a>, <a href="#p-interlock">interlocks</a>, <a href="#p-recipe-deploy">unified RAC tool</a></span></li>
-          <li><b>Cameras and sensors</b><span>Line scan (TDI), area, 3D confocal sensor, DAQ</span><span class="made">Built with it: <a href="#p-setup">2D/3D vision setup</a>, <a href="#p-focus">contact-sensing AF</a>, <a href="#p-light">light interlock</a></span></li>
+          <li><b>Image processing</b><span>OpenCV, IPP, NCC matching, edge and Hough, blob, subpixel fitting, perspective transform, design (GDS) rasterization</span><span class="made">Built with it: <a href="#p-align">Wafer Align</a>, <a href="#p-mark">alignment marks</a>, <a href="#p-crack">crack detection</a>, <a href="#p-recipe">design-to-image conversion</a></span></li>
+          <li><b>Equipment SW</b><span>C++ (MFC), C# (WPF, WinForms), C++/CLI, multithreading and async, tile-based parallel processing, memory optimization</span><span class="made">Built with it: <a href="#p-stable">new tool SW</a>, <a href="#p-focus">Auto Focus</a>, <a href="#p-interlock">interlocks</a>, <a href="#p-recipe-deploy">unified RAC tool</a></span></li>
+          <li><b>Cameras and sensors</b><span>Line scan (TDI), area, 3D confocal sensor, DAQ, GigE Vision, USB3 Vision, Camera Link, CoaXPress, frame grabbers, Sapera, Matrox, Euresys, Cognex</span><span class="made">Built with it: <a href="#p-setup">2D/3D vision setup</a>, <a href="#p-focus">contact-sensing AF</a>, <a href="#p-light">light interlock</a></span></li>
           <li><b>Data</b><span>Python, NumPy, CNN training, local LLMs</span><span class="made">Built with it: <a href="#p-mark">CNN training tool</a>, <a href="#p-crack">TB-scale image splitter</a>, <a href="#p-matching">coordinate matching</a></span></li>
+          <li><b>Tools and collaboration</b><span>Git and GitHub (fork, PR), Visual Studio, static analysis (SonarQube), Jira, Notion</span><span class="made">Built <a href="#p-static">static analysis cleanup</a>, <a href="#p-release">release pack builder</a></span></li>
+          <li><b>Semiconductor domain</b><span>Wafer Align (θ, XY), die-to-die inspection, recipes, bump and stacked-memory inspection, repeatability (RNR), MTBI and uptime, Klarf output</span></li>
         </ul>
       </div>
     </section>

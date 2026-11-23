@@ -344,3 +344,9 @@ h2 { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.03em; font-weight: 7
 .st-dev { border-style: dashed; }
 .card-body .st { align-self: flex-start; }
 .d-meta .st { margin-right: 8px; }
+/* 맡은 범위: SW 계층 표 */
+.layers li { grid-template-columns: 150px 1fr; }
+.layers time { font-variant-numeric: normal; }
+.layers p a { color: var(--accent); font-weight: 600; text-decoration: none; white-space: nowrap; }
+.layers p a:hover { text-decoration: underline; }
+@media (max-width: 560px) { .layers li { grid-template-columns: 1fr; gap: 4px; } }
