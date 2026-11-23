@@ -26,6 +26,8 @@
 index.html, assets/      포트폴리오 한 페이지, 카드를 누르면 #p-이름 으로 세부 패널이 열림
 resume.html              1장 이력서 (인쇄하면 A4 1쪽 PDF). index.html 수치를 바꾸면 여기도 같이 바꿈
 assets/resume.pdf        resume.html 을 인쇄한 PDF (내려받기 버튼). resume.html 을 고치면 다시 만든다 (아래 "올릴 때")
+resume-en.html           영문 1장 이력서. resume.html 을 고치면 같은 내용을 여기도 고친다
+assets/resume-en.pdf     resume-en.html 을 인쇄한 PDF (Download PDF 버튼)
 notes/                   기술 노트. 현업 사례 노트는 make_figures.py 의 합성 데이터 그림, 공개 앱 노트는 앱 화면(합성 데이터)을 씀
 notes/en/                기술 노트 영문판. 한국어 노트를 고치면 여기도 같이 고친다
 tools/make_figures.py    합성 데이터로 사례 그림(assets/img/fig-*.webp)을 다시 만듦
@@ -49,6 +51,7 @@ python -m http.server 8765
 
 ```
 msedge --headless=new --no-pdf-header-footer --print-to-pdf="assets\resume.pdf" http://127.0.0.1:8765/resume.html
+msedge --headless=new --no-pdf-header-footer --print-to-pdf="assets\resume-en.pdf" http://127.0.0.1:8765/resume-en.html
 ```
 
-공개 사이트와 `resume.html` 에는 구직 문구 · 병역 · 입사 시기를 쓰지 않습니다. 회사에 내는 서류에서만 적습니다.
+공개 사이트와 `resume.html` · `resume-en.html` 에는 구직 문구 · 병역 · 입사 시기를 쓰지 않습니다. 회사에 내는 서류에서만 적습니다.
