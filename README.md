@@ -11,7 +11,6 @@
 | — | LLM Pulse — 내 구독 안에서 분야별 모델 추천 · 소스 불일치 경고 (Windows) | [설치 파일](https://github.com/mhbae-semi-lab/llm-pulse/releases/latest) | [llm-pulse](https://github.com/mhbae-semi-lab/llm-pulse) | v1.0.0 |
 | 03 | Klarf 웨이퍼 맵 뷰어 — KLARF 1.2 · 1.8 · 맵 정의 검증 5종 · 겹치기 · 두 파일 비교 (웹) | [열기](https://mhbae-semi-lab.github.io/klarf-viewer/) | [klarf-viewer](https://github.com/mhbae-semi-lab/klarf-viewer) | v1.0.0 |
 | 04 | 레시피 기준 관리 — 기준 등록 · 허용 오차 Diff · 장비 × 버전 현황판 · 배포 · 롤백 묶음 · 검사 전 검증 (웹) | [열기](https://mhbae-semi-lab.github.io/recipe-golden/) | [recipe-golden](https://github.com/mhbae-semi-lab/recipe-golden) | v1.0.0 |
-| 05 | 정렬 마크 검출 비교 — 규칙 vs CNN(브라우저 ONNX) vs 결합 정책 | — | — | 예정 |
 | 06 | MDCV 메일 분류기 — 설비 · 알람 코드 분류 · 한국어 마감 → 기한순 할 일 (웹 + Docker 셀프호스트) | [열기](https://mhbae-semi-lab.github.io/mdcv/) | [mdcv](https://github.com/mhbae-semi-lab/mdcv) | v1.0.0 |
 | 07 | 프롬프트 어드바이저 — 보내기 전 낭비 경고 · 장비 SW 요청 린트 (Windows) | [설치 파일](https://github.com/mhbae-semi-lab/prompt-advisor/releases/latest) | [prompt-advisor](https://github.com/mhbae-semi-lab/prompt-advisor) | v1.0.0 |
 | 08 | 프레임 대기열 시뮬레이터 — 단계별 처리 시간 · 넘침 정책 · 메모리 한도 도달 시각 (웹) | [열기](https://mhbae-semi-lab.github.io/frame-backlog-sim/) | [frame-backlog-sim](https://github.com/mhbae-semi-lab/frame-backlog-sim) | v1.0.0 |

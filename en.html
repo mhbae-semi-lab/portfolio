@@ -151,7 +151,7 @@
         </a>
       </div>
 
-      <h3 class="more-head">More projects</h3>
+      <details class="more"><summary class="more-head" data-more="Show" data-less="Hide">17 more projects</summary>
       <div class="groups">
         <div class="group">
           <h4>Image algorithms</h4>
@@ -184,7 +184,7 @@
             <a class="tile reveal" href="#p-backup"><img class="light" src="assets/img/en/fig-backup.webp" alt="" loading="lazy" width="900" height="600"><b>Tool data backup and disk management</b><span>25 min → 4 min</span></a>
             <a class="tile reveal" href="#p-ftp"><img class="light" src="assets/img/en/fig-ftp.webp" alt="" loading="lazy" width="900" height="600"><b>Large inspection result transfer</b><span>4 GB in 65 s</span></a>
             <a class="tile reveal" href="#p-matching"><img class="light" src="assets/img/en/fig-matching.webp" alt="" loading="lazy" width="1000" height="520"><b>Defect coordinate matching and review reports</b><span>2023, position error handling</span></a>
-            <a class="tile reveal" href="#p-weekly"><img src="assets/img/en/app-weekly-report.webp" alt="" loading="lazy" width="960" height="600"><b>Weekly report automation (in-house)</b><span>Used by 10 people, 50 planned</span></a>
+            <a class="tile reveal" href="#p-weekly"><img src="assets/img/en/app-weekly-report.webp" alt="" loading="lazy" width="960" height="600"><b>Weekly report automation (in-house)</b><span>Used by a team of 10</span></a>
             <a class="tile reveal" href="#p-release"><img class="light" src="assets/img/en/fig-release.webp" alt="" loading="lazy" width="1000" height="600"><b>Release pack builder for tool patches (in-house)</b><span>Rolled out to about 30 people</span></a>
           </div>
         </div>
@@ -196,6 +196,7 @@
           </div>
         </div>
       </div>
+      </details>
     </section>
 
     <section id="scope" class="wrap">
@@ -281,19 +282,6 @@
           <a class="demo-src" href="https://github.com/mhbae-semi-lab/klarf-viewer" target="_blank" rel="noopener">Source code</a>
         </article>
         <article class="demo reveal">
-          <a class="demo-main" href="https://mhbae-semi-lab.github.io/recipe-golden/" target="_blank" rel="noopener">
-            <img src="assets/img/en/app-recipe-golden.webp" alt="Recipe baseline manager with the tool-by-version board and the pre-run check" loading="lazy" width="960" height="600">
-            <b>Recipe baseline manager</b>
-          </a>
-          <span class="demo-kind">Web app · no install · v1.0.0</span>
-          <dl class="demo-why">
-            <dt>Angle</dt><dd>Shows which tool differs from the baseline and what changed when, from recipe files alone, with no SECS/GEM or MES link.</dd>
-            <dt>Solves</dt><dd>Reads JSON, INI, XML, CSV and key=value into one parameter tree, diffs with tolerance and units, and gives a pass or block with reasons before a run.</dd>
-            <dt>Different</dt><dd>Tool-by-version board, one-tool pilot then full rollout bundle, and rollback bundle on one screen. Runs in the browser from files only, with no server or agent.</dd>
-          </dl>
-          <a class="demo-src" href="https://github.com/mhbae-semi-lab/recipe-golden" target="_blank" rel="noopener">Source code</a>
-        </article>
-        <article class="demo reveal">
           <a class="demo-main" href="https://mhbae-semi-lab.github.io/frame-backlog-sim/" target="_blank" rel="noopener">
             <img src="assets/img/en/app-frame-backlog-sim.webp" alt="Frame backlog simulator results with the time memory hits its limit and per-stage latency" loading="lazy" width="960" height="600">
             <b>Frame backlog simulator</b>
@@ -305,19 +293,6 @@
             <dt>Different</dt><dd>Uses the same overflow policies as camera SDKs as the built-in model, so you only fill in fields. Replays your own timing log and computes when memory will hit its limit.</dd>
           </dl>
           <a class="demo-src" href="https://github.com/mhbae-semi-lab/frame-backlog-sim" target="_blank" rel="noopener">Source code</a>
-        </article>
-        <article class="demo reveal">
-          <a class="demo-main" href="https://mhbae-semi-lab.github.io/log-analyzer/" target="_blank" rel="noopener">
-            <img src="assets/img/en/app-log-analyzer.webp" alt="Equipment log analyzer with summary counts and a per-module timeline" loading="lazy" width="960" height="600">
-            <b>Equipment log analyzer</b>
-          </a>
-          <span class="demo-kind">Web app · no install · v1.0.0</span>
-          <dl class="demo-why">
-            <dt>Angle</dt><dd>Cuts the time it takes to find what broke first in tens of thousands of log lines after a tool goes down.</dd>
-            <dt>Solves</dt><dd>Groups alarms into occurrences, finds warnings that repeat before them with lead-time statistics, and cites the evidence line numbers.</dd>
-            <dt>Different</dt><dd>For each labeled down case, it recomputes how many minutes earlier a warning rule would have caught it. Works on a single file with no collection server.</dd>
-          </dl>
-          <a class="demo-src" href="https://github.com/mhbae-semi-lab/log-analyzer" target="_blank" rel="noopener">Source code</a>
         </article>
         <article class="demo reveal">
           <a class="demo-main" href="https://mhbae-semi-lab.github.io/equip-sw-lint/viewer/" target="_blank" rel="noopener">
@@ -335,14 +310,13 @@
         <article class="demo demo-more reveal">
           <h3>Other public apps</h3>
           <ul>
+            <li><a href="https://mhbae-semi-lab.github.io/recipe-golden/" target="_blank" rel="noopener">Recipe golden manager</a> <span class="demo-kind">Web</span><p>From recipe files alone, finds which tools differ from the golden recipe and when it changed, and builds deployment and rollback packs. <a class="demo-src" href="https://github.com/mhbae-semi-lab/recipe-golden" target="_blank" rel="noopener">Source</a></p></li>
+            <li><a href="https://mhbae-semi-lab.github.io/log-analyzer/" target="_blank" rel="noopener">Equipment log analyzer</a> <span class="demo-kind">Web</span><p>Groups alarms by occurrence and finds the warnings that repeated beforehand using lead-time statistics, with evidence line numbers. <a class="demo-src" href="https://github.com/mhbae-semi-lab/log-analyzer" target="_blank" rel="noopener">Source</a></p></li>
             <li><a href="https://mhbae-semi-lab.github.io/mdcv/" target="_blank" rel="noopener">MDCV mail classifier</a> <span class="demo-kind">Web · Docker self-host</span><p>Pulls tool IDs, alarm codes and Korean deadlines from mail into per-tool threads and a due-date to-do list. <a class="demo-src" href="https://github.com/mhbae-semi-lab/mdcv" target="_blank" rel="noopener">Source</a></p></li>
             <li><a href="https://mhbae-semi-lab.github.io/weekly-report/" target="_blank" rel="noopener">Weekly report builder</a> <span class="demo-kind">Web</span><p>Turns a git log into three-line topic summaries as PPTX, and blocks numbers that are not in the input. <a class="demo-src" href="https://github.com/mhbae-semi-lab/weekly-report" target="_blank" rel="noopener">Source</a></p></li>
-            <li><a href="https://github.com/mhbae-semi-lab/prompt-advisor/releases/latest" target="_blank" rel="noopener">Prompt Advisor</a> <span class="demo-kind">Windows</span><p>Flags missing tool, version, log and repro details in AI coding requests before you send them. <a class="demo-src" href="https://github.com/mhbae-semi-lab/prompt-advisor" target="_blank" rel="noopener">Source</a></p></li>
-            <li><a href="https://github.com/mhbae-semi-lab/llm-pulse/releases/latest" target="_blank" rel="noopener">LLM Pulse</a> <span class="demo-kind">Windows</span><p>Recommends models per field within the subscriptions you pay for, and shows why the top pick changed. <a class="demo-src" href="https://github.com/mhbae-semi-lab/llm-pulse" target="_blank" rel="noopener">Source</a></p></li>
           </ul>
         </article>
       </div>
-      <p class="soon">Next app: alignment mark detection comparison (rules vs CNN, leakage from how the evaluation set is split)</p>
       <h3 class="lessons-head">How I work with AI</h3>
       <ul class="lessons">
         <li class="reveal"><b>I set the design and the pass criteria</b><p>I write down first what to build, what counts as correct, and how to check it.</p></li>
@@ -404,7 +378,7 @@
           <li class="reveal"><b>Research topic</b><span>Building inspection zones and per-zone inspection settings automatically from the design drawing, verified by how closely they match zones drawn by people and whether detection stays the same.</span></li>
           <li class="reveal"><b>Next</b><span>Define problems in numbers, solve them in ways that can be verified, and build equipment SW that does not need constant manual tuning.</span></li>
         </ol>
-        <figure class="d-fig light reveal"><img src="assets/img/en/fig-research-pre.webp" alt="Killer defect detection bars. Baseline: current 81.3 percent vs drawing zones 95.3. Lower pattern reflectance: 25.8 vs 99.2. Multilayer: 95.4 vs 95.6" loading="lazy" width="900" height="460"><figcaption>Preliminary experiment: public SKY130 design, simulated imaging, vertical 4-die comparison. Detection of short and open defects with false calls held at 1 or fewer per image. The baseline gap is +14.0 pp (95% interval +12.0 to +15.9). The cost: inspected area grows from 22% to 39%, and a 1 px alignment error roughly doubles false calls. The current method gets close on the baseline when its thresholds are lowered, and falls behind when conditions change. No company data was used.</figcaption></figure>
+        <figure class="d-fig light reveal"><img src="assets/img/en/fig-research-pre.webp" alt="Killer defect detection bars. Baseline: current 81.3 percent vs drawing zones 95.3. Lower pattern reflectance: 25.8 vs 99.2. Multilayer: 95.4 vs 95.6" loading="lazy" width="900" height="460"><figcaption>Preliminary experiment (public SKY130 design, simulated imaging): with false calls held at 1 or fewer per image, killer defect detection on the baseline goes from 81.3% to 95.3% (+14.0 pp, 95% interval +12.0 to +15.9). No company data was used.<details><summary>Conditions and limits</summary>Vertical 4-die comparison, short and open defects. Inspected area grows from 22% to 39%, and a 1 px alignment error roughly doubles false calls. The current method gets close on the baseline when its thresholds are lowered, and falls behind when conditions change.</details></figcaption></figure>
       </div>
       <div class="pipeline reveal">
         <p>What RAC automates, and the step the research adds</p>
@@ -687,13 +661,13 @@
     <p class="d-meta"><span class="st st-field">Used in-house</span> 2026 · in-house tool, design and implementation · the public demo is a rebuild on synthetic data</p>
     <h2 id="detail-title">Weekly report automation (in-house)</h2>
     <figure class="d-fig"><img src="assets/img/en/app-weekly-report.webp" alt="Public weekly report builder with a topic summary and the phrases the fact check blocked" width="960" height="600"><figcaption>The public app. It rebuilds the in-house tool’s flow so anyone can run it on their own git log.</figcaption></figure>
-    <dl class="kpi"><div><dt>People using it now</dt><dd>10</dd></div><div><dt>Planned rollout</dt><dd>50</dd></div></dl>
+    <dl class="kpi"><div><dt>People using it now</dt><dd>10</dd></div></dl>
     <h3>Problem</h3>
     <ul><li>Every week, writing the report meant rereading the week’s commits and notes and copying them by hand into the company PPT template.</li></ul>
     <h3>Approach</h3>
     <ul><li>Rules group the week’s git commits by topic; each topic gets a title and a three-line summary in the template PPT.</li><li>Summaries come only from a local LLM, so no data leaves the machine.</li><li>Every summary is checked: three lines, 80 characters per line, and no numbers or status words such as “done” that are not in the input. On failure it retries once, then falls back to rule-based sentences.</li><li>It also runs as a Claude Code command.</li></ul>
     <h3>Result</h3>
-    <ul><li>10 people on the team use it, with a rollout to 50 planned.</li><li>You can run the same flow on your own git log in the <a href="https://mhbae-semi-lab.github.io/weekly-report/" target="_blank" rel="noopener">public app</a>.</li><li>For tool patches, this report feeds the <a href="#p-release">release pack builder</a>, which makes the release documents and the patch folder from it.</li></ul>
+    <ul><li>10 people on the team use it.</li><li>You can run the same flow on your own git log in the <a href="https://mhbae-semi-lab.github.io/weekly-report/" target="_blank" rel="noopener">public app</a>.</li><li>For tool patches, this report feeds the <a href="#p-release">release pack builder</a>, which makes the release documents and the patch folder from it.</li></ul>
     <p class="d-tags">Python, python-pptx, local LLM (Ollama), Claude Code</p>
     <p class="d-source">Source: in-house tool usage (Nov 2026)</p>
   </template>
