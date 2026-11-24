@@ -1,0 +1,68 @@
+:root {
+  color-scheme: light;
+  --ink: #18232b; --body: #28373e; --muted: #475a62; --rule: #cbd4d6;
+  --accent: #245669; --paper: #fff;
+  font-family: "Pretendard Variable", Pretendard, "Malgun Gothic", sans-serif;
+  color: var(--ink);
+}
+:root:lang(en) { font-family: "Segoe UI", Arial, sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #edf0ef; word-break: keep-all; overflow-wrap: break-word; }
+html:lang(en) body { word-break: normal; }
+h1, h2, h3, p, ol { margin: 0; }
+a { color: var(--accent); text-underline-offset: .16em; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.toolbar { max-width: 210mm; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 16px; padding: 12px 0; font-size: .9rem; }
+.tracks, .actions { display: flex; align-items: center; gap: 3px; flex-wrap: wrap; }
+.toolbar a, .toolbar button { border: 1px solid transparent; border-radius: 4px; padding: 6px 8px; color: var(--ink); background: transparent; font: inherit; text-decoration: none; cursor: pointer; }
+.tracks { background: #fff; padding: 2px; border: 1px solid var(--rule); border-radius: 6px; }
+.tracks a:target, body:not(:has(.tracks a:target)) #vision, .toolbar .download { background: var(--accent); color: #fff; }
+.toolbar .pair-download { border-color: var(--accent); color: var(--accent); }
+.toolbar a:hover, .toolbar button:hover { text-decoration: underline; }
+.page { width: 210mm; min-height: 297mm; margin: 0 auto 24px; padding: 12mm 15mm; background: var(--paper); box-shadow: 0 3px 18px #18232b12; font-size: 11pt; line-height: 1.43; color: var(--body); }
+h1, h2, h3, strong { color: var(--ink); }
+.resume-header { display: grid; grid-template-columns: minmax(0, 1fr) 24mm; column-gap: 5mm; align-items: start; }
+.identity, .lead { grid-column: 1; }
+.portrait { grid-column: 2; grid-row: 1 / span 2; display: block; width: 100%; height: auto; border: .6pt solid var(--rule); }
+h1 { font-size: 28pt; font-weight: 700; line-height: 1.12; letter-spacing: -.025em; }
+.role { margin-top: 3pt; font-size: 14pt; font-weight: 600; color: var(--accent); line-height: 1.3; }
+.contact { display: flex; flex-wrap: wrap; gap: 2pt 12pt; margin-top: 5pt; font-size: 9.2pt; color: var(--muted); }
+.contact a, h3 a { color: inherit; text-decoration: none; }
+.contact a:hover, h3 a:hover { text-decoration: underline; }
+.lead { margin-top: 6pt; }
+.page > section { margin-top: 9pt; }
+h2 { display: flex; align-items: center; gap: 9pt; margin-bottom: 3pt; color: var(--accent); font-size: 12.25pt; font-weight: 700; line-height: 1.32; }
+h2::after { content: ""; height: .6pt; background: var(--rule); flex: 1; }
+.experience p:first-of-type, .projects h3 { display: flex; justify-content: space-between; align-items: baseline; column-gap: 8pt; }
+time, .year { flex: none; color: var(--muted); font-size: 9pt; font-weight: 400; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.experience p + p, .credentials p + p { margin-top: 1.5pt; }
+.projects { list-style: none; padding: 0; }
+.projects li { break-inside: avoid; }
+.projects li + li { margin-top: 7pt; }
+.projects h3 { font-size: 11.3pt; line-height: 1.35; }
+.outcome { color: var(--ink); }
+.metric { font-weight: 700; white-space: nowrap; }
+.detail { color: var(--muted); }
+[data-edition="control"], [data-edition="ax"] { display: none; }
+body:has(:is(#control, #ax):target) [data-edition="vision"] { display: none; }
+body:has(#control:target) [data-edition="control"], body:has(#ax:target) [data-edition="ax"] { display: block; }
+@media screen and (max-width: 830px) {
+  .toolbar { padding: 10px 12px; }
+  .page { width: auto; min-height: 0; margin: 0 6px 18px; padding: 26px 18px; font-size: 1rem; line-height: 1.6; }
+  .resume-header { grid-template-columns: minmax(0, 1fr) clamp(60px, 17vw, 86px); column-gap: 14px; }
+  .portrait { grid-row: 1; }
+  .lead { grid-column: 1 / -1; }
+  h1 { font-size: clamp(1.75rem, 7.5vw, 2.35rem); }
+  .page > section { margin-top: 20px; }
+  .projects li + li { margin-top: 14px; }
+  .experience p:first-of-type { flex-wrap: wrap; }
+  .role { font-size: 1.15rem; }
+  .contact { gap: 2px 10px; font-size: .83rem; }
+}
+@page { size: A4; margin: 0; }
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background: #fff; }
+  .toolbar { display: none; }
+  .page { min-height: 0; margin: 0; box-shadow: none; }
+}

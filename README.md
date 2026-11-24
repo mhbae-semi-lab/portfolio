@@ -24,10 +24,10 @@
 ## 구조
 ```
 index.html, assets/      포트폴리오 한 페이지, 카드를 누르면 #p-이름 으로 세부 패널이 열림
-resume.html              1장 이력서 (인쇄하면 A4 1쪽 PDF). index.html 수치를 바꾸면 여기도 같이 바꿈
-assets/resume.pdf        resume.html 을 인쇄한 PDF (내려받기 버튼). resume.html 을 고치면 다시 만든다 (아래 "올릴 때")
-resume-en.html           영문 1장 이력서. resume.html 을 고치면 같은 내용을 여기도 고친다
-assets/resume-en.pdf     resume-en.html 을 인쇄한 PDF (Download PDF 버튼)
+resume.html              단일 열 A4 이력서. #vision(기본), #control, #ax로 직무별 대표 사례 3개를 선택
+resume-en.html           같은 사실과 직무 구성을 담은 영문판. 두 언어의 수치를 함께 갱신
+assets/resume.css, assets/resume.js   이력서 인쇄 스타일, 직무·언어 이동, 제출용 PDF의 공개 프로젝트 링크
+assets/resume*.pdf       비전은 기존 resume.pdf와 resume-en.pdf, 나머지는 resume-control[-en].pdf와 resume-ax[-en].pdf
 notes/                   기술 노트. 현업 사례 노트는 make_figures.py 의 합성 데이터 그림, 공개 앱 노트는 앱 화면(합성 데이터)을 씀
 notes/en/                기술 노트 영문판. 한국어 노트를 고치면 여기도 같이 고친다
 tools/make_figures.py    합성 데이터로 사례 그림(assets/img/fig-*.webp)을 다시 만듦
@@ -47,11 +47,14 @@ python -m http.server 8765
 ## 올릴 때
 `index.html` 의 `site.css?v=` 와 `site.js?v=` 값을 바꿉니다. 바꾸지 않으면 방문자 브라우저가 예전 스타일을 계속 씁니다.
 
-`resume.html` 을 고쳤으면 로컬 서버를 띄운 채로 PDF 를 다시 만듭니다 (A4 1쪽인지 확인).
+국문·영문 이력서나 프로젝트 본문을 고치면 두 언어의 PDF를 함께 갱신합니다. 이력서는 직무별 A4 한 쪽, 포트폴리오는 해당 이력서의 사례 세 건을 한 쪽씩 담습니다. 그림, 검증 조건, 결과와 공개 사례 링크를 같은 언어의 원본에서 가져옵니다.
 
+프로젝트 루트에서 Node.js와 Playwright를 사용할 수 있는 환경으로 다음 명령을 실행합니다. `PLAYWRIGHT_MODULE`로 Playwright 모듈 위치를, `EDGE_EXE`로 Edge 실행 파일을 지정할 수 있습니다.
+
+```powershell
+node tools/build_application_pdfs.cjs
 ```
-msedge --headless=new --no-pdf-header-footer --print-to-pdf="assets\resume.pdf" http://127.0.0.1:8765/resume.html
-msedge --headless=new --no-pdf-header-footer --print-to-pdf="assets\resume-en.pdf" http://127.0.0.1:8765/resume-en.html
-```
+
+`assets/resume*.pdf`와 `assets/portfolio*.pdf`에 비전, 장비 제어, 제조 자동화의 두 언어 파일이 생성됩니다. 직무별 이력서 화면에서 이력서와 같은 언어·직무의 포트폴리오 PDF를 내려받을 수 있습니다.
 
 공개 사이트와 `resume.html` · `resume-en.html` 에는 구직 문구 · 병역 · 입사 시기를 쓰지 않습니다. 회사에 내는 서류에서만 적습니다.

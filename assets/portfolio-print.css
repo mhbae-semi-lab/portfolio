@@ -1,0 +1,25 @@
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+html { color: #202c33; font: 11.5pt/1.5 "Pretendard Variable", Pretendard, "Malgun Gothic", sans-serif; word-break: keep-all; }
+html:lang(en) { font-family: "Segoe UI", Arial, sans-serif; word-break: normal; }
+body, h1, h2, p, figure { margin: 0; }
+body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.sheet { width: 210mm; height: 297mm; padding: 14mm 18mm 13mm; display: flex; flex-direction: column; break-after: page; }
+.sheet:last-child { break-after: auto; }
+.folio, footer { display: flex; justify-content: space-between; align-items: baseline; gap: 5mm; color: #435760; font-size: 10pt; }
+.folio { padding-bottom: 3mm; border-bottom: 1px solid #a9babf; }
+.folio strong { color: #245669; font-weight: 650; }
+.with-portrait { display: grid; grid-template-columns: minmax(0, 1fr) 23mm; column-gap: 6mm; align-items: start; }
+.portrait { display: block; width: 100%; height: auto; margin-top: 6mm; border: .6pt solid #cbd4d6; }
+h1 { margin: 6mm 0 2.5mm; font-size: 24pt; line-height: 1.18; letter-spacing: -.025em; }
+.outcome { font-size: 14.2pt; line-height: 1.48; color: #245669; }
+.metric { font-weight: 700; color: #183c4b; white-space: nowrap; }
+figure { margin: 5mm 0 2mm; }
+figure img { display: block; width: 100%; height: 80mm; object-fit: contain; }
+figcaption { margin-top: 2mm; color: #475a62; font-size: 9.7pt; line-height: 1.45; }
+.notes { display: grid; grid-template-columns: 29mm minmax(0,1fr); column-gap: 4mm; row-gap: 3mm; margin-top: 4mm; align-items: baseline; }
+html:lang(en) .notes { grid-template-columns: 31mm minmax(0,1fr); }
+h2 { font-size: 11.3pt; line-height: 1.45; color: #1e363f; }
+.sources { margin-top: 4mm; color: #475a62; font-size: 9.5pt; line-height: 1.45; }
+footer { margin-top: auto; padding-top: 2.5mm; border-top: 1px solid #a9babf; }
+footer a, .folio a { color: #245669; text-decoration: none; }

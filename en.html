@@ -8,7 +8,7 @@
   <meta name="color-scheme" content="light dark">
   <link rel="alternate" hreflang="ko" href="https://mhbae-semi-lab.github.io/portfolio/">
   <link rel="alternate" hreflang="en" href="https://mhbae-semi-lab.github.io/portfolio/en.html">
-  <script>try{var l=localStorage.getItem("lang"),c=document.documentElement.lang;if(l&&l!==c)location.replace((l==="en"?"en.html":"./")+location.hash)}catch(e){}</script>
+  <script>try{var l=localStorage.getItem("lang"),c=document.documentElement.lang;if(l&&l!==c)location.replace((l==="en"?"en.html":"index.html")+location.hash)}catch(e){}</script>
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mhbae-semi-lab.github.io/portfolio/en.html">
   <meta property="og:title" content="Minhyeok Bae | Semiconductor Inspection Equipment SW Engineer">
@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%232f62d6%22/%3E%3Ctext x=%2216%22 y=%2222.5%22 font-size=%2217%22 font-family=%22sans-serif%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22white%22%3E%EB%B0%B0%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="assets/site.css?v=20261123c">
+  <link rel="stylesheet" href="assets/site.css?v=20261124docs">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Minhyeok Bae", "alternateName": "배민혁", "jobTitle": "Semiconductor Inspection Equipment SW Engineer", "url": "https://mhbae-semi-lab.github.io/portfolio/en.html", "email": "mailto:mhbae03@gmail.com", "image": "https://mhbae-semi-lab.github.io/portfolio/assets/img/profile.jpg", "sameAs": ["https://github.com/mhbae-semi-lab"], "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Inha University, Graduate School of Manufacturing Innovation"}, {"@type": "CollegeOrUniversity", "name": "Tech University of Korea"}], "knowsAbout": ["Wafer Align", "Defect detection", "Inspection recipe automation", "Image processing", "OpenCV", "C++", "C#", "Auto Focus"]}</script>
 </head>
 <body>
@@ -32,7 +32,7 @@
         <a href="#research">Research</a>
         <a href="resume-en.html">Resume</a>
       </nav>
-      <div class="lang-switch" role="group" aria-label="Language"><a href="./" lang="ko" hreflang="ko">KO</a><a href="en.html" lang="en" hreflang="en" aria-current="true">EN</a></div>
+      <div class="lang-switch" role="group" aria-label="Language"><a href="index.html" lang="ko" hreflang="ko">KO</a><a href="en.html" lang="en" hreflang="en" aria-current="true">EN</a></div>
       <a class="btn btn-sm" href="#contact">Contact</a>
     </div>
   </header>
@@ -44,12 +44,13 @@
         <h1>Minhyeok Bae</h1>
         <p class="lead">I design and ship Wafer Align, defect detection, and recipe automation, from first design through stable mass production.</p>
         <ul class="proof">
-          <li><a href="#p-stable"><b>From design to stable mass production</b><span>25 days on site for a new tool, 0 failures in 11 days of operation</span></a></li>
-          <li><a href="#p-align"><b>Reproduce the failure, then redesign the pass criteria</b><span>Reproduced misjudgments on synthetic images; false passes cut from 134 to 0 on synthetic and in-house images</span></a></li>
+          <li><a href="#p-stable"><b>From design to stable mass production</b><span>25 days on site. In 11 days of observation, 0 recorded failures and 3 h of planned downtime.</span></a></li>
+          <li><a href="#p-align"><b>Reproduce the failure and revise the pass criteria</b><span>False passes fell from 134 to 0 in 191 synthetic cases and from 31 to 0 in 48 in-house decisions.</span></a></li>
           <li><a href="#p-recipe"><b>Apply what I learn to the tool right away</b><span>Working while studying; recipe auto-creation became my master’s research</span></a></li>
         </ul>
         <div class="cta">
           <a class="btn" href="#work">View projects</a>
+          <a class="btn btn-line" href="resume-en.html">Resume by role</a>
           <a class="btn btn-line" href="#contact">Contact</a>
         </div>
       </div>
@@ -59,10 +60,10 @@
     </section>
 
     <section class="figures wrap" aria-label="Key results">
-      <a class="fig-num reveal" href="#p-mark"><strong>−84<span>%</span></strong><p>Mark-based align time<br><small>140 s → 23 s vs. the template method, 12/12 slots on site</small></p></a>
+      <a class="fig-num reveal" href="#p-mark"><strong>−84<span>%</span></strong><p>Mark-based align time<br><small>Rules and fewer scan lines, 140 s → 23 s. Marks found in 12/12 field slots</small></p></a>
       <a class="fig-num reveal" href="#p-recipe"><strong>−92<span>%</span></strong><p>Bump recipe authoring time<br><small>4 h → 20 min, automatic placement from design data</small></p></a>
-      <a class="fig-num reveal" href="#p-focus"><strong>−72<span>%</span></strong><p>Auto Focus time<br><small>90 s → 25 s, image AF with parallel checks, then contact sensing at ±2µm</small></p></a>
-      <a class="fig-num reveal" href="#p-stable"><strong>264<span>h</span></strong><p>0 failures in operation<br><small>new tool, 11 days running, Vision uptime 98.86% including 3 h of planned stops</small></p></a>
+      <a class="fig-num reveal" href="#p-focus"><strong>−72<span>%</span></strong><p>Auto Focus time<br><small>Image AF 90 s → 25 s. Contact sensing ±2 µm in 20 repeats on particles ≥300 µm.</small></p></a>
+      <a class="fig-num reveal" href="#p-stable"><strong>264<span>h</span></strong><p>0 failures in operation<br><small>11 days observed. Vision uptime 98.86%, including 3 h of planned downtime.</small></p></a>
     </section>
 
     <section id="flow" class="wrap">
@@ -89,8 +90,8 @@
           <div class="card-body">
             <span class="st st-lab">In-house validated · production switch pending</span>
             <h3>Wafer Align without registered features</h3>
-            <p>Fits a grid to the die-array period to find the rotation, and rejects its own wrong answers.</p>
-            <dl class="kpi"><div><dt>False passes (synthetic and in-house images)</dt><dd>134 → 0</dd></div><div><dt>Max angle error (100 rotated wafers)</dt><dd>0.0013°</dd></div></dl>
+            <p>Estimates rotation from the die grid and accepts an angle when multiple regions agree.</p>
+            <dl class="kpi"><div><dt>False passes · 191 synthetic cases</dt><dd>134 → 0</dd></div><div><dt>In-tolerance results withheld · 48 in-house decisions</dt><dd>0 → 10</dd></div></dl>
             <span class="more-link">Details</span>
           </div>
         </a>
@@ -100,8 +101,8 @@
           <div class="card-body">
             <span class="st st-prod">In production</span>
             <h3>New particle-removal tool SW</h3>
-            <p>Stabilized a brand-new tool with no reference code until it stopped halting in production.</p>
-            <div class="stat-big"><strong>264<span>h</span></strong><span>11 days running, 0 failures</span></div>
+            <p>Traced a production freeze within 48 hours of startup to queued display frames and fixed the backlog.</p>
+            <div class="stat-big"><strong>264<span>h</span></strong><span>11 days observed, 0 recorded failures, 3 h of planned downtime</span></div>
             <span class="more-link">Details</span>
           </div>
         </a>
@@ -112,7 +113,7 @@
             <span class="st st-field">Field validated</span>
             <h3>Particle-height Auto Focus</h3>
             <p>Made image AF 72% faster, then redesigned it around contact sensing when blank floors defeated it.</p>
-            <dl class="kpi"><div><dt>Image AF time</dt><dd>−72%</dd></div><div><dt>Height repeatability</dt><dd>±2µm</dd></div></dl>
+            <dl class="kpi"><div><dt>Image AF time</dt><dd>−72%</dd></div><div><dt>Particles ≥300 µm · 20 repeats</dt><dd>±2 µm</dd></div></dl>
             <span class="more-link">Details</span>
           </div>
         </a>
@@ -122,8 +123,8 @@
           <div class="card-body">
             <span class="st st-field">Rules field validated · CNN in shadow</span>
             <h3>Shot Key mark detection, rules + CNN</h3>
-            <p>Finds die marks without templates; a CNN covers faint marks the rules miss.</p>
-            <dl class="kpi"><div><dt>Align time</dt><dd>−84%</dd></div><div><dt>False detections (with CNN, 280 → 114)</dt><dd>−59%</dd></div></dl>
+            <p>Rule-based detection reduced the capture range from seven lines to about three. A CNN runs alongside the existing decision.</p>
+            <dl class="kpi"><div><dt>Rules · field alignment time</dt><dd>140 s → 23 s</dd></div><div><dt>CNN · in-house false detections</dt><dd>280 → 114</dd></div></dl>
             <span class="more-link">Details</span>
           </div>
         </a>
@@ -142,10 +143,10 @@
         <a class="card card-5 reveal" href="#p-crack">
           <img src="assets/img/fig-crack.webp" alt="" loading="lazy" width="900" height="600">
           <div class="card-body">
-            <span class="st st-field">Passed customer evaluation</span>
+            <span class="st st-field">Tested on customer material</span>
             <h3>Die-edge crack detection</h3>
-            <p>Catches edge cracks the old inspection missed or over-detected, with a multi-stage algorithm.</p>
-            <dl class="kpi"><div><dt>Newly found (524 of 1,883 defects)</dt><dd>28%</dd></div></dl>
+            <p>Built an inspection band that follows the die edge to detect cracks and chipping.</p>
+            <dl class="kpi"><div><dt>Edge cracks among 1,883 recorded detections</dt><dd>524</dd></div></dl>
             <span class="more-link">Details</span>
           </div>
         </a>
@@ -212,8 +213,8 @@
       <h3 class="lessons-head">Results that fed decisions</h3>
       <ul class="lessons">
         <li class="reveal"><b>Evidence for purchase decisions</b><p>Repeatability evaluations of 7 infrared optics samples supported ordering the replacement optics, and the glass wafer evaluation led to a new tool order.</p><a href="#p-optics">New optics and material detectability evaluation</a></li>
-        <li class="reveal"><b>Certification of a new tool</b><p>On a brand-new tool with no reference code, I cleared every SW item in the functional test and it passed third-party certification, with 0 failures over 11 days (264 hours) of operation.</p><a href="#p-stable">New particle-removal tool SW</a></li>
-        <li class="reveal"><b>Customer criteria and evaluations passed</b><p>Design conversion passed production validation on production material, and crack detection passed all 4 evaluation conditions for stacked memory. Stage tilt was brought within the customer limit.</p><a href="#p-crack">Die-edge crack detection</a></li>
+        <li class="reveal"><b>Certification of a new tool</b><p>On a brand-new tool with no reference code, I cleared every SW item in the functional test and it passed third-party certification, with 0 recorded failures in 11 days (264 h) of observation, including 3 h of planned downtime.</p><a href="#p-stable">New particle-removal tool SW</a></li>
+        <li class="reveal"><b>Customer material evaluations</b><p>The edge inspection identified 524 cracks on a customer sample. A separate detection study on different stacked-memory material passed all four customer conditions. Layout conversion passed validation on production material.</p><a href="#p-crack">Die-edge crack detection</a></li>
         <li class="reveal"><b>Recurring time saved</b><p>Bump recipe authoring 4 h → 20 min, mark-based align 140 s → 23 s. This time recurs for every recipe and every wafer.</p><a href="#p-recipe">Inspection recipe auto-creation</a></li>
       </ul>
       <h3 class="lessons-head">Who I worked with</h3>
@@ -236,7 +237,7 @@
       <ul class="checks">
         <li class="reveal"><a href="#p-recipe-deploy"><strong>200<span> runs</span></strong>Restart loop to confirm the start race is gone</a></li>
         <li class="reveal"><a href="#p-interlock"><strong>1,000<span> runs</span></strong>Lifter servo repeat drive, position repeatability</a></li>
-        <li class="reveal"><a href="#p-align"><strong>100<span> runs</span></strong>Rotated wafers through Align, 0 fails</a></li>
+        <li class="reveal"><a href="#p-align"><strong>100<span> runs</span></strong>First featureless method on rotated material, zero failures</a></li>
         <li class="reveal"><a href="#p-light"><strong>100<span> runs</span></strong>Repeated light measurements, mean deviation 0.52%</a></li>
         <li class="reveal"><a href="#p-focus"><strong>20<span> runs</span></strong>Particle height repeats, ±2 µm</a></li>
         <li class="reveal"><a href="#p-recipe-deploy"><strong>54<span> tests</span></strong>Unit tests, all passing</a></li>
@@ -244,7 +245,7 @@
       </ul>
       <h3 class="lessons-head">What I got wrong and what I changed</h3>
       <ul class="lessons">
-        <li class="reveal"><b>I recheck methods that already passed</b><p>The first Align beat the customer criteria over thousands of production runs, but I found it sometimes gave a wrong angle a high score on low-contrast images. I redesigned it so wrong answers score low, and reported the longer compute time (150 → 700 ms) as well.</p><a href="#p-align">Featureless Wafer Align</a></li>
+        <li class="reveal"><b>I recheck methods that already passed</b><p>After the first alignment method met customer criteria, I found that it still accepted wrong angles on low-contrast images. I changed the decision to use the die grid and counted how often it also withheld angles within tolerance.</p><a href="#p-align">Featureless Wafer Align</a></li>
         <li class="reveal"><b>I change the method rather than polish it</b><p>I made image AF 72% faster, but on a blank floor no sharpness peak appeared. Instead of polishing the image method further, I redesigned it around contact sensing.</p><a href="#p-focus">Particle-height Auto Focus</a></li>
         <li class="reveal"><b>When a score looks good, I suspect it first</b><p>An evaluation set split by file-name hash scored better than reality. Frames from the same day had leaked into both training and evaluation, so I switched to a split by date. The CNN’s detection gain was not significant, and I reported it that way.</p><a href="#p-mark">Shot Key mark detection</a></li>
         <li class="reveal"><b>I check the measuring tool first</b><p>The repeat-run program measuring the race reproduction rate had a bug, so the first numbers were inflated. I fixed the measurement program first, then measured again.</p><a href="#p-recipe-deploy">Unified RAC tool</a></li>
@@ -329,7 +330,7 @@
     <section id="career" class="wrap career">
       <div>
         <h2>Career</h2>
-        <p class="sub">Engineer on the SW team of the corporate R&amp;D center at a semiconductor inspection equipment company, joined January 2022. Setup and on-site support on production lines of two Korean memory makers. 7+ tool types supported, 80 tasks, 8 customer-facing documents (as of H1 2026)</p>
+        <p class="sub">Software engineer, associate grade, in the R&amp;D center of a semiconductor inspection equipment company since January 2022. I set up tools and supported production lines at two Korean memory manufacturers. By H1 2026, I had supported 7+ tool types, completed 80 tasks and written 8 customer-facing documents.</p>
         <ol class="timeline">
           <li><time>2026</time><p>Featureless Align, alignment mark detection, recipe auto-creation from design data, crack detection, preventing tip breakage, unified RAC tool</p></li>
           <li><time>2025</time><p>New particle-removal tool SW setup and on-site stabilization, particle-height Auto Focus, 3D inspection stage tilt correction, infrared optics evaluation</p></li>
@@ -411,14 +412,14 @@
       <p class="mail">mhbae03@gmail.com</p>
       <div class="cta">
         <a class="btn" href="mailto:mhbae03@gmail.com">Send email</a>
-        <a class="btn btn-line" href="resume-en.html">One-page resume</a>
+        <a class="btn btn-line" href="resume-en.html">Resumes and portfolios by role</a>
         <a class="btn btn-line" href="https://github.com/mhbae-semi-lab" target="_blank" rel="noopener">GitHub</a>
       </div>
     </section>
   </main>
 
   <footer class="foot wrap">
-    <p>All figures and demos use synthetic or public data. No equipment screens, customer information, or design data are shown. Numbers are field measurements or internal validation results.</p>
+    <p>Work project metrics come from the field or in-house evaluation identified in each case. Figures, public apps and the graduate research pilot use synthetic or public data.</p>
   </footer>
 
   <!-- Detail panel: a card opens it via #p-name -->
@@ -435,7 +436,7 @@
     <p class="d-meta"><span class="st st-lab">In-house validated · production switch pending</span> 2026 · needed to unify RAC across all sites · algorithm design, experiments, C++ implementation, field validation</p>
     <h2 id="detail-title">Wafer Align without registered features</h2>
     <figure class="d-fig"><img src="assets/img/fig-align.webp" alt="Estimated grid overlaid on a synthetic die array rotated 1.8 degrees" width="1200" height="750"><figcaption>Grid estimated on a synthetic die array (1.8° rotation, column fixed-pattern noise)</figcaption></figure>
-    <dl class="kpi"><div><dt>False passes (synthetic and in-house images)</dt><dd>134 → 0</dd></div><div><dt>Max angle error</dt><dd>0.0013°</dd></div><div><dt>Rotated wafers, 100 runs</dt><dd>Fail 0</dd></div></dl>
+    <dl class="kpi"><div><dt>False passes · 191 synthetic cases</dt><dd>134 → 0</dd></div><div><dt>False passes · 48 in-house decisions</dt><dd>31 → 0</dd></div></dl>
     <section class="d-step">
       <h3><span>1</span>No registration, and reject its own wrong answers</h3>
       <p>Matching features registered by people cost registration effort for every recipe and still left failures. The first version met the customer criteria over thousands of production runs, but on low-contrast images it sometimes gave a wrong angle a high score.</p>
@@ -448,22 +449,42 @@
     <section class="d-step">
       <h3><span>3</span>Port to C++ and validate</h3>
       <p>Validated in Python, ported to C++, and matched the results value by value for each condition. Wafers with no pattern are filtered first by a majority vote on center-region variance, skipping unnecessary align.</p>
-      <ul><li>False passes <b>134 → 0</b> (vs. the previous method, synthetic and in-house images combined)</li><li>±0.1 to 1° rotated wafers, 100 runs, 0 fails, max error <b>0.0013°</b> (previous method residual after correction about 0.02°)</li></ul>
+      <table class="evidence decisions">
+        <caption>Angle decisions on the same inputs</caption>
+        <thead><tr><th scope="col">Test and outcome</th><th scope="col">Previous method</th><th scope="col">Grid fit</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">191 synthetic cases · incorrect angles accepted</th><td>134</td><td>0</td></tr>
+          <tr><th scope="row">159 of those cases with a pattern and supported angle<br><small>In-tolerance estimates withheld</small></th><td>0</td><td>11</td></tr>
+          <tr><th scope="row">48 in-house decisions on patterned images · incorrect angles accepted</th><td>31</td><td>0</td></tr>
+          <tr><th scope="row">Same 48 decisions · in-tolerance estimates withheld</th><td>0</td><td>10</td></tr>
+        </tbody>
+      </table>
+      <p>The 11 synthetic scenarios used known input rotations. The in-house test used 16 patterned images, including software rotations, at three region sizes each. The previous method ran with the equipment’s default settings. The reference combined the applied rotation with the median offset estimated by the grid method on the full region.</p>
+      <p>A withheld estimate did not pass the algorithm’s decision threshold. Equipment retries and repeat scans were outside this offline test.</p>
+      <table class="evidence">
+        <caption>Compute time by development stage</caption>
+        <thead><tr><th scope="col">Test</th><th scope="col">Baseline</th><th scope="col">New method</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">First version · rotated material</th><td>Registered feature<br>~150 ms</td><td>First featureless method<br>~700 ms</td></tr>
+          <tr><th scope="row">Later version · large synthetic image, C++</th><td>Previous featureless method<br>2.45 s</td><td>Grid fit<br>0.75 s</td></tr>
+        </tbody>
+      </table>
+      <p>The first featureless method completed 100 alignments on rotated material with zero failures and a maximum angle error of 0.0013°.</p>
     </section>
     <section class="d-step">
       <h3><span>4</span>Open items</h3>
-      <p>Compute time went from 150 ms to about 700 ms, still within production takt. Regions with too few visible dies are rejected by design, and validation for the production switch is in progress.</p>
+      <p>The grid method withholds an estimate when too few dies are visible. Production qualification is in progress. The field evaluation will need to measure how these decisions affect retries and tool cycle time.</p>
     </section>
     <p class="d-tags">C++, Python, OpenCV</p>
-    <p class="d-source">Source: internal evaluation records (H1 2026)</p>
+    <p class="d-source">Evidence · H1 2026 rotated-material test and September synthetic and in-house decision records</p>
   </template>
 
   <template id="p-stable">
     <p class="d-meta"><span class="st st-prod">In production</span> 2025 to 2026 · vision, sequence, UI, interlocks, camera control</p>
     <h2 id="detail-title">New particle-removal tool SW</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-stable.webp" alt="Frames not yet drawn over continuous capture time. Drawing every frame piles up over 700 in 5 minutes; drawing only the latest stays at 1 or fewer" width="900" height="540"><figcaption>If drawing is even slightly slower than capture, drawing every frame in order makes the queue grow without end. Synthetic simulation</figcaption></figure>
-    <div class="stat-big"><strong>264<span>h</span></strong><span>0 failures over 11 days (264 hours) of operation, Vision uptime 98.86% including 3 h of planned stops</span></div>
-    <dl class="kpi"><div><dt>Availability (432 h basis)</dt><dd>99.31%</dd></div><div><dt>Memory (10 shears)</dt><dd>18 → 12GB</dd></div><div><dt>Camera usage time</dt><dd>−55%</dd></div></dl>
+    <div class="stat-big"><strong>264<span>h</span></strong><span>11 days observed · 0 recorded failures · 3 h of planned downtime · vision uptime 98.86%</span></div>
+    <dl class="kpi"><div><dt>Memory (10 shears)</dt><dd>18 → 12GB</dd></div><div><dt>Camera usage time</dt><dd>−55%</dd></div></dl>
     <h3>Timeline</h3>
     <ol class="timeline">
       <li><time>2025.01</time><p>New project to turn a manual machine semi-automatic; I owned vision, sequence, and UI</p></li>
@@ -484,7 +505,16 @@
     </section>
     <section class="d-step">
       <h3><span>3</span>Measure stops in numbers</h3>
-      <p>Detected crashes and forced exits so MTBI, MTBF, and availability are computed from logs automatically. Cleared every SW item among the 9 functional test findings and passed third-party certification.</p>
+      <p>I implemented detection of abnormal and forced software exits and calculated uptime from event logs. Failure counts use deduplicated events classified as failures in the operating record. Planned software patches were logged separately. I handled the software items in the functional inspection, and the tool passed third-party certification.</p>
+      <table class="evidence">
+        <caption>Vision software uptime and failure counts</caption>
+        <thead><tr><th scope="col">Observation</th><th scope="col">Operating record</th><th scope="col">Uptime</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">11 days · 264 h</th><td>0 failures<br>3 h planned downtime</td><td>261 / 264 h<br>98.86%</td></tr>
+          <tr><th scope="row">18 operating days · 432 h</th><td>0 failures<br>3 h total downtime</td><td>429 / 432 h<br>99.31%</td></tr>
+        </tbody>
+      </table>
+      <p>Each percentage uses the full observation period as its denominator. The 18-day summary does not break its three hours of downtime down by cause.</p>
     </section>
     <section class="d-step">
       <h3><span>4</span>Rebuild the interlocks</h3>
@@ -498,7 +528,7 @@
     <p class="d-meta"><span class="st st-field">Field validated</span> 2025 · new particle-removal tool, design and field validation</p>
     <h2 id="detail-title">Particle-height Auto Focus, from images to contact sensing</h2>
     <figure class="d-fig light" data-widget="focus"><img src="assets/img/en/fig-focus-stack.webp" alt="Synthetic particle images at focus heights 0, 15, 30, 45, 60 µm with particle and floor sharpness bars. The floor is sharpest at 0 µm, the particle at 60 µm" width="1000" height="440"><figcaption>Raise the focus and measure sharpness of the particle (blue box) and the floor in four directions (dashed) together. The height gap between the two peaks is the particle height. Synthetic image</figcaption></figure>
-    <dl class="kpi"><div><dt>Image AF time</dt><dd>−72%</dd></div><div><dt>Height repeatability (20 runs)</dt><dd>±2µm</dd></div><div><dt>Shear height accuracy</dt><dd>±1µm</dd></div></dl>
+    <dl class="kpi"><div><dt>Image AF time</dt><dd>−72%</dd></div><div><dt>Contact sensing · 20 repeats on particles ≥300 µm</dt><dd>±2 µm</dd></div></dl>
 
     <section class="d-step">
       <h3><span>1</span>Faster image AF, and its limit</h3>
@@ -509,13 +539,14 @@
     <section class="d-step">
       <h3><span>2</span>Redesign around contact sensing</h3>
       <figure class="d-fig light"><img src="assets/img/en/fig-focus-contact.webp" alt="Sensing signal vs. descent distance. An 8 µm step detects contact 6.6 µm late, a 1 µm step 0.6 µm late" width="900" height="540"><figcaption>The finer the descent step, the closer the threshold crossing is to the real contact. Synthetic signal</figcaption></figure>
-      <p>Detect the floor and the particle top each by a voltage threshold, with a finer descent step.</p>
+      <p>I measured particle height from the difference between the Z positions where the voltage crossed the contact threshold at the floor and the particle top. A finer descent step localized each contact more precisely.</p>
       <ul><li>For small particles under 200 µm, the sensing reference point moves to the particle center so the floor can still be found.</li><li>If empty air is mistaken for the floor, it reads again; if the height is out of range, the shear is blocked.</li><li>After a tip breakage, vacuum control was added to every floor-sensing sequence.</li></ul>
     </section>
 
     <section class="d-step">
       <h3><span>3</span>Field validation</h3>
-      <p>No height-measured samples were available on site, so I validated by per-particle repeatability. Particles of 300 µm and up, 20 repeats: <b>±2µm</b>; shear height for 50 to 100 µm: <b>±1µm</b>; continuous production material and multiple shears normal.</p>
+      <p>With no independently measured reference sample on site, I measured the same particle repeatedly. Height repeatability was <b>±2 µm</b> over 20 runs on particles of 300 µm or larger. Consecutive and multiple shears on production material also ran normally.</p>
+      <p>A separate shear test in the 50–100 µm range recorded ±1 µm. The record gives no reference height or calculation for that figure, so absolute accuracy cannot be established.</p>
     </section>
     <p class="d-tags">C#, motion control, DAQ, OpenCV</p>
     <p class="d-source">Source: internal evaluation records (H2 2025)</p>
@@ -525,7 +556,7 @@
     <p class="d-meta"><span class="st st-field">Rules field validated · CNN in shadow</span> 2026 · detection algorithm, training tool, CNN training and ONNX deployment, shadow judgment tool</p>
     <h2 id="detail-title">Shot Key Align, rules + CNN</h2>
     <figure class="d-fig"><img src="assets/img/fig-mark.webp" alt="Three cross marks among similar pads: two in solid boxes, one faint mark in a dashed box, correlation map at bottom right" width="900" height="600"><figcaption>Rule detections (solid) and a faint mark missed by score (dashed); bottom right is the correlation map. Synthetic image</figcaption></figure>
-    <dl class="kpi"><div><dt>Align time</dt><dd>−84%</dd></div><div><dt>False detections (with CNN, 280 → 114)</dt><dd>−59%</dd></div><div><dt>Field slot detection</dt><dd>12/12</dd></div><div><dt>Inference p95 latency</dt><dd>−58%</dd></div></dl>
+    <dl class="kpi"><div><dt>Rules · field alignment time</dt><dd>140 s → 23 s</dd></div><div><dt>CNN · in-house false detections</dt><dd>280 → 114</dd></div><div><dt>Rules · field slots</dt><dd>12/12</dd></div><div><dt>CNN inference p95 latency</dt><dd>−58%</dd></div></dl>
     <section class="d-step">
       <h3><span>1</span>Slow, and re-registered at every site</h3>
       <p>Template-based align was slow and needed marks re-registered at every new site. Rule parameters did not fit every image, causing false detections.</p>
@@ -546,7 +577,8 @@
     <section class="d-step">
       <h3><span>5</span>CNN runs in shadow mode first</h3>
       <p>The CNN verifies rule results and replaces them with its own position when they fail. It is not switched on directly but runs in shadow mode, with staged rollout and instant rollback planned.</p>
-      <ul><li>Internal evaluation: the CNN kept detections while cutting false detections from 280 to 114 (59%); the detection gain was not statistically significant, and I reported it that way.</li><li>Offline evaluation in the training tool with a date split: the combined policy brought both the rule-only misses (about 2.6%) and false detections on mark-free images (about 5.1%) to 0. This is on in-house images, the evaluation labels lean toward the rules, and it has not been applied in the field yet.</li></ul>
+      <p>In the in-house CNN evaluation, false detections fell from <b>280 to 114</b> on 6,150 images including augmented examples. Mark detections on 1,030 unaugmented images rose from 996 to 998. This difference was not statistically significant.</p>
+      <p>In a separate offline test split by date, combining the rules with the CNN reduced both rule-only misses (about 2.6%) and false detections on mark-free images (about 5.1%) to zero. The evaluation labels favor the rules. The CNN is being compared with the existing decisions in shadow mode.</p>
     </section>
     <p class="d-tags">C#, C++, OpenCV, PyTorch, ONNX, HOG</p>
     <p class="d-source">Source: internal evaluation records (H1 2026), training tool documentation</p>
@@ -582,24 +614,25 @@
   </template>
 
   <template id="p-crack">
-    <p class="d-meta"><span class="st st-field">Passed customer evaluation</span> 2026 · algorithm and analysis tools, end to end</p>
+    <p class="d-meta"><span class="st st-field">Tested on customer material</span> 2026 · algorithm and analysis tools, end to end</p>
     <h2 id="detail-title">Die-edge crack detection</h2>
     <figure class="d-fig"><img src="assets/img/fig-crack.webp" alt="Die-edge inspection band and excluded inner region, with a crack detected inside the band" width="900" height="600"><figcaption>Edge inspection band (blue), excluded region (hatched), and the detected crack (synthetic image)</figcaption></figure>
-    <dl class="kpi"><div><dt>Newly found (524 of 1,883 defects)</dt><dd>28%</dd></div><div><dt>Images to split</dt><dd>TB-scale per wafer</dd></div></dl>
+    <dl class="kpi"><div><dt>Edge cracks among 1,883 recorded detections</dt><dd>524</dd></div><div><dt>Images to split</dt><dd>TB-scale per wafer</dd></div></dl>
     <section class="d-step">
       <h3><span>1</span>Edges that were missed or over-detected</h3>
       <p>The existing die-to-die comparison missed or over-detected edge cracks on stacked memory dies. TB-scale images could not even be opened on a regular PC.</p>
     </section>
     <section class="d-step">
       <h3><span>2</span>Detection in five stages</h3>
-      <p>Split into five stages (edge search, adaptive mask, defect detection, size filter, interlock), with edge band width and brightness as parameters. Found <b>524</b> new defects out of 1,883 total, and passed all 4 evaluation conditions for stacked memory (real rate up to 92.6%, above the customer criterion).</p>
+      <p>I implemented five stages covering edge search, adaptive masking, defect detection, size filtering and an interlock. The band width and brightness limits were adjustable. On the customer sample, <b>524 of 1,883 detections</b> were classified as edge cracks.</p>
+      <p>Edge cracks accounted for 27.8% of the detections. The evaluation did not pair both methods’ results with ground truth on the same sample, so changes in misses and false calls cannot be calculated.</p>
     </section>
     <section class="d-step">
       <h3><span>3</span>A tool to open TB-scale images</h3>
       <p>Built a standalone program that tiles the image and opens only the needed region, with per-channel saving. Also built a tool that aggregates 7 customer-required align metrics from logs into Excel.</p>
     </section>
     <p class="d-tags">C++, C# (WPF), OpenCV</p>
-    <p class="d-source">Source: internal evaluation records (H1 2026)</p>
+    <p class="d-source">Evidence · May 2026 customer-sample edge-crack evaluation</p>
   </template>
 
   <template id="p-recipe-tools">
@@ -665,11 +698,21 @@
     <h3>Problem</h3>
     <ul><li>Every week, writing the report meant rereading the week’s commits and notes and copying them by hand into the company PPT template.</li></ul>
     <h3>Approach</h3>
-    <ul><li>Rules group the week’s git commits by topic; each topic gets a title and a three-line summary in the template PPT.</li><li>Summaries come only from a local LLM, so no data leaves the machine.</li><li>Every summary is checked: three lines, 80 characters per line, and no numbers or status words such as “done” that are not in the input. On failure it retries once, then falls back to rule-based sentences.</li><li>It also runs as a Claude Code command.</li></ul>
+    <ul><li>The tool groups the week’s commits by topic and fills the company slide template with titles and three-line summaries.</li><li>Authors can enter a summary directly or generate a draft with a local LLM.</li><li>Rules check line count, length and unsupported numbers or status claims such as “done.” A failed generated draft is retried once before falling back to rule-based text.</li><li>The tool can also be run as a Claude Code command.</li></ul>
     <h3>Result</h3>
-    <ul><li>10 people on the team use it.</li><li>You can run the same flow on your own git log in the <a href="https://mhbae-semi-lab.github.io/weekly-report/" target="_blank" rel="noopener">public app</a>.</li><li>For tool patches, this report feeds the <a href="#p-release">release pack builder</a>, which makes the release documents and the patch folder from it.</li></ul>
+    <table class="evidence">
+      <caption>Workflow for one weekly report</caption>
+      <thead><tr><th scope="col">Step</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Draft</th><td>Author reread and summarized commits and notes</td><td>Commits grouped by topic, with manual entry or a local LLM draft</td></tr>
+        <tr><th scope="row">Slides</th><td>Author copied text into the company template</td><td>Rules check format and numbers, then populate the template</td></tr>
+      </tbody>
+    </table>
+    <p><b>Internal adoption.</b> Ten team members used the tool as of November 2026. One weekly build record shows that all five manually entered topics passed validation and were exported. The available records do not track drafting or review time, the share of AI draft sentences edited, or repeat usage by author.</p>
+    <p><b>Public app benchmark.</b> Replaying two reporting weeks with 15 synthetic commits reduced the interactions up to the export request from 25 clicks to 15 clicks and one file drop. Input fields fell from 11 to 8. In a separate test, the checker blocked 220 of 220 injected unsupported claims, up from 88, and accepted all 22 valid example summaries. <a href="https://github.com/mhbae-semi-lab/weekly-report/blob/main/docs/measurements.md" target="_blank" rel="noopener">Benchmark and test conditions</a></p>
+    <ul><li>You can run the same flow on your own git log in the <a href="https://mhbae-semi-lab.github.io/weekly-report/" target="_blank" rel="noopener">public app</a>.</li><li>For tool patches, this report feeds the <a href="#p-release">release pack builder</a>, which makes the release documents and the patch folder from it.</li></ul>
     <p class="d-tags">Python, python-pptx, local LLM (Ollama), Claude Code</p>
-    <p class="d-source">Source: in-house tool usage (Nov 2026)</p>
+    <p class="d-source">Evidence · November 2026 team usage, internal report build record and public app benchmarks</p>
   </template>
 
   <template id="p-release">
@@ -731,7 +774,13 @@
     <p class="d-meta"><span class="st st-prod">In production</span> 2026</p>
     <h2 id="detail-title">Interlock against tip breakage</h2>
     <figure class="d-fig light"><img src="assets/img/en/fig-interlock.webp" alt="X position vs. Z height. The dashed path moving XY and Z together collides in the interference zone; the solid path raising Z first passes" width="900" height="540"><figcaption>Moving XY and Z together passes through the interference zone. The interlock forces Z up first, then XY. Concept diagram</figcaption></figure>
-    <ul><li>Corrected the interlock criterion from the XY axes to the Z axis, and added per-axis interference checks, stop confirmation, and a block on simultaneous XY and Z moves.</li><li>Ran the lifter servo motor 1,000 times to confirm position repeatability.</li><li>0 recurrences since, production lots running normally.</li></ul>
+    <h3>How I changed the motion sequence</h3>
+    <ol class="sequence">
+      <li><b>Check the move request</b> When XY motion is requested, check clearance using Z position. The previous logic used XY position.</li>
+      <li><b>Hold XY in the interference zone</b> Block simultaneous XY and Z movement and raise Z first.</li>
+      <li><b>Resume after confirming the stop</b> Allow XY travel once Z clears the interference zone and its stop is confirmed.</li>
+    </ol>
+    <p>I implemented the clearance check, simultaneous-motion block and stop confirmation in the tool software. Production lots recorded zero repeat tip breakages after the change. In a separate 1,000-cycle lifter test, I recorded commanded and actual positions at the home and both limit switches and checked stop-position repeatability (3σ).</p>
     <p class="d-source">Source: internal evaluation records (H1 2026), servo repeat-run records</p>
   </template>
 
@@ -769,6 +818,6 @@
   </template>
 
   <script src="assets/widgets.js?v=20261123c"></script>
-  <script src="assets/site.js?v=20261123c"></script>
+  <script src="assets/site.js?v=20261124a"></script>
 </body>
 </html>

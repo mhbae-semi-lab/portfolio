@@ -3,144 +3,130 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="반도체 검사 장비 비전·제어·AX 경력 이력서. 직무별 대표 프로젝트 세 건과 한 장 PDF.">
   <title>배민혁 이력서</title>
-  <meta name="description" content="배민혁, 반도체 검사 장비 SW · AI 응용 엔지니어 1장 이력서">
-  <meta name="color-scheme" content="light">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <!-- 1장 이력서. 내용은 index.html 과 같은 근거에서 손으로 옮김: index.html 수치를 바꾸면 여기도 같이 바꾼다 -->
-  <style>
-    :root { --ink: #14171c; --ink-2: #3a414b; --muted: #687180; --line: #dfe3e8; --accent: #2f62d6; }
-    * { box-sizing: border-box; }
-    body { margin: 0; background: #e9ecf0; color: var(--ink); font: 9.4pt/1.5 "Pretendard Variable", Pretendard, "Malgun Gothic", sans-serif; word-break: keep-all; overflow-wrap: anywhere; }
-    h1, h2, h3, p, ul, ol, dl, dd { margin: 0; }
-    a { color: inherit; text-decoration: none; }
-    .bar { display: flex; gap: 10px; justify-content: center; padding: 16px; font: 600 15px/1 inherit; }
-    .bar a, .bar button { font: inherit; padding: 11px 18px; border-radius: 10px; border: 0; cursor: pointer; }
-    .bar a.dl { background: var(--accent); color: #fff; }
-    .bar button { background: none; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
-    .bar a:not(.dl) { box-shadow: inset 0 0 0 1.5px var(--ink); }
-    .page { width: 210mm; min-height: 297mm; margin: 0 auto 32px; padding: 10.5mm 13mm; background: #fff; box-shadow: 0 6px 30px rgb(0 0 0 / .08); }
-
-    header { display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; align-items: baseline; border-bottom: 2px solid var(--ink); padding-bottom: 9px; }
-    h1 { font-size: 22pt; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
-    .role { color: var(--accent); font-weight: 650; font-size: 11pt; }
-    .contact { grid-column: 1 / -1; color: var(--ink-2); margin-top: 4px; }
-    .contact span + span::before { content: "  ·  "; color: var(--muted); }
-    .lead { margin-top: 9px; font-size: 10pt; color: var(--ink-2); }
-
-    .nums { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 10px 0 4px; padding: 8px 0; border-bottom: 1px solid var(--line); }
-    .nums strong { display: block; font-size: 16pt; font-weight: 750; letter-spacing: -.03em; line-height: 1.15; color: var(--accent); font-variant-numeric: tabular-nums; }
-    .nums span { font-size: 8.6pt; color: var(--ink-2); }
-
-    .cols { display: grid; grid-template-columns: 1.55fr 1fr; gap: 0 9mm; }
-    h2 { font-size: 10.5pt; font-weight: 750; margin: 9px 0 5px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
-    .job b { font-weight: 650; }
-    .job p { color: var(--ink-2); }
-    .years { list-style: none; padding: 0; margin-top: 4px; display: grid; gap: 2px; }
-    .years li { display: grid; grid-template-columns: 34px 1fr; gap: 6px; color: var(--ink-2); }
-    .years time { font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
-    .proj { list-style: none; padding: 0; display: grid; gap: 6px; }
-    .proj b { font-weight: 650; }
-    .proj time { color: var(--muted); font-size: 8.6pt; margin-left: 4px; }
-    .proj p { color: var(--ink-2); }
-    .proj em { font-style: normal; font-weight: 650; color: var(--ink); }
-    .side ul { list-style: none; padding: 0; display: grid; gap: 4px; }
-    .side b { display: block; font-weight: 650; }
-    .side span { color: var(--ink-2); }
-    .apps { margin-top: 10px; color: var(--ink-2); }
-    .apps b { color: var(--ink); font-weight: 650; margin-right: 6px; }
-    footer { margin-top: 12px; padding-top: 6px; border-top: 1px solid var(--line); color: var(--muted); font-size: 8.2pt; }
-
-    @page { size: A4; margin: 0; }
-    @media print {
-      body { background: #fff; }
-      .bar { display: none; }
-      .page { margin: 0; box-shadow: none; min-height: 0; }
-    }
-    @media screen and (max-width: 820px) {
-      .page { width: auto; min-height: 0; margin: 0 16px 24px; padding: 20px 18px; }
-      .nums { grid-template-columns: 1fr 1fr; }
-      .cols { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/resume.css?v=20261124portrait">
+  <script defer src="assets/resume.js?v=20261124docs"></script>
 </head>
 <body>
-  <div class="bar">
-    <a class="dl" href="assets/resume.pdf" download="배민혁_이력서.pdf">PDF 내려받기</a>
-    <button type="button" onclick="print()">인쇄</button>
-    <a href="./">포트폴리오로</a>
+  <div class="toolbar">
+    <nav class="tracks" aria-label="직무별 이력서">
+        <a id="vision" href="#vision">비전</a>
+        <a id="control" href="#control">제어</a>
+        <a id="ax" href="#ax">AX</a>
+    </nav>
+    <div class="actions">
+        <a class="download" data-edition="vision" href="assets/resume.pdf" download="배민혁_비전_이력서.pdf">이력서 PDF</a>
+        <a class="download" data-edition="control" href="assets/resume-control.pdf" download="배민혁_제어_이력서.pdf">이력서 PDF</a>
+        <a class="download" data-edition="ax" href="assets/resume-ax.pdf" download="배민혁_AX_이력서.pdf">이력서 PDF</a>
+        <a class="pair-download" data-edition="vision" href="assets/portfolio.pdf" download="배민혁_비전_포트폴리오.pdf">포트폴리오 PDF</a>
+        <a class="pair-download" data-edition="control" href="assets/portfolio-control.pdf" download="배민혁_장비제어_포트폴리오.pdf">포트폴리오 PDF</a>
+        <a class="pair-download" data-edition="ax" href="assets/portfolio-ax.pdf" download="배민혁_제조자동화_포트폴리오.pdf">포트폴리오 PDF</a>
+        <button type="button" onclick="window.print()">인쇄</button>
+        <a href="index.html">포트폴리오</a>
+        <a href="resume-en.html" hreflang="en" lang="en">EN</a>
+    </div>
   </div>
 
-  <main class="page">
-    <header>
-      <h1>배민혁</h1>
-      <p class="role">반도체 검사 장비 SW · AI 응용 엔지니어</p>
-      <p class="contact"><span><a href="mailto:mhbae03@gmail.com">mhbae03@gmail.com</a></span><span><a href="https://github.com/mhbae-semi-lab">github.com/mhbae-semi-lab</a></span><span><a href="https://mhbae-semi-lab.github.io/portfolio/">mhbae-semi-lab.github.io/portfolio</a></span></p>
+  <main class="page" aria-label="이력서">
+    <header class="resume-header">
+      <div class="identity">
+        <h1>배민혁</h1>
+        <p class="role" data-edition="vision">반도체 검사장비 비전 SW 엔지니어</p>
+        <p class="role" data-edition="control">반도체 장비 시퀀스·제어 SW 엔지니어</p>
+        <p class="role" data-edition="ax">반도체 검사·제조 업무 자동화 엔지니어</p>
+        <p class="contact">
+          <a href="mailto:mhbae03@gmail.com">mhbae03@gmail.com</a>
+          <a href="https://github.com/mhbae-semi-lab">github.com/mhbae-semi-lab</a>
+          <a class="portfolio" href="https://mhbae-semi-lab.github.io/portfolio/">mhbae-semi-lab.github.io/portfolio</a>
+        </p>
+      </div>
+      <img class="portrait" src="assets/img/profile.jpg" width="236" height="304" alt="배민혁 프로필 사진">
+      <p class="lead" data-edition="vision">웨이퍼 정렬과 결함 검출 알고리즘을 개발합니다. 저대비 영상의 오판정을 재현하고, Python에서 검증한 알고리즘을 C++로 이식해 같은 영상으로 결과를 대조했습니다.</p>
+      <p class="lead" data-edition="control">카메라·DAQ·축을 연동해 촬영과 접촉 감지 시퀀스를 개발합니다. 신규 설비에 25일간 상주하며 프로그램 정지 원인을 추적하고 장비 SW를 안정화했습니다.</p>
+      <p class="lead" data-edition="ax">설계 도면에서 검사 레시피를 생성하고, 현장 이미지로 정렬 마크 검출을 개선했습니다. 엔지니어의 주간 보고에는 로컬 언어 모델과 규칙 검사를 적용했습니다.</p>
     </header>
-    <p class="lead">Wafer Align, 결함 검출, Recipe 자동화를 설계부터 양산 안정화까지 맡고 있습니다. 실패를 합성 영상으로 먼저 재현하고, Python 으로 설계해 C++ 로 옮긴 뒤 값 단위로 대조하고, Shadow 병행으로 현장 데이터를 쌓은 뒤 전환합니다.</p>
 
-    <section class="nums" aria-label="주요 성과">
-      <div><strong>−84%</strong><span>정렬 마크 Align 시간 (140 → 23초)</span></div>
-      <div><strong>−92%</strong><span>Bump Recipe 작성 시간</span></div>
-      <div><strong>−72%</strong><span>Auto Focus 시간 (90 → 25초)</span></div>
-      <div><strong>264h</strong><span>신규 설비 운영 중 Failure 0건</span></div>
+    <section class="experience">
+      <h2>경력</h2>
+      <p><strong>반도체 검사장비 기업 · 기업부설연구소 SW팀 주임</strong> <time>2022.01 – 현재</time></p>
+      <p>일학습병행으로 입사해 국내 메모리 제조사 2곳의 양산 라인 셋업과 현장 대응을 맡았습니다. 2026년 상반기까지 <strong class="metric">설비 7종 이상</strong>, <strong class="metric">작업 80건</strong>, <strong class="metric">고객 문서 8건</strong>을 담당했습니다.</p>
+      <p>2022~2024년에는 검사 상태 화면, 불량 통계, 결함 좌표 매칭과 2D·3D 설비 셋업을 담당했습니다.</p>
     </section>
 
-    <div class="cols">
-      <div>
-        <h2>경력</h2>
-        <div class="job">
-          <b>반도체 검사장비 기업 기업부설연구소 SW팀 주임 · 2022.01 ~ 현재</b>
-          <p>일학습병행 입사. 국내 메모리 제조사 2곳 양산 라인 Setup 과 상주. 대응 설비 7종 이상, 누적 작업 80건, 고객 공유 문서 8건 (2026 상반기 기준)</p>
-          <ol class="years">
-            <li><time>2026</time><span>Feature 없는 Align, 정렬 마크 검출, 도면 기반 Recipe 자동 생성과 통합 도구, Crack 검출, 패치 릴리스 묶음 자동화</span></li>
-            <li><time>2025</time><span>신규 Particle 제거 설비 SW 셋업과 현장 상주 안정화, 입자 높이 Auto Focus, 3D Stage Tilt 보정</span></li>
-            <li><time>2024</time><span>2D, 3D 검사 설비 Vision Setup 과 Tact 단축, 데이터 백업 도구</span></li>
-            <li><time>2023</time><span>결함 좌표 매칭과 Review 리포트, 설비 데이터 백업, 전압 Interlock</span></li>
-            <li><time>2022</time><span>검사 상태 화면, 불량 통계 분석, 밝기 Interlock</span></li>
-          </ol>
-        </div>
+    <section>
+      <h2>대표 프로젝트</h2>
+      <ol class="projects" data-edition="vision">
+        <li>
+          <h3><a href="index.html#p-mark">Shot Key 정렬 마크 검출</a> <span class="year">2026</span></h3>
+          <p class="outcome">현장 정렬 시간 <strong class="metric">140초 → 23초</strong>, <strong class="metric">12/12</strong> 슬롯 검출. 증강을 포함한 사내 영상 6,150장에서 CNN 오검출 <strong class="metric">280건 → 114건</strong>.</p>
+          <p class="detail"><span class="method">템플릿을 규칙 검출로 바꾸고 촬영을 7줄에서 약 3줄로 줄였습니다.</span> <span class="status">규칙은 현장 검증 완료, CNN은 기존 판정과 병행 비교 중입니다.</span></p>
+        </li>
+        <li>
+          <h3><a href="index.html#p-align">Feature 등록 없는 웨이퍼 정렬</a> <span class="year">2026</span></h3>
+          <p class="outcome">합성 191건에서 오판정 통과 <strong class="metric">134→0건</strong>. 사내 48판정에서는 <strong class="metric">31→0건</strong>으로 줄고, 허용오차 안의 결과 보류는 <strong class="metric">0→10건</strong>으로 늘었습니다.</p>
+          <p class="detail"><span class="method">Die 격자 주기와 여러 영역의 일치도로 각도를 구해 신뢰도가 낮으면 보류했습니다.</span> <span class="status">C++ 이식과 사내 검증을 마치고 양산 전환을 검증 중입니다.</span></p>
+        </li>
+        <li>
+          <h3><a href="index.html#p-crack">Die 가장자리 Crack 검출</a> <span class="year">2026</span></h3>
+          <p class="outcome">고객 시료의 검출 결과 <strong class="metric">1,883건</strong> 중 <strong class="metric">524건</strong>을 Die 가장자리 균열로 분류했습니다.</p>
+          <p class="detail"><span class="method">가변 검사 띠와 마스크를 적용하고 대용량 영상을 나눠 보는 도구를 개발했습니다.</span> <span class="status">고객 시료로 균열과 모서리 깨짐 검출을 확인했습니다.</span></p>
+        </li>
+      </ol>
+      <ol class="projects" data-edition="control">
+        <li>
+          <h3><a href="index.html#p-stable">신규 Particle 제거 설비 SW 안정화</a> <span class="year">2025–2026</span></h3>
+          <p class="outcome">11일(264시간) 관찰 중 <strong class="metric">고장 0건</strong>. 계획 중단 3시간을 포함한 비전 시스템 가동률은 <strong class="metric">98.86%</strong>였습니다.</p>
+          <p class="detail"><span class="method">최신 프레임 표시, 카메라 재연결, 프로그램 종료 감지를 구현했습니다.</span> <span class="status">현장에 25일 상주해 정지를 재현·수정했습니다. 설비는 양산에 적용됐고 제3자 인증을 통과했습니다.</span></p>
+        </li>
+        <li>
+          <h3><a href="index.html#p-interlock">Tip 파손 방지 인터록</a> <span class="year">2026</span></h3>
+          <p class="outcome">양산 적용 후 <strong class="metric">팁 파손 재발 0건</strong>. 생산 로트가 정상 진행됐습니다.</p>
+          <p class="detail"><span class="method">Z축 위치로 간섭을 확인하고 상승·정지가 끝나야 XY 이동을 허용했습니다.</span> <span class="status">별도 리프터 1,000회 시험으로 원점·리밋 센서에서 정지 위치 반복성(3σ)을 확인했습니다.</span></p>
+        </li>
+        <li>
+          <h3><a href="index.html#p-focus">입자 높이 측정과 접촉 감지</a> <span class="year">2025</span></h3>
+          <p class="outcome">영상 자동 초점 <strong class="metric">90초 → 25초</strong>. 접촉 방식은 300 µm 이상 입자에서 20회 측정 반복성 <strong class="metric">±2 µm</strong>였습니다.</p>
+          <p class="detail"><span class="method">무늬가 약한 바닥에서는 전압 신호로 바닥과 입자 윗면을 감지했습니다.</span> <span class="status">양산 자재의 연속·다중 전단 동작을 현장에서 검증했습니다.</span></p>
+        </li>
+      </ol>
+      <ol class="projects" data-edition="ax">
+        <li>
+          <h3><a href="index.html#p-recipe">도면 기반 검사 레시피 자동 생성 (RAC)</a> <span class="year">2026</span></h3>
+          <p class="outcome">Bump 레시피 작성 <strong class="metric">4시간 → 20분</strong>, 대면적 도면 변환 <strong class="metric">314초 → 42초</strong>.</p>
+          <p class="detail"><span class="method">도면 좌표를 보정해 Bump 약 25만 개를 배치하고 필요한 영역만 병렬 변환했습니다.</span> <span class="status">도면 변환은 양산 자재 검증을 통과했고, 통합 도구는 장비 투입 전입니다.</span></p>
+        </li>
+        <li>
+          <h3><a href="index.html#p-mark">Shot Key 검출 조건 학습과 CNN 검증</a> <span class="year">2026</span></h3>
+          <p class="outcome">규칙 검출과 촬영 범위 축소로 현장 정렬 <strong class="metric">140초 → 23초</strong>, <strong class="metric">12/12</strong> 슬롯 검출. 증강 포함 사내 영상 6,150장에서 CNN 오검출 <strong class="metric">280건 → 114건</strong>.</p>
+          <p class="detail"><span class="method">같은 날의 영상이 학습·평가에 섞여 날짜별 고정 평가셋과 회귀 검사를 도입했습니다.</span> <span class="status">규칙은 현장 검증 완료, CNN은 기존 판정과 병행 비교 중입니다.</span></p>
+        </li>
+        <li>
+          <h3><a href="index.html#p-weekly">로컬 LLM 기반 주간 보고 자동화</a> <span class="year">2026</span></h3>
+          <p class="outcome">공개 앱에서 두 주의 합성 자료로 비교한 결과, 보고서 내보내기 요청까지 입력 동작이 <strong class="metric">25회에서 16회</strong>로 줄었습니다.</p>
+          <p class="detail"><span class="method">커밋을 주제별로 묶어 슬라이드를 작성하고, 수치와 상태 표현을 원문과 대조했습니다.</span> <span class="status">사내 도구는 팀원 10명이 사용했고, 한 주의 기록에서 직접 입력한 5개 주제의 보고서 생성을 확인했습니다.</span></p>
+        </li>
+      </ol>
+    </section>
 
-        <h2>대표 프로젝트</h2>
-        <ul class="proj">
-          <li><b>Feature 등록 없는 Wafer Align</b><time>2026</time><p>Die 배열의 주기에 격자를 맞춰 회전각을 구하고, 틀린 결과는 스스로 거릅니다. <em>오판정 합격 134 → 0건</em> (합성 · 사내 영상), 회전 자재 100회 <em>최대 오차 0.0013°</em>.</p></li>
-          <li><b>신규 Particle 제거 설비 SW</b><time>2025-2026</time><p>참고 코드 없는 신규 설비, 현장 25일 상주. 11일(264h) 운영 <em>Failure 0건</em>, 메모리 18 → 12GB.</p></li>
-          <li><b>입자 높이 Auto Focus</b><time>2025</time><p>영상 AF <em>90 → 25초</em>. 무늬 없는 바닥에서 막히자 접촉 감지로 다시 설계해 높이 반복성 <em>±2µm</em>.</p></li>
-          <li><b>Shot Key 정렬 마크 검출, 규칙 + CNN</b><time>2026</time><p>템플릿 없는 규칙 검출, 현장 라벨 학습 도구, 장비 추론 엔진에 맞춘 CNN(ONNX). Align <em>140 → 23초</em>, 현장 <em>12/12 Slot</em>.</p></li>
-          <li><b>검사 Recipe 자동 생성 (RAC)</b><time>2026</time><p>도면 기반으로 Bump 약 25만 개 자동 배치. 작성 <em>4시간 → 20분</em>, 대면적 변환 314 → 42초.</p></li>
-          <li><b>RAC 통합 도구, 장비 배포와 안정성</b><time>2026</time><p>WPF, TCP 다중 장비 배포, 도면 변환 안전장치. 시작 레이스를 고쳐 <em>200회 반복 시작 통과</em>, 단위 테스트 41 → 54.</p></li>
-          <li><b>Die 가장자리 Crack 검출</b><time>2026</time><p>5단계 검출과 TB 급 영상 분할 도구. 전체 결함 1,883건 중 <em>524건을 새로 검출</em>.</p></li>
-        </ul>
-      </div>
-
-      <div class="side">
-        <h2>학력</h2>
-        <ul>
-          <li><b>인하대학교 제조혁신전문대학원</b><span>반도체공정지능화융합 석사, 재직자 과정 (2026.03 ~ 2028.02 졸업 예정)</span></li>
-          <li><b>한국공학대학교 컴퓨터전자공학과</b><span>일학습병행 (2022.03 ~ 2026.02), 학점 3.9 / 4.5, 성적 우수 장학</span></li>
-          <li><b>서울로봇고등학교</b><span>마이스터고 (2019.03 ~ 2022.02)</span></li>
-        </ul>
-        <h2>석사 연구</h2>
-        <p class="side-p"><span>설계 도면에서 검사 구역과 구역별 검사 조건을 자동으로 만드는 방법. 공개 설계와 가상 영상 예비 실험에서 치명 결함 검출률 81.3% → 95.3% (과검 영상 1장당 1개 이하).</span></p>
-        <h2>기술</h2>
-        <ul>
-          <li><b>영상처리</b><span>OpenCV, IPP, NCC 매칭, 서브픽셀 피팅, 원근 변환</span></li>
-          <li><b>장비 SW</b><span>C++ (MFC), C# (WPF, WinForms), C++/CLI, 멀티스레드 · 비동기, Tile 병렬 처리</span></li>
-          <li><b>카메라와 센서</b><span>Line Scan (TDI), Area, 3D 공초점 센서, DAQ, Camera Link · CoaXPress, 프레임 그래버</span></li>
-          <li><b>데이터와 도구</b><span>Python, NumPy, PyTorch, ONNX, 로컬 LLM, Git (Fork, PR), 정적 분석</span></li>
-        </ul>
-        <h2>자격과 교육</h2>
-        <ul>
-          <li><b>일학습병행자격 SW개발 L5</b><span>2025.12</span></li>
-          <li><b>ADsP 데이터분석 준전문가</b><span>2025.09</span></li>
-          <li><b>전자, 전기, 프로그래밍기능사</b><span>국가기술자격</span></li>
-          <li><b>반도체 제조 8대 공정, LLM 활용</b><span>2022, 2025</span></li>
-        </ul>
-      </div>
-    </div>
-
-    <p class="apps"><b>공개 앱 (개인)</b> 앱 7개 (합성 데이터 검증): Klarf 웨이퍼 맵 뷰어, 프레임 대기열 시뮬레이터, 장비 SW 위험 코드 린트, 레시피 기준 관리 등</p>
-    <footer>수치는 현장 실측 또는 사내 검증 기준입니다. 그림, 단계별 설명, 직접 써 보는 데모: mhbae-semi-lab.github.io/portfolio</footer>
+    <section>
+      <h2>기술</h2>
+      <p class="skills" data-edition="vision">C++ (MFC), C#, C++/CLI, Python, OpenCV, IPP, PyTorch, ONNX. TDI 라인스캔·Area 카메라, 3D 공초점 센서, 프레임 그래버 연동.</p>
+      <p class="skills" data-edition="control">C# (WinForms·WPF), C++, 멀티스레드·비동기 처리, DAQ, 모션 시퀀스, 인터록. TDI 라인스캔·Area 카메라와 3D 공초점 센서 연동.</p>
+      <p class="skills" data-edition="ax">Python, NumPy, PyTorch, ONNX, 로컬 LLM, C# (WPF), C++, OpenCV. GDS 도면 변환, 레시피 생성, 검출 모델 검증.</p>
+    </section>
+    <section class="credentials">
+      <h2>학력·연구</h2>
+      <p><strong>인하대학교 제조혁신전문대학원</strong> · 반도체공정지능화융합 석사 재학(재직자 과정), 2026.03 – 2028.02 졸업 예정</p>
+      <p>설계 도면으로 검사 구역과 조건을 생성하는 연구. 공개 SKY130 설계와 가상 영상 예비 실험에서 과검을 영상당 1건 이하로 맞췄을 때 치명 결함 검출률 <strong class="metric">81.3% → 95.3%</strong>.</p>
+      <p><strong>한국공학대학교 컴퓨터전자공학과</strong> · 학사 · 일학습병행, 2022.03 – 2026.02, 학점 3.9/4.5, 성적 우수 장학</p>
+      <p><strong>서울로봇고등학교</strong> · 마이스터고, 2019.03 – 2022.02</p>
+    </section>
+    <section class="credentials">
+      <h2>자격·교육</h2>
+      <p>일학습병행자격 SW개발 L5 (2025.12), ADsP (2025.09), 전자·전기·프로그래밍기능사</p>
+      <p>반도체 제조 8대 공정 (2022), LLM 활용 교육 (2025)</p>
+    </section>
   </main>
 </body>
 </html>

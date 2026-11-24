@@ -8,7 +8,7 @@
   <meta name="color-scheme" content="light dark">
   <link rel="alternate" hreflang="ko" href="https://mhbae-semi-lab.github.io/portfolio/">
   <link rel="alternate" hreflang="en" href="https://mhbae-semi-lab.github.io/portfolio/en.html">
-  <script>try{var l=localStorage.getItem("lang"),c=document.documentElement.lang;if(l&&l!==c)location.replace((l==="en"?"en.html":"./")+location.hash)}catch(e){}</script>
+  <script>try{var l=localStorage.getItem("lang"),c=document.documentElement.lang;if(l&&l!==c)location.replace((l==="en"?"en.html":"index.html")+location.hash)}catch(e){}</script>
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mhbae-semi-lab.github.io/portfolio/">
   <meta property="og:title" content="배민혁 | 반도체 검사 장비 SW 엔지니어">
@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%232f62d6%22/%3E%3Ctext x=%2216%22 y=%2222.5%22 font-size=%2217%22 font-family=%22sans-serif%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22white%22%3E%EB%B0%B0%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="assets/site.css?v=20261123c">
+  <link rel="stylesheet" href="assets/site.css?v=20261124docs">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "배민혁", "jobTitle": "반도체 검사 장비 SW 엔지니어", "url": "https://mhbae-semi-lab.github.io/portfolio/", "email": "mailto:mhbae03@gmail.com", "image": "https://mhbae-semi-lab.github.io/portfolio/assets/img/profile.jpg", "sameAs": ["https://github.com/mhbae-semi-lab"], "alumniOf": [{"@type": "CollegeOrUniversity", "name": "인하대학교 제조혁신전문대학원"}, {"@type": "CollegeOrUniversity", "name": "한국공학대학교"}], "knowsAbout": ["Wafer Align", "결함 검출", "검사 Recipe 자동화", "영상처리", "OpenCV", "C++", "C#", "Auto Focus"]}</script>
 </head>
 <body>
@@ -32,7 +32,7 @@
         <a href="#research">연구</a>
         <a href="resume.html">이력서</a>
       </nav>
-      <div class="lang-switch" role="group" aria-label="언어 선택"><a href="./" lang="ko" hreflang="ko" aria-current="true">KO</a><a href="en.html" lang="en" hreflang="en">EN</a></div>
+      <div class="lang-switch" role="group" aria-label="언어 선택"><a href="index.html" lang="ko" hreflang="ko" aria-current="true">KO</a><a href="en.html" lang="en" hreflang="en">EN</a></div>
       <a class="btn btn-sm" href="#contact">연락하기</a>
     </div>
   </header>
@@ -44,12 +44,13 @@
         <h1>배민혁</h1>
         <p class="lead">Wafer Align, 결함 검출, Recipe 자동화를 설계부터 양산 안정화까지 맡고 있습니다.</p>
         <ul class="proof">
-          <li><a href="#p-stable"><b>설계부터 양산 안정화까지</b><span>신규 설비 현장 25일 상주, 11일 운영 Failure 0건</span></a></li>
-          <li><a href="#p-align"><b>실패를 재현하고 판정 기준까지 다시 설계</b><span>합성 영상으로 오판정을 재현, 합성 · 사내 영상에서 오판정 합격 134건 → 0건</span></a></li>
+          <li><a href="#p-stable"><b>설계부터 양산 안정화까지</b><span>현장 25일 상주. 11일 관찰 중 Failure 0건, 계획 중단 3시간</span></a></li>
+          <li><a href="#p-align"><b>실패를 재현하고 판정 기준까지 다시 설계</b><span>합성 시험 191건에서 잘못된 각도 통과 134→0건. 사내 패턴 영상 48개 판정에서도 31→0건</span></a></li>
           <li><a href="#p-recipe"><b>배운 것을 설비에 바로 적용</b><span>일과 학업 병행, Recipe 자동 생성을 석사 연구로 확장</span></a></li>
         </ul>
         <div class="cta">
           <a class="btn" href="#work">프로젝트 보기</a>
+          <a class="btn btn-line" href="resume.html">직무별 이력서</a>
           <a class="btn btn-line" href="#contact">연락하기</a>
         </div>
       </div>
@@ -59,10 +60,10 @@
     </section>
 
     <section class="figures wrap" aria-label="주요 성과">
-      <a class="fig-num reveal" href="#p-mark"><strong>−84<span>%</span></strong><p>정렬 마크 Align 시간<br><small>140초 → 23초, 템플릿 방식 대비, 현장 12/12 Slot</small></p></a>
+      <a class="fig-num reveal" href="#p-mark"><strong>−84<span>%</span></strong><p>정렬 마크 Align 시간<br><small>규칙 검출·촬영 범위 축소, 140초 → 23초. 현장 12/12 슬롯</small></p></a>
       <a class="fig-num reveal" href="#p-recipe"><strong>−92<span>%</span></strong><p>Bump Recipe 작성 시간<br><small>4시간 → 20분, 도면 기반 자동 배치</small></p></a>
-      <a class="fig-num reveal" href="#p-focus"><strong>−72<span>%</span></strong><p>Auto Focus 시간<br><small>90초 → 25초, 영상 AF 동시 검증, 이후 접촉 감지로 ±2µm</small></p></a>
-      <a class="fig-num reveal" href="#p-stable"><strong>264<span>h</span></strong><p>운영 중 Failure 0건<br><small>신규 설비 11일 운영, 계획 중단 3시간 포함 Vision UpTime 98.86%</small></p></a>
+      <a class="fig-num reveal" href="#p-focus"><strong>−72<span>%</span></strong><p>Auto Focus 시간<br><small>영상 AF 90초 → 25초. 접촉 감지는 300 µm 이상 입자 20회 반복 ±2 µm</small></p></a>
+      <a class="fig-num reveal" href="#p-stable"><strong>264<span>h</span></strong><p>운영 중 Failure 0건<br><small>11일 관찰. 계획 중단 3시간을 포함한 Vision 가동률 98.86%</small></p></a>
     </section>
 
     <section id="flow" class="wrap">
@@ -89,8 +90,8 @@
           <div class="card-body">
             <span class="st st-lab">사내 검증 · 양산 전환 검증 중</span>
             <h3>Feature 등록 없는 Wafer Align</h3>
-            <p>Die 배열의 주기에 격자를 맞춰 회전각을 구하고, 틀린 결과는 스스로 거릅니다.</p>
-            <dl class="kpi"><div><dt>오판정 합격 (합성 · 사내 영상)</dt><dd>134 → 0건</dd></div><div><dt>최대 각도 오차 (회전 자재 100회)</dt><dd>0.0013°</dd></div></dl>
+            <p>Die 격자로 회전각을 추정하고 여러 영역의 결과가 맞아야 통과시킵니다.</p>
+            <dl class="kpi"><div><dt>잘못된 각도 통과 · 합성 191건</dt><dd>134 → 0건</dd></div><div><dt>허용오차 내 보류 · 사내 48판정</dt><dd>0 → 10건</dd></div></dl>
             <span class="more-link">자세히 보기</span>
           </div>
         </a>
@@ -100,8 +101,8 @@
           <div class="card-body">
             <span class="st st-prod">양산 적용</span>
             <h3>신규 Particle 제거 설비 SW</h3>
-            <p>참고 코드 없는 신규 설비를 양산에서 멈추지 않을 때까지 안정화했습니다.</p>
-            <div class="stat-big"><strong>264<span>h</span></strong><span>11일 운영, Failure 0건</span></div>
+            <p>양산 현장에서 48시간 안에 멈추던 프로그램의 프레임 적체를 찾아 수정했습니다.</p>
+            <div class="stat-big"><strong>264<span>h</span></strong><span>11일 관찰 중 Failure 0건 · 계획 중단 3시간</span></div>
             <span class="more-link">자세히 보기</span>
           </div>
         </a>
@@ -112,7 +113,7 @@
             <span class="st st-field">현장 검증</span>
             <h3>입자 높이 Auto Focus</h3>
             <p>영상 AF 를 72% 빠르게 만든 뒤, 무늬 없는 바닥에서 막히자 접촉 감지 방식으로 다시 설계했습니다.</p>
-            <dl class="kpi"><div><dt>영상 AF 시간</dt><dd>−72%</dd></div><div><dt>높이 반복성</dt><dd>±2µm</dd></div></dl>
+            <dl class="kpi"><div><dt>영상 AF 시간</dt><dd>−72%</dd></div><div><dt>300 µm 이상 입자 · 20회 반복</dt><dd>±2 µm</dd></div></dl>
             <span class="more-link">자세히 보기</span>
           </div>
         </a>
@@ -122,8 +123,8 @@
           <div class="card-body">
             <span class="st st-field">규칙 현장 검증 · CNN Shadow</span>
             <h3>Shot Key 정렬 마크 검출, 규칙 + CNN</h3>
-            <p>템플릿 없이 Die 마크를 찾고, 규칙이 놓친 흐린 마크는 CNN 이 보완합니다.</p>
-            <dl class="kpi"><div><dt>Align 시간</dt><dd>−84%</dd></div><div><dt>오검출 (CNN 보완, 280 → 114건)</dt><dd>−59%</dd></div></dl>
+            <p>규칙 검출로 촬영 범위를 7줄에서 약 3줄로 줄였습니다. CNN은 기존 판정과 병행해 비교합니다.</p>
+            <dl class="kpi"><div><dt>규칙 검출 · 현장 Align 시간</dt><dd>140초 → 23초</dd></div><div><dt>CNN · 사내 평가 오검출</dt><dd>280 → 114건</dd></div></dl>
             <span class="more-link">자세히 보기</span>
           </div>
         </a>
@@ -142,10 +143,10 @@
         <a class="card card-5 reveal" href="#p-crack">
           <img src="assets/img/fig-crack.webp" alt="" loading="lazy" width="900" height="600">
           <div class="card-body">
-            <span class="st st-field">고객 평가 통과</span>
+            <span class="st st-field">고객 시료 평가</span>
             <h3>Die 가장자리 Crack 검출</h3>
-            <p>기존 검사가 놓치거나 과검하던 가장자리 Crack 을 다단계 알고리즘으로 잡습니다.</p>
-            <dl class="kpi"><div><dt>새로 검출 (524 / 1,883건)</dt><dd>28%</dd></div></dl>
+            <p>Die 외곽을 따라 검사 띠를 만들어 가장자리 Crack과 Chipping을 검출했습니다.</p>
+            <dl class="kpi"><div><dt>검출 결과 1,883건 중 가장자리 Crack 분류</dt><dd>524건</dd></div></dl>
             <span class="more-link">자세히 보기</span>
           </div>
         </a>
@@ -212,8 +213,8 @@
       <h3 class="lessons-head">결정으로 이어진 결과</h3>
       <ul class="lessons">
         <li class="reveal"><b>발주 결정의 근거</b><p>적외선 광학계 시료 7건의 반복성 평가가 신규 광학계 교체 발주의 근거가 됐고, Glass 자재 평가는 신규 장비 발주로 이어졌습니다.</p><a href="#p-optics">신규 광학계, 자재 검출력 평가</a></li>
-        <li class="reveal"><b>신규 설비의 인증 통과</b><p>참고 코드 없는 신규 설비에서 기능검사의 SW 담당 항목을 모두 처리해 3자 인증을 통과했고, 11일(264시간) 운영 동안 Failure 0건이었습니다.</p><a href="#p-stable">신규 Particle 제거 설비 SW</a></li>
-        <li class="reveal"><b>고객 기준과 평가 통과</b><p>도면 변환은 양산 자재로 양산 검증을 통과했고, Crack 검출은 적층 메모리 평가 조건 4개를 모두 통과했습니다. Stage Tilt 는 고객 기준 안으로 줄였습니다.</p><a href="#p-crack">Die 가장자리 Crack 검출</a></li>
+        <li class="reveal"><b>신규 설비의 인증 통과</b><p>참고 코드 없는 신규 설비에서 기능검사의 SW 담당 항목을 모두 처리해 3자 인증을 통과했고, 11일(264시간) 관찰 중 Failure는 0건이었습니다. 계획 중단은 3시간이었습니다.</p><a href="#p-stable">신규 Particle 제거 설비 SW</a></li>
+        <li class="reveal"><b>고객 자재 평가</b><p>가장자리 검사에서는 고객 시료의 Crack 524건을 확인했습니다. 다른 적층 메모리 자재의 검출력 평가는 고객 조건 4개를 모두 통과했습니다. 도면 변환은 양산 자재 검증을 통과했습니다.</p><a href="#p-crack">Die 가장자리 Crack 검출</a></li>
         <li class="reveal"><b>반복되는 시간 절감</b><p>Bump Recipe 작성 4시간 → 20분, 정렬 마크 Align 140초 → 23초. Recipe 한 건, 웨이퍼 한 장마다 반복되는 시간입니다.</p><a href="#p-recipe">검사 Recipe 자동 생성</a></li>
       </ul>
       <h3 class="lessons-head">함께 일한 범위</h3>
@@ -236,7 +237,7 @@
       <ul class="checks">
         <li class="reveal"><a href="#p-recipe-deploy"><strong>200<span>회</span></strong>재시작 반복으로 시작 레이스 재발 확인</a></li>
         <li class="reveal"><a href="#p-interlock"><strong>1,000<span>회</span></strong>Lifter 서보 반복 구동, 위치 반복성</a></li>
-        <li class="reveal"><a href="#p-align"><strong>100<span>회</span></strong>회전 자재 Align, Fail 0건</a></li>
+        <li class="reveal"><a href="#p-align"><strong>100<span>회</span></strong>1차 Featureless Align 회전 자재 시험, 실패 0건</a></li>
         <li class="reveal"><a href="#p-light"><strong>100<span>회</span></strong>광량 반복 측정, 평균 편차 0.52%</a></li>
         <li class="reveal"><a href="#p-focus"><strong>20<span>회</span></strong>입자 높이 반복, ±2µm</a></li>
         <li class="reveal"><a href="#p-recipe-deploy"><strong>54<span>개</span></strong>단위 테스트, 모두 통과</a></li>
@@ -244,7 +245,7 @@
       </ul>
       <h3 class="lessons-head">틀렸던 것과 바꾼 것</h3>
       <ul class="lessons">
-        <li class="reveal"><b>통과한 방식도 다시 봅니다</b><p>1차 Align 은 양산 수천 회 평가에서 고객 기준을 넘었지만, 저대비 영상에서 틀린 각도에 높은 점수를 주는 경우를 찾았습니다. 틀리면 점수가 떨어지게 다시 설계했고, 늘어난 연산 시간(150 → 700ms)도 함께 보고했습니다.</p><a href="#p-align">Feature 없는 Wafer Align</a></li>
+        <li class="reveal"><b>통과한 방식도 다시 봅니다</b><p>1차 Align은 고객 기준을 충족한 뒤에도 저대비 영상에서 틀린 각도를 통과시켰습니다. 격자를 이용해 판정 기준을 바꾸고, 허용오차 안의 결과까지 보류한 횟수도 함께 셌습니다.</p><a href="#p-align">Feature 없는 Wafer Align</a></li>
         <li class="reveal"><b>다듬기보다 방식을 바꿉니다</b><p>영상 AF 를 72% 빠르게 만들었지만, 무늬 없는 바닥에서는 선명도 봉우리가 생기지 않았습니다. 영상 방식을 더 다듬지 않고 접촉 감지로 다시 설계했습니다.</p><a href="#p-focus">입자 높이 Auto Focus</a></li>
         <li class="reveal"><b>점수가 좋으면 먼저 의심합니다</b><p>파일 이름 해시로 나눈 평가셋에서 점수가 실제보다 좋게 나왔습니다. 같은 날 프레임이 학습과 평가에 섞인 누수라 날짜 단위로 바꿨습니다. CNN 의 검출 향상은 유의하지 않아 그대로 보고했습니다.</p><a href="#p-mark">Shot Key 정렬 마크 검출</a></li>
         <li class="reveal"><b>재는 도구부터 확인합니다</b><p>레이스 재현율을 재던 반복 실행 프로그램에 결함이 있어 처음 잰 값이 부풀어 있었습니다. 측정 프로그램부터 고친 뒤 다시 쟀습니다.</p><a href="#p-recipe-deploy">RAC 통합 도구</a></li>
@@ -411,14 +412,14 @@
       <p class="mail">mhbae03@gmail.com</p>
       <div class="cta">
         <a class="btn" href="mailto:mhbae03@gmail.com">이메일 보내기</a>
-        <a class="btn btn-line" href="resume.html">이력서 (1장, PDF 저장)</a>
+        <a class="btn btn-line" href="resume.html">직무별 이력서와 포트폴리오 PDF</a>
         <a class="btn btn-line" href="https://github.com/mhbae-semi-lab" target="_blank" rel="noopener">GitHub</a>
       </div>
     </section>
   </main>
 
   <footer class="foot wrap">
-    <p>그림과 데모는 모두 합성 또는 공개 데이터로 만들었습니다. 설비 화면, 고객 정보, 설계 데이터는 없습니다. 수치는 현장 실측 또는 사내 검증 기준입니다.</p>
+    <p>실무 프로젝트의 수치는 각 사례에 표시한 현장·사내 평가 기록에서 가져왔습니다. 그림, 공개 앱과 석사 예비 실험에는 합성 또는 공개 데이터를 사용했습니다.</p>
   </footer>
 
   <!-- 세부 내용 패널: 카드를 누르면 #p-이름 으로 열린다 -->
@@ -435,7 +436,7 @@
     <p class="d-meta"><span class="st st-lab">사내 검증 · 양산 전환 검증 중</span> 2026 · RAC 전 Site 통합 과제 · 알고리즘 설계, 실험, C++ 구현, 현장 검증</p>
     <h2 id="detail-title">Feature 등록 없는 Wafer Align</h2>
     <figure class="d-fig"><img src="assets/img/fig-align.webp" alt="1.8도 회전한 합성 Die 격자 위에 추정한 격자를 겹친 그림" width="1200" height="750"><figcaption>합성 Die 격자(1.8° 회전, 열 고정 잡음)에서 추정한 격자</figcaption></figure>
-    <dl class="kpi"><div><dt>오판정 합격 (합성 · 사내 영상)</dt><dd>134 → 0건</dd></div><div><dt>최대 각도 오차</dt><dd>0.0013°</dd></div><div><dt>회전 자재 100회</dt><dd>Fail 0</dd></div></dl>
+    <dl class="kpi"><div><dt>잘못된 각도 통과 · 합성 191건</dt><dd>134 → 0건</dd></div><div><dt>잘못된 각도 통과 · 사내 48판정</dt><dd>31 → 0건</dd></div></dl>
     <section class="d-step">
       <h3><span>1</span>등록 없이, 틀리면 스스로 거르게</h3>
       <p>사람이 등록한 Feature 를 매칭하는 방식은 Recipe 마다 등록 공수가 들고 Fail 이 남았습니다. 1차 방식은 양산 자재 수천 회 평가에서 고객 기준을 만족했지만, 저대비 영상에서 틀린 각도에 높은 점수를 주는 경우가 있었습니다.</p>
@@ -448,22 +449,42 @@
     <section class="d-step">
       <h3><span>3</span>C++ 이식과 검증</h3>
       <p>Python 으로 검증한 뒤 C++ 로 옮기고 조건별 결과를 값 단위로 대조했습니다. 패턴이 없는 웨이퍼는 중앙 영역 분산의 다수결로 먼저 걸러 불필요한 Align 을 건너뜁니다.</p>
-      <ul><li>오판정 합격 <b>134건 → 0건</b> (기존 방식 대비, 합성 및 사내 영상 통합)</li><li>±0.1~1° 회전 자재 100회 Fail 0건, 최대 오차 <b>0.0013°</b> (기존 방식 보정 후 잔차 약 0.02°)</li></ul>
+      <table class="evidence decisions">
+        <caption>같은 입력에서 비교한 각도 판정</caption>
+        <thead><tr><th scope="col">시험과 판정 항목</th><th scope="col">기존 방식</th><th scope="col">격자 방식</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">합성 191건 · 잘못된 각도 통과</th><td>134건</td><td>0건</td></tr>
+          <tr><th scope="row">이 중 유효 패턴·각도 범위 159건<br><small>허용오차 안의 결과 보류</small></th><td>0건</td><td>11건</td></tr>
+          <tr><th scope="row">사내 패턴 영상 48판정 · 잘못된 각도 통과</th><td>31건</td><td>0건</td></tr>
+          <tr><th scope="row">같은 48판정 · 허용오차 안의 결과 보류</th><td>0건</td><td>10건</td></tr>
+        </tbody>
+      </table>
+      <p>합성 시험은 11개 조건에서 입력 회전각을 알고 비교했습니다. 사내 시험은 소프트웨어 회전본을 포함한 패턴 영상 16장을 각각 3개 영역에서 평가했습니다. 기존 방식은 장비 기본 설정을 사용했습니다. 기준각은 격자 방식으로 전체 영역에서 구한 오프셋의 중앙값에 입력 회전각을 더해 정했습니다.</p>
+      <p>보류는 계산한 각도가 알고리즘의 통과 기준을 충족하지 못한 경우입니다. 장비의 재촬영·재정렬 횟수는 이 오프라인 시험에서 측정하지 않았습니다.</p>
+      <table class="evidence">
+        <caption>개발 단계별 연산 시간</caption>
+        <thead><tr><th scope="col">시험</th><th scope="col">비교 기준</th><th scope="col">개발 방식</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">1차 · 회전 자재 시험</th><td>등록 Feature<br>약 150 ms</td><td>1차 Featureless<br>약 700 ms</td></tr>
+          <tr><th scope="row">후속 · 대형 합성 영상, C++</th><td>기존 Featureless<br>2.45초</td><td>격자 방식<br>0.75초</td></tr>
+        </tbody>
+      </table>
+      <p>1차 방식은 회전 자재를 100회 정렬해 실패 0건, 최대 각도 오차 0.0013°를 기록했습니다.</p>
     </section>
     <section class="d-step">
       <h3><span>4</span>남은 과제</h3>
-      <p>연산은 150ms 에서 약 700ms 로 늘었지만 양산 Takt 안에서 허용되는 수준입니다. 보이는 Die 가 적은 영역은 판정을 거부하도록 설계했고, 양산 전환 검증을 진행 중입니다.</p>
+      <p>격자 방식은 보이는 Die가 적으면 판정을 보류합니다. 현재 양산 전환을 검증 중입니다. 현장에서는 보류가 실제 재시도와 장비 처리 시간에 미치는 영향을 확인해야 합니다.</p>
     </section>
     <p class="d-tags">C++, Python, OpenCV</p>
-    <p class="d-source">근거: 사내 평가 기록 (2026 상반기)</p>
+    <p class="d-source">근거 · 2026년 상반기 회전 자재 평가와 9월 합성·사내 영상별 판정 기록</p>
   </template>
 
   <template id="p-stable">
     <p class="d-meta"><span class="st st-prod">양산 적용</span> 2025-2026 · Vision, 시퀀스, UI, Interlock, 카메라 제어</p>
     <h2 id="detail-title">신규 Particle 제거 설비 SW</h2>
     <figure class="d-fig light"><img src="assets/img/fig-stable.webp" alt="연속 촬영 시간에 따라 화면에 못 그린 프레임 수. 모든 프레임을 차례로 그리면 5분에 700장 넘게 쌓이고, 최신 1장만 그리면 1장 이하" width="900" height="540"><figcaption>화면 그리기가 촬영보다 조금만 느려도, 모든 프레임을 차례로 그리면 대기열이 끝없이 쌓입니다. 합성 시뮬레이션</figcaption></figure>
-    <div class="stat-big"><strong>264<span>h</span></strong><span>11일(264시간) 운영 동안 Failure 0건, 계획 중단 3시간 포함 Vision UpTime 98.86%</span></div>
-    <dl class="kpi"><div><dt>가동률 (432h 기준)</dt><dd>99.31%</dd></div><div><dt>메모리 (10회 Shear)</dt><dd>18 → 12GB</dd></div><div><dt>카메라 사용 시간</dt><dd>−55%</dd></div></dl>
+    <div class="stat-big"><strong>264<span>h</span></strong><span>11일 관찰 중 Failure 0건 · 계획 중단 3시간 · Vision 가동률 98.86%</span></div>
+    <dl class="kpi"><div><dt>메모리 (10회 Shear)</dt><dd>18 → 12GB</dd></div><div><dt>카메라 사용 시간</dt><dd>−55%</dd></div></dl>
     <h3>일정</h3>
     <ol class="timeline">
       <li><time>2025.01</time><p>수동 장비를 Semi Auto 로 바꾸는 신규 과제 시작. Vision, 시퀀스, UI 담당</p></li>
@@ -484,7 +505,16 @@
     </section>
     <section class="d-step">
       <h3><span>3</span>멈춤을 숫자로 보기</h3>
-      <p>Crash 와 강제 종료를 감지해 MTBI, MTBF, 가동률을 로그에서 자동으로 계산하게 했습니다. 기능검사 9건 중 SW 담당 항목을 모두 처리하고 3자 인증을 통과했습니다.</p>
+      <p>프로그램 비정상 종료와 강제 종료를 감지하고 이벤트 로그로 가동률을 집계했습니다. 장애 건수는 운전 기록에서 Failure로 분류한 사건을 중복 제거해 셌습니다. 계획된 SW 패치는 별도로 기록했습니다. 설비는 제가 SW 항목을 담당한 기능검사를 거쳐 제3자 인증을 통과했습니다.</p>
+      <table class="evidence">
+        <caption>Vision SW 가동률과 장애 집계</caption>
+        <thead><tr><th scope="col">관찰 구간</th><th scope="col">운전 기록</th><th scope="col">가동률</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">11일 · 264시간</th><td>Failure 0건<br>계획 중단 3시간</td><td>261 / 264시간<br>98.86%</td></tr>
+          <tr><th scope="row">운영 18일 · 432시간</th><td>Failure 0건<br>총 중단 3시간</td><td>429 / 432시간<br>99.31%</td></tr>
+        </tbody>
+      </table>
+      <p>각 가동률은 해당 구간의 전체 관찰 시간을 분모로 계산했습니다. 18일 집계에는 중단 3시간의 사유별 내역이 없습니다.</p>
     </section>
     <section class="d-step">
       <h3><span>4</span>Interlock 재정비</h3>
@@ -498,7 +528,7 @@
     <p class="d-meta"><span class="st st-field">현장 검증</span> 2025 · 신규 Particle 제거 설비, 설계와 현장 검증</p>
     <h2 id="detail-title">입자 높이 Auto Focus, 영상에서 접촉 감지로</h2>
     <figure class="d-fig light" data-widget="focus"><img src="assets/img/fig-focus-stack.webp" alt="초점 높이 0, 15, 30, 45, 60µm 에서 찍은 합성 입자 영상과 입자, 바닥 선명도 막대. 바닥은 0µm, 입자는 60µm 에서 가장 선명" width="1000" height="440"><figcaption>초점을 올리며 입자(파란 상자)와 주변 네 방향 바닥(점선)의 선명도를 함께 잽니다. 두 봉우리의 높이 차이가 입자 높이입니다. 합성 영상</figcaption></figure>
-    <dl class="kpi"><div><dt>영상 AF 시간</dt><dd>−72%</dd></div><div><dt>높이 반복성 (20회)</dt><dd>±2µm</dd></div><div><dt>Shear 높이 정확도</dt><dd>±1µm</dd></div></dl>
+    <dl class="kpi"><div><dt>영상 AF 시간</dt><dd>−72%</dd></div><div><dt>접촉 감지 · 300 µm 이상 입자 20회 반복</dt><dd>±2 µm</dd></div></dl>
 
     <section class="d-step">
       <h3><span>1</span>영상 AF 를 빠르게, 그리고 한계</h3>
@@ -509,13 +539,14 @@
     <section class="d-step">
       <h3><span>2</span>접촉 감지로 다시 설계</h3>
       <figure class="d-fig light"><img src="assets/img/fig-focus-contact.webp" alt="하강 거리에 따른 감지 신호. 8µm 간격은 접촉을 6.6µm 늦게, 1µm 간격은 0.6µm 늦게 감지" width="900" height="540"><figcaption>하강 간격이 촘촘할수록 임계값을 넘는 순간이 실제 접촉에 가깝습니다. 합성 신호</figcaption></figure>
-      <p>바닥과 입자 윗면을 각각 전압 임계값으로 감지하고 하강 간격을 잘게 나눴습니다.</p>
+      <p>바닥과 입자 윗면에 접촉할 때 전압이 임계값을 넘는 순간의 Z축 위치를 읽고, 두 위치의 차이로 높이를 구했습니다. 접촉 지점을 더 가깝게 잡기 위해 하강 간격을 줄였습니다.</p>
       <ul><li>200µm 이하 작은 입자는 감지 기준점을 입자 중심으로 옮겨 바닥을 찾게 했습니다.</li><li>허공을 바닥으로 잘못 감지하면 다시 읽고, 높이가 범위를 벗어나면 Shear 를 막습니다.</li><li>Tip 파손 뒤 모든 바닥 감지 시퀀스에 Vacuum 제어를 넣었습니다.</li></ul>
     </section>
 
     <section class="d-step">
       <h3><span>3</span>현장 검증</h3>
-      <p>높이를 계측한 자재가 현장에 없어 입자별 반복성으로 검증했습니다. 300µm 이상 입자 20회 반복 <b>±2µm</b>, 50~100µm 구간 Shear 높이 <b>±1µm</b>, 양산 자재 연속, 다중 Shear 정상.</p>
+      <p>현장에는 높이를 독립적으로 계측한 기준 자재가 없어 같은 입자를 반복 측정했습니다. 300 µm 이상 입자에서 20회 측정한 높이 반복성은 <b>±2 µm</b>였습니다. 양산 자재의 연속·다중 Shear도 정상 동작했습니다.</p>
+      <p>50~100 µm 구간의 별도 Shear 시험 기록에는 ±1 µm가 기재돼 있습니다. 이 시험의 기준 높이와 편차 계산식은 확인되지 않아 절대 정확도를 산출할 수 없습니다.</p>
     </section>
     <p class="d-tags">C#, 모션 제어, DAQ, OpenCV</p>
     <p class="d-source">근거: 사내 평가 기록 (2025 하반기)</p>
@@ -525,7 +556,7 @@
     <p class="d-meta"><span class="st st-field">규칙 현장 검증 · CNN Shadow</span> 2026 · 검출 알고리즘, 학습 도구, CNN 학습과 ONNX 배포, Shadow 판정 도구</p>
     <h2 id="detail-title">Shot Key Align, 규칙 + CNN</h2>
     <figure class="d-fig"><img src="assets/img/fig-mark.webp" alt="비슷한 패드 사이 십자 마크 세 개, 두 개는 실선 상자, 흐린 하나는 점선 상자, 오른쪽 아래 상관 맵" width="900" height="600"><figcaption>규칙 검출(실선)과 점수 미달로 놓친 흐린 마크(점선), 오른쪽 아래는 상관 맵. 합성 영상</figcaption></figure>
-    <dl class="kpi"><div><dt>Align 시간</dt><dd>−84%</dd></div><div><dt>오검출 (CNN 보완, 280 → 114건)</dt><dd>−59%</dd></div><div><dt>현장 Slot 검출</dt><dd>12/12</dd></div><div><dt>추론 p95 지연</dt><dd>−58%</dd></div></dl>
+    <dl class="kpi"><div><dt>규칙 검출 · 현장 Align 시간</dt><dd>140초 → 23초</dd></div><div><dt>CNN · 사내 평가 오검출</dt><dd>280 → 114건</dd></div><div><dt>규칙 검출 · 현장 슬롯</dt><dd>12/12</dd></div><div><dt>CNN 추론 p95 지연</dt><dd>−58%</dd></div></dl>
     <section class="d-step">
       <h3><span>1</span>느리고, Site 마다 다시 등록</h3>
       <p>템플릿 방식 Align 은 느리고 새 Site 마다 마크를 다시 등록해야 했습니다. 규칙 파라미터가 이미지마다 맞지 않아 오검출도 생겼습니다.</p>
@@ -546,7 +577,8 @@
     <section class="d-step">
       <h3><span>5</span>CNN 은 Shadow 로 먼저</h3>
       <p>규칙 결과를 CNN 이 검증하고, 실패하면 CNN 위치로 대체합니다. 바로 바꾸지 않고 Shadow 로 병행 운용하며, 단계적 투입과 즉시 롤백을 계획했습니다.</p>
-      <ul><li>사내 평가: CNN 은 검출을 유지하면서 오검출을 280건에서 114건으로 59% 줄였고, 검출 향상은 통계적으로 유의하지 않아 그대로 보고했습니다.</li><li>학습 도구의 날짜 분할 오프라인 평가: 결합 정책이 규칙 단독의 놓침(약 2.6%)과 마크 없는 화면 오검출(약 5.1%)을 모두 0으로 줄였습니다. 사내 이미지 기준이고, 평가 라벨이 규칙에 유리하게 치우쳐 있으며, 현장 적용 전입니다.</li></ul>
+      <p>CNN 사내 평가에서 증강 영상을 포함한 6,150장의 오검출은 <b>280건에서 114건</b>으로 줄었습니다. 증강하지 않은 1,030장의 마크 검출은 996건에서 998건으로 바뀌었고, 이 차이는 통계적으로 유의하지 않았습니다.</p>
+      <p>학습 도구의 날짜 분할 오프라인 평가에서는 규칙과 CNN을 결합해 규칙 단독의 놓침(약 2.6%)과 마크 없는 화면의 오검출(약 5.1%)을 모두 0으로 줄였습니다. 평가 라벨은 규칙에 유리하게 치우쳐 있습니다. 현장에서는 기존 판정과 병행해 비교 중입니다.</p>
     </section>
     <p class="d-tags">C#, C++, OpenCV, PyTorch, ONNX, HOG</p>
     <p class="d-source">근거: 사내 평가 기록 (2026 상반기), 학습 도구 문서</p>
@@ -582,24 +614,25 @@
   </template>
 
   <template id="p-crack">
-    <p class="d-meta"><span class="st st-field">고객 평가 통과</span> 2026 · 알고리즘과 분석 도구 개발 전체</p>
+    <p class="d-meta"><span class="st st-field">고객 시료 평가</span> 2026 · 알고리즘과 분석 도구 개발 전체</p>
     <h2 id="detail-title">Die 가장자리 Crack 검출</h2>
     <figure class="d-fig"><img src="assets/img/fig-crack.webp" alt="Die 가장자리 검사 밴드와 안쪽 제외 영역, 밴드 안에서 검출된 Crack" width="900" height="600"><figcaption>가장자리 검사 밴드(파랑)와 제외 영역(빗금), 검출된 Crack (합성 영상)</figcaption></figure>
-    <dl class="kpi"><div><dt>새로 검출 (524 / 1,883건)</dt><dd>28%</dd></div><div><dt>분할 대상 영상</dt><dd>장당 TB 급</dd></div></dl>
+    <dl class="kpi"><div><dt>검출 결과 1,883건 중 가장자리 Crack 분류</dt><dd>524건</dd></div><div><dt>분할 대상 영상</dt><dd>장당 TB 급</dd></div></dl>
     <section class="d-step">
       <h3><span>1</span>놓치거나 과검하던 가장자리</h3>
       <p>적층 메모리 Die 가장자리 Crack 을 기존 Die 비교 조건이 놓치거나 과검했습니다. 장당 TB 급 영상은 일반 PC 에서 열 수도 없었습니다.</p>
     </section>
     <section class="d-step">
       <h3><span>2</span>5단계로 나눈 검출</h3>
-      <p>가장자리 탐색, 가변 Mask, 결함 검출, 크기 필터, Interlock 의 5단계로 나누고, 가장자리 띠 폭과 밝기 조건을 파라미터로 뺐습니다. 전체 결함 1,883건 중 <b>524건</b>을 새로 검출했고, 적층 메모리 평가 조건 4개를 모두 통과했습니다(Real Rate 최대 92.6%, 고객 기준 이상).</p>
+      <p>가장자리 탐색, 가변 마스크, 결함 검출, 크기 필터, 인터록의 5단계로 나눴습니다. 검사 띠의 폭과 밝기 조건을 조정할 수 있게 했습니다. 고객 시료에서 검출 결과 <b>1,883건 중 524건</b>이 가장자리 Crack으로 분류됐습니다.</p>
+      <p>이 집계는 검출 항목의 구성비(27.8%)를 보여줍니다. 같은 시료에서 정답과 기존·개선 판정을 짝지어 기록한 자료가 없어 미검·과검의 전후 변화는 산출할 수 없습니다.</p>
     </section>
     <section class="d-step">
       <h3><span>3</span>TB 급 영상을 여는 도구</h3>
       <p>영상을 Tile 로 나눠 필요한 영역만 여는 독립 프로그램을 만들고 채널별 분리 저장도 넣었습니다. 고객 요구 Align 지표 7종을 로그에서 자동 집계해 엑셀로 내는 도구도 만들었습니다.</p>
     </section>
     <p class="d-tags">C++, C# (WPF), OpenCV</p>
-    <p class="d-source">근거: 사내 평가 기록 (2026 상반기)</p>
+    <p class="d-source">근거 · 2026년 5월 가장자리 Crack 고객 시료 평가표</p>
   </template>
 
   <template id="p-recipe-tools">
@@ -665,11 +698,21 @@
     <h3>문제</h3>
     <ul><li>주간 보고를 쓸 때마다 한 주의 커밋과 메모를 다시 읽고, 사내 양식 PPT 에 손으로 옮겨 적었습니다.</li></ul>
     <h3>접근</h3>
-    <ul><li>한 주의 git 커밋을 규칙으로 주제별로 묶고, 주제마다 제목과 요약 3줄을 만들어 양식 PPT 로 냅니다.</li><li>요약은 로컬 LLM 으로만 만들어 데이터가 밖으로 나가지 않습니다.</li><li>요약은 매번 검사합니다. 3줄, 줄당 80자, 입력에 없는 숫자나 "완료" 같은 상태어가 나오면 한 번 다시 만들고, 그래도 안 되면 규칙 기반 문장으로 바꿉니다.</li><li>Claude Code 명령으로도 쓸 수 있게 했습니다.</li></ul>
+    <ul><li>한 주의 커밋을 주제별로 묶고, 제목과 세 줄 요약을 사내 PPT 양식에 채웁니다.</li><li>작성자는 요약을 직접 입력하거나 로컬 LLM으로 초안을 만들 수 있습니다.</li><li>줄 수와 길이, 입력에 없는 숫자나 “완료” 같은 상태 표현을 검사합니다. 생성 초안이 검사를 통과하지 못하면 한 번 다시 생성하고, 그래도 실패하면 규칙 기반 문장을 사용합니다.</li><li>Claude Code 명령으로도 실행할 수 있습니다.</li></ul>
     <h3>결과</h3>
-    <ul><li>팀 10명이 쓰고 있습니다.</li><li>같은 흐름을 다시 만든 <a href="https://mhbae-semi-lab.github.io/weekly-report/" target="_blank" rel="noopener">공개 앱</a>을 자기 git log 로 써 볼 수 있습니다.</li><li>패치 때는 이 보고에서 Release 문서와 반입 폴더를 바로 만드는 <a href="#p-release">릴리스 묶음 도구</a>로 이어집니다.</li></ul>
+    <table class="evidence">
+      <caption>주간 보고 한 건의 작성 방식</caption>
+      <thead><tr><th scope="col">단계</th><th scope="col">도입 전</th><th scope="col">도입 후</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">초안</th><td>작성자가 커밋과 메모를 다시 읽고 요약</td><td>커밋을 주제별로 묶고 직접 입력 또는 로컬 LLM 초안 선택</td></tr>
+        <tr><th scope="row">PPT 작성</th><td>사내 양식에 수작업으로 전사</td><td>형식과 숫자를 규칙으로 검사해 양식에 자동 입력</td></tr>
+      </tbody>
+    </table>
+    <p><b>사내 사용.</b> 2026년 11월 기준 팀원 10명이 사용했습니다. 확인한 한 주의 실행 기록에서는 작성자가 직접 입력한 5개 주제가 검사를 통과해 보고서로 생성됐습니다. 작성·검수 시간, AI 초안 수정 비율, 사용자별 반복 사용 주수는 기록에서 확인되지 않았습니다.</p>
+    <p><b>공개 앱에서 재현한 비교.</b> 합성 커밋 15개로 두 주의 보고를 이어 작성했을 때, 내보내기 요청까지 클릭 25회가 클릭 15회와 파일 놓기 1회로 줄었습니다. 입력란은 11개에서 8개로 줄었습니다. 합성 문장에 근거 없는 표현을 넣은 별도 시험에서는 220건 중 차단 건수가 88건에서 220건으로 늘었고, 작성 예시 22건은 모두 통과했습니다. <a href="https://github.com/mhbae-semi-lab/weekly-report/blob/main/docs/measurements.md" target="_blank" rel="noopener">비교 조건과 측정 기록</a></p>
+    <ul><li>같은 흐름을 다시 만든 <a href="https://mhbae-semi-lab.github.io/weekly-report/" target="_blank" rel="noopener">공개 앱</a>을 자기 git log 로 써 볼 수 있습니다.</li><li>패치 때는 이 보고에서 Release 문서와 반입 폴더를 바로 만드는 <a href="#p-release">릴리스 묶음 도구</a>로 이어집니다.</li></ul>
     <p class="d-tags">Python, python-pptx, 로컬 LLM (Ollama), Claude Code</p>
-    <p class="d-source">근거: 사내 도구 사용 현황 (2026.11)</p>
+    <p class="d-source">근거 · 2026년 11월 팀 사용 현황, 사내 보고서 생성 기록, 공개 앱 합성 시험</p>
   </template>
 
   <template id="p-release">
@@ -731,7 +774,13 @@
     <p class="d-meta"><span class="st st-prod">양산 적용</span> 2026</p>
     <h2 id="detail-title">Tip 파손 재발 방지 Interlock</h2>
     <figure class="d-fig light"><img src="assets/img/fig-interlock.webp" alt="X 위치와 Z 높이 그림. XY 와 Z 를 동시에 움직이는 점선 경로는 간섭 영역에서 충돌, Z 를 먼저 올린 실선 경로는 통과" width="900" height="540"><figcaption>XY 와 Z 를 동시에 움직이면 간섭 영역을 지납니다. Z 를 먼저 올린 뒤 XY 를 움직이도록 막았습니다. 개념도</figcaption></figure>
-    <ul><li>Interlock 판정 기준을 XY 축에서 Z 축으로 바로잡고, 축별 간섭 판정, 정지 확인, XY 와 Z 동시 이동 차단을 넣었습니다.</li><li>Lifter 서보모터를 1,000회 반복 구동해 위치 반복성을 확인했습니다.</li><li>조치 이후 재발 0건, 양산 Lot 정상 진행.</li></ul>
+    <h3>제가 바꾼 이동 허가 조건</h3>
+    <ol class="sequence">
+      <li><b>이동 요청 확인</b> XY 이동 요청을 받으면 Z축 위치로 간섭 여부를 판단합니다. 기존 로직은 XY축을 기준으로 삼았습니다.</li>
+      <li><b>간섭 구간에서 XY 차단</b> XY와 Z가 동시에 움직이지 않도록 막고 Z축을 먼저 올립니다.</li>
+      <li><b>정지 확인 후 이동 재개</b> Z축이 간섭 구간을 벗어나고 정지가 확인되면 XY 이동을 허용합니다.</li>
+    </ol>
+    <p>제 담당은 장비 SW의 축 간섭 판정, 동시 이동 차단과 정지 확인입니다. 양산 Lot에서 조치 후 Tip 파손 재발 0건이 기록됐습니다. 별도 Lifter 시험에서는 1,000회 구동하며 원점·양방향 리밋 센서가 감지한 순간의 지령·실제 위치를 기록하고, 정지 위치 반복성(3σ)을 확인했습니다.</p>
     <p class="d-source">근거: 사내 평가 기록 (2026 상반기), 서보 반복 구동 기록</p>
   </template>
 
@@ -769,6 +818,6 @@
   </template>
 
   <script src="assets/widgets.js?v=20261123c"></script>
-  <script src="assets/site.js?v=20261123c"></script>
+  <script src="assets/site.js?v=20261124a"></script>
 </body>
 </html>
